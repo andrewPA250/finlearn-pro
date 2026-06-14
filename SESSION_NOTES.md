@@ -4,7 +4,7 @@
 
 ---
 
-## Stato attuale: Step 7.5 (extra, fuori spec) completato — UI/UX polish: sidebar/bottom nav con stati attivi e icone, branding FinLearn, dashboard e homepage più ricche visivamente, microanimazioni leggere.
+## Stato attuale: Step 8 (spec) completato — Beta privata online: repository GitHub collegato a Vercel, deploy automatico ad ogni push, app pubblica su https://finlearn-pro.vercel.app.
 
 Riferimento spec: [finlearn-mvp-spec.md](finlearn-mvp-spec.md)
 
@@ -314,12 +314,15 @@ Finlearn-Pro/
 
 ## 6. Prossimo step consigliato
 
-Step 7 (spec) — Mobile e QA — completato (vedi "Come testare lo Step 7" sotto). Step 7.5 (extra, fuori spec) — UI/UX Polish — completato (vedi "Come testare lo Step 7.5" sotto). Prossimo step:
+Step 7 (spec) — Mobile e QA — completato (vedi "Come testare lo Step 7" sotto). Step 7.5 (extra, fuori spec) — UI/UX Polish — completato (vedi "Come testare lo Step 7.5" sotto). Step 8 (spec) — Beta privata — completato: deploy di produzione su Vercel, repository GitHub collegato, app pubblica su https://finlearn-pro.vercel.app (vedi "Handoff — Step 8 completato" in fondo per il workflow di deploy). Prossimo step:
 
-**Step 8 (spec) — Beta privata**
-- Deploy produzione su Vercel
-- Onboarding 10-20 utenti beta, raccolta feedback strutturato
-- Fix problemi bloccanti emersi dal feedback
+**Step 9 (spec) — Auth e lancio pubblico**
+- Introdurre Supabase Auth (email + password)
+- Profili utente (tabella `profiles`, collegata a `auth.users`)
+- Sincronizzazione progressi su DB (tabella `lesson_progress`, RLS)
+- Migrazione da localStorage a Supabase (one-time, al primo login)
+- Nuove pagine `/login` e `/register`, route protection (middleware)
+- Deploy e lancio pubblico
 
 ---
 
@@ -612,9 +615,21 @@ Con `npm run dev`, su desktop (≥1024px) e mobile (375px/320px).
 
 ---
 
-## Handoff — Step 7.5 completato (stato finale MVP, pronto per Step 8)
+## Handoff — Step 8 completato (Beta privata online, pronto per Step 9)
 
-**Stato complessivo**: Step 1-7 della spec + Step 7.5 (extra, UI/UX polish) completati. `npx tsc --noEmit` e `npm run build` passano senza errori (7 route: `/`, `/_not-found`, `/dashboard`, `/lessons/[id]`, `/lessons/[id]/quiz`, `/workbench`).
+**Stato complessivo**: Step 1-8 della spec + Step 7.5 (extra, UI/UX polish) completati. `npx tsc --noEmit` e `npm run build` passano senza errori (7 route: `/`, `/_not-found`, `/dashboard`, `/lessons/[id]`, `/lessons/[id]/quiz`, `/workbench`).
+
+**Deploy (Step 8)**:
+- Repository GitHub creato e collegato al progetto Vercel
+- Deploy di produzione completato — app pubblica su **https://finlearn-pro.vercel.app**
+- Workflow di deploy (deploy automatico ad ogni push):
+  ```
+  git add .
+  git commit -m "..."
+  git push
+  -> Vercel rileva il push ed esegue il deploy automaticamente
+  ```
+- Nessun file di codice modificato per questo step (solo setup repo/hosting)
 
 **Dataset reali in uso (Step 5, invariati):**
 
@@ -639,5 +654,6 @@ Con `npm run dev`, su desktop (≥1024px) e mobile (375px/320px).
 - Step 6 — Dashboard reale (`LessonTracker`, `ContinueCard`/`CompletionScreen`, `WorkbenchCard`) in `app/dashboard/page.tsx`, basata su `useProgress()` e `isPathCompleted`. `/` resta homepage pubblica con CTA "Inizia" (nessun redirect automatico, per decisione esplicita).
 - Step 7 — QA mobile/desktop: fix overflow orizzontale (`overflow-x: hidden` globale, tooltip grafico contenuto), touch target ≥48px su CTA dashboard, layout `LessonTracker` e grafico workbench responsive su schermi piccoli. Solo CSS/layout, nessuna nuova funzionalità.
 - Step 7.5 (extra, fuori spec) — UI/UX polish: nuovo set di icone SVG inline (`components/layout/icons.tsx`), logomark/branding FinLearn, sidebar e bottom nav con stati attivi basati su `usePathname()` e progresso reale, homepage con feature card e microanimazioni `fade-in-up`, dashboard con header di saluto e card più curate (icone, hover lift, CTA animate). Solo modifiche visive/markup, nessuna modifica a logica/dati.
+- Step 8 — Beta privata: repository GitHub creato e collegato a Vercel, deploy in produzione completato. URL pubblico: https://finlearn-pro.vercel.app. Deploy automatico ad ogni push su GitHub (vedi "Workflow di deploy" sotto). Nessuna modifica al codice in questo step.
 
-**Prossimo step**: Step 8 (spec) — Beta privata (deploy Vercel, onboarding 10-20 utenti, raccolta feedback strutturato, fix problemi bloccanti). Vedi sezione "## 6. Prossimo step consigliato" per i dettagli.
+**Prossimo step**: Step 9 (spec) — Auth e lancio pubblico (Supabase Auth email+password, profili utente, sincronizzazione progressi su DB, migrazione da localStorage, pagine `/login` e `/register`). Vedi sezione "## 6. Prossimo step consigliato" per i dettagli.
