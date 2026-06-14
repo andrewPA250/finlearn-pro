@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm -v)",
+      "Bash(npx --yes create-next-app@14 . --typescript --tailwind --eslint --app --src-dir=false --import-alias \"@/*\" --use-npm --no-turbopack)",
+      "Bash(npx --yes create-next-app@14 finlearn-pro --typescript --tailwind --eslint --app --src-dir=false --import-alias \"@/*\" --use-npm --no-turbopack)",
+      "Bash(rm -rf finlearn-pro)",
+      "Bash(npx --yes create-next-app@14 --help)",
+      "Bash(npx --yes create-next-app@14 finlearn-pro --typescript --tailwind --eslint --app --import-alias \"@/*\" --use-npm)"
+    ]
+  }
+}

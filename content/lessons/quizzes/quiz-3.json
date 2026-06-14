@@ -1,0 +1,96 @@
+{
+  "lessonId": 3,
+  "passThreshold": 2,
+  "questions": [
+    {
+      "id": "l3-q1",
+      "question": "Qual è, in generale, la relazione tra rischio e rendimento potenziale?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Un rischio più alto è generalmente associato a un rendimento potenziale più alto",
+          "isCorrect": true,
+          "feedback": "Esatto: rendimenti potenziali più alti sono generalmente accompagnati da un rischio maggiore, cioè da oscillazioni di valore più ampie."
+        },
+        {
+          "id": "b",
+          "text": "Un rischio più alto è sempre associato a un rendimento più basso",
+          "isCorrect": false,
+          "feedback": "È il contrario di quanto osservato nella lezione: rischio e rendimento potenziale tendono a muoversi nella stessa direzione."
+        },
+        {
+          "id": "c",
+          "text": "Non esiste alcuna relazione tra rischio e rendimento",
+          "isCorrect": false,
+          "feedback": "La lezione descrive proprio una relazione tra i due concetti, anche se non è una regola matematica esatta."
+        },
+        {
+          "id": "d",
+          "text": "Il rischio diminuisce sempre nel tempo, indipendentemente dall'asset",
+          "isCorrect": false,
+          "feedback": "Il rischio non diminuisce automaticamente nel tempo per ogni asset: dipende dalle caratteristiche dello strumento."
+        }
+      ]
+    },
+    {
+      "id": "l3-q2",
+      "question": "Nell'esempio della lezione, cosa caratterizza l'Investimento A, di tipo \"titolo di stato\"?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Rendimento atteso più alto e oscillazioni molto ampie",
+          "isCorrect": false,
+          "feedback": "Questo descrive piuttosto l'Investimento B, di tipo azionario, non l'Investimento A."
+        },
+        {
+          "id": "b",
+          "text": "Rendimento atteso più contenuto e oscillazioni minime",
+          "isCorrect": true,
+          "feedback": "Corretto: l'Investimento A rappresenta uno strumento a basso rischio, con rendimento atteso più contenuto e oscillazioni limitate."
+        },
+        {
+          "id": "c",
+          "text": "Nessun rendimento e nessuna oscillazione",
+          "isCorrect": false,
+          "feedback": "L'Investimento A ha un rendimento atteso positivo, anche se contenuto: non è pari a zero."
+        },
+        {
+          "id": "d",
+          "text": "Un rendimento garantito del 10% annuo",
+          "isCorrect": false,
+          "feedback": "La lezione non parla di rendimenti garantiti: l'Investimento A ha un rendimento atteso del +3%, non garantito al 10%."
+        }
+      ]
+    },
+    {
+      "id": "l3-q3",
+      "question": "Cosa significa scegliere un investimento \"adatto\" al proprio profilo?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Scegliere sempre l'investimento con il rendimento potenziale più alto possibile",
+          "isCorrect": false,
+          "feedback": "Un rendimento potenziale più alto comporta generalmente un rischio maggiore, che potrebbe non essere adatto a tutti."
+        },
+        {
+          "id": "b",
+          "text": "Scegliere un investimento in base a obiettivi, orizzonte temporale e tolleranza al rischio personale",
+          "isCorrect": true,
+          "feedback": "Esatto: la scelta dipende da fattori personali come obiettivi, tempo disponibile e capacità di tollerare le oscillazioni."
+        },
+        {
+          "id": "c",
+          "text": "Scegliere sempre l'investimento meno volatile, indipendentemente dagli obiettivi",
+          "isCorrect": false,
+          "feedback": "Anche la scelta dell'investimento meno volatile dipende dagli obiettivi: non è una regola valida in ogni caso."
+        },
+        {
+          "id": "d",
+          "text": "Affidarsi esclusivamente al caso",
+          "isCorrect": false,
+          "feedback": "La lezione descrive una valutazione basata su obiettivi e tolleranza al rischio, non una scelta casuale."
+        }
+      ]
+    }
+  ]
+}

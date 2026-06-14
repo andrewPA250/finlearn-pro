@@ -1,0 +1,96 @@
+{
+  "lessonId": 4,
+  "passThreshold": 2,
+  "questions": [
+    {
+      "id": "l4-q1",
+      "question": "Cosa misura la volatilità?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Il valore assoluto di un investimento",
+          "isCorrect": false,
+          "feedback": "Il valore assoluto indica quanto vale un investimento in un certo momento, non quanto oscillano i suoi rendimenti."
+        },
+        {
+          "id": "b",
+          "text": "La dispersione dei rendimenti rispetto alla loro media",
+          "isCorrect": true,
+          "feedback": "Corretto: la volatilità misura quanto i rendimenti si discostano dalla loro media in un certo periodo, spesso tramite la deviazione standard."
+        },
+        {
+          "id": "c",
+          "text": "Il numero di asset presenti in un portafoglio",
+          "isCorrect": false,
+          "feedback": "Il numero di asset in un portafoglio riguarda la diversificazione, non la volatilità di un singolo asset."
+        },
+        {
+          "id": "d",
+          "text": "La quantità di denaro investita",
+          "isCorrect": false,
+          "feedback": "L'importo investito non è una misura di volatilità: la volatilità riguarda l'oscillazione dei rendimenti, indipendentemente dalla cifra investita."
+        }
+      ]
+    },
+    {
+      "id": "l4-q2",
+      "question": "Nell'esempio dei due portafogli con lo stesso rendimento annuo del +6%, cosa li differenzia?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Il rendimento finale, che è diverso tra i due portafogli",
+          "isCorrect": false,
+          "feedback": "Nell'esempio il rendimento finale è lo stesso per entrambi i portafogli: +6% nell'anno."
+        },
+        {
+          "id": "b",
+          "text": "Il percorso mensile: uno dei due ha oscillazioni più ampie dell'altro",
+          "isCorrect": true,
+          "feedback": "Esatto: a parità di rendimento finale, il Portafoglio B ha un percorso mensile molto più \"a zig-zag\" rispetto al Portafoglio A."
+        },
+        {
+          "id": "c",
+          "text": "Il fatto che uno dei due portafogli non genera alcun rendimento",
+          "isCorrect": false,
+          "feedback": "Entrambi i portafogli generano un rendimento medio del +6% nell'anno, secondo l'esempio."
+        },
+        {
+          "id": "d",
+          "text": "Il fatto che uno dei due portafogli è garantito da uno stato",
+          "isCorrect": false,
+          "feedback": "L'esempio non descrive alcuna garanzia statale: la differenza riguarda esclusivamente l'oscillazione mensile dei rendimenti."
+        }
+      ]
+    },
+    {
+      "id": "l4-q3",
+      "question": "Una volatilità alta significa automaticamente una perdita permanente?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Sì, sempre",
+          "isCorrect": false,
+          "feedback": "La lezione chiarisce che la volatilità descrive il percorso, non necessariamente l'esito finale dell'investimento."
+        },
+        {
+          "id": "b",
+          "text": "No, la volatilità descrive le oscillazioni nel percorso, non necessariamente l'esito finale",
+          "isCorrect": true,
+          "feedback": "Corretto: un investimento volatile può comunque generare un buon rendimento nel lungo periodo, pur con oscillazioni nel breve."
+        },
+        {
+          "id": "c",
+          "text": "Sì, ma solo per le obbligazioni",
+          "isCorrect": false,
+          "feedback": "La relazione tra volatilità e perdita permanente descritta nella lezione non riguarda uno specifico tipo di asset."
+        },
+        {
+          "id": "d",
+          "text": "La volatilità non ha alcuna relazione con le oscillazioni di prezzo",
+          "isCorrect": false,
+          "feedback": "È esattamente il contrario: la volatilità è la misura delle oscillazioni dei rendimenti rispetto alla loro media."
+        }
+      ]
+    }
+  ]
+}

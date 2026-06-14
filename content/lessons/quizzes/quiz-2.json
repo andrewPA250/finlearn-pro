@@ -1,0 +1,96 @@
+{
+  "lessonId": 2,
+  "passThreshold": 2,
+  "questions": [
+    {
+      "id": "l2-q1",
+      "question": "Cos'è l'inflazione?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Una diminuzione generale dei prezzi di beni e servizi",
+          "isCorrect": false,
+          "feedback": "Una diminuzione generale dei prezzi è il fenomeno opposto, chiamato deflazione."
+        },
+        {
+          "id": "b",
+          "text": "Un aumento generale dei prezzi di beni e servizi nel tempo",
+          "isCorrect": true,
+          "feedback": "Corretto: l'inflazione è l'aumento generale dei prezzi nel tempo, che riduce il potere d'acquisto del denaro."
+        },
+        {
+          "id": "c",
+          "text": "Un tipo di investimento ad alto rendimento",
+          "isCorrect": false,
+          "feedback": "L'inflazione non è un investimento: è un fenomeno economico che riguarda i prezzi di beni e servizi."
+        },
+        {
+          "id": "d",
+          "text": "Una tassa applicata sui conti correnti",
+          "isCorrect": false,
+          "feedback": "L'inflazione non è una tassa: è l'aumento generale dei prezzi, indipendente da eventuali imposte sui conti."
+        }
+      ]
+    },
+    {
+      "id": "l2-q2",
+      "question": "Come si calcola, in modo semplificato, il rendimento reale?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Rendimento nominale meno inflazione",
+          "isCorrect": true,
+          "feedback": "Esatto: il rendimento reale tiene conto dell'effetto dell'inflazione sul rendimento nominale."
+        },
+        {
+          "id": "b",
+          "text": "Rendimento nominale più inflazione",
+          "isCorrect": false,
+          "feedback": "Sommare l'inflazione al rendimento nominale sovrastimerebbe la crescita reale del potere d'acquisto."
+        },
+        {
+          "id": "c",
+          "text": "Il rendimento garantito da una banca",
+          "isCorrect": false,
+          "feedback": "Il rendimento reale non è un valore garantito da una banca: è un calcolo che tiene conto dell'inflazione."
+        },
+        {
+          "id": "d",
+          "text": "Il rendimento calcolato senza tenere conto del tempo",
+          "isCorrect": false,
+          "feedback": "Il rendimento reale tiene conto proprio del tempo, perché l'inflazione si misura in un determinato periodo."
+        }
+      ]
+    },
+    {
+      "id": "l2-q3",
+      "question": "Se il denaro resta fermo sul conto corrente e l'inflazione è positiva, cosa succede al suo potere d'acquisto nel tempo?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Aumenta",
+          "isCorrect": false,
+          "feedback": "Senza alcun rendimento, il denaro fermo non aumenta il proprio potere d'acquisto."
+        },
+        {
+          "id": "b",
+          "text": "Resta invariato",
+          "isCorrect": false,
+          "feedback": "Il numero sul conto resta invariato, ma il potere d'acquisto cambia comunque a causa dell'aumento dei prezzi."
+        },
+        {
+          "id": "c",
+          "text": "Diminuisce",
+          "isCorrect": true,
+          "feedback": "Corretto: con prezzi in aumento e nessun rendimento, lo stesso importo permette di acquistare meno beni e servizi nel tempo."
+        },
+        {
+          "id": "d",
+          "text": "Diventa impossibile da misurare",
+          "isCorrect": false,
+          "feedback": "Il potere d'acquisto si può misurare confrontando l'importo disponibile con il livello dei prezzi nel tempo."
+        }
+      ]
+    }
+  ]
+}

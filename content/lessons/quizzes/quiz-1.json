@@ -1,0 +1,96 @@
+{
+  "lessonId": 1,
+  "passThreshold": 2,
+  "questions": [
+    {
+      "id": "l1-q1",
+      "question": "Cosa significa, in generale, \"investire\"?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Tenere il denaro fermo sul conto corrente",
+          "isCorrect": false,
+          "feedback": "Questo è risparmiare: il denaro resta disponibile ma di norma non genera alcun rendimento."
+        },
+        {
+          "id": "b",
+          "text": "Usare il denaro per acquistare qualcosa che può generare valore nel tempo",
+          "isCorrect": true,
+          "feedback": "Esatto: investire significa rinunciare alla disponibilità immediata del denaro nella speranza che il suo valore cresca nel tempo."
+        },
+        {
+          "id": "c",
+          "text": "Spendere tutto il denaro disponibile in beni di consumo",
+          "isCorrect": false,
+          "feedback": "La spesa per consumi non è un investimento: il denaro viene utilizzato e non genera un potenziale rendimento futuro."
+        },
+        {
+          "id": "d",
+          "text": "Prestare denaro a un amico senza alcun interesse",
+          "isCorrect": false,
+          "feedback": "Un prestito senza interesse non genera un rendimento, quindi non corrisponde al concetto di investimento descritto nella lezione."
+        }
+      ]
+    },
+    {
+      "id": "l1-q2",
+      "question": "Cosa misura il \"rendimento\" di un investimento?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Il numero di azioni possedute",
+          "isCorrect": false,
+          "feedback": "Il numero di azioni non indica di per sé quanto è cresciuto o diminuito il valore dell'investimento."
+        },
+        {
+          "id": "b",
+          "text": "La crescita o la perdita di valore di un investimento, espressa in percentuale",
+          "isCorrect": true,
+          "feedback": "Corretto: il rendimento esprime in percentuale quanto è variato il valore di un investimento in un certo periodo."
+        },
+        {
+          "id": "c",
+          "text": "Il tempo necessario per vendere un investimento",
+          "isCorrect": false,
+          "feedback": "Questo riguarda la liquidità di un investimento, non il suo rendimento."
+        },
+        {
+          "id": "d",
+          "text": "Il numero di transazioni effettuate in un anno",
+          "isCorrect": false,
+          "feedback": "Il numero di transazioni non è collegato alla crescita o alla perdita di valore di un investimento."
+        }
+      ]
+    },
+    {
+      "id": "l1-q3",
+      "question": "Nell'esempio della lezione, l'Anno 2 registra un calo del 3%. Cosa significa questo per il percorso complessivo dell'investimento?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Il valore aumenta rispetto all'anno precedente",
+          "isCorrect": false,
+          "feedback": "Un calo del 3% significa che il valore diminuisce rispetto all'anno precedente, non che aumenta."
+        },
+        {
+          "id": "b",
+          "text": "Il valore diminuisce rispetto all'anno precedente, ma può comunque far parte di un percorso di crescita più lungo",
+          "isCorrect": true,
+          "feedback": "Esatto: il percorso di un investimento non è una linea retta. Anni negativi possono far parte di un percorso che, nel tempo, cresce comunque."
+        },
+        {
+          "id": "c",
+          "text": "L'investimento viene perso completamente",
+          "isCorrect": false,
+          "feedback": "Un calo del 3% riduce il valore dell'investimento, ma non corrisponde a una perdita totale del capitale."
+        },
+        {
+          "id": "d",
+          "text": "Il rendimento futuro diventa garantito",
+          "isCorrect": false,
+          "feedback": "Nessun rendimento futuro è garantito: gli esempi della lezione sono illustrativi e non sono previsioni."
+        }
+      ]
+    }
+  ]
+}

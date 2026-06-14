@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-primary: #0F1117;
+  --bg-card: #1A1D27;
+  --bg-sidebar: #13151F;
+  --accent-purple: #6C63FF;
+  --accent-green: #00D4A8;
+  --text-primary: #F0F0F0;
+  --text-secondary: #8B8FA8;
+  --error: #FF6B6B;
+}
+
+html,
+body {
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  /* Glow ambientale sottile per una percezione più "premium" del tema scuro. */
+  background-image:
+    radial-gradient(circle at 12% -10%, rgba(108, 99, 255, 0.10), transparent 45%),
+    radial-gradient(circle at 90% 10%, rgba(0, 212, 168, 0.07), transparent 40%);
+  background-attachment: fixed;
+  /* Difesa contro overflow orizzontale su mobile (es. tooltip del grafico vicino al bordo). */
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--accent-purple);
+  color: var(--text-primary);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-purple);
+  outline-offset: 2px;
+}
+
+* {
+  scrollbar-color: var(--accent-purple) var(--bg-sidebar);
+}

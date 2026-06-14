@@ -1,0 +1,96 @@
+{
+  "lessonId": 6,
+  "passThreshold": 2,
+  "questions": [
+    {
+      "id": "l6-q1",
+      "question": "Cosa indica una correlazione vicina a +1 tra due asset?",
+      "options": [
+        {
+          "id": "a",
+          "text": "I due asset tendono a muoversi in direzioni opposte",
+          "isCorrect": false,
+          "feedback": "Una correlazione vicina a -1, non a +1, indica movimenti in direzioni opposte."
+        },
+        {
+          "id": "b",
+          "text": "I due asset tendono a muoversi nella stessa direzione, nello stesso momento",
+          "isCorrect": true,
+          "feedback": "Corretto: una correlazione vicina a +1 indica che quando un asset sale, anche l'altro tende a salire, e viceversa."
+        },
+        {
+          "id": "c",
+          "text": "I due asset non hanno alcuna relazione tra loro",
+          "isCorrect": false,
+          "feedback": "L'assenza di relazione corrisponde a una correlazione vicina a 0, non a +1."
+        },
+        {
+          "id": "d",
+          "text": "Uno dei due asset non ha alcun valore",
+          "isCorrect": false,
+          "feedback": "La correlazione descrive la relazione tra i movimenti di due asset, non il valore di uno di essi."
+        }
+      ]
+    },
+    {
+      "id": "l6-q2",
+      "question": "Perché combinare asset con correlazione bassa o negativa può essere utile in un portafoglio?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Perché aumenta sempre il rendimento totale del portafoglio",
+          "isCorrect": false,
+          "feedback": "La correlazione riguarda come si muovono insieme gli asset, non garantisce un aumento del rendimento totale."
+        },
+        {
+          "id": "b",
+          "text": "Perché può ridurre l'oscillazione complessiva del portafoglio",
+          "isCorrect": true,
+          "feedback": "Esatto: se un asset scende mentre l'altro resta stabile o sale, l'oscillazione complessiva del portafoglio può risultare più contenuta."
+        },
+        {
+          "id": "c",
+          "text": "Perché elimina completamente ogni forma di rischio",
+          "isCorrect": false,
+          "feedback": "Nessuna combinazione di asset elimina completamente il rischio: può solo attenuare l'oscillazione complessiva."
+        },
+        {
+          "id": "d",
+          "text": "Perché garantisce che nessun asset del portafoglio perda valore",
+          "isCorrect": false,
+          "feedback": "La correlazione non offre alcuna garanzia sul fatto che i singoli asset non perdano valore."
+        }
+      ]
+    },
+    {
+      "id": "l6-q3",
+      "question": "La correlazione tra due asset è fissa nel tempo?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Sì, una volta calcolata non cambia mai",
+          "isCorrect": false,
+          "feedback": "La lezione chiarisce che la correlazione può cambiare nel tempo, anche in modo significativo."
+        },
+        {
+          "id": "b",
+          "text": "No, può cambiare anche in modo significativo a seconda delle condizioni di mercato",
+          "isCorrect": true,
+          "feedback": "Corretto: la correlazione tra asset non è fissa e può variare in base alle condizioni di mercato."
+        },
+        {
+          "id": "c",
+          "text": "Sì, ma solo per le materie prime",
+          "isCorrect": false,
+          "feedback": "La variabilità della correlazione nel tempo non è limitata a una specifica categoria di asset come le materie prime."
+        },
+        {
+          "id": "d",
+          "text": "La correlazione non si può calcolare per asset finanziari",
+          "isCorrect": false,
+          "feedback": "La correlazione è un valore calcolabile per asset finanziari ed è proprio l'argomento centrale di questa lezione."
+        }
+      ]
+    }
+  ]
+}

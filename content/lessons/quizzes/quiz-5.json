@@ -1,0 +1,96 @@
+{
+  "lessonId": 5,
+  "passThreshold": 2,
+  "questions": [
+    {
+      "id": "l5-q1",
+      "question": "Cos'è il \"rischio specifico\"?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Il rischio legato all'andamento di un singolo asset o settore",
+          "isCorrect": true,
+          "feedback": "Corretto: il rischio specifico riguarda ciò che succede a un singolo asset o settore in cui è concentrato l'investimento."
+        },
+        {
+          "id": "b",
+          "text": "Il rischio che riguarda tutti i mercati contemporaneamente",
+          "isCorrect": false,
+          "feedback": "Questo descrive il rischio di mercato o sistemico, che la diversificazione non elimina, non il rischio specifico."
+        },
+        {
+          "id": "c",
+          "text": "Il rischio di non avere abbastanza liquidità disponibile",
+          "isCorrect": false,
+          "feedback": "Questo è un concetto diverso, legato alla disponibilità di denaro, non al rischio specifico descritto nella lezione."
+        },
+        {
+          "id": "d",
+          "text": "Il rischio di pagare commissioni troppo alte",
+          "isCorrect": false,
+          "feedback": "Le commissioni non sono l'argomento della lezione: il rischio specifico riguarda la concentrazione su un singolo asset o settore."
+        }
+      ]
+    },
+    {
+      "id": "l5-q2",
+      "question": "Cosa fa la diversificazione?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Elimina completamente ogni tipo di rischio",
+          "isCorrect": false,
+          "feedback": "La lezione chiarisce che la diversificazione non elimina il rischio di mercato generale."
+        },
+        {
+          "id": "b",
+          "text": "Riduce il rischio legato a singoli asset distribuendo il capitale tra elementi diversi",
+          "isCorrect": true,
+          "feedback": "Esatto: distribuendo il capitale su asset diversi, un andamento negativo di uno di essi può essere bilanciato da altri."
+        },
+        {
+          "id": "c",
+          "text": "Garantisce un rendimento minimo",
+          "isCorrect": false,
+          "feedback": "La diversificazione non garantisce alcun rendimento: riduce solo l'esposizione al rischio specifico di un singolo asset."
+        },
+        {
+          "id": "d",
+          "text": "Aumenta il rischio specifico",
+          "isCorrect": false,
+          "feedback": "È l'opposto: la diversificazione riduce, non aumenta, il rischio legato a un singolo asset o settore."
+        }
+      ]
+    },
+    {
+      "id": "l5-q3",
+      "question": "Perché l'oro viene spesso citato come esempio nella diversificazione?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Perché ha sempre lo stesso prezzo delle azioni",
+          "isCorrect": false,
+          "feedback": "Se si muovesse sempre come le azioni, l'oro non offrirebbe alcun beneficio di diversificazione."
+        },
+        {
+          "id": "b",
+          "text": "Perché storicamente, in alcuni periodi, si è mosso in modo diverso rispetto alle azioni",
+          "isCorrect": true,
+          "feedback": "Corretto: in alcuni periodi di calo dei mercati azionari, il prezzo dell'oro è rimasto stabile o è aumentato, anche se questo non è garantito."
+        },
+        {
+          "id": "c",
+          "text": "Perché è l'unico asset che non perde mai valore",
+          "isCorrect": false,
+          "feedback": "La lezione non afferma che l'oro non possa mai perdere valore: il suo comportamento può variare nel tempo."
+        },
+        {
+          "id": "d",
+          "text": "Perché elimina completamente il rischio di mercato",
+          "isCorrect": false,
+          "feedback": "Nessun singolo asset elimina il rischio di mercato generale: la diversificazione riduce solo il rischio specifico."
+        }
+      ]
+    }
+  ]
+}
