@@ -16,9 +16,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "FinLearn Pro",
+  title: "FinanceHub",
   description:
-    "Impara le basi degli investimenti, dell'inflazione e del rischio attraverso lezioni brevi e dati di mercato reali.",
+    "FinanceHub — impara le basi degli investimenti, dell'inflazione e del rischio con il modulo Learn: lezioni brevi e dati di mercato reali.",
 };
 
 export default function RootLayout({

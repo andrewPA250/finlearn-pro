@@ -20,7 +20,7 @@ export default async function LoginPage({
       <div className="w-full max-w-sm rounded-card border border-bg-sidebar bg-bg-card p-6">
         <h1 className="text-2xl font-bold text-text-primary">Accedi</h1>
         <p className="mt-1 text-sm text-text-secondary">
-          Accedi al tuo account FinLearn Pro per continuare il percorso.
+          Accedi al tuo account FinanceHub per continuare il percorso.
         </p>
 
         {searchParams.error === "auth_callback_error" && (

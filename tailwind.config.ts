@@ -14,6 +14,7 @@ const config: Config = {
         "bg-sidebar": "var(--bg-sidebar)",
         "accent-purple": "var(--accent-purple)",
         "accent-green": "var(--accent-green)",
+        "accent-blue": "var(--accent-blue)",
         "text-primary": "var(--text-primary)",
         "text-secondary": "var(--text-secondary)",
         error: "var(--error)",
@@ -38,6 +39,7 @@ const config: Config = {
       },
       maxWidth: {
         reading: "680px",
+        platform: "1440px",
       },
       screens: {
         mobile: { max: "767px" },

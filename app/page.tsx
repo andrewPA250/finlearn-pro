@@ -26,15 +26,14 @@ export default function HomePage() {
         <LogoMark className="h-14 w-14 animate-fade-in-up" />
         <div className="flex flex-col gap-3">
           <h1 className="animate-fade-in-up text-4xl font-bold" style={{ animationDelay: "60ms" }}>
-            Fin<span className="text-accent-purple">Learn</span>{" "}
-            <span className="text-accent-green">Pro</span>
+            Finance<span className="text-accent-purple">Hub</span>
           </h1>
           <p
             className="max-w-reading animate-fade-in-up text-base text-text-secondary"
             style={{ animationDelay: "120ms" }}
           >
-            Impara le basi degli investimenti, dell&apos;inflazione e del rischio attraverso 6
-            lezioni brevi collegate a dati di mercato reali.
+            Impara le basi degli investimenti, dell&apos;inflazione e del rischio con il modulo
+            Learn: 6 lezioni brevi collegate a dati di mercato reali.
           </p>
         </div>
         <Link

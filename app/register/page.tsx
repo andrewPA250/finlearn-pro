@@ -16,7 +16,7 @@ export default async function RegisterPage() {
       <div className="w-full max-w-sm rounded-card border border-bg-sidebar bg-bg-card p-6">
         <h1 className="text-2xl font-bold text-text-primary">Crea un account</h1>
         <p className="mt-1 text-sm text-text-secondary">
-          Registrati per salvare i tuoi progressi su FinLearn Pro.
+          Registrati per salvare i tuoi progressi su FinanceHub.
         </p>
 
         <RegisterForm />

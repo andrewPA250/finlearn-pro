@@ -28,9 +28,9 @@ export function Sidebar() {
         <LogoMark className="h-9 w-9" />
         <span className="flex flex-col leading-tight">
           <span className="text-base font-bold text-text-primary">
-            Fin<span className="text-accent-purple">Learn</span>
+            Finance<span className="text-accent-purple">Hub</span>
           </span>
-          <span className="text-xs text-text-secondary">Investire, capito.</span>
+          <span className="text-xs text-text-secondary">Modulo Learn</span>
         </span>
       </Link>
 
