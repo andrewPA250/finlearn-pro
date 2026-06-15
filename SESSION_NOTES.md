@@ -6,7 +6,7 @@
 
 ---
 
-## Stato attuale: Step 9 (spec) completato — Auth e lancio pubblico: Supabase Auth (email+password, conferma email, reset password), route protection, progressi cloud con migrazione one-time da localStorage, pagina profilo (modifica nome, reset progressi, logout). Step 10.1 (Brand Identity + Design System), 10.2 (Header globale), 10.2bis (Search Overlay), 10.4 (Nuova Home FinanceHub), 10.3 (Sidebar contestuale Learn), 10.5 (Markets Module Foundation) e 10.6 (Search + Markets Integration) **completati** — vedi rispettive sezioni "Handoff" in fondo. Micro-fix UX "toggle mostra/nascondi password" (Login/Register/Reset) **completato**. Prossimo step: da definire con l'utente.
+## Stato attuale: Step 9 (spec) completato — Auth e lancio pubblico: Supabase Auth (email+password, conferma email, reset password), route protection, progressi cloud con migrazione one-time da localStorage, pagina profilo (modifica nome, reset progressi, logout). Step 10.1 (Brand Identity + Design System), 10.2 (Header globale), 10.2bis (Search Overlay), 10.4 (Nuova Home FinanceHub), 10.3 (Sidebar contestuale Learn), 10.5 (Markets Module Foundation), 10.6 (Search + Markets Integration), 10.7 (Asset Page Foundation) e 11 (Real Market Data Expansion — catalogo a 34 strumenti) **completati** — vedi rispettive sezioni "Handoff" in fondo. Micro-fix UX "toggle mostra/nascondi password" (Login/Register/Reset) **completato**. Prossimo step: da definire con l'utente.
 
 Riferimento spec: [finlearn-mvp-spec.md](finlearn-mvp-spec.md)
 
@@ -825,7 +825,7 @@ Questo non significa implementare questi dati ora — significa che le scelte di
 
 Se questa conversazione viene ripresa in una nuova chat, il prompt di avvio dovrebbe essere equivalente a:
 
-> "Step 9 è completo (vedi 'Handoff — Step 9 completato'). Step 10.1 (Brand Identity + Design System), Step 10.2 (Header globale), Step 10.2bis (Search overlay), Step 10.4 (Nuova Home FinanceHub), Step 10.3 (Sidebar contestuale Learn), Step 10.5 (Markets Module Foundation) e Step 10.6 (Search + Markets Integration) sono **completati** (vedi le rispettive sezioni 'Handoff — Step 10.x completato'): rebranding FinanceHub, nuovo logomark 'hub', Header globale fisso con nav primaria/account menu/search, command palette Ctrl/Cmd+K con categorie Vai a/Lezioni/Asset, nuova Home "command center" con ticker Markets reale (`lib/market/ticker.ts`, `components/dashboard/MarketTicker.tsx`) e card Learn/Workbench/Portfolio a peso uguale (`components/dashboard/ModuleCard.tsx`), sidebar trasformata in `LearnSidebar` contestuale al modulo Learn (renderizzata da `components/sidebar/ContextSidebar.tsx` solo su `/lessons/*`), nuovo modulo Markets (`/markets`) con sezioni per categoria (Azioni/ETF/Indici/Crypto/Forex/Commodities/Bond), Market List Pattern riutilizzabile (`components/markets/MarketListRow.tsx`, `MarketListSection.tsx`), catalogo asset (`lib/markets/catalog.ts`, `types/markets.ts`) e route definitiva per le pagine asset (`/asset/[symbol]`). La Search Overlay (`lib/search/searchIndex.ts`, `components/search/SearchOverlay.tsx`) è ora collegata allo stesso catalogo Markets: la sezione "Asset" mostra simbolo/nome/categoria/stato (live/soon, badge `components/markets/MarketStatusBadge.tsx`) e naviga a `/asset/[symbol]`, ricerca per simbolo/nome/categoria, max 8 risultati. Inoltre è stato completato un micro-fix UX: toggle mostra/nascondi password in Login/Register/Reset (`components/auth/PasswordInput.tsx`). Step 10 (Brand Identity + Platform UI) resta **approvato** secondo quanto descritto in 'Handoff — Step 10 approvato' per i sotto-step successivi — segui le decisioni di design lì documentate (Markets centrale, Learn non più al centro, stile Bloomberg×Apple×Linear). Il prossimo step non è ancora definito: chiedi conferma all'utente sulla prossima priorità (es. catalogo asset più ampio, Watchlist/Portfolio, bottom nav modulo). NON toccare Watchlist, Portfolio, AI, integrazioni provider esterni, e NON modificare auth/Supabase/progressi/quiz/lezioni/workbench oltre a quanto necessario."
+> "Step 9 è completo (vedi 'Handoff — Step 9 completato'). Step 10.1 (Brand Identity + Design System), Step 10.2 (Header globale), Step 10.2bis (Search overlay), Step 10.4 (Nuova Home FinanceHub), Step 10.3 (Sidebar contestuale Learn), Step 10.5 (Markets Module Foundation), Step 10.6 (Search + Markets Integration), Step 10.7 (Asset Page Foundation) e Step 11 (Real Market Data Expansion) sono **completati** (vedi le rispettive sezioni 'Handoff — Step 10.x/11 completato'): rebranding FinanceHub, nuovo logomark 'hub', Header globale fisso con nav primaria/account menu/search, command palette Ctrl/Cmd+K con categorie Vai a/Lezioni/Asset, nuova Home "command center" con ticker Markets reale (`lib/market/ticker.ts`, `components/dashboard/MarketTicker.tsx`) e card Learn/Workbench/Portfolio a peso uguale (`components/dashboard/ModuleCard.tsx`), sidebar trasformata in `LearnSidebar` contestuale al modulo Learn (renderizzata da `components/sidebar/ContextSidebar.tsx` solo su `/lessons/*`), nuovo modulo Markets (`/markets`) con sezioni per categoria (Azioni/ETF/Indici/Crypto/Forex/Commodities/Bond, ora rinominata "Bond / Rates"), Market List Pattern riutilizzabile (`components/markets/MarketListRow.tsx`, `MarketListSection.tsx`), catalogo asset (`lib/markets/catalog.ts`, `types/markets.ts`) e route definitiva per le pagine asset (`/asset/[symbol]`). Il catalogo `MARKET_INSTRUMENTS` è stato esteso in Step 11 da 12 a **34 strumenti** (Indici: SPX/NDX/DJI/RUT; Azioni: AAPL/MSFT/NVDA/AMZN/GOOGL/META/TSLA/AMD/PLTR; ETF: SPY/QQQ/VOO/VTI/SCHD/AGG/BND; Crypto: BTCUSD/ETHUSD/XRPUSD/ADAUSD; Forex: EURUSD/GBPUSD/USDJPY; Commodities: XAUUSD/XAGUSD/WTI/NATGAS; Bond/Rates: US10Y/US02Y/US30Y), ma solo SPX/XAUUSD/US10Y restano `status: "live"` con `assetId` (gli stessi 3 dataset reali `sp500`/`gold`/`us10y`); tutti gli altri 31 sono `status: "soon"`, nessun prezzo finto. La Search Overlay (`lib/search/searchIndex.ts`, `components/search/SearchOverlay.tsx`) è collegata allo stesso catalogo Markets: la sezione "Asset" mostra simbolo/nome/categoria/stato (live/soon, badge `components/markets/MarketStatusBadge.tsx`) e naviga a `/asset/[symbol]`, ricerca per simbolo/nome/categoria, max 8 risultati (`MAX_ASSET_RESULTS`, invariato). La pagina `/asset/[symbol]` (Step 10.7, `components/asset/`) è ora una vera pagina FinanceHub: hero con categoria/badge stato (`AssetStatusBadge`: "Dati EOD" per i 3 strumenti live, "Soon" per gli altri)/quotazione/CTA Workbench (`AssetHero`), sezione Overview con i fatti chiave (`AssetOverviewSection`), e 4 sezioni placeholder Chart/Stats/News/Learn references (`AssetSectionPlaceholder`), tutte composte in `AssetView` — funziona automaticamente per tutti i 34 strumenti del catalogo, nessuna modifica necessaria in Step 11. Inoltre è stato completato un micro-fix UX: toggle mostra/nascondi password in Login/Register/Reset (`components/auth/PasswordInput.tsx`). Step 10 (Brand Identity + Platform UI) resta **approvato** secondo quanto descritto in 'Handoff — Step 10 approvato' per i sotto-step successivi — segui le decisioni di design lì documentate (Markets centrale, Learn non più al centro, stile Bloomberg×Apple×Linear). Il prossimo step non è ancora definito: chiedi conferma all'utente sulla prossima priorità (es. provider dati reali per i 31 strumenti "soon", Watchlist/Portfolio, bottom nav modulo, grafico reale in Asset/Chart). NON toccare Watchlist, Portfolio, AI, integrazioni provider esterni, e NON modificare auth/Supabase/progressi/quiz/lezioni/workbench/route `/asset/[symbol]` oltre a quanto necessario. NON generare prezzi/dati finti per gli strumenti 'soon': restano 'soon' finché non c'è un dataset reale."
 
 ---
 
@@ -1136,4 +1136,102 @@ Se questa conversazione viene ripresa in una nuova chat, il prompt di avvio dovr
 - Click su risultato asset "live" (SPX) → naviga a `/asset/SPX`, mostra quotazione reale (valore/variazione/data)
 - Mobile (375px), `/markets` → overlay search apribile, 8 risultati Asset visibili con subtitle troncato correttamente (`document.body.scrollWidth === 375`, nessun overflow); click su SPX → naviga a `/asset/SPX` correttamente
 
-**Prossimo step**: da definire con l'utente (es. catalogo asset più ampio, Watchlist/Portfolio, bottom nav modulo). In attesa di indicazioni sulla prossima priorità.
+**Prossimo step**: 10.7 — Asset Page Foundation — completato (vedi "Handoff — Step 10.7 completato" in fondo). A seguire, Step 11 — Real Market Data Expansion — completato (vedi "Handoff — Step 11 completato" in fondo).
+
+---
+
+## Handoff — Step 10.7 completato (Asset Page Foundation)
+
+**Stato complessivo**: Step 1-9 + Step 7.5 (extra) + Step 10.1 + Step 10.2 + Step 10.2bis + Step 10.4 + Step 10.3 + Step 10.5 + Step 10.6 + Step 10.7 + micro-fix password completati. `npx tsc --noEmit` e `npm run build` passano senza errori (14 route, invariate — `/asset/[symbol]` resta dinamica 179B).
+
+**Cosa è cambiato**:
+
+- `components/asset/AssetStatusBadge.tsx` (**nuovo**) — badge di stato per l'header asset: "Dati EOD" (pillola verde) per `status: "live"`, `SoonBadge` per `status: "soon"`. Variante più descrittiva di `MarketStatusBadge` (Step 10.6, usato nelle liste/Search): qui comunica che i 3 strumenti live hanno serie storiche reali ma di fine giornata, non quotazioni realtime
+- `components/asset/AssetHero.tsx` (**nuovo**) — header della pagina: breadcrumb "← Markets", riga categoria + `AssetStatusBadge`, titolo (nome + simbolo), quotazione (valore/variazione/data, se disponibile) o messaggio placeholder, e — solo per strumenti con `assetId` (i 3 live) — CTA "Apri in Workbench →" verso `/workbench` (stesso dataset già visualizzabile lì)
+- `components/asset/AssetOverviewSection.tsx` (**nuovo**) — sezione "Overview": griglia di fatti (Simbolo, Nome, Categoria, Stato, + Valore/Variazione/Aggiornato al se c'è una quotazione). Stessi campi per ogni strumento; per i "soon" mostra in più una nota che i dati arriveranno con il catalogo completo
+- `components/asset/AssetSectionPlaceholder.tsx` (**nuovo**) — card generica riusabile per le sezioni future: header (titolo + `SoonBadge`) + testo descrittivo. Usata per Chart, Stats, News, Learn references
+- `components/asset/AssetView.tsx` (**nuovo**) — composizione della pagina: `AssetHero` + `AssetOverviewSection` + griglia 2 colonne (1 su mobile) con le 4 `AssetSectionPlaceholder` (Chart/Stats/News/Learn references). Stessa struttura per asset live e soon — cambia solo il contenuto delle singole sezioni
+- `app/asset/[symbol]/page.tsx` (**modificato**) — la logica fs/quotazione resta invariata (stesso pattern `readMarketData` + `buildTickerQuote` di Step 10.5); il rendering ora delega a `<AssetView instrument={...} categoryLabel={...} quote={...} />` invece del markup inline precedente
+
+**Cosa NON è cambiato** (volutamente, per restare entro lo scope di 10.7):
+
+- Route `/asset/[symbol]` invariata: stesso `notFound()` per simboli non in `MARKET_INSTRUMENTS`, stessa risoluzione `getInstrumentBySymbol`/`MARKET_CATEGORIES`
+- Nessun nuovo dato/provider: `quote` viene calcolata esattamente come in Step 10.5 (`buildTickerQuote` sui 3 dataset `public/data/*.json` esistenti)
+- `MARKET_INSTRUMENTS`/`MARKET_CATEGORIES`/`MarketStatusBadge`/Search Overlay (Step 10.5/10.6) non toccati — `AssetStatusBadge` è un componente nuovo e separato, non una modifica di `MarketStatusBadge`
+- Nessuna Watchlist, Portfolio, AI, provider esterni; nessun catalogo asset massivo (sempre 12 strumenti)
+- Auth/Supabase/progressi/quiz/lezioni/Workbench non modificati: il link "Apri in Workbench" punta a `/workbench` (route protetta esistente, comportamento di redirect a `/login` per utenti anonimi invariato — stesso pattern del link "Workbench" nel Header)
+
+**Architettura — pronta per dati live e migliaia di asset**:
+
+- **Stessa composizione per ogni stato**: `AssetView` non ha rami condizionali sulla struttura — `AssetHero`/`AssetOverviewSection` decidono internamente cosa mostrare in base a `quote` (presente o `null`) e `instrument.status`. Un futuro provider che rende "live" un nuovo strumento (aggiungendo `assetId`/dati) fa apparire automaticamente quotazione, CTA Workbench e i fatti aggiuntivi in Overview, senza toccare `AssetView`/`AssetPage`
+- **Sezioni placeholder pronte a "diventare vere"**: `AssetSectionPlaceholder` definisce lo slot visivo (header + contenuto) per Chart/Stats/News/Learn references. Implementare il grafico reale, ad es., significa creare un `AssetChartSection` con la stessa interfaccia (props `instrument`/dati) e sostituirlo nel punto corrispondente di `AssetView` — il resto della pagina non cambia
+- **Nessun catalogo duplicato**: la pagina continua a leggere `MARKET_INSTRUMENTS`/`MARKET_CATEGORIES` via `getInstrumentBySymbol` (Step 10.5/10.6); aggiungere migliaia di strumenti al catalogo rende automaticamente disponibile per ognuno la stessa pagina (hero + Overview + placeholder), live o soon in base a `status`/`assetId`
+- **Badge di stato a due livelli**: `MarketStatusBadge` (liste/Search, Step 10.6) resta minimale (pallino/Soon); `AssetStatusBadge` (hero asset) è più descrittivo ("Dati EOD"/"Soon") — quando arriveranno dati realtime, `AssetStatusBadge` potrà aggiungere un terzo stato (es. "Live") senza impatti sulle liste
+
+**Verifica eseguita** (via preview tool):
+
+- `npx tsc --noEmit`: nessun errore
+- `npm run build`: 14 route, nessun errore (solo warning preesistente su Edge Runtime/Supabase, non correlato)
+- Desktop (1280×800):
+  - `/asset/SPX`: hero "Indici · Dati EOD · S&P 500 · SPX · 7431,46 · +0.50% · aggiornato al 2026-06-12" + CTA "Apri in Workbench →"; Overview con 7 fatti (Simbolo/Nome/Categoria/Stato/Valore/Variazione/Aggiornato al); 4 sezioni placeholder con badge "Soon"
+  - `/asset/XAUUSD`: hero "Commodities · Dati EOD · Oro · XAUUSD · 4211,12 · +0.00% · aggiornato al 2026-06-12" + CTA Workbench; Overview e placeholder coerenti
+  - `/asset/US10Y`: hero "Bond · Dati EOD · US Treasury 10Y · US10Y · 4.45% · -0.10 pp · aggiornato al 2026-06-11" + CTA Workbench
+  - `/asset/AAPL` (soon): hero "Azioni · Soon · Apple Inc. · AAPL" + testo placeholder, nessuna CTA Workbench; Overview con Stato "Soon" + nota catalogo completo; 4 sezioni placeholder
+  - `/asset/UNKNOWN`: `notFound()` → pagina 404 corretta
+- Mobile (375px):
+  - `/asset/SPX` e `/asset/AAPL`: `document.body.scrollWidth === 375` — nessun overflow, stesso contenuto del desktop
+  - Griglia Overview: 2 colonne (`grid-cols-2`) su mobile, 4 su desktop (`sm:grid-cols-4`); griglia placeholder Chart/Stats/News/Learn references: 1 colonna su mobile (327px ciascuna), 2 su desktop (`sm:grid-cols-2`)
+
+---
+
+## Handoff — Step 11 completato (Real Market Data Expansion)
+
+**Stato complessivo**: Step 1-9 + Step 7.5 (extra) + Step 10.1 + Step 10.2 + Step 10.2bis + Step 10.4 + Step 10.3 + Step 10.5 + Step 10.6 + Step 10.7 + Step 11 + micro-fix password completati. `npx tsc --noEmit` e `npm run build` passano senza errori (14 route, invariate).
+
+**Cosa è cambiato**:
+
+- `lib/markets/catalog.ts` (**modificato**):
+  - `MARKET_INSTRUMENTS` esteso da 12 a **34 strumenti**, organizzati per categoria:
+    - Indici (4): SPX (**live**, `assetId: "sp500"`), NDX, DJI, RUT (soon)
+    - Azioni (9): AAPL, MSFT, NVDA, AMZN, GOOGL, META, TSLA, AMD, PLTR (tutti soon)
+    - ETF (7): SPY, QQQ, VOO, VTI, SCHD, AGG, BND (tutti soon)
+    - Crypto (4): BTCUSD, ETHUSD, XRPUSD, ADAUSD (tutti soon)
+    - Forex (3): EURUSD, GBPUSD, USDJPY (tutti soon)
+    - Commodities (4): XAUUSD (**live**, `assetId: "gold"`), XAGUSD, WTI, NATGAS (soon)
+    - Bond / Rates (3): US10Y (**live**, `assetId: "us10y"`), US02Y, US30Y (soon)
+  - `MARKET_CATEGORIES`: label della categoria `bond` rinominata da "Bond" a "**Bond / Rates**" (più chiara ora che il gruppo contiene anche US02Y/US30Y, tassi e non solo lo strumento principale)
+  - Aggiornato il commento di intestazione: descrive esplicitamente la separazione tra catalogo (anagrafica strumento), disponibilità dati (`status`/`assetId`) e rendering (componenti `MarketListRow`/`AssetHero`/Search), più i passi concreti per collegare un futuro provider a uno strumento "soon"
+  - Nessun nuovo file, nessuna nuova funzione: `getInstrumentsByCategory`/`getInstrumentBySymbol` invariate (filtri puri su `MARKET_INSTRUMENTS`, indipendenti dalla dimensione del catalogo)
+
+**Cosa NON è cambiato** (volutamente, per restare entro lo scope di Step 11):
+
+- `types/markets.ts`, `types/market.ts` (`AssetId` resta `"sp500" | "gold" | "us10y"`, solo 3 valori — nessun nuovo dataset reale)
+- `public/data/*.json`: ancora solo `sp500.json`, `gold.json`, `us10y.json` — nessun prezzo/valore finto introdotto per i 31 nuovi strumenti "soon" (nessun campo `assetId`, nessuna serie storica)
+- `lib/search/searchIndex.ts`: `getAssetItems()`/`matchesQuery`/`MAX_ASSET_RESULTS = 8` invariati — leggono `MARKET_INSTRUMENTS` e si aggiornano automaticamente con il catalogo più grande
+- `components/markets/MarketListRow.tsx`/`MarketListSection.tsx`/`MarketsView.tsx`, `components/asset/AssetView.tsx`/`AssetHero.tsx`/`AssetOverviewSection.tsx`/`AssetSectionPlaceholder.tsx`, `components/markets/MarketStatusBadge.tsx`/`components/asset/AssetStatusBadge.tsx`: nessuna modifica — già generici rispetto al numero di strumenti/categorie (Step 10.5-10.7)
+- `components/dashboard/MarketTicker.tsx`/`buildTickerQuotes`: invariati — il ticker continua a mostrare solo i 3 strumenti con dati reali (`AssetId` ha ancora solo 3 valori), coerente con "il ticker mostra solo strumenti con dati reali disponibili"
+- Nessuna modifica ad auth/Supabase/progressi/quiz/lezioni/Workbench
+- Nessun provider esterno, nessuna API key, nessuno scraping, nessun dato sintetico
+- Nessuna Watchlist, Portfolio, AI
+
+**Architettura — pronta per migliaia di asset reali**:
+
+- **Catalogo, disponibilità dati e rendering restano tre livelli separati**: `MARKET_INSTRUMENTS` è solo anagrafica (simbolo/nome/categoria); `status`/`assetId` codificano la disponibilità dati; tutti i componenti UI (Markets, Search, Asset page) leggono questi due livelli senza logica per-simbolo. Aggiungere altri strumenti "soon" (verso le migliaia) significa solo aggiungere voci a `MARKET_INSTRUMENTS` — zero modifiche a componenti
+- **Passaggio "soon" → "live" è un'operazione locale e incrementale**: per ognuno dei 31 strumenti "soon", il giorno in cui arriverà un dataset reale basterà (1) aggiungere il suo id a `AssetId` e alle mappe `ASSET_*`/`ASSET_FILE_NAMES` in `lib/market.ts`, (2) fornire `public/data/<id>.json`, (3) impostare `status: "live"` + `assetId: "<id>"` nel catalogo. Markets, Search e `/asset/[symbol]` mostreranno automaticamente la quotazione reale per quello strumento, senza alcuna modifica a `MarketListRow`/`AssetHero`/`SearchOverlay`
+- **Nessun dato finto come garanzia strutturale, non solo come scelta puntuale**: la UI non ha mai bisogno di un valore numerico per uno strumento "soon" (badge `SoonBadge`/`AssetStatusBadge` bastano) — quindi un domani con migliaia di strumenti "soon" il sistema resta corretto senza alcun placeholder numerico da rimuovere in seguito
+- **Search e Asset page già scalano per costruzione**: `getAssetItems()` mappa l'intero catalogo e `MAX_ASSET_RESULTS = 8` limita già i risultati mostrati; `/asset/[symbol]` risolve qualsiasi simbolo presente nel catalogo (`getInstrumentBySymbol`, case-insensitive) con `notFound()` per quelli assenti — entrambi i meccanismi restano validi indipendentemente dal fatto che il catalogo abbia 34 o 5.000 strumenti
+- **Categoria "Bond / Rates"**: la rinomina della label rende esplicito che la categoria copre sia lo strumento "Treasury" come prodotto sia i tassi/rendimenti correlati (US02Y/US10Y/US30Y) — utile quando arriveranno altri tassi (es. Bund, Gilt) nello stesso gruppo
+
+**Verifica eseguita** (via preview tool):
+
+- `npx tsc --noEmit`: nessun errore
+- `npm run build`: 14 route generate correttamente, nessun errore (solo warning preesistente su Edge Runtime/Supabase, non correlato)
+- `/markets`: tutte le 7 categorie renderizzate con i nuovi conteggi (Indici 4, Azioni 9, ETF 7, Crypto 4, Forex 3, Commodities 4, Bond / Rates 3 = 34 totali), nessun overflow; SPX/XAUUSD/US10Y mostrano ancora valore/variazione reali con pallino verde, tutti gli altri 31 mostrano badge "Soon"; categorie senza strumenti live (es. Azioni, ETF, Crypto, Forex) mostrano badge "Soon" a livello di sezione
+- Search Overlay (Ctrl/Cmd+K): query "TSLA" → 1 risultato "TSLA · Tesla Inc. · Azioni" con badge "Soon"; query vuota → sezione "Asset" mostra i primi 8 strumenti del catalogo (SPX live con pallino verde, NDX/DJI soon, ecc.), limite a 8 confermato
+- Asset page per nuovi strumenti "soon" (`/asset/NDX`, `/asset/TSLA`, `/asset/XAGUSD`, `/asset/US02Y`): tutte 200 OK, badge "Soon" nell'hero, nessun "Dati EOD", 4 sezioni placeholder
+- Asset page per i 3 strumenti "live" (`/asset/SPX`, `/asset/XAUUSD`, `/asset/US10Y`): ancora 200 OK con badge "Dati EOD", quotazione reale invariata
+- `/asset/UNKNOWN`: `notFound()` → 404 corretto
+
+**Prossimo step**: da definire con l'utente (es. provider dati reali per gli strumenti "soon", Watchlist/Portfolio, grafico reale in Asset/Chart).
+
+**Prossimo step**: da definire con l'utente (es. catalogo asset più ampio, Watchlist/Portfolio, bottom nav modulo, grafico reale in Asset/Chart). In attesa di indicazioni sulla prossima priorità.
