@@ -1,10 +1,12 @@
-# FinLearn Pro — Session Notes
+# FinanceHub (ex FinLearn Pro) — Session Notes
 
 > Handoff dello stato del progetto. Aggiornare ad ogni step completato.
+>
+> **Rebranding (deciso in Step 10, non ancora implementato)**: il prodotto torna a chiamarsi **FinanceHub**. "FinLearn" diventa il nome interno del modulo **Learn**. Il codice e la UI attuali usano ancora "FinLearn"/"FinLearn Pro" — la rinomina è pianificata ma non eseguita (vedi "Handoff — Step 10 approvato" in fondo).
 
 ---
 
-## Stato attuale: Step 9 (spec) completato — Auth e lancio pubblico: Supabase Auth (email+password, conferma email, reset password), route protection, progressi cloud con migrazione one-time da localStorage, pagina profilo (modifica nome, reset progressi, logout).
+## Stato attuale: Step 9 (spec) completato — Auth e lancio pubblico: Supabase Auth (email+password, conferma email, reset password), route protection, progressi cloud con migrazione one-time da localStorage, pagina profilo (modifica nome, reset progressi, logout). Step 10 (Brand Identity + Platform UI) **approvato ma non ancora implementato** — vedi sezione dedicata in fondo.
 
 Riferimento spec: [finlearn-mvp-spec.md](finlearn-mvp-spec.md)
 
@@ -695,7 +697,7 @@ Con `npm run dev`, su desktop (≥1024px) e mobile (375px/320px).
 - Step 7.5 (extra, fuori spec) — UI/UX polish: nuovo set di icone SVG inline (`components/layout/icons.tsx`), logomark/branding FinLearn, sidebar e bottom nav con stati attivi basati su `usePathname()` e progresso reale, homepage con feature card e microanimazioni `fade-in-up`, dashboard con header di saluto e card più curate (icone, hover lift, CTA animate). Solo modifiche visive/markup, nessuna modifica a logica/dati.
 - Step 8 — Beta privata: repository GitHub creato e collegato a Vercel, deploy in produzione completato. URL pubblico: https://finlearn-pro.vercel.app. Deploy automatico ad ogni push su GitHub (vedi "Workflow di deploy" sotto). Nessuna modifica al codice in questo step.
 
-**Prossimo step**: Step 9 (spec) — Auth e lancio pubblico — completato (vedi "Handoff — Step 9 completato" sotto).
+**Prossimo step**: Step 9 (spec) — Auth e lancio pubblico — completato (vedi "Handoff — Step 9 completato" sotto). Step 10 (extra, fuori spec) — Brand Identity + Platform UI — **approvato, non ancora implementato** (vedi "Handoff — Step 10 approvato" in fondo al documento).
 
 ---
 
@@ -749,3 +751,76 @@ Con `npm run dev`, su desktop (≥1024px) e mobile (375px/320px).
 - Completare un'altra lezione/quiz da autenticato: verificare in Supabase che la riga corrispondente in `lesson_progress` venga creata/aggiornata (`upsert`)
 - Ricaricare la pagina: i progressi devono persistere (letti da Supabase)
 - Fare logout e login da un altro browser/dispositivo con lo stesso account: i progressi devono essere identici (letti dallo stesso `user_id` su Supabase)
+
+---
+
+## Handoff — Step 10 approvato (Brand Identity + Platform UI) — NON ANCORA IMPLEMENTATO
+
+> Questa sezione documenta una decisione strategica e un piano di redesign **discussi e approvati** in sessione, ma per cui **non è stato scritto né modificato alcun file**. Step 1-9 (vedi sopra) restano lo stato reale del codice: `npx tsc --noEmit` e `npm run build` passano, 12 route attive, brand ancora "FinLearn Pro" nel codice/UI.
+
+### Decisione strategica: rebranding FinanceHub
+
+- Il prodotto **torna a chiamarsi FinanceHub** (nome originario/visione di lungo periodo).
+- **FinLearn non viene eliminato**: diventa il **modulo "Learn"** interno a FinanceHub — tutto ciò che oggi esiste (lezioni 1-6, quiz, contenuti, `lib/access.ts`, `lib/lessons.ts`, `ProgressContext`, progressi cloud) resta valido e diventa la base del modulo Learn.
+- **Learn non è più "il prodotto"**: è uno dei moduli, importante ma non centrale come oggi (oggi la sidebar globale è quasi solo elenco lezioni — questo è il problema principale identificato).
+
+### Visione futura della piattaforma — architettura moduli
+
+```
+FinanceHub
+├─ Home       (hub/punto di incontro tra Learn, Markets, Workbench)
+├─ Learn      (= FinLearn attuale: 6 lezioni, quiz, progressi — modulo interno)
+├─ Markets    (modulo FONDAMENTALE, non un addon — azioni, ETF, indici, forex, crypto, commodities, bond)
+├─ Portfolio  (multi-portfolio, holding, performance, allocazione)
+├─ AI         (assistente contestuale: spiega concetti Learn, commenta dati Markets, analizza Portfolio)
+└─ Workbench  (esiste già — grafico/overlay; in futuro motore grafico condiviso con Markets/Asset page)
+```
+
+### Vincolo di scala — obiettivo a medio/lungo termine
+
+La UI deve essere progettata **fin da ora** per poter ospitare senza redesign:
+- 5.000+ azioni globali, centinaia di ETF, indici, forex, crypto, commodities, bond
+- ricerca veloce su catalogo enorme, watchlist, portfolio multipli, pagine asset complete, dati live/quasi-live, grafici professionali
+
+Questo non significa implementare questi dati ora — significa che le scelte di navigazione/ricerca/layout fatte in Step 10 **non devono richiedere un secondo redesign** quando questi dati arriveranno.
+
+### Decisioni di design chiave (validate, da rispettare nell'implementazione)
+
+1. **Search è un elemento di primo livello**: non un'icona nascosta, ma una search bar visibile nel header (desktop) + overlay/command palette a schermo intero (Ctrl/Cmd+K). Categorie fin da subito: **"Vai a"** (navigazione sezioni), **"Lezioni"** (titoli reali da `LESSON_META`), **"Asset"** (slot vuoto/placeholder "Catalogo in arrivo" — pronto per il futuro catalogo).
+2. **Pagina Asset generica (`/asset/[symbol]` o equivalente)** è un concetto architetturale centrale: futura destinazione comune di risultati di ricerca, righe Markets, voci Watchlist e holding Portfolio. La convenzione di routing va decisa presto (in 10.1) perché la search la userà.
+3. **Markets è un modulo fondamentale**, non un "extra": in nav primaria va posizionato vicino a Home (ordine proposto: **Home, Markets°, Learn, Portfolio°, AI°, Workbench** — °= "Soon" per ora). Il "ticker strip" con dati reali già disponibili (`public/data/sp500.json`, `gold.json`, `us10y.json` via `lib/market.ts`) è il modo per rendere Markets "vivo" da subito senza nuovi dati — pianificato per 10.4 (Home) / 10.6 (stub Markets), non in questa iterazione.
+4. **Learn non è più il centro visivo**: nella nuova Home, Learn è una card tra altre (con la metrica "Knowledge Capital" = progresso lezioni), non l'elemento dominante.
+5. **Componente "riga densa" (ticker/list row)**: nuovo pattern di UI (font mono, riga compatta ~40-48px, valore + variazione %) per ticker strip, liste Markets, Watchlist, Portfolio — da introdurre quando arriva il primo consumer reale (10.4), non come token isolato.
+6. **Due varianti di layout**: `reading` (esistente, `max-w-reading` 680px, per contenuti testuali come le lezioni) e una variante **"larga/platform"** (nuova, per Home/Markets/Portfolio) — da definire in 10.1 e usare subito nel Header (10.2).
+7. **Direzione estetica**: Bloomberg × Apple × Linear, dark fintech premium, "piattaforma finanziaria seria" — NO stile LMS/corso online/Duolingo/admin dashboard generica. Palette esistente (`bg-primary`/`bg-card`/`bg-sidebar` + `accent-purple`/`accent-green`/`error`) resta la base; possibile nuovo token `accent-blue` per badge "Soon"/info.
+8. **Homepage pubblica `/`**: l'attuale landing "da corso" (hero + 3 feature card) va eventualmente sostituita da un teaser con ticker strip dati reali — **rimandato a 10.4bis**, non in questa iterazione.
+
+### Step 10 — sotto-step approvati per QUESTA iterazione
+
+- **10.1 — Brand Identity + Design System**: rebranding testuale (FinanceHub), nuovo logomark (concetto "hub"/rete di nodi, non più solo "trend line"), eventuale token `accent-blue`, definizione variante layout "larga/platform" (usata subito dal Header).
+- **10.2 — Header globale**: nuovo componente `Header.tsx` — logo FinanceHub, nav primaria (Home, Markets°, Learn, Portfolio°, AI°, Workbench — °="Soon" disabilitati), search bar visibile, account menu (avatar/dropdown con Profilo/Esci, riusando auth esistente). Sidebar attuale **resta** per questa iterazione (la sua trasformazione in sidebar contestuale a Learn è 10.3, non approvato ora) — verrà solo rimosso il blocco logo duplicato (il brand vive nel Header).
+- **10.2bis — Search overlay**: command palette Ctrl/Cmd+K con categorie "Vai a" / "Lezioni" (reali, da `LESSON_META`) / "Asset" (placeholder vuoto).
+
+### Step 10 — elementi esplicitamente RIMANDATI (non toccare)
+
+- **Watchlist** (anche solo come icona/slot visivo nel Header)
+- **Pagine Asset complete** (`/asset/[symbol]`) — solo la *convenzione di routing* va eventualmente fissata in 10.1, senza creare la pagina
+- **Portfolio** (modulo, pagine, dati)
+- **AI** (modulo, pagine)
+- **Markets completo** (ticker strip, stub catalogo, pagina `/markets`) — fa parte di 10.4/10.6, non di questa iterazione. In 10.2 "Markets" esiste solo come voce di nav disabilitata "Soon".
+- **10.3** (sidebar → contestuale Learn), **10.4** (nuova Home), **10.4bis** (restyle homepage pubblica), **10.5** (bottom nav modulo), **10.6/10.6bis** (stub Markets + Asset page), **10.7** (QA finale) — tutti pianificati ma non approvati per questa iterazione.
+
+### Note tecniche raccolte (analisi già fatta, utile per chi implementa 10.1/10.2/10.2bis)
+
+- **Occorrenze testuali "FinLearn"/"FinLearn Pro" da aggiornare** per il rebranding: `app/layout.tsx` (metadata `title`/`description`), `app/page.tsx` (wordmark hero "Fin**Learn** **Pro**"), `app/login/page.tsx` (sottotitolo "...account FinLearn Pro..."), `app/register/page.tsx` (sottotitolo "...su FinLearn Pro."), `components/layout/Sidebar.tsx` (wordmark "Fin**Learn**" + tagline "Investire, capito."). `scripts/import-market-data.mjs`, `finlearn-mvp-spec.md` e questo file sono documentazione/storico — non richiedono modifica per il rebranding UI.
+- **Logomark attuale** (`LogoMark` in `components/layout/icons.tsx`): quadrato arrotondato gradiente viola→verde con linea di trend. Da ripensare in chiave "hub" (nodo centrale + nodi collegati), mantenendo il gradiente viola/verde come continuità di brand.
+- **Sidebar (`components/layout/Sidebar.tsx`)**: il blocco logo/wordmark in cima (righe iniziali, `Link href="/"` con `LogoMark` + "Fin**Learn**") va rimosso quando il Header globale viene introdotto (10.2), per evitare doppio branding verticale. Il resto della Sidebar (Percorso, elenco lezioni, Strumenti, Account) resta invariato in questa iterazione.
+- **Search su "Lezioni" (10.2bis) — refactor necessario**: `lib/lessons.ts` importa `fs`/`path` a livello di modulo → **non importabile da un client component** (la search overlay lo è). `LESSON_META`, `getAllLessonIds`, `getLessonMeta` sono dati/funzioni pure (nessun uso di `fs`). Soluzione individuata: estrarre questi tre elementi in un nuovo modulo fs-free (es. `lib/lessonsMeta.ts`), far re-esportare `lib/lessons.ts` da lì (mantenendo `getLessonContent`/`getQuiz` con `fs` dove sono) — stesso pattern già usato per `lib/access.ts` e `lib/chartContext.ts` (separati da `fs` per essere importabili da client component). Nessun import esistente (`app/dashboard/page.tsx`, `app/workbench/page.tsx`, `app/lessons/[id]/*`) cambia.
+- **Header — dati utente**: per mostrare avatar/email nel account menu, il Header (client component) dovrà leggere lo stato auth via `supabase.auth.onAuthStateChange`/`getUser()` (stesso pattern già usato in `ProgressContext`). Se nessun utente (pagine pubbliche `/`, `/login`, `/register`), mostrare link "Accedi" invece dell'avatar.
+- **Integrazione nel layout**: `Header` va aggiunto in `app/layout.tsx` sopra al wrapper `<div className="flex">` che contiene `Sidebar` + `main`, restando sopra anche a `BottomNav`. Nessuna modifica a `ProgressProvider`, middleware, o route esistenti.
+
+### Handoff per una nuova chat — come riprendere
+
+Se questa conversazione viene ripresa in una nuova chat, il prompt di avvio dovrebbe essere equivalente a:
+
+> "Step 9 è completo (vedi 'Handoff — Step 9 completato'). Step 10 (Brand Identity + Platform UI) è **approvato** secondo quanto descritto in 'Handoff — Step 10 approvato' — segui le decisioni di design lì documentate (rebranding FinanceHub, nav Home/Markets°/Learn/Portfolio°/AI°/Workbench, search first-class con categorie Vai a/Lezioni/Asset, Markets centrale, Learn non più al centro, stile Bloomberg×Apple×Linear). Procedi SOLO con **10.1 Brand Identity + Design System**, poi fermati per conferma prima di 10.2. NON toccare Watchlist, Asset pages, Portfolio, AI, Markets completo, e NON modificare auth/Supabase/progressi/quiz/lezioni/workbench oltre a quanto necessario per il rebranding testuale e il nuovo logomark. Alla fine di 10.1: typecheck/build, elenco file modificati."
