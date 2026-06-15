@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { LESSON_IDS } from "@/lib/access";
 import { useProgress } from "@/lib/progress/ProgressContext";
 import { ProgressBar } from "@/components/layout/ProgressBar";
-import { BookIcon, ChartIcon, CheckIcon, DashboardIcon, LockIcon, LogoMark } from "@/components/layout/icons";
+import { BookIcon, ChartIcon, CheckIcon, DashboardIcon, LockIcon, LogoMark, UserIcon } from "@/components/layout/icons";
 
 function navLinkClasses(active: boolean): string {
   return `flex items-center gap-2.5 rounded-card px-3 py-2 transition duration-150 ease-in-out ${
@@ -93,6 +93,14 @@ export function Sidebar() {
         <Link href="/workbench" className={navLinkClasses(pathname === "/workbench")}>
           <ChartIcon className="h-4 w-4" />
           Grafico
+        </Link>
+
+        <p className="mb-1 mt-5 px-3 text-[11px] font-bold uppercase tracking-wide text-text-secondary/60">
+          Account
+        </p>
+        <Link href="/profile" className={navLinkClasses(pathname === "/profile")}>
+          <UserIcon className="h-4 w-4" />
+          Profilo
         </Link>
       </nav>
     </aside>

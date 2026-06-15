@@ -4,7 +4,7 @@
 
 ---
 
-## Stato attuale: Step 8 (spec) completato — Beta privata online: repository GitHub collegato a Vercel, deploy automatico ad ogni push, app pubblica su https://finlearn-pro.vercel.app.
+## Stato attuale: Step 9 (spec) completato — Auth e lancio pubblico: Supabase Auth (email+password, conferma email, reset password), route protection, progressi cloud con migrazione one-time da localStorage, pagina profilo (modifica nome, reset progressi, logout).
 
 Riferimento spec: [finlearn-mvp-spec.md](finlearn-mvp-spec.md)
 
@@ -134,6 +134,48 @@ Solo modifiche visive/CSS e markup presentazionale. Nessuna nuova funzionalità,
 - `components/dashboard/ContinueCard.tsx` — aggiunta icona (`BookIcon`) in badge colorato, hover lift sulla card (`hover:-translate-y-0.5 hover:border-accent-purple/70`), CTA con icona freccia animata al hover
 - `components/dashboard/CompletionScreen.tsx` — aggiunta icona (`TrophyIcon`) in badge colorato verde, hover lift sulla card, CTA con icona freccia animata al hover
 - `components/dashboard/WorkbenchCard.tsx` — aggiunta icona (`ChartIcon`) in badge colorato, hover lift sulla card, CTA con icona freccia animata al hover
+
+### Step 9 (spec) — Auth e lancio pubblico
+
+Schema SQL eseguito manualmente su Supabase (progetto EU/Ireland, piano Free): tabelle `profiles` e `lesson_progress`, RLS + policy `_own` (select/insert/update/delete), trigger `handle_new_user` (crea riga `profiles` alla registrazione) e `set_updated_at`. Email confirmation ON, redirect URL configurati lato Supabase.
+
+**Punto 1 — Setup Supabase client/middleware:**
+- `package.json` — aggiunte dipendenze `@supabase/supabase-js` e `@supabase/ssr`
+- `lib/supabase/client.ts` — **nuovo file**: client Supabase per componenti client (`createBrowserClient`)
+- `lib/supabase/server.ts` — **nuovo file**: client Supabase per Server Component/Route Handler (`createServerClient` + cookies)
+- `lib/supabase/middleware.ts` — **nuovo file**: `updateSession()`, refresh sessione via `supabase.auth.getUser()`
+- `middleware.ts` — **nuovo file**: root middleware, invoca `updateSession()`
+- `.env.local.example` — **nuovo file**: template `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+
+**Punto 2 — Login/Register/Callback:**
+- `app/login/page.tsx`, `app/register/page.tsx` — **nuovi file**: pagine server component, redirect a `/dashboard` se già autenticati
+- `components/auth/LoginForm.tsx` — **nuovo file**: form email/password, `signInWithPassword`, errori in italiano, link "Password dimenticata?"
+- `components/auth/RegisterForm.tsx` — **nuovo file**: form displayName (opzionale)/email/password/confirmPassword, `signUp` con `emailRedirectTo` verso `/auth/callback`, messaggio di successo (conferma email richiesta)
+- `app/auth/callback/route.ts` — **nuovo file**: route handler, `exchangeCodeForSession`, redirect a `next` (default `/dashboard`) o a `/login?error=auth_callback_error`
+
+**Punto 3 — Password reset:**
+- `app/forgot-password/page.tsx`, `app/reset-password/page.tsx` — **nuovi file**
+- `components/auth/ForgotPasswordForm.tsx` — **nuovo file**: `resetPasswordForEmail`, messaggio generico anti-enumerazione
+- `components/auth/ResetPasswordForm.tsx` — **nuovo file**: `updateUser({ password })`, redirect a `/dashboard`
+
+**Punto 4 — Route protection:**
+- `lib/supabase/middleware.ts` — aggiunta logica di redirect: utenti non autenticati su `/dashboard`, `/lessons/*`, `/workbench`, `/profile` → `/login`; utenti autenticati su `/login`/`/register` → `/dashboard`. `/`, `/forgot-password`, `/reset-password` restano pubbliche/gestite a parte
+
+**Punto 5 — Progressi cloud + migrazione localStorage:**
+- `lib/progress/localStorageProgressStore.ts` — esportata costante `LESSON_PROGRESS_STORAGE_KEY`
+- `lib/progress/supabaseProgressStore.ts` — **nuovo file**: `SupabaseProgressStore` con `fetchState`, `upsertLessonProgress`, `migrateFromLocalState` su tabella `lesson_progress`
+- `lib/progress/ProgressContext.tsx` — riscritto: sottoscrizione a `supabase.auth.onAuthStateChange`, switch automatico tra `LocalStorageProgressStore` (utente anonimo) e `SupabaseProgressStore` (utente autenticato), migrazione one-time al primo login (marker `finlearn:progressMigrated:${userId}` in localStorage), aggiornamento ottimistico, nuovo campo `error` nel context. API pubblica invariata per dashboard/lezioni/quiz/guards/workbench
+
+**Punto 6 — Pagina profilo:**
+- `components/layout/icons.tsx` — aggiunta `UserIcon`
+- `lib/progress/supabaseProgressStore.ts` — aggiunto metodo `resetProgress()` (DELETE su `lesson_progress` filtrato per `user_id`)
+- `lib/progress/ProgressContext.tsx` — aggiunto `resetProgress()` al context (azzera stato locale o remoto, ottimistico, con gestione errori)
+- `components/profile/ProfileForm.tsx` — **nuovo file**: modifica `display_name` (update su `profiles`)
+- `components/profile/LogoutButton.tsx` — **nuovo file**: `signOut()` + redirect a `/login`
+- `components/profile/ResetProgressButton.tsx` — **nuovo file**: reset progressi con conferma in due passi
+- `app/profile/page.tsx` — **nuovo file**: server component, email utente (read-only), `ProfileForm`, `ResetProgressButton`, `LogoutButton`
+- `components/layout/Sidebar.tsx` — aggiunta sezione "Account" con link "Profilo"
+- `components/layout/BottomNav.tsx` — aggiunta voce "Profilo" (4° item)
 
 ---
 
@@ -314,15 +356,12 @@ Finlearn-Pro/
 
 ## 6. Prossimo step consigliato
 
-Step 7 (spec) — Mobile e QA — completato (vedi "Come testare lo Step 7" sotto). Step 7.5 (extra, fuori spec) — UI/UX Polish — completato (vedi "Come testare lo Step 7.5" sotto). Step 8 (spec) — Beta privata — completato: deploy di produzione su Vercel, repository GitHub collegato, app pubblica su https://finlearn-pro.vercel.app (vedi "Handoff — Step 8 completato" in fondo per il workflow di deploy). Prossimo step:
+Step 7 (spec) — Mobile e QA — completato (vedi "Come testare lo Step 7" sotto). Step 7.5 (extra, fuori spec) — UI/UX Polish — completato (vedi "Come testare lo Step 7.5" sotto). Step 8 (spec) — Beta privata — completato: deploy di produzione su Vercel, repository GitHub collegato, app pubblica su https://finlearn-pro.vercel.app (vedi "Handoff — Step 8 completato" in fondo per il workflow di deploy). Step 9 (spec) — Auth e lancio pubblico — completato: Supabase Auth (email+password, conferma email, reset password), route protection, progressi cloud con migrazione one-time da localStorage, pagina profilo (vedi "Handoff — Step 9 completato" in fondo). Prossimo step:
 
-**Step 9 (spec) — Auth e lancio pubblico**
-- Introdurre Supabase Auth (email + password)
-- Profili utente (tabella `profiles`, collegata a `auth.users`)
-- Sincronizzazione progressi su DB (tabella `lesson_progress`, RLS)
-- Migrazione da localStorage a Supabase (one-time, al primo login)
-- Nuove pagine `/login` e `/register`, route protection (middleware)
-- Deploy e lancio pubblico
+**Lancio pubblico**
+- Push su GitHub → deploy automatico su Vercel
+- Configurare le variabili d'ambiente Supabase (`NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`) anche su Vercel (Project Settings → Environment Variables)
+- Aggiornare su Supabase Site URL / Redirect URLs con il dominio di produzione (oltre a quello già configurato per la beta)
 
 ---
 
@@ -656,4 +695,57 @@ Con `npm run dev`, su desktop (≥1024px) e mobile (375px/320px).
 - Step 7.5 (extra, fuori spec) — UI/UX polish: nuovo set di icone SVG inline (`components/layout/icons.tsx`), logomark/branding FinLearn, sidebar e bottom nav con stati attivi basati su `usePathname()` e progresso reale, homepage con feature card e microanimazioni `fade-in-up`, dashboard con header di saluto e card più curate (icone, hover lift, CTA animate). Solo modifiche visive/markup, nessuna modifica a logica/dati.
 - Step 8 — Beta privata: repository GitHub creato e collegato a Vercel, deploy in produzione completato. URL pubblico: https://finlearn-pro.vercel.app. Deploy automatico ad ogni push su GitHub (vedi "Workflow di deploy" sotto). Nessuna modifica al codice in questo step.
 
-**Prossimo step**: Step 9 (spec) — Auth e lancio pubblico (Supabase Auth email+password, profili utente, sincronizzazione progressi su DB, migrazione da localStorage, pagine `/login` e `/register`). Vedi sezione "## 6. Prossimo step consigliato" per i dettagli.
+**Prossimo step**: Step 9 (spec) — Auth e lancio pubblico — completato (vedi "Handoff — Step 9 completato" sotto).
+
+---
+
+## Handoff — Step 9 completato (Auth e lancio pubblico)
+
+**Stato complessivo**: Step 1-9 della spec + Step 7.5 (extra, UI/UX polish) completati. `npx tsc --noEmit` e `npm run build` passano senza errori (12 route: `/`, `/_not-found`, `/auth/callback`, `/dashboard`, `/forgot-password`, `/lessons/[id]`, `/lessons/[id]/quiz`, `/login`, `/profile`, `/register`, `/reset-password`, `/workbench`).
+
+**Supabase (progetto EU/Ireland, piano Free)**:
+- Tabelle `profiles` (1:1 con `auth.users`, `display_name`) e `lesson_progress` (`user_id`, `lesson_id`, `lesson_completed`, `quiz_passed`, `quiz_attempts`, vincolo `unique(user_id, lesson_id)`)
+- RLS attiva su entrambe le tabelle, policy `_own` (select/insert/update/delete solo per `auth.uid()`)
+- Trigger `handle_new_user` (crea riga `profiles` alla registrazione), `set_updated_at`
+- Email confirmation ON; Site URL e Redirect URLs configurati per l'ambiente di beta
+
+**Riepilogo Punti 1-6** (dettagli file in "### Step 9" sopra):
+- Punto 1 — Setup client Supabase (browser/server), middleware di refresh sessione, `.env.local.example`
+- Punto 2 — `/login`, `/register`, `LoginForm`, `RegisterForm`, `/auth/callback` (conferma email)
+- Punto 3 — `/forgot-password`, `/reset-password`, reset password via email
+- Punto 4 — Route protection nel middleware (`/dashboard`, `/lessons/*`, `/workbench`, `/profile` → richiedono login; `/login`, `/register` → richiedono utente anonimo)
+- Punto 5 — `SupabaseProgressStore`, `ProgressContext` riscritto con switch automatico locale/cloud e migrazione one-time da localStorage al primo login
+- Punto 6 — `/profile`: modifica `display_name`, email read-only, reset progressi (con conferma), logout; link "Profilo" in sidebar e bottom nav
+
+### Come testare Step 9
+
+**1. Profilo**
+- Login con un utente esistente → cliccare "Profilo" nella sidebar (desktop) o nella bottom nav (mobile)
+- Verificare che la pagina mostri l'email dell'utente autenticato (read-only) e il nome attuale (vuoto se non impostato)
+- Da disconnesso, navigare a `/profile` → redirect automatico a `/login` (route protection)
+
+**2. Modifica nome**
+- In `/profile`, inserire un nome nel campo "Nome" e cliccare "Salva"
+- Verificare il messaggio "Nome aggiornato."
+- Ricaricare la pagina (F5): il nome inserito deve persistere (letto da `profiles.display_name` su Supabase, verificabile anche da Table Editor)
+- Svuotare il campo e salvare di nuovo: il nome deve tornare vuoto (salvato come `null`)
+
+**3. Logout**
+- In `/profile`, cliccare "Esci"
+- Verificare il redirect a `/login`
+- Provare a navigare a `/dashboard` o `/profile` → redirect a `/login` (sessione terminata)
+
+**4. Reset progressi**
+- Completare almeno una lezione/quiz prima del test (per avere righe in `lesson_progress`)
+- In `/profile`, cliccare "Reset progressi" → appare il messaggio di conferma con "Sì, azzera i progressi" / "Annulla"
+- Cliccare "Annulla": nessuna modifica
+- Cliccare "Sì, azzera i progressi": messaggio "Progressi azzerati."
+- Verificare in Supabase (Table Editor → `lesson_progress`) che le righe dell'utente siano state eliminate
+- Tornare in `/dashboard`: lo stato deve riflettere l'azzeramento (solo Lezione 1 sbloccata, nessuna lezione completata)
+
+**5. Sincronizzazione progressi cloud**
+- Da disconnesso, completare lezione/quiz (progressi salvati in localStorage)
+- Registrarsi/loggarsi: al primo login, i progressi locali vengono migrati su Supabase (verificabile in `lesson_progress`) e `finlearn:lessonProgress` viene rimosso da localStorage
+- Completare un'altra lezione/quiz da autenticato: verificare in Supabase che la riga corrispondente in `lesson_progress` venga creata/aggiornata (`upsert`)
+- Ricaricare la pagina: i progressi devono persistere (letti da Supabase)
+- Fare logout e login da un altro browser/dispositivo con lo stesso account: i progressi devono essere identici (letti dallo stesso `user_id` su Supabase)

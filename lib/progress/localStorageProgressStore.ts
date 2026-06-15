@@ -8,7 +8,8 @@ import {
   isWorkbenchUnlocked,
 } from "@/lib/access";
 
-const STORAGE_KEY = "finlearn:lessonProgress";
+export const LESSON_PROGRESS_STORAGE_KEY = "finlearn:lessonProgress";
+const STORAGE_KEY = LESSON_PROGRESS_STORAGE_KEY;
 
 function readState(): ProgressState {
   if (typeof window === "undefined") return {};
