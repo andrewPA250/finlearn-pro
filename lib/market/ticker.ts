@@ -1,11 +1,16 @@
-import type { AssetId, MarketDataPoint } from "@/types/market";
+import type { AssetId } from "@/types/market";
 import type { AssetUnit } from "@/lib/market";
-import { ASSET_LABELS, ASSET_UNITS, sanitizeSeries } from "@/lib/market";
+import type { DataFreshness, ProviderQuote, ProviderSource } from "@/lib/providers/types";
 
 /**
- * Quotazione sintetica per la ticker strip della Home: ultimo valore
- * disponibile + variazione rispetto al punto precedente. Calcolata da dati
- * già presenti in `public/data/*.json`, nessun provider nuovo.
+ * Quotazione sintetica per la ticker strip della Home, il Market List
+ * Pattern (`/markets`) e l'hero asset (`/asset/[symbol]`): ultimo valore
+ * disponibile + variazione rispetto al punto precedente.
+ *
+ * Dallo Step 12 questi dati arrivano dal livello provider
+ * (`lib/providers`, vedi `ProviderQuote`) tramite `quoteFromProvider`:
+ * `freshness`/`source` viaggiano insieme al valore, pronti per badge futuri
+ * ("Live"/"Delayed"/"EOD"/"Unavailable") senza ulteriori modifiche al tipo.
  */
 export interface TickerQuote {
   id: AssetId;
@@ -15,41 +20,26 @@ export interface TickerQuote {
   change: number;
   changePercent: number;
   date: string;
+  freshness: DataFreshness;
+  source: ProviderSource;
 }
 
-export function buildTickerQuote(id: AssetId, data: MarketDataPoint[]): TickerQuote | null {
-  const sanitized = sanitizeSeries(data);
-  if (sanitized.length < 2) return null;
-
-  const last = sanitized[sanitized.length - 1];
-  const prev = sanitized[sanitized.length - 2];
-  const change = last.value - prev.value;
-  const changePercent = prev.value !== 0 ? (change / prev.value) * 100 : 0;
-
+/** Adatta la quotazione di un provider (`lib/providers`) al tipo usato dalla UI. */
+export function quoteFromProvider(quote: ProviderQuote): TickerQuote {
   return {
-    id,
-    label: ASSET_LABELS[id],
-    unit: ASSET_UNITS[id],
-    value: last.value,
-    change,
-    changePercent,
-    date: last.date,
+    id: quote.assetId,
+    label: quote.label,
+    unit: quote.unit,
+    value: quote.value,
+    change: quote.change,
+    changePercent: quote.changePercent,
+    date: quote.date,
+    freshness: quote.freshness,
+    source: quote.source,
   };
 }
 
-/**
- * Costruisce le quotazioni per tutti gli asset disponibili. La Home itera su
- * questo array senza conoscere quanti asset esistono: in futuro, un
- * catalogo Markets più ampio richiederà solo di estendere `rawData`, non di
- * modificare la ticker strip.
- */
-export function buildTickerQuotes(rawData: Record<AssetId, MarketDataPoint[]>): TickerQuote[] {
-  return (Object.keys(rawData) as AssetId[])
-    .map((id) => buildTickerQuote(id, rawData[id]))
-    .filter((quote): quote is TickerQuote => quote !== null);
-}
-
-/** Formattazione condivisa del valore di una quotazione (Home ticker, Markets list). */
+/** Formattazione condivisa del valore di una quotazione (Home ticker, Markets list, Asset page). */
 export function formatQuoteValue(quote: TickerQuote): string {
   if (quote.unit === "percent") {
     return `${quote.value.toFixed(2)}%`;
@@ -57,7 +47,7 @@ export function formatQuoteValue(quote: TickerQuote): string {
   return quote.value.toLocaleString("it-IT", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
-/** Formattazione condivisa della variazione di una quotazione (Home ticker, Markets list). */
+/** Formattazione condivisa della variazione di una quotazione (Home ticker, Markets list, Asset page). */
 export function formatQuoteChange(quote: TickerQuote): string {
   const sign = quote.change >= 0 ? "+" : "";
   if (quote.unit === "percent") {

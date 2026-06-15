@@ -1,33 +1,19 @@
-import fs from "fs";
-import path from "path";
 import { notFound } from "next/navigation";
-import type { MarketDataPoint } from "@/types/market";
-import { ASSET_FILE_NAMES } from "@/lib/market";
-import { buildTickerQuote } from "@/lib/market/ticker";
+import { getInstrumentQuote } from "@/lib/providers";
+import { quoteFromProvider } from "@/lib/market/ticker";
 import { MARKET_CATEGORIES, getInstrumentBySymbol } from "@/lib/markets/catalog";
 import { AssetView } from "@/components/asset/AssetView";
 
-const DATA_DIR = path.join(process.cwd(), "public", "data");
-
-function readMarketData(fileName: string): MarketDataPoint[] {
-  try {
-    const raw = fs.readFileSync(path.join(DATA_DIR, fileName), "utf-8");
-    const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? (parsed as MarketDataPoint[]) : [];
-  } catch {
-    return [];
-  }
-}
-
 /**
- * Asset page (Step 10.5, struttura estesa in Step 10.7): route definitiva
- * `/asset/[symbol]` per ogni strumento del catalogo Markets
- * (`MARKET_INSTRUMENTS`, fonte unica condivisa con `/markets` e la Search).
- * Per gli strumenti `"live"` mostra la quotazione reale già usata da
- * Home/Markets; per gli strumenti `"soon"` mostra una pagina placeholder
- * elegante con le stesse sezioni. Grafico/dati storici completi arriveranno
- * con il catalogo asset: questa pagina resta lo shell stabile in cui
- * inserirli (vedi `components/asset/`).
+ * Asset page (Step 10.5, struttura estesa in Step 10.7, dati via provider
+ * dal Step 12): route definitiva `/asset/[symbol]` per ogni strumento del
+ * catalogo Markets (`MARKET_INSTRUMENTS`, fonte unica condivisa con
+ * `/markets` e la Search). La quotazione arriva da `getInstrumentQuote`
+ * (`lib/providers`): per gli strumenti `"live"` ritorna i dati reali, per
+ * gli strumenti `"soon"` (nessun `assetId`) ritorna `null` e la pagina
+ * mostra il placeholder elegante. Grafico/dati storici completi arriveranno
+ * con un provider candele più ricco: questa pagina resta lo shell stabile in
+ * cui inserirli (vedi `components/asset/`).
  */
 export default function AssetPage({ params }: { params: { symbol: string } }) {
   const instrument = getInstrumentBySymbol(params.symbol);
@@ -35,9 +21,8 @@ export default function AssetPage({ params }: { params: { symbol: string } }) {
 
   const categoryLabel = MARKET_CATEGORIES.find((c) => c.id === instrument.category)?.label ?? instrument.category;
 
-  const quote = instrument.assetId
-    ? buildTickerQuote(instrument.assetId, readMarketData(ASSET_FILE_NAMES[instrument.assetId]))
-    : null;
+  const providerQuote = getInstrumentQuote(instrument);
+  const quote = providerQuote ? quoteFromProvider(providerQuote) : null;
 
   return <AssetView instrument={instrument} categoryLabel={categoryLabel} quote={quote} />;
 }
