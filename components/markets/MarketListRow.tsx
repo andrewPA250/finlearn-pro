@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { MarketInstrument } from "@/types/markets";
 import type { TickerQuote } from "@/lib/market/ticker";
 import { formatQuoteChange, formatQuoteValue } from "@/lib/market/ticker";
-import { SoonBadge } from "@/components/layout/SoonBadge";
+import { MarketStatusBadge } from "@/components/markets/MarketStatusBadge";
 
 interface MarketListRowProps {
   instrument: MarketInstrument;
@@ -40,11 +40,7 @@ export function MarketListRow({ instrument, quote }: MarketListRowProps) {
         {live ? formatQuoteChange(quote) : "—"}
       </span>
       <span className="flex justify-end">
-        {live ? (
-          <span className="h-1.5 w-1.5 rounded-full bg-accent-green" aria-label="Dati live" />
-        ) : (
-          <SoonBadge />
-        )}
+        <MarketStatusBadge status={live ? "live" : "soon"} />
       </span>
     </>
   );

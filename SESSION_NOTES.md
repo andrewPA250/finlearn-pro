@@ -6,7 +6,7 @@
 
 ---
 
-## Stato attuale: Step 9 (spec) completato — Auth e lancio pubblico: Supabase Auth (email+password, conferma email, reset password), route protection, progressi cloud con migrazione one-time da localStorage, pagina profilo (modifica nome, reset progressi, logout). Step 10.1 (Brand Identity + Design System), 10.2 (Header globale), 10.2bis (Search Overlay), 10.4 (Nuova Home FinanceHub), 10.3 (Sidebar contestuale Learn) e 10.5 (Markets Module Foundation) **completati** — vedi rispettive sezioni "Handoff" in fondo. Micro-fix UX "toggle mostra/nascondi password" (Login/Register/Reset) **completato**. Prossimo step: da definire con l'utente.
+## Stato attuale: Step 9 (spec) completato — Auth e lancio pubblico: Supabase Auth (email+password, conferma email, reset password), route protection, progressi cloud con migrazione one-time da localStorage, pagina profilo (modifica nome, reset progressi, logout). Step 10.1 (Brand Identity + Design System), 10.2 (Header globale), 10.2bis (Search Overlay), 10.4 (Nuova Home FinanceHub), 10.3 (Sidebar contestuale Learn), 10.5 (Markets Module Foundation) e 10.6 (Search + Markets Integration) **completati** — vedi rispettive sezioni "Handoff" in fondo. Micro-fix UX "toggle mostra/nascondi password" (Login/Register/Reset) **completato**. Prossimo step: da definire con l'utente.
 
 Riferimento spec: [finlearn-mvp-spec.md](finlearn-mvp-spec.md)
 
@@ -825,7 +825,7 @@ Questo non significa implementare questi dati ora — significa che le scelte di
 
 Se questa conversazione viene ripresa in una nuova chat, il prompt di avvio dovrebbe essere equivalente a:
 
-> "Step 9 è completo (vedi 'Handoff — Step 9 completato'). Step 10.1 (Brand Identity + Design System), Step 10.2 (Header globale), Step 10.2bis (Search overlay), Step 10.4 (Nuova Home FinanceHub), Step 10.3 (Sidebar contestuale Learn) e Step 10.5 (Markets Module Foundation) sono **completati** (vedi le rispettive sezioni 'Handoff — Step 10.x completato'): rebranding FinanceHub, nuovo logomark 'hub', Header globale fisso con nav primaria/account menu/search, command palette Ctrl/Cmd+K con categorie Vai a/Lezioni/Asset (placeholder), architettura pronta per un futuro catalogo asset (`lib/search/searchIndex.ts`), nuova Home "command center" con ticker Markets reale (`lib/market/ticker.ts`, `components/dashboard/MarketTicker.tsx`) e card Learn/Workbench/Portfolio a peso uguale (`components/dashboard/ModuleCard.tsx`), sidebar trasformata in `LearnSidebar` contestuale al modulo Learn (renderizzata da `components/sidebar/ContextSidebar.tsx` solo su `/lessons/*`), e nuovo modulo Markets (`/markets`) con sezioni per categoria (Azioni/ETF/Indici/Crypto/Forex/Commodities/Bond), Market List Pattern riutilizzabile (`components/markets/MarketListRow.tsx`, `MarketListSection.tsx`), catalogo asset (`lib/markets/catalog.ts`, `types/markets.ts`) e route definitiva per le pagine asset (`/asset/[symbol]`). Inoltre è stato completato un micro-fix UX: toggle mostra/nascondi password in Login/Register/Reset (`components/auth/PasswordInput.tsx`). Step 10 (Brand Identity + Platform UI) resta **approvato** secondo quanto descritto in 'Handoff — Step 10 approvato' per i sotto-step successivi — segui le decisioni di design lì documentate (Markets centrale, Learn non più al centro, stile Bloomberg×Apple×Linear). Il prossimo step non è ancora definito: chiedi conferma all'utente sulla prossima priorità (es. catalogo asset estero, Watchlist/Portfolio, bottom nav modulo). NON toccare Watchlist, Portfolio, AI, integrazioni provider esterni, e NON modificare auth/Supabase/progressi/quiz/lezioni/workbench/LearnSidebar/Search Overlay oltre a quanto necessario."
+> "Step 9 è completo (vedi 'Handoff — Step 9 completato'). Step 10.1 (Brand Identity + Design System), Step 10.2 (Header globale), Step 10.2bis (Search overlay), Step 10.4 (Nuova Home FinanceHub), Step 10.3 (Sidebar contestuale Learn), Step 10.5 (Markets Module Foundation) e Step 10.6 (Search + Markets Integration) sono **completati** (vedi le rispettive sezioni 'Handoff — Step 10.x completato'): rebranding FinanceHub, nuovo logomark 'hub', Header globale fisso con nav primaria/account menu/search, command palette Ctrl/Cmd+K con categorie Vai a/Lezioni/Asset, nuova Home "command center" con ticker Markets reale (`lib/market/ticker.ts`, `components/dashboard/MarketTicker.tsx`) e card Learn/Workbench/Portfolio a peso uguale (`components/dashboard/ModuleCard.tsx`), sidebar trasformata in `LearnSidebar` contestuale al modulo Learn (renderizzata da `components/sidebar/ContextSidebar.tsx` solo su `/lessons/*`), nuovo modulo Markets (`/markets`) con sezioni per categoria (Azioni/ETF/Indici/Crypto/Forex/Commodities/Bond), Market List Pattern riutilizzabile (`components/markets/MarketListRow.tsx`, `MarketListSection.tsx`), catalogo asset (`lib/markets/catalog.ts`, `types/markets.ts`) e route definitiva per le pagine asset (`/asset/[symbol]`). La Search Overlay (`lib/search/searchIndex.ts`, `components/search/SearchOverlay.tsx`) è ora collegata allo stesso catalogo Markets: la sezione "Asset" mostra simbolo/nome/categoria/stato (live/soon, badge `components/markets/MarketStatusBadge.tsx`) e naviga a `/asset/[symbol]`, ricerca per simbolo/nome/categoria, max 8 risultati. Inoltre è stato completato un micro-fix UX: toggle mostra/nascondi password in Login/Register/Reset (`components/auth/PasswordInput.tsx`). Step 10 (Brand Identity + Platform UI) resta **approvato** secondo quanto descritto in 'Handoff — Step 10 approvato' per i sotto-step successivi — segui le decisioni di design lì documentate (Markets centrale, Learn non più al centro, stile Bloomberg×Apple×Linear). Il prossimo step non è ancora definito: chiedi conferma all'utente sulla prossima priorità (es. catalogo asset più ampio, Watchlist/Portfolio, bottom nav modulo). NON toccare Watchlist, Portfolio, AI, integrazioni provider esterni, e NON modificare auth/Supabase/progressi/quiz/lezioni/workbench oltre a quanto necessario."
 
 ---
 
@@ -1085,5 +1085,55 @@ Se questa conversazione viene ripresa in una nuova chat, il prompt di avvio dovr
 - Desktop, `/asset/SPX` (live): mostra valore/variazione/data reali; `/asset/AAPL` (soon): mostra testo placeholder; `/asset/UNKNOWN`: `notFound()` → 404 corretto
 - Mobile (375px), `/markets`: `document.body.scrollWidth === 375` — nessun overflow orizzontale, 7 sezioni renderizzate correttamente
 - Mobile (375px), `/asset/SPX`: `document.body.scrollWidth === 375` — nessun overflow, quotazione live mostrata correttamente
+
+**Prossimo step**: 10.6 — Search + Markets Integration — completato (vedi "Handoff — Step 10.6 completato" in fondo).
+
+---
+
+## Handoff — Step 10.6 completato (Search + Markets Integration)
+
+**Stato complessivo**: Step 1-9 + Step 7.5 (extra) + Step 10.1 + Step 10.2 + Step 10.2bis + Step 10.4 + Step 10.3 + Step 10.5 + Step 10.6 + micro-fix password completati. `npx tsc --noEmit` e `npm run build` passano senza errori (14 route, invariate).
+
+**Cosa è cambiato**:
+
+- `lib/search/searchIndex.ts` (**modificato**):
+  - rimosso il tipo locale `AssetClass` (placeholder, vuoto); `SearchResultItem.assetClass` ora è tipizzato `MarketCategoryId` (da `types/markets.ts`)
+  - nuovo campo opzionale `SearchResultItem.assetStatus?: MarketInstrumentStatus` (`"live"` | `"soon"`)
+  - `getAssetItems()` non ritorna più `[]`: mappa `MARKET_INSTRUMENTS` (da `lib/markets/catalog.ts`) in risultati di ricerca — `title` = simbolo, `subtitle` = `"Nome · Categoria"` (label da `MARKET_CATEGORIES`), `href` = `/asset/[symbol]`, `assetClass`/`assetStatus` dallo strumento
+  - `matchesQuery` invariato (controlla `title + subtitle`): copre già ricerca per simbolo, nome e categoria perché entrambi sono nel subtitle
+  - sezione "Asset": `emptyMessage` cambiato da "Catalogo asset in arrivo" a "Nessun asset trovato"; risultati limitati a `MAX_ASSET_RESULTS = 8` (nuova costante) per mantenere la overlay compatta
+- `components/markets/MarketStatusBadge.tsx` (**nuovo**) — componente condiviso: pallino verde "Dati live" per `status: "live"`, `SoonBadge` per `status: "soon"`. Estratto dalla logica già presente in `MarketListRow` per essere riusato anche nella Search Overlay
+- `components/markets/MarketListRow.tsx` (**modificato**) — usa `MarketStatusBadge` al posto della logica inline (stesso comportamento: dipende da `live = status === "live" && quote !== undefined`)
+- `components/search/SearchOverlay.tsx` (**modificato**) — i risultati `type: "asset"` mostrano ora `MarketStatusBadge` a destra (allineato con `justify-between`); aggiunto `min-w-0`/`truncate` al blocco titolo/sottotitolo per evitare overflow su mobile con subtitle lunghi (es. "Dollaro USA / Yen Giapponese · Forex")
+
+**Cosa NON è cambiato** (volutamente, per restare entro lo scope di 10.6):
+
+- Nessuna nuova route: `/markets`, `/asset/[symbol]` e tutte le altre route invariate (14 totali)
+- Nessuna modifica ad auth/Supabase/progressi cloud/quiz/lezioni
+- Nessun provider esterno, nessun catalogo asset massivo: `MARKET_INSTRUMENTS` resta lo stesso array di 12 strumenti definito in Step 10.5
+- Nessuna Watchlist reale, nessun Portfolio reale, nessuna integrazione AI
+- `getNavItems`/`getLessonItems`/struttura `SearchSection`/keyboard navigation (freccie, Enter, Esc) invariati
+
+**Markets come fonte unica**:
+
+- `MARKET_INSTRUMENTS`/`MARKET_CATEGORIES` (`lib/markets/catalog.ts`) sono ora l'unica fonte per **tre** consumer: `/markets` (Step 10.5, invariato), la sezione "Asset" della Search Overlay (nuovo) e `/asset/[symbol]` (Step 10.5, invariato — risolto via `getInstrumentBySymbol`). Aggiungere/modificare uno strumento nel catalogo si riflette automaticamente in tutti e tre, senza altre modifiche
+
+**Architettura — pronta per la ricerca su un catalogo di migliaia di asset**:
+
+- **Nessuna struttura dati duplicata**: la search non mantiene un proprio indice asset — legge `MARKET_INSTRUMENTS` a ogni `buildSearchSections`. Un futuro catalogo più grande (es. generato da un provider) richiede solo di popolare quell'array; `getAssetItems`/`matchesQuery`/UI non cambiano
+- **Limite risultati incorporato**: `MAX_ASSET_RESULTS = 8` applica già ora il pattern "mostra i primi N risultati rilevanti" necessario quando il catalogo avrà migliaia di voci — evita di dover aggiungere questo limite in un secondo momento
+- **Match testuale semplice ma estendibile**: `matchesQuery` confronta su `title + subtitle` (quindi simbolo, nome e categoria); con un catalogo più grande lo stesso punto di estensione può evolvere verso un indice/ranking più sofisticato senza cambiare la firma di `buildSearchSections` né il componente `SearchOverlay`
+- **Stato live/soon riusabile**: `MarketStatusBadge` è l'unico punto che traduce `MarketInstrumentStatus` in UI — usato da Market List Pattern e Search oggi, pronto per Watchlist/Portfolio in futuro
+- **Routing coerente**: ogni risultato Asset (live o soon) punta a `/asset/[symbol]`, la stessa route definitiva di Step 10.5 — click su un asset "soon" mostra il placeholder, click su un asset "live" mostra la quotazione reale, senza logica condizionale aggiuntiva nella Search Overlay
+
+**Verifica eseguita** (via preview tool):
+
+- `npx tsc --noEmit`: nessun errore
+- `npm run build`: 14 route, nessun errore (solo warning preesistente su Edge Runtime/Supabase, non correlato)
+- Desktop (1280×800), `/markets` → Ctrl/Cmd+K: sezione "Asset" mostra 8 risultati (primi 8 di `MARKET_INSTRUMENTS`: AAPL, MSFT, NVDA, SPY, QQQ, SPX, BTCUSD, ETHUSD), ognuno con simbolo/nome/categoria; SPX (live) senza badge "Soon" (pallino verde), gli altri con badge "Soon"
+- Ricerca per nome ("oro") → 1 risultato `XAUUSDOro · Commodities`; ricerca per categoria ("crypto") → `BTCUSD`/`ETHUSD` (entrambi `· Crypto`)
+- Click su risultato asset "soon" (AAPL) → naviga a `/asset/AAPL`, mostra placeholder corretto
+- Click su risultato asset "live" (SPX) → naviga a `/asset/SPX`, mostra quotazione reale (valore/variazione/data)
+- Mobile (375px), `/markets` → overlay search apribile, 8 risultati Asset visibili con subtitle troncato correttamente (`document.body.scrollWidth === 375`, nessun overflow); click su SPX → naviga a `/asset/SPX` correttamente
 
 **Prossimo step**: da definire con l'utente (es. catalogo asset più ampio, Watchlist/Portfolio, bottom nav modulo). In attesa di indicazioni sulla prossima priorità.

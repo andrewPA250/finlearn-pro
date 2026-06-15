@@ -1,11 +1,6 @@
 import { LESSON_META } from "@/lib/lessonsMeta";
-
-/**
- * Categorie di asset finanziari previste per il futuro catalogo Markets.
- * Non ancora collegate a dati reali: servono solo a tipizzare gli item
- * "asset" che la search potrà restituire in futuro senza cambiare la UI.
- */
-export type AssetClass = "equity" | "etf" | "crypto" | "forex" | "commodity" | "bond";
+import { MARKET_CATEGORIES, MARKET_INSTRUMENTS } from "@/lib/markets/catalog";
+import type { MarketCategoryId, MarketInstrumentStatus } from "@/types/markets";
 
 export type SearchResultType = "nav" | "lesson" | "asset";
 
@@ -15,7 +10,9 @@ export interface SearchResultItem {
   title: string;
   subtitle?: string;
   href?: string;
-  assetClass?: AssetClass;
+  assetClass?: MarketCategoryId;
+  /** Presente solo per risultati `type: "asset"`: stato del catalogo Markets. */
+  assetStatus?: MarketInstrumentStatus;
 }
 
 export interface SearchSection {
@@ -32,6 +29,9 @@ interface NavDestinations {
   workbench: string;
   profile: string;
 }
+
+/** Numero massimo di risultati Asset mostrati: mantiene la overlay compatta anche con un catalogo molto più grande. */
+const MAX_ASSET_RESULTS = 8;
 
 function getNavItems({ home, learn, workbench, profile }: NavDestinations): SearchResultItem[] {
   return [
@@ -52,14 +52,26 @@ function getLessonItems(): SearchResultItem[] {
   }));
 }
 
+const CATEGORY_LABELS: Partial<Record<MarketCategoryId, string>> = Object.fromEntries(
+  MARKET_CATEGORIES.map((category) => [category.id, category.label])
+);
+
 /**
- * Catalogo asset (azioni, ETF, crypto, forex, commodity, bond): vuoto fino
- * all'integrazione di un provider dati. Quando sarà disponibile, basterà
- * popolare questo array — `buildSearchSections` e la UI non richiedono
- * altre modifiche per mostrare i risultati.
+ * Catalogo asset (azioni, ETF, indici, crypto, forex, commodity, bond):
+ * stessa fonte dati di `/markets` e `/asset/[symbol]` (`MARKET_INSTRUMENTS`).
+ * Estendere il catalogo Markets popola automaticamente anche questi
+ * risultati, senza altre modifiche.
  */
 function getAssetItems(): SearchResultItem[] {
-  return [];
+  return MARKET_INSTRUMENTS.map((instrument) => ({
+    id: `asset-${instrument.symbol}`,
+    type: "asset",
+    title: instrument.symbol,
+    subtitle: `${instrument.name} · ${CATEGORY_LABELS[instrument.category] ?? instrument.category}`,
+    href: `/asset/${instrument.symbol}`,
+    assetClass: instrument.category,
+    assetStatus: instrument.status,
+  }));
 }
 
 function matchesQuery(item: SearchResultItem, query: string): boolean {
@@ -85,8 +97,8 @@ export function buildSearchSections(query: string, destinations: NavDestinations
     {
       id: "assets",
       title: "Asset",
-      items: filterItems(getAssetItems()),
-      emptyMessage: "Catalogo asset in arrivo",
+      items: filterItems(getAssetItems()).slice(0, MAX_ASSET_RESULTS),
+      emptyMessage: "Nessun asset trovato",
     },
   ];
 

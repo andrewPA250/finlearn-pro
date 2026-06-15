@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { buildSearchSections, type SearchResultItem } from "@/lib/search/searchIndex";
 import { SearchIcon } from "@/components/layout/icons";
+import { MarketStatusBadge } from "@/components/markets/MarketStatusBadge";
 
 interface SearchOverlayProps {
   open: boolean;
@@ -135,12 +136,17 @@ export function SearchOverlay({ open, onClose, learnHref }: SearchOverlayProps) 
                           : "text-text-secondary hover:bg-bg-card hover:text-text-primary"
                       }`}
                     >
-                      <span className="flex flex-col">
+                      <span className="flex min-w-0 flex-col">
                         <span className={active ? "font-bold" : ""}>{item.title}</span>
                         {item.subtitle && (
-                          <span className="text-xs text-text-secondary/70">{item.subtitle}</span>
+                          <span className="truncate text-xs text-text-secondary/70">{item.subtitle}</span>
                         )}
                       </span>
+                      {item.type === "asset" && item.assetStatus && (
+                        <span className="ml-2 flex shrink-0 items-center">
+                          <MarketStatusBadge status={item.assetStatus} />
+                        </span>
+                      )}
                     </button>
                   );
                 })
