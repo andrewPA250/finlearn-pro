@@ -8,6 +8,7 @@ import { createClient } from "@/lib/supabase/client";
 import { useProgress } from "@/lib/progress/ProgressContext";
 import { getNextAccessibleLessonId } from "@/lib/access";
 import { ChevronDownIcon, LogoMark, SearchIcon, UserIcon } from "@/components/layout/icons";
+import { SearchOverlay } from "@/components/search/SearchOverlay";
 
 interface NavItem {
   label: string;
@@ -31,6 +32,7 @@ export function Header() {
   const { state } = useProgress();
   const [user, setUser] = useState<User | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
 
   useEffect(() => {
     const supabase = createClient();
@@ -42,6 +44,18 @@ export function Header() {
     });
 
     return () => subscription.subscription.unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
+        event.preventDefault();
+        setSearchOpen(true);
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
   async function handleLogout() {
@@ -106,15 +120,23 @@ export function Header() {
 
       <button
         type="button"
-        disabled
-        title="La ricerca arriverà presto"
-        className="hidden max-w-xs flex-1 items-center gap-2 rounded-card border border-bg-card bg-bg-primary px-3 py-1.5 text-sm text-text-secondary/60 lg:flex"
+        onClick={() => setSearchOpen(true)}
+        className="hidden max-w-xs flex-1 items-center gap-2 rounded-card border border-bg-card bg-bg-primary px-3 py-1.5 text-sm text-text-secondary transition duration-150 ease-in-out hover:border-accent-purple/40 lg:flex"
       >
         <SearchIcon className="h-4 w-4" />
-        <span className="flex-1 text-left">Cerca...</span>
+        <span className="flex-1 text-left text-text-secondary/60">Cerca...</span>
         <kbd className="rounded border border-text-secondary/20 px-1.5 py-0.5 font-mono text-[10px]">
           Ctrl K
         </kbd>
+      </button>
+
+      <button
+        type="button"
+        onClick={() => setSearchOpen(true)}
+        aria-label="Apri ricerca"
+        className="flex items-center justify-center rounded-card p-2 text-text-secondary transition duration-150 ease-in-out hover:bg-bg-card hover:text-text-primary lg:hidden"
+      >
+        <SearchIcon className="h-4 w-4" />
       </button>
 
       <div className="relative ml-auto shrink-0">
@@ -170,6 +192,8 @@ export function Header() {
           </Link>
         )}
       </div>
+
+      <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} learnHref={learnHref} />
     </header>
   );
 }

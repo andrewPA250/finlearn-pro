@@ -825,7 +825,7 @@ Questo non significa implementare questi dati ora — significa che le scelte di
 
 Se questa conversazione viene ripresa in una nuova chat, il prompt di avvio dovrebbe essere equivalente a:
 
-> "Step 9 è completo (vedi 'Handoff — Step 9 completato'). Step 10.1 (Brand Identity + Design System) e Step 10.2 (Header globale) sono **completati** (vedi 'Handoff — Step 10.1 completato' e 'Handoff — Step 10.2 completato'): rebranding FinanceHub, nuovo logomark 'hub', Header globale fisso con nav primaria/account menu/search placeholder, sidebar de-enfatizzata (blocco logo rimosso). Step 10 (Brand Identity + Platform UI) resta **approvato** secondo quanto descritto in 'Handoff — Step 10 approvato' per i sotto-step successivi — segui le decisioni di design lì documentate (search first-class con categorie Vai a/Lezioni/Asset, Markets centrale, Learn non più al centro, stile Bloomberg×Apple×Linear). Procedi con **10.2bis — Search overlay** (vedi 'Note tecniche raccolte' per il refactor `lib/lessons.ts`→`lib/lessonsMeta.ts` necessario per la search su 'Lezioni'), poi fermati per conferma prima di 10.3. NON toccare Watchlist, Asset pages, Portfolio, AI, Markets completo, e NON modificare auth/Supabase/progressi/quiz/lezioni/workbench oltre a quanto necessario per l'integrazione della search. Alla fine di 10.2bis: typecheck/build, elenco file modificati."
+> "Step 9 è completo (vedi 'Handoff — Step 9 completato'). Step 10.1 (Brand Identity + Design System), Step 10.2 (Header globale) e Step 10.2bis (Search overlay) sono **completati** (vedi le rispettive sezioni 'Handoff — Step 10.x completato'): rebranding FinanceHub, nuovo logomark 'hub', Header globale fisso con nav primaria/account menu/search, sidebar de-enfatizzata (blocco logo rimosso), command palette Ctrl/Cmd+K con categorie Vai a/Lezioni/Asset (placeholder) e architettura pronta per un futuro catalogo asset (`lib/search/searchIndex.ts`). Step 10 (Brand Identity + Platform UI) resta **approvato** secondo quanto descritto in 'Handoff — Step 10 approvato' per i sotto-step successivi — segui le decisioni di design lì documentate (Markets centrale, Learn non più al centro, stile Bloomberg×Apple×Linear). Procedi con **10.3 — Sidebar contestuale al modulo Learn**, poi fermati per conferma prima di 10.4. NON toccare Watchlist, Asset pages, Portfolio, AI, Markets completo, e NON modificare auth/Supabase/progressi/quiz/lezioni/workbench oltre a quanto necessario. Alla fine di 10.3: typecheck/build, elenco file modificati."
 
 ---
 
@@ -868,7 +868,7 @@ Se questa conversazione viene ripresa in una nuova chat, il prompt di avvio dovr
 - `components/layout/Sidebar.tsx` — rimosso il blocco logo/wordmark in cima (Link "/" con `LogoMark` + "FinanceHub" + "Modulo Learn"); la sidebar inizia ora direttamente con la sezione "Percorso". Rimosso import non utilizzato di `LogoMark`. Resto invariato (Percorso, lezioni, Strumenti, Account)
 - `app/page.tsx` — sottotitolo "...con il modulo Learn..." → "...con Learn..." (risolve il feedback "Modulo Learn non convince"); ricalcolo altezza contenitore (`min-h-[calc(100vh-3rem)] md:min-h-screen` → `min-h-[calc(100vh-6.5rem)] md:min-h-[calc(100vh-3.5rem)]`)
 - `app/login/page.tsx`, `app/register/page.tsx`, `app/forgot-password/page.tsx`, `app/reset-password/page.tsx` — stesso ricalcolo altezza contenitore di `app/page.tsx` (per compensare il nuovo Header sticky + BottomNav mobile)
-- `.claude/launch.json` (**nuovo**, tooling locale, non parte dell'app) — configurazione per l'avvio di `npm run dev` tramite gli strumenti di preview
+- `.claude/launch.json` (creato e poi rimosso, tooling locale non necessario al repository — configurazione per l'avvio di `npm run dev` tramite gli strumenti di preview)
 
 **Cosa NON è cambiato** (volutamente, per restare entro lo scope di 10.2):
 
@@ -886,3 +886,50 @@ Se questa conversazione viene ripresa in una nuova chat, il prompt di avvio dovr
 - `/workbench` da anonimo → redirect a `/login` (comportamento middleware preesistente, non impattato)
 
 **Prossimo step**: 10.2bis — Search overlay (Ctrl/Cmd+K, categorie "Vai a" / "Lezioni" / "Asset" placeholder). Richiede il refactor di `lib/lessons.ts` descritto in "Note tecniche raccolte" (estrazione di `LESSON_META`/`getAllLessonIds`/`getLessonMeta` in un modulo fs-free). In attesa di conferma per procedere.
+
+---
+
+## Handoff — Step 10.2bis completato (Search Overlay)
+
+**Stato complessivo**: Step 1-9 + Step 7.5 (extra) + Step 10.1 + Step 10.2 + Step 10.2bis completati. `npx tsc --noEmit` e `npm run build` passano senza errori (12 route, invariate).
+
+**Cosa è cambiato**:
+
+- `lib/lessonsMeta.ts` (**nuovo**, fs-free) — estratti `LESSON_META`, `getAllLessonIds`, `getLessonMeta` da `lib/lessons.ts`, ora importabili da componenti client (stesso pattern già usato per `lib/access.ts`)
+- `lib/lessons.ts` — ri-esporta `LESSON_META`/`getAllLessonIds`/`getLessonMeta` da `lib/lessonsMeta.ts`; mantiene `getLessonContent`/`getQuiz` (uso di `fs`, solo server). Nessun import esistente (`app/dashboard`, `app/workbench`, `app/lessons/[id]/*`) richiede modifiche
+- `lib/search/searchIndex.ts` (**nuovo**, fs-free) — modulo che definisce l'architettura della search:
+  - tipi `SearchResultItem` (`id`, `type: "nav" | "lesson" | "asset"`, `title`, `subtitle?`, `href?`, `assetClass?`) e `SearchSection` (`id`, `title`, `items`, `emptyMessage?`)
+  - tipo `AssetClass = "equity" | "etf" | "crypto" | "forex" | "commodity" | "bond"` (non usato oggi, pronto per il futuro catalogo Markets)
+  - `buildSearchSections(query, destinations)` → restituisce le sezioni filtrate per query: "Vai a" (Home/Learn/Workbench/Profilo), "Lezioni" (da `LESSON_META`, titolo + key concept), "Asset" (array vuoto oggi, `emptyMessage: "Catalogo asset in arrivo"`)
+- `components/search/SearchOverlay.tsx` (**nuovo**) — command palette: overlay full-screen con backdrop blur, input con focus automatico, sezioni renderizzate da `buildSearchSections`, navigazione da tastiera (`↑`/`↓` per spostare la selezione tra tutti i risultati, `Enter` per navigare, `Esc` o click sul backdrop per chiudere)
+- `components/layout/Header.tsx`:
+  - il placeholder search "Cerca... Ctrl K" è ora cliccabile e apre l'overlay (non più `disabled`)
+  - aggiunto un secondo pulsante search (solo icona, visibile sotto `lg:`) per l'accesso da mobile/tablet, dove il campo search è nascosto
+  - listener globale `keydown` per `Ctrl+K` / `Cmd+K` che apre l'overlay da qualsiasi punto della pagina
+  - `<SearchOverlay>` montato in coda al `<header>`, riceve `learnHref` (stesso link dinamico "prossima lezione" già usato dalla voce nav "Learn")
+
+**Cosa NON è cambiato** (volutamente, per restare entro lo scope di 10.2bis):
+
+- Nessun nuovo modulo Markets/Watchlist/Portfolio/AI, nessuna pagina Asset
+- Nessuna modifica ad auth/Supabase/progressi cloud/quiz/lezioni/workbench (la search legge solo `LESSON_META` e lo stato di progresso già esposto da `useProgress()`/`lib/access.ts`)
+- Nessuna nuova dipendenza (command palette implementata con React/Tailwind puri)
+
+**Decisioni architetturali per la futura integrazione di migliaia di asset**:
+
+- La search è organizzata in **sezioni indipendenti** (`SearchSection[]`), ciascuna con un `id`, un `title` e una lista di `SearchResultItem`. Il componente `SearchOverlay` itera su questo array senza conoscere il numero o il tipo di sezioni: aggiungere una categoria "Markets" in futuro significa aggiungere una entry a `buildSearchSections`, senza toccare la UI.
+- Ogni risultato è uno `SearchResultItem` generico (`type`, `title`, `subtitle?`, `href?`, `assetClass?`). Il campo `type: "asset"` e l'enum `AssetClass` (`equity`/`etf`/`crypto`/`forex`/`commodity`/`bond`) sono già definiti ma non popolati: quando arriverà un catalogo/provider dati, basterà far restituire a `getAssetItems()` (in `lib/search/searchIndex.ts`) gli item reali — filtro, rendering, navigazione e keyboard nav restano invariati.
+- La sezione "Asset" è già presente in UI con `emptyMessage: "Catalogo asset in arrivo"`: il passaggio da placeholder a dati reali è quindi solo un cambiamento di dati, non di struttura/UX.
+- Il filtro (`matchesQuery`) opera su `title`/`subtitle` in modo case-insensitive ed è già pensato per scalare: con un catalogo di migliaia di asset, la stessa funzione di matching potrà essere sostituita da una ricerca indicizzata/remota dietro la stessa interfaccia (`buildSearchSections` resta il punto di integrazione).
+- La navigazione da tastiera opera su una lista "flattenata" (`flatItems`) calcolata dalle sezioni correnti: indipendente dal numero di sezioni/risultati, quindi non richiede modifiche quando le sezioni cresceranno.
+
+**Verifica funzionale** (via preview tool, 1280×800 e 375×700):
+
+- `Ctrl+K` e `Cmd+K` aprono l'overlay da qualsiasi pagina; `Esc` e click sul backdrop chiudono
+- Input riceve il focus automaticamente all'apertura
+- Sezioni "VAI A" (Home, Learn, Workbench, Profilo), "LEZIONI" (tutte le 6 lezioni con titolo e key concept) e "ASSET" ("Catalogo asset in arrivo") renderizzate correttamente
+- Digitando una query (es. "lezione 4") i risultati si filtrano correttamente, le sezioni senza match scompaiono
+- Navigazione da tastiera (`↓`×4 poi `Enter`) seleziona ed apre "Lezione 1" → redirect a `/login` (comportamento middleware preesistente per utenti anonimi, non impattato)
+- Su mobile (375px): pulsante search dedicato nel Header apre l'overlay correttamente, nessun overflow orizzontale (`scrollWidth === 375`)
+- Nessuna regressione di altezza/scroll introdotta rispetto a 10.2
+
+**Prossimo step**: 10.3 — Sidebar contestuale al modulo Learn (vedi "Handoff — Step 10 approvato" per i vincoli). In attesa di conferma per procedere.
