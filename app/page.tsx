@@ -21,7 +21,7 @@ const FEATURES = [
 
 export default function HomePage() {
   return (
-    <div className="flex min-h-[calc(100vh-3rem)] flex-col items-center justify-center gap-12 px-6 py-12 text-center md:min-h-screen">
+    <div className="flex min-h-[calc(100vh-6.5rem)] flex-col items-center justify-center gap-12 px-6 py-12 text-center md:min-h-[calc(100vh-3.5rem)]">
       <div className="flex flex-col items-center gap-6">
         <LogoMark className="h-14 w-14 animate-fade-in-up" />
         <div className="flex flex-col gap-3">
@@ -32,8 +32,8 @@ export default function HomePage() {
             className="max-w-reading animate-fade-in-up text-base text-text-secondary"
             style={{ animationDelay: "120ms" }}
           >
-            Impara le basi degli investimenti, dell&apos;inflazione e del rischio con il modulo
-            Learn: 6 lezioni brevi collegate a dati di mercato reali.
+            Impara le basi degli investimenti, dell&apos;inflazione e del rischio con Learn: 6
+            lezioni brevi collegate a dati di mercato reali.
           </p>
         </div>
         <Link

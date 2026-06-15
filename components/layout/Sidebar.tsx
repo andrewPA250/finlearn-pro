@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { LESSON_IDS } from "@/lib/access";
 import { useProgress } from "@/lib/progress/ProgressContext";
 import { ProgressBar } from "@/components/layout/ProgressBar";
-import { BookIcon, ChartIcon, CheckIcon, DashboardIcon, LockIcon, LogoMark, UserIcon } from "@/components/layout/icons";
+import { BookIcon, ChartIcon, CheckIcon, DashboardIcon, LockIcon, UserIcon } from "@/components/layout/icons";
 
 function navLinkClasses(active: boolean): string {
   return `flex items-center gap-2.5 rounded-card px-3 py-2 transition duration-150 ease-in-out ${
@@ -24,16 +24,6 @@ export function Sidebar() {
 
   return (
     <aside className="hidden w-sidebar shrink-0 flex-col gap-8 border-r border-bg-card/60 bg-bg-sidebar p-6 md:flex">
-      <Link href="/" className="flex items-center gap-2.5">
-        <LogoMark className="h-9 w-9" />
-        <span className="flex flex-col leading-tight">
-          <span className="text-base font-bold text-text-primary">
-            Finance<span className="text-accent-purple">Hub</span>
-          </span>
-          <span className="text-xs text-text-secondary">Modulo Learn</span>
-        </span>
-      </Link>
-
       <div>
         <div className="flex items-center justify-between text-xs text-text-secondary">
           <span className="font-bold uppercase tracking-wide">Percorso</span>

@@ -12,7 +12,7 @@ export default async function RegisterPage() {
   }
 
   return (
-    <div className="flex min-h-[calc(100vh-3rem)] flex-col items-center justify-center px-6 py-12 md:min-h-screen">
+    <div className="flex min-h-[calc(100vh-6.5rem)] flex-col items-center justify-center px-6 py-12 md:min-h-[calc(100vh-3.5rem)]">
       <div className="w-full max-w-sm rounded-card border border-bg-sidebar bg-bg-card p-6">
         <h1 className="text-2xl font-bold text-text-primary">Crea un account</h1>
         <p className="mt-1 text-sm text-text-secondary">

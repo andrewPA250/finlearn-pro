@@ -825,7 +825,7 @@ Questo non significa implementare questi dati ora — significa che le scelte di
 
 Se questa conversazione viene ripresa in una nuova chat, il prompt di avvio dovrebbe essere equivalente a:
 
-> "Step 9 è completo (vedi 'Handoff — Step 9 completato'). Step 10.1 (Brand Identity + Design System) è **completato** (vedi 'Handoff — Step 10.1 completato'): rebranding testuale a FinanceHub, nuovo logomark 'hub', token `accent-blue` e `maxWidth.platform` pronti ma non ancora usati. Step 10 (Brand Identity + Platform UI) resta **approvato** secondo quanto descritto in 'Handoff — Step 10 approvato' per i sotto-step successivi — segui le decisioni di design lì documentate (nav Home/Markets°/Learn/Portfolio°/AI°/Workbench, search first-class con categorie Vai a/Lezioni/Asset, Markets centrale, Learn non più al centro, stile Bloomberg×Apple×Linear). Procedi con **10.2 Header globale** (vedi 'Note tecniche raccolte' per i dettagli su refactor `lib/lessons.ts`, dati utente, integrazione nel layout), poi fermati per conferma prima di 10.2bis. NON toccare Watchlist, Asset pages, Portfolio, AI, Markets completo, e NON modificare auth/Supabase/progressi/quiz/lezioni/workbench oltre a quanto necessario per l'integrazione del Header. Alla fine di 10.2: typecheck/build, elenco file modificati."
+> "Step 9 è completo (vedi 'Handoff — Step 9 completato'). Step 10.1 (Brand Identity + Design System) e Step 10.2 (Header globale) sono **completati** (vedi 'Handoff — Step 10.1 completato' e 'Handoff — Step 10.2 completato'): rebranding FinanceHub, nuovo logomark 'hub', Header globale fisso con nav primaria/account menu/search placeholder, sidebar de-enfatizzata (blocco logo rimosso). Step 10 (Brand Identity + Platform UI) resta **approvato** secondo quanto descritto in 'Handoff — Step 10 approvato' per i sotto-step successivi — segui le decisioni di design lì documentate (search first-class con categorie Vai a/Lezioni/Asset, Markets centrale, Learn non più al centro, stile Bloomberg×Apple×Linear). Procedi con **10.2bis — Search overlay** (vedi 'Note tecniche raccolte' per il refactor `lib/lessons.ts`→`lib/lessonsMeta.ts` necessario per la search su 'Lezioni'), poi fermati per conferma prima di 10.3. NON toccare Watchlist, Asset pages, Portfolio, AI, Markets completo, e NON modificare auth/Supabase/progressi/quiz/lezioni/workbench oltre a quanto necessario per l'integrazione della search. Alla fine di 10.2bis: typecheck/build, elenco file modificati."
 
 ---
 
@@ -853,3 +853,36 @@ Se questa conversazione viene ripresa in una nuova chat, il prompt di avvio dovr
 - `README.md`: è il boilerplate standard di `create-next-app`, non contiene riferimenti al brand — non modificato
 
 **Prossimo step**: 10.2 — Header globale (vedi "Note tecniche raccolte" sopra per i dettagli tecnici già analizzati). In attesa di conferma per procedere.
+
+---
+
+## Handoff — Step 10.2 completato (Header globale)
+
+**Stato complessivo**: Step 1-9 + Step 7.5 (extra) + Step 10.1 + Step 10.2 completati. `npx tsc --noEmit` e `npm run build` passano senza errori (12 route, invariate rispetto a Step 9/10.1).
+
+**Cosa è cambiato**:
+
+- `components/layout/Header.tsx` (**nuovo**) — Header globale `sticky top-0 z-30`, alto `3.5rem` (`h-14`): logo FinanceHub a sinistra (link a `/`), nav primaria al centro (Home → `/dashboard`, Markets °Soon, Learn → `/lessons/{prossima lezione accessibile}` via `getNextAccessibleLessonId`, Portfolio °Soon, AI °Soon, Workbench → `/workbench`), placeholder search "Cerca... Ctrl K" (disabilitato, visibile da `lg:`), account menu a destra (avatar con iniziale email + dropdown Profilo/Esci se autenticato, altrimenti link "Accedi"). Stato auth letto via `supabase.auth.getUser()` + `onAuthStateChange` (stesso pattern di `ProgressContext`/`LogoutButton`).
+- `components/layout/icons.tsx` — aggiunte due icone: `SearchIcon` (lente, per il placeholder search) e `ChevronDownIcon` (per il dropdown account)
+- `app/layout.tsx` — `Header` montato sopra al wrapper `flex` (Sidebar + main), sopra anche a `BottomNav`; `min-h-screen` → `min-h-[calc(100vh-3.5rem)]` su wrapper e `main` (compensa l'altezza fissa del nuovo Header)
+- `components/layout/Sidebar.tsx` — rimosso il blocco logo/wordmark in cima (Link "/" con `LogoMark` + "FinanceHub" + "Modulo Learn"); la sidebar inizia ora direttamente con la sezione "Percorso". Rimosso import non utilizzato di `LogoMark`. Resto invariato (Percorso, lezioni, Strumenti, Account)
+- `app/page.tsx` — sottotitolo "...con il modulo Learn..." → "...con Learn..." (risolve il feedback "Modulo Learn non convince"); ricalcolo altezza contenitore (`min-h-[calc(100vh-3rem)] md:min-h-screen` → `min-h-[calc(100vh-6.5rem)] md:min-h-[calc(100vh-3.5rem)]`)
+- `app/login/page.tsx`, `app/register/page.tsx`, `app/forgot-password/page.tsx`, `app/reset-password/page.tsx` — stesso ricalcolo altezza contenitore di `app/page.tsx` (per compensare il nuovo Header sticky + BottomNav mobile)
+- `.claude/launch.json` (**nuovo**, tooling locale, non parte dell'app) — configurazione per l'avvio di `npm run dev` tramite gli strumenti di preview
+
+**Cosa NON è cambiato** (volutamente, per restare entro lo scope di 10.2):
+
+- Nessuna search overlay/command palette (10.2bis) — solo placeholder visivo disabilitato nel Header
+- Nessuna modifica a logica auth/Supabase/progressi cloud/quiz/lezioni/workbench
+- Sidebar: solo rimosso il blocco logo duplicato, resto invariato (la trasformazione in sidebar contestuale Learn è 10.3, non approvato)
+- Nessun nuovo modulo Markets/Portfolio/AI (solo voci di nav disabilitate con badge "Soon" usando il token `accent-blue`)
+- Nessuna nuova dipendenza
+
+**Verifica visuale** (via preview tool, 1280×800 e mobile):
+- Header desktop: logo + nav (Home/Markets°/Learn/Portfolio°/AI°/Workbench) + search placeholder + "Accedi" (utente anonimo)
+- Sidebar: 240px, inizia con "PERCORSO 0/6", nessun blocco logo
+- Nessuno scroll verticale extra introdotto (`scrollHeight === innerHeight` su `/`, `/login`)
+- Mobile: Header mostra solo logo + "Accedi" (nav/search nascosti da `md:`/`lg:`), BottomNav invariata
+- `/workbench` da anonimo → redirect a `/login` (comportamento middleware preesistente, non impattato)
+
+**Prossimo step**: 10.2bis — Search overlay (Ctrl/Cmd+K, categorie "Vai a" / "Lezioni" / "Asset" placeholder). Richiede il refactor di `lib/lessons.ts` descritto in "Note tecniche raccolte" (estrazione di `LESSON_META`/`getAllLessonIds`/`getLessonMeta` in un modulo fs-free). In attesa di conferma per procedere.
