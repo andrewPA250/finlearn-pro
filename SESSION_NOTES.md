@@ -6,7 +6,7 @@
 
 ---
 
-## Stato attuale: Step 9 (spec) completato — Auth e lancio pubblico: Supabase Auth (email+password, conferma email, reset password), route protection, progressi cloud con migrazione one-time da localStorage, pagina profilo (modifica nome, reset progressi, logout). Step 10.1 (Brand Identity + Design System) **completato** — vedi "Handoff — Step 10.1 completato" in fondo. Step 10.2/10.2bis e successivi **approvati ma non ancora implementati**.
+## Stato attuale: Step 9 (spec) completato — Auth e lancio pubblico: Supabase Auth (email+password, conferma email, reset password), route protection, progressi cloud con migrazione one-time da localStorage, pagina profilo (modifica nome, reset progressi, logout). Step 10.1 (Brand Identity + Design System), 10.2 (Header globale), 10.2bis (Search Overlay) e 10.4 (Nuova Home FinanceHub) **completati** — vedi rispettive sezioni "Handoff" in fondo. Step 10.3 (Sidebar contestuale Learn) **approvato ma non ancora implementato** (eseguito dopo 10.4 per decisione di roadmap dell'utente).
 
 Riferimento spec: [finlearn-mvp-spec.md](finlearn-mvp-spec.md)
 
@@ -825,7 +825,7 @@ Questo non significa implementare questi dati ora — significa che le scelte di
 
 Se questa conversazione viene ripresa in una nuova chat, il prompt di avvio dovrebbe essere equivalente a:
 
-> "Step 9 è completo (vedi 'Handoff — Step 9 completato'). Step 10.1 (Brand Identity + Design System), Step 10.2 (Header globale) e Step 10.2bis (Search overlay) sono **completati** (vedi le rispettive sezioni 'Handoff — Step 10.x completato'): rebranding FinanceHub, nuovo logomark 'hub', Header globale fisso con nav primaria/account menu/search, sidebar de-enfatizzata (blocco logo rimosso), command palette Ctrl/Cmd+K con categorie Vai a/Lezioni/Asset (placeholder) e architettura pronta per un futuro catalogo asset (`lib/search/searchIndex.ts`). Step 10 (Brand Identity + Platform UI) resta **approvato** secondo quanto descritto in 'Handoff — Step 10 approvato' per i sotto-step successivi — segui le decisioni di design lì documentate (Markets centrale, Learn non più al centro, stile Bloomberg×Apple×Linear). Procedi con **10.3 — Sidebar contestuale al modulo Learn**, poi fermati per conferma prima di 10.4. NON toccare Watchlist, Asset pages, Portfolio, AI, Markets completo, e NON modificare auth/Supabase/progressi/quiz/lezioni/workbench oltre a quanto necessario. Alla fine di 10.3: typecheck/build, elenco file modificati."
+> "Step 9 è completo (vedi 'Handoff — Step 9 completato'). Step 10.1 (Brand Identity + Design System), Step 10.2 (Header globale), Step 10.2bis (Search overlay) e Step 10.4 (Nuova Home FinanceHub) sono **completati** (vedi le rispettive sezioni 'Handoff — Step 10.x completato'): rebranding FinanceHub, nuovo logomark 'hub', Header globale fisso con nav primaria/account menu/search, sidebar de-enfatizzata (blocco logo rimosso), command palette Ctrl/Cmd+K con categorie Vai a/Lezioni/Asset (placeholder), architettura pronta per un futuro catalogo asset (`lib/search/searchIndex.ts`), e nuova Home "command center" con ticker Markets reale (`lib/market/ticker.ts`, `components/dashboard/MarketTicker.tsx`) e card Learn/Workbench/Portfolio a peso uguale (`components/dashboard/ModuleCard.tsx`). Step 10 (Brand Identity + Platform UI) resta **approvato** secondo quanto descritto in 'Handoff — Step 10 approvato' per i sotto-step successivi — segui le decisioni di design lì documentate (Markets centrale, Learn non più al centro, stile Bloomberg×Apple×Linear). Procedi con **10.3 — Sidebar contestuale al modulo Learn** (eseguito dopo 10.4 per decisione di roadmap dell'utente), poi fermati per conferma prima del prossimo step. NON toccare Watchlist, Asset pages, Portfolio, AI, Markets completo, e NON modificare auth/Supabase/progressi/quiz/lezioni/workbench oltre a quanto necessario. Alla fine di 10.3: typecheck/build, elenco file modificati."
 
 ---
 
@@ -931,5 +931,56 @@ Se questa conversazione viene ripresa in una nuova chat, il prompt di avvio dovr
 - Navigazione da tastiera (`↓`×4 poi `Enter`) seleziona ed apre "Lezione 1" → redirect a `/login` (comportamento middleware preesistente per utenti anonimi, non impattato)
 - Su mobile (375px): pulsante search dedicato nel Header apre l'overlay correttamente, nessun overflow orizzontale (`scrollWidth === 375`)
 - Nessuna regressione di altezza/scroll introdotta rispetto a 10.2
+
+**Prossimo step**: 10.3 — Sidebar contestuale al modulo Learn (vedi "Handoff — Step 10 approvato" per i vincoli). In attesa di conferma per procedere.
+
+---
+
+## Handoff — Step 10.4 completato (Nuova Home FinanceHub)
+
+**Stato complessivo**: Step 1-9 + Step 7.5 (extra) + Step 10.1 + Step 10.2 + Step 10.2bis + Step 10.4 completati. `npx tsc --noEmit` e `npm run build` passano senza errori (13 route, invariate). Step 10.3 resta il prossimo step (eseguito dopo 10.4 per decisione di roadmap dell'utente: "la Home ha un impatto visivo e di branding molto maggiore").
+
+**Cosa è cambiato**:
+
+- `lib/market/ticker.ts` (**nuovo**, fs-free) — modulo che trasforma le serie `MarketDataPoint[]` già disponibili in `TickerQuote[]` per la ticker strip:
+  - `TickerQuote { id, label, unit, value, change, changePercent, date }`
+  - `buildTickerQuote(id, data)` — ultimo punto vs penultimo, calcola `change`/`changePercent` (null se la serie ha meno di 2 punti)
+  - `buildTickerQuotes(rawData: Record<AssetId, MarketDataPoint[]>)` — itera su `Object.keys(rawData)`, filtra i `null`. La Home non conosce a priori quanti/quali asset esistono: estendere il ticker in futuro significa solo estendere `rawData`
+- `app/dashboard/page.tsx` (**riscritto**) — server component: legge `sp500.json`/`gold.json`/`us10y.json` da `public/data/` via un piccolo helper `readMarketData` locale (stesso pattern di `app/workbench/page.tsx`, duplicato apposta per non toccare il workbench), costruisce `Record<AssetId, MarketDataPoint[]>` con `ASSET_FILE_NAMES`, chiama `buildTickerQuotes(...)` e passa `lessonMeta={LESSON_META}` + `tickerQuotes` a `<DashboardView>`
+- `components/dashboard/ModuleCard.tsx` (**nuovo**) — shell generica per le card del "command center": icon badge, eyebrow, titolo, descrizione, CTA opzionale (`Link` con freccia) o badge "Soon", `children` per contenuto extra (es. barra di progresso). Usata da `LearnCard`, `WorkbenchCard`, `PortfolioCard` per garantire peso visivo identico
+- `components/dashboard/MarketTicker.tsx` (**nuovo**) — ticker strip "riga densa": riceve `TickerQuote[]`, mostra label + valore (formattato secondo `unit`: `index` → numero IT a 2 decimali, `percent` → `%`) + variazione (verde/rosso, `pp` per i tassi, `%` per gli indici). Riga scorrevole orizzontalmente (`overflow-x-auto`) per supportare in futuro decine di asset senza modifiche; header con badge "Catalogo completo · Soon" per anticipare il futuro catalogo Markets
+- `components/dashboard/LearnCard.tsx` (**nuovo**, client) — estrae la logica della vecchia dashboard (prossima lezione/percorso completato, progress bar, CTA "Continua"/"Esplora il grafico") in una `ModuleCard`, usando `useProgress()` + `lib/access.ts` (nessuna logica di progresso modificata)
+- `components/dashboard/WorkbenchCard.tsx` (**riscritto**) — ora una semplice `ModuleCard` con CTA "Apri grafico" → `/workbench`, stesso peso visivo delle altre card
+- `components/dashboard/PortfolioCard.tsx` (**nuovo**) — `ModuleCard` con badge "Soon", placeholder per il futuro modulo Portfolio
+- `components/dashboard/DashboardView.tsx` (**riscritto**) — nuovo layout "command center": header FinanceHub + saluto, `MarketTicker`, poi grid `md:grid-cols-3` con `LearnCard`/`WorkbenchCard`/`PortfolioCard` a peso uguale. Learn non è più la sezione dominante: è una delle tre card
+- `components/layout/SoonBadge.tsx` (**nuovo**) — badge "Soon" estratto da `Header.tsx` in componente condiviso, riusato da `ModuleCard`/`MarketTicker`
+- `components/layout/Header.tsx` — rimossa la definizione locale di `SoonBadge`, ora importata da `@/components/layout/SoonBadge` (nessun cambiamento funzionale)
+- `components/layout/icons.tsx` — aggiunta `WalletIcon` (usata da `PortfolioCard`)
+- `components/dashboard/ContinueCard.tsx`, `components/dashboard/CompletionScreen.tsx`, `components/dashboard/LessonTracker.tsx` — **eliminati**: funzionalità assorbita da `LearnCard`, nessun altro file li referenziava (verificato via grep)
+- `app/layout.tsx` — aggiunta la classe `min-w-0` al `<main>`: fix di un bug di overflow orizzontale su mobile pre-esistente nel layout flex (`main` con `flex-1` e `min-width: auto` di default si allargava al "min-content" del contenuto, es. la riga ticker con elementi `shrink-0`, spingendo la Home a ~634px su un viewport di 375px e tagliando le card a destra). `min-w-0` permette a `main` di restringersi alla viewport disponibile; nessun effetto visibile su desktop o sulle altre pagine (verificato)
+
+**Cosa NON è cambiato** (volutamente, per restare entro lo scope di 10.4):
+
+- Nessuna sidebar contestuale (10.3 resta da fare)
+- Nessuna watchlist, nessun portfolio reale, nessuna AI, nessun catalogo Markets completo, nessuna Asset Page
+- Nessun nuovo provider/fonte dati: il ticker usa gli stessi `public/data/sp500.json` / `gold.json` / `us10y.json` e le utility già esistenti in `lib/market.ts` (`ASSET_LABELS`, `ASSET_UNITS`, `ASSET_FILE_NAMES`, `sanitizeSeries`)
+- Nessuna modifica ad auth/Supabase/progressi cloud/quiz/lezioni/workbench
+- `lib/access.ts`, `lib/progress/ProgressContext.tsx`, `components/layout/ProgressBar.tsx` riusati invariati
+
+**Decisioni architetturali per la futura espansione (decine di asset nel ticker, migliaia nel catalogo Markets)**:
+
+- `MarketTicker` itera su `TickerQuote[]` senza assumere un numero fisso di elementi: passare da 3 a N asset richiede solo di estendere `rawData` in `app/dashboard/page.tsx` (e l'eventuale mappa `ASSET_*` in `lib/market.ts`), non di toccare `MarketTicker`/`ticker.ts`
+- La riga ticker è già "densa" e scorrevole orizzontalmente (`overflow-x-auto`, elementi `shrink-0`): pensata per ospitare molti più asset senza wrap o redesign
+- `buildTickerQuote`/`buildTickerQuotes` sono pure funzioni fs-free che operano su dati già caricati: in futuro, se i dati arriveranno da un provider/API invece che da `public/data/*.json`, basterà cambiare come viene popolato `rawData` in `app/dashboard/page.tsx` — l'intera UI (ticker + card) resta invariata
+- Il badge "Catalogo completo · Soon" nel `MarketTicker` e la card "Portfolio (Soon)" anticipano visivamente i moduli futuri (Markets, Portfolio) senza implementarli, mantenendo coerente la promessa di "command center" della Home
+- `ModuleCard` è il punto di estensione per nuovi moduli del command center (es. un futuro modulo "AI" o "Watchlist"): basta una nuova card che la usa, senza modificare `DashboardView` oltre ad aggiungerla alla grid
+
+**Verifica eseguita** (via preview tool, build server temporaneo + route temporanea `app/devpreviewtmp` non protetta da auth, rimossa a fine verifica):
+
+- `npx tsc --noEmit`: nessun errore
+- `npm run build`: 13 route generate correttamente, nessun errore (solo warning preesistente su Edge Runtime/Supabase, non correlato)
+- Desktop (1280×800): `MarketTicker` mostra S&P 500 7431,46 (+0.50%), Oro 4211,12 (+0.00%), US Treasury 10Y 4.45% (-0.10 pp), colori verde/rosso coerenti con il segno; grid command center a 3 colonne da 320px ciascuna, nessun overflow (`scrollWidth === 1280`)
+- Mobile (375px): dopo il fix `min-w-0`, `main` e le card si adattano correttamente a 375px (card a 327px, ticker scrollabile orizzontalmente senza overflow di pagina), card impilate verticalmente
+- Nessuna regressione visiva sulle altre pagine (il fix `min-w-0` su `main` non altera larghezze/scroll su desktop)
 
 **Prossimo step**: 10.3 — Sidebar contestuale al modulo Learn (vedi "Handoff — Step 10 approvato" per i vincoli). In attesa di conferma per procedere.

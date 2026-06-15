@@ -8,6 +8,7 @@ import { createClient } from "@/lib/supabase/client";
 import { useProgress } from "@/lib/progress/ProgressContext";
 import { getNextAccessibleLessonId } from "@/lib/access";
 import { ChevronDownIcon, LogoMark, SearchIcon, UserIcon } from "@/components/layout/icons";
+import { SoonBadge } from "@/components/layout/SoonBadge";
 import { SearchOverlay } from "@/components/search/SearchOverlay";
 
 interface NavItem {
@@ -15,14 +16,6 @@ interface NavItem {
   href?: string;
   soon?: boolean;
   isActive?: (pathname: string) => boolean;
-}
-
-function SoonBadge() {
-  return (
-    <span className="rounded-full bg-accent-blue/15 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-accent-blue">
-      Soon
-    </span>
-  );
 }
 
 /** Header globale fisso in alto: logo, navigazione primaria, search (anteprima) e account menu. */

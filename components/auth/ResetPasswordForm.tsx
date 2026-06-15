@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { PasswordInput } from "@/components/auth/PasswordInput";
 
 const inputClassName =
   "w-full rounded-card border border-text-secondary/20 bg-bg-primary px-4 py-3 text-base text-text-primary placeholder:text-text-secondary/50 focus:border-accent-purple focus:outline-none";
@@ -62,10 +63,9 @@ export function ResetPasswordForm() {
         <label htmlFor="password" className="text-sm font-bold text-text-primary">
           Nuova password
         </label>
-        <input
+        <PasswordInput
           id="password"
           name="password"
-          type="password"
           required
           minLength={6}
           autoComplete="new-password"
@@ -79,10 +79,9 @@ export function ResetPasswordForm() {
         <label htmlFor="confirmPassword" className="text-sm font-bold text-text-primary">
           Conferma nuova password
         </label>
-        <input
+        <PasswordInput
           id="confirmPassword"
           name="confirmPassword"
-          type="password"
           required
           minLength={6}
           autoComplete="new-password"

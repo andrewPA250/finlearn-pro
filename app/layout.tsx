@@ -36,7 +36,7 @@ export default function RootLayout({
           <Header />
           <div className="flex min-h-[calc(100vh-3.5rem)]">
             <Sidebar />
-            <main className="min-h-[calc(100vh-3.5rem)] flex-1 pb-touch-target md:pb-0">
+            <main className="min-h-[calc(100vh-3.5rem)] min-w-0 flex-1 pb-touch-target md:pb-0">
               {children}
             </main>
           </div>
