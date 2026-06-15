@@ -48,3 +48,20 @@ export function buildTickerQuotes(rawData: Record<AssetId, MarketDataPoint[]>): 
     .map((id) => buildTickerQuote(id, rawData[id]))
     .filter((quote): quote is TickerQuote => quote !== null);
 }
+
+/** Formattazione condivisa del valore di una quotazione (Home ticker, Markets list). */
+export function formatQuoteValue(quote: TickerQuote): string {
+  if (quote.unit === "percent") {
+    return `${quote.value.toFixed(2)}%`;
+  }
+  return quote.value.toLocaleString("it-IT", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+/** Formattazione condivisa della variazione di una quotazione (Home ticker, Markets list). */
+export function formatQuoteChange(quote: TickerQuote): string {
+  const sign = quote.change >= 0 ? "+" : "";
+  if (quote.unit === "percent") {
+    return `${sign}${quote.change.toFixed(2)} pp`;
+  }
+  return `${sign}${quote.changePercent.toFixed(2)}%`;
+}

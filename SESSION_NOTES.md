@@ -6,7 +6,7 @@
 
 ---
 
-## Stato attuale: Step 9 (spec) completato — Auth e lancio pubblico: Supabase Auth (email+password, conferma email, reset password), route protection, progressi cloud con migrazione one-time da localStorage, pagina profilo (modifica nome, reset progressi, logout). Step 10.1 (Brand Identity + Design System), 10.2 (Header globale), 10.2bis (Search Overlay) e 10.4 (Nuova Home FinanceHub) **completati** — vedi rispettive sezioni "Handoff" in fondo. Step 10.3 (Sidebar contestuale Learn) **approvato ma non ancora implementato** (eseguito dopo 10.4 per decisione di roadmap dell'utente).
+## Stato attuale: Step 9 (spec) completato — Auth e lancio pubblico: Supabase Auth (email+password, conferma email, reset password), route protection, progressi cloud con migrazione one-time da localStorage, pagina profilo (modifica nome, reset progressi, logout). Step 10.1 (Brand Identity + Design System), 10.2 (Header globale), 10.2bis (Search Overlay), 10.4 (Nuova Home FinanceHub), 10.3 (Sidebar contestuale Learn) e 10.5 (Markets Module Foundation) **completati** — vedi rispettive sezioni "Handoff" in fondo. Micro-fix UX "toggle mostra/nascondi password" (Login/Register/Reset) **completato**. Prossimo step: da definire con l'utente.
 
 Riferimento spec: [finlearn-mvp-spec.md](finlearn-mvp-spec.md)
 
@@ -825,7 +825,7 @@ Questo non significa implementare questi dati ora — significa che le scelte di
 
 Se questa conversazione viene ripresa in una nuova chat, il prompt di avvio dovrebbe essere equivalente a:
 
-> "Step 9 è completo (vedi 'Handoff — Step 9 completato'). Step 10.1 (Brand Identity + Design System), Step 10.2 (Header globale), Step 10.2bis (Search overlay) e Step 10.4 (Nuova Home FinanceHub) sono **completati** (vedi le rispettive sezioni 'Handoff — Step 10.x completato'): rebranding FinanceHub, nuovo logomark 'hub', Header globale fisso con nav primaria/account menu/search, sidebar de-enfatizzata (blocco logo rimosso), command palette Ctrl/Cmd+K con categorie Vai a/Lezioni/Asset (placeholder), architettura pronta per un futuro catalogo asset (`lib/search/searchIndex.ts`), e nuova Home "command center" con ticker Markets reale (`lib/market/ticker.ts`, `components/dashboard/MarketTicker.tsx`) e card Learn/Workbench/Portfolio a peso uguale (`components/dashboard/ModuleCard.tsx`). Step 10 (Brand Identity + Platform UI) resta **approvato** secondo quanto descritto in 'Handoff — Step 10 approvato' per i sotto-step successivi — segui le decisioni di design lì documentate (Markets centrale, Learn non più al centro, stile Bloomberg×Apple×Linear). Procedi con **10.3 — Sidebar contestuale al modulo Learn** (eseguito dopo 10.4 per decisione di roadmap dell'utente), poi fermati per conferma prima del prossimo step. NON toccare Watchlist, Asset pages, Portfolio, AI, Markets completo, e NON modificare auth/Supabase/progressi/quiz/lezioni/workbench oltre a quanto necessario. Alla fine di 10.3: typecheck/build, elenco file modificati."
+> "Step 9 è completo (vedi 'Handoff — Step 9 completato'). Step 10.1 (Brand Identity + Design System), Step 10.2 (Header globale), Step 10.2bis (Search overlay), Step 10.4 (Nuova Home FinanceHub), Step 10.3 (Sidebar contestuale Learn) e Step 10.5 (Markets Module Foundation) sono **completati** (vedi le rispettive sezioni 'Handoff — Step 10.x completato'): rebranding FinanceHub, nuovo logomark 'hub', Header globale fisso con nav primaria/account menu/search, command palette Ctrl/Cmd+K con categorie Vai a/Lezioni/Asset (placeholder), architettura pronta per un futuro catalogo asset (`lib/search/searchIndex.ts`), nuova Home "command center" con ticker Markets reale (`lib/market/ticker.ts`, `components/dashboard/MarketTicker.tsx`) e card Learn/Workbench/Portfolio a peso uguale (`components/dashboard/ModuleCard.tsx`), sidebar trasformata in `LearnSidebar` contestuale al modulo Learn (renderizzata da `components/sidebar/ContextSidebar.tsx` solo su `/lessons/*`), e nuovo modulo Markets (`/markets`) con sezioni per categoria (Azioni/ETF/Indici/Crypto/Forex/Commodities/Bond), Market List Pattern riutilizzabile (`components/markets/MarketListRow.tsx`, `MarketListSection.tsx`), catalogo asset (`lib/markets/catalog.ts`, `types/markets.ts`) e route definitiva per le pagine asset (`/asset/[symbol]`). Inoltre è stato completato un micro-fix UX: toggle mostra/nascondi password in Login/Register/Reset (`components/auth/PasswordInput.tsx`). Step 10 (Brand Identity + Platform UI) resta **approvato** secondo quanto descritto in 'Handoff — Step 10 approvato' per i sotto-step successivi — segui le decisioni di design lì documentate (Markets centrale, Learn non più al centro, stile Bloomberg×Apple×Linear). Il prossimo step non è ancora definito: chiedi conferma all'utente sulla prossima priorità (es. catalogo asset estero, Watchlist/Portfolio, bottom nav modulo). NON toccare Watchlist, Portfolio, AI, integrazioni provider esterni, e NON modificare auth/Supabase/progressi/quiz/lezioni/workbench/LearnSidebar/Search Overlay oltre a quanto necessario."
 
 ---
 
@@ -984,3 +984,106 @@ Se questa conversazione viene ripresa in una nuova chat, il prompt di avvio dovr
 - Nessuna regressione visiva sulle altre pagine (il fix `min-w-0` su `main` non altera larghezze/scroll su desktop)
 
 **Prossimo step**: 10.3 — Sidebar contestuale al modulo Learn (vedi "Handoff — Step 10 approvato" per i vincoli). In attesa di conferma per procedere.
+
+---
+
+## Handoff — Micro-fix completato (toggle mostra/nascondi password)
+
+**Stato complessivo**: Step 1-9 + Step 7.5 (extra) + Step 10.1 + Step 10.2 + Step 10.2bis + Step 10.4 + micro-fix completati. `npx tsc --noEmit` e `npm run build` passano senza errori (13 route, invariate).
+
+**Cosa è cambiato**:
+
+- `components/layout/icons.tsx` — aggiunte `EyeIcon` e `EyeOffIcon` (stesso stile delle icone esistenti: `viewBox 0 0 24 24`, `stroke="currentColor"`)
+- `components/auth/PasswordInput.tsx` (**nuovo**) — input controllato con toggle mostra/nascondi: `type` alterna `password`/`text` in base a uno stato locale `visible`; bottone con `aria-label` ("Mostra password"/"Nascondi password") e `aria-pressed`, icona occhio/occhio-barrato, stile coerente (`pr-12` per lo spazio del bottone)
+- `components/auth/LoginForm.tsx`, `RegisterForm.tsx`, `ResetPasswordForm.tsx` — i campi password (incluso "Conferma password"/"Conferma nuova password") usano ora `PasswordInput` invece di `<input type="password">`; nessuna modifica a validazioni, `mapAuthError`, chiamate Supabase o redirect
+
+**Cosa NON è cambiato**: flusso auth, Supabase, validazioni (`minLength`, `required`, controllo coincidenza password), layout pagine, `ForgotPasswordForm` (nessun campo password).
+
+**Verifica**: toggle testato via preview tool — alterna correttamente `type` (`password`↔`text`), `aria-label` e `aria-pressed`, mantenendo il valore digitato.
+
+---
+
+## Handoff — Step 10.3 completato (Sidebar contestuale Learn)
+
+**Stato complessivo**: Step 1-9 + Step 7.5 (extra) + Step 10.1 + Step 10.2 + Step 10.2bis + Step 10.4 + Step 10.3 + micro-fix password completati. `npx tsc --noEmit` e `npm run build` passano senza errori (13 route, invariate).
+
+**Cosa è cambiato**:
+
+- `components/sidebar/LearnSidebar.tsx` (**nuovo**) — sidebar contestuale del modulo Learn:
+  - sezione "Percorso Learn" con conteggio lezioni completate (`N/6`) e `ProgressBar`
+  - elenco lezioni 1-6: stato bloccato (icona lucchetto, opacità ridotta, non cliccabile) o sbloccato (link a `/lessons/{id}`, evidenziato se attivo, icona check se completata) — stessa logica di `isLessonUnlocked`/`getLessonProgress` di prima, invariata
+  - blocco "Workbench" in fondo: link a `/workbench?lesson={lezione corrente}` se `isWorkbenchUnlocked` per la lezione attiva (dedotta dal pathname `/lessons/[id]`, fallback lezione 1), altrimenti voce disabilitata con lucchetto
+  - **rimossi** rispetto alla vecchia sidebar: link "Dashboard" (duplicato con "Home" del Header) e sezione "Account" → "Profilo" (ora nell'avatar menu del Header)
+  - stile più compatto: padding `p-5` (era `p-6`), gap `gap-5` (era `gap-8`), voci nav `px-2.5 py-1.5 text-xs` (era `px-3 py-2`, testo via classe genitore), niente più intestazioni di sezione "Lezioni"/"Strumenti"/"Account" — solo blocco progresso + lista lezioni + blocco Workbench
+- `components/sidebar/ContextSidebar.tsx` (**nuovo**) — componente "router" client-side: legge `usePathname()` e renderizza `LearnSidebar` solo per route che iniziano con `/lessons`, altrimenti `null`. Punto di estensione futuro per `MarketsSidebar` (`/markets`) e `PortfolioSidebar` (`/portfolio`), già commentato nel file
+- `app/layout.tsx` — `<Sidebar />` → `<ContextSidebar />` (import aggiornato a `@/components/sidebar/ContextSidebar`); resto del layout (Header, wrapper flex, `main`, `BottomNav`) invariato
+- `components/layout/Sidebar.tsx` — **eliminato**, sostituito dalla coppia `ContextSidebar`/`LearnSidebar`
+
+**Cosa NON è cambiato** (volutamente, per restare entro lo scope di 10.3):
+
+- Nessuna modifica ad auth/Supabase/progressi cloud/quiz/logica lezioni/Workbench (solo aggiunto un link in entrata da `LearnSidebar`, già esistente come pattern `/workbench?lesson=N`)
+- `BottomNav` invariata (nav mobile globale, non tocca la sidebar)
+- Nessuna nuova route, nessun modulo Markets/Portfolio/AI
+- `MarketsSidebar`/`PortfolioSidebar` non implementate: solo struttura `ContextSidebar` pronta ad accoglierle
+
+**Architettura — sidebar come variante contestuale**:
+
+- `ContextSidebar` è ora l'unico punto in cui `app/layout.tsx` monta una sidebar: decide *quale* sidebar (se una) mostrare in base alla sezione attiva, senza che `layout.tsx` conosca i dettagli dei singoli moduli
+- Aggiungere `MarketsSidebar` o `PortfolioSidebar` in futuro significa: creare `components/sidebar/MarketsSidebar.tsx` (o `PortfolioSidebar.tsx`) con la stessa firma (`"use client"`, nessuna prop, `<aside className="hidden w-sidebar ... md:flex">`), e aggiungere un ramo `if (pathname.startsWith("/markets")) return <MarketsSidebar />;` in `ContextSidebar` — nessuna modifica a `layout.tsx` o alle altre sidebar
+- Su tutte le route che non iniziano con `/lessons` (Home, Markets°, Portfolio°, Workbench, Profilo, auth) `ContextSidebar` restituisce `null`: nessuna sidebar, `main` occupa l'intera larghezza — coerente con "Header/Search/Home sono ora la navigazione primaria, la sidebar è solo per Learn"
+
+**Verifica eseguita** (via preview tool, build server temporaneo + route temporanea `app/devpreviewtmp` non protetta da auth, rimossa a fine verifica — `/lessons/*` richiede login e non è stato eseguito un login reale):
+
+- `npx tsc --noEmit`: nessun errore (dopo `rm -rf .next` per pulire i riferimenti stale alla route temporanea)
+- `npm run build`: 13 route generate correttamente, nessun errore (solo warning preesistente su Edge Runtime/Supabase, non correlato)
+- `/login`, `/dashboard` (redirect a `/login` da anonimo): nessun `<aside>` nel DOM — la sidebar non appare più fuori da Learn
+- Desktop (1280×800), `LearnSidebar` renderizzata in isolamento: `<aside>` largo 240px (`w-sidebar`), sfondo `bg-sidebar`, contenuto "PERCORSO LEARN · 0/6 · Lezione 1-6 · Workbench" (lucchetto su lezioni 2-6 e su Workbench, coerente con progresso 0/6)
+- Mobile (375px): `<aside>` ha `display: none` (classe `hidden md:flex` invariata), `document.body.scrollWidth === 375` — nessun overflow orizzontale
+
+**Prossimo step**: 10.5 — Markets Module Foundation — completato (vedi "Handoff — Step 10.5 completato" in fondo).
+
+---
+
+## Handoff — Step 10.5 completato (Markets Module Foundation)
+
+**Stato complessivo**: Step 1-9 + Step 7.5 (extra) + Step 10.1 + Step 10.2 + Step 10.2bis + Step 10.4 + Step 10.3 + Step 10.5 + micro-fix password completati. `npx tsc --noEmit` e `npm run build` passano senza errori (14 route: aggiunte `/markets` statica e `/asset/[symbol]` dinamica).
+
+**Cosa è cambiato**:
+
+- `types/markets.ts` (**nuovo**) — tipi del catalogo Markets: `MarketCategoryId` (`equity`/`etf`/`index`/`crypto`/`forex`/`commodity`/`bond`), `MarketCategory`, `MarketInstrumentStatus` (`live`/`soon`), `MarketInstrument` (con `assetId?: AssetId` opzionale per collegare uno strumento ai dati reali esistenti)
+- `lib/markets/catalog.ts` (**nuovo**) — `MARKET_CATEGORIES` (7 categorie con label IT) e `MARKET_INSTRUMENTS` (12 strumenti placeholder, 3 "live" collegati ai dati esistenti: SPX→`sp500`, XAUUSD→`gold`, US10Y→`us10y`; gli altri 9 sono "soon"), più `getInstrumentsByCategory()` e `getInstrumentBySymbol()`
+- `lib/market/ticker.ts` (**esteso**) — aggiunte `formatQuoteValue(quote)` e `formatQuoteChange(quote)`, helper di formattazione condivisi (estratti dalla vecchia logica inline di `MarketTicker`) usati ora sia dal ticker che dal Market List Pattern e dalle pagine asset
+- `components/dashboard/MarketTicker.tsx` (**esteso**) — nuova prop `variant?: "compact" | "full"`: `"compact"` (default, invariato per la Home) mostra "Markets"; `"full"` (usata in `/markets`) mostra "Live now" e aggiunge la data di aggiornamento per ogni quote
+- `components/markets/MarketListRow.tsx` (**nuovo**) — riga del Market List Pattern: simbolo + nome, valore, variazione, indicatore stato (pallino verde "live" con link a `/asset/[symbol]`, oppure badge "Soon" non cliccabile)
+- `components/markets/MarketListSection.tsx` (**nuovo**) — sezione per categoria: header con nome categoria (+ badge "Soon" se nessuno strumento della categoria è live) ed elenco `MarketListRow`; non assume un numero fisso di righe
+- `components/markets/MarketsView.tsx` (**nuovo**) — composizione della pagina Markets: titolo, `MarketTicker` variant `"full"` ("Live now" con SPX/Oro/US10Y), griglia responsive (1/2/3 colonne) di `MarketListSection` per ognuna delle 7 categorie
+- `app/markets/page.tsx` (**nuovo**) — route `/markets`, server component: legge i 3 dataset JSON esistenti (`public/data/*.json`) con lo stesso pattern fs già usato in `app/dashboard/page.tsx`/`app/workbench/page.tsx`, costruisce le `TickerQuote` con `buildTickerQuotes` e renderizza `MarketsView`
+- `app/asset/[symbol]/page.tsx` (**nuovo**) — route dinamica `/asset/[symbol]`: risolve lo strumento da `getInstrumentBySymbol`, `notFound()` se lo symbol non esiste nel catalogo; per strumenti "live" mostra la quotazione reale (valore, variazione, data) con gli stessi helper del ticker; per strumenti "soon" mostra un testo placeholder che dichiara la pagina come shell stabile per il futuro catalogo
+- `components/layout/Header.tsx` — voce nav "Markets": da `{ label: "Markets", soon: true }` a link reale `{ label: "Markets", href: "/markets", isActive: (p) => p.startsWith("/markets") || p.startsWith("/asset") }`
+
+**Cosa NON è cambiato** (volutamente, per restare entro lo scope di 10.5):
+
+- Nessuna modifica ad auth/Supabase/progressi cloud/quiz/lezioni/Search Overlay/`LearnSidebar`/`ContextSidebar`
+- Nessun provider esterno, nessuna API realtime aggiuntiva, nessun catalogo asset massivo: i dati "live" sono gli stessi 3 dataset già usati da Home/Dashboard/Workbench (`sp500`, `gold`, `us10y`)
+- Nessuna Watchlist reale, nessun Portfolio reale, nessuna integrazione AI
+- `AssetClass` esistente in `lib/search/searchIndex.ts` (usato dalla Search Overlay) non toccato: `MarketCategoryId` è un tipo separato (stessi 7 valori) con nota nel codice per una futura unificazione, ma lo Step 10.5 non modifica la Search Overlay
+- `MarketsSidebar`/`PortfolioSidebar` ancora non implementate: `/markets` non ha sidebar laterale (coerente con `ContextSidebar`, che restituisce `null` fuori da `/lessons/*`)
+
+**Architettura — pronta per un catalogo di migliaia di asset**:
+
+- **Estendere il catalogo non richiede modifiche ai componenti**: aggiungere strumenti significa solo aggiungere voci a `MARKET_INSTRUMENTS` in `lib/markets/catalog.ts` (con `status: "soon"` finché non ci sono dati reali, o `status: "live"` + `assetId` quando il dato è disponibile). `MarketListSection` e `MarketsView` iterano sul catalogo senza assumere un numero fisso di righe/categorie
+- **Market List Pattern riutilizzabile**: `MarketListRow`/`MarketListSection` sono pensati per essere riusati identici in una futura Watchlist e in Portfolio — stessa riga (simbolo/nome/valore/variazione/stato), stesso componente di sezione
+- **Routing asset stabile**: `/asset/[symbol]` è già la route definitiva per ogni strumento (azioni, ETF, indici, crypto, forex, commodities, bond — un solo namespace, nessuna route per-categoria). Quando arriverà il catalogo completo, basterà popolare `MARKET_INSTRUMENTS` con migliaia di voci (es. da un file generato o da un provider) e la pagina `/asset/[symbol]` mostrerà automaticamente la quotazione reale per ogni strumento con `assetId` valido, mantenendo il placeholder per gli altri
+- **Disaccoppiamento dati/UI**: `formatQuoteValue`/`formatQuoteChange` centralizzano la formattazione numerica (valuta per indici/oro, percentuale per i tassi) in `lib/market/ticker.ts`, usati identicamente da Home, `/markets` e `/asset/[symbol]` — un futuro provider con più unità/valute richiederà di estendere questi helper in un solo posto
+- **Separazione dei tipi**: `MarketCategoryId` (Markets) e `AssetClass` (Search Overlay) restano tipi distinti per non accoppiare i due moduli durante questa fase di costruzione; una futura unificazione è possibile ma non necessaria ora
+
+**Verifica eseguita** (via preview tool):
+
+- `npx tsc --noEmit`: nessun errore
+- `npm run build`: 14 route generate correttamente (`/markets` statica 179B, `/asset/[symbol]` dinamica 179B), nessun errore (solo warning preesistente su Edge Runtime/Supabase, non correlato)
+- Desktop (1280×800), `/markets`: 7 sezioni di categoria (Azioni 3, ETF 2, Indici 1, Crypto 2, Forex 2, Commodities 1, Bond 1 = 12 strumenti totali), nessun overflow, ticker "Live now" mostra S&P 500/Oro/US Treasury 10Y con data di aggiornamento, riga live (SPX) collegata a `/asset/SPX`
+- Desktop, `/asset/SPX` (live): mostra valore/variazione/data reali; `/asset/AAPL` (soon): mostra testo placeholder; `/asset/UNKNOWN`: `notFound()` → 404 corretto
+- Mobile (375px), `/markets`: `document.body.scrollWidth === 375` — nessun overflow orizzontale, 7 sezioni renderizzate correttamente
+- Mobile (375px), `/asset/SPX`: `document.body.scrollWidth === 375` — nessun overflow, quotazione live mostrata correttamente
+
+**Prossimo step**: da definire con l'utente (es. catalogo asset più ampio, Watchlist/Portfolio, bottom nav modulo). In attesa di indicazioni sulla prossima priorità.

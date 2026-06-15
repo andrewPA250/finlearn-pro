@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
-import { Sidebar } from "@/components/layout/Sidebar";
+import { ContextSidebar } from "@/components/sidebar/ContextSidebar";
 import { BottomNav } from "@/components/layout/BottomNav";
 import { ProgressProvider } from "@/lib/progress/ProgressContext";
 
@@ -35,7 +35,7 @@ export default function RootLayout({
         <ProgressProvider>
           <Header />
           <div className="flex min-h-[calc(100vh-3.5rem)]">
-            <Sidebar />
+            <ContextSidebar />
             <main className="min-h-[calc(100vh-3.5rem)] min-w-0 flex-1 pb-touch-target md:pb-0">
               {children}
             </main>
