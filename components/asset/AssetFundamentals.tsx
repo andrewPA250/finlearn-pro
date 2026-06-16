@@ -155,8 +155,8 @@ export function AssetFundamentals({ fundamentals: f, category }: AssetFundamenta
   if (groups.length === 0) return null;
 
   return (
-    <section className="rounded-card border border-bg-sidebar bg-bg-card p-4">
-      <h2 className="mb-3 text-xs font-bold uppercase tracking-wide text-text-secondary">
+    <section className="rounded-card border border-bg-border bg-bg-card p-5">
+      <h2 className="mb-3 text-[10px] font-semibold uppercase tracking-widest text-text-muted">
         Fundamentals
       </h2>
 

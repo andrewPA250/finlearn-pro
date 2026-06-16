@@ -187,7 +187,7 @@ export function AssetChartSection({ symbol, candles, unit, source, tvSymbol }: A
   // ---------------------------------------------------------------------------
 
   return (
-    <section className="rounded-card border border-bg-sidebar bg-bg-card p-4">
+    <section id="chart" className="rounded-card border border-bg-border bg-bg-card p-5">
 
       {/* ── Header ─────────────────────────────────────────────────────────── */}
       <header className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
@@ -205,7 +205,7 @@ export function AssetChartSection({ symbol, candles, unit, source, tvSymbol }: A
                 aria-pressed={mode === "sync" || !hydrated}
                 className={`rounded-full px-2.5 py-0.5 text-[10px] font-bold transition-colors duration-100 ${
                   !hydrated || mode === "sync"
-                    ? "bg-accent-purple/15 text-accent-purple"
+                    ? "bg-cyan-bg text-cyan"
                     : "text-text-secondary hover:text-text-primary"
                 }`}
               >
@@ -216,7 +216,7 @@ export function AssetChartSection({ symbol, candles, unit, source, tvSymbol }: A
                 aria-pressed={hydrated && mode === "advanced"}
                 className={`rounded-full px-2.5 py-0.5 text-[10px] font-bold transition-colors duration-100 ${
                   hydrated && mode === "advanced"
-                    ? "bg-accent-purple/15 text-accent-purple"
+                    ? "bg-cyan-bg text-cyan"
                     : "text-text-secondary hover:text-text-primary"
                 }`}
               >
@@ -235,7 +235,7 @@ export function AssetChartSection({ symbol, candles, unit, source, tvSymbol }: A
                 onClick={() => setTimeframe(tf.value)}
                 className={`rounded px-2 py-0.5 text-[10px] font-bold transition-colors duration-100 ${
                   timeframe === tf.value
-                    ? "bg-accent-purple/20 text-accent-purple"
+                    ? "bg-cyan-bg text-cyan"
                     : "text-text-secondary hover:text-text-primary"
                 }`}
               >
@@ -293,7 +293,7 @@ export function AssetChartSection({ symbol, candles, unit, source, tvSymbol }: A
               <Tooltip content={tooltip} />
               <Line
                 dataKey="value"
-                stroke="#6C63FF"
+                stroke="#00d4b8"
                 strokeWidth={1.5}
                 dot={false}
                 isAnimationActive={false}

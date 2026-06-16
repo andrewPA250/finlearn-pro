@@ -19,8 +19,8 @@ export function AssetKeyFacts({ symbol, category }: AssetKeyFactsProps) {
   const facts = getAssetFacts(symbol, category);
 
   return (
-    <section className="rounded-card border border-bg-sidebar bg-bg-card p-4">
-      <h2 className="text-xs font-bold uppercase tracking-wide text-text-secondary">Key Facts</h2>
+    <section className="rounded-card border border-bg-border bg-bg-card p-5">
+      <h2 className="mb-1 text-[10px] font-semibold uppercase tracking-widest text-text-muted">Key Facts</h2>
       <div className="mt-1 divide-y divide-bg-sidebar/60">
         {facts.map((fact) => (
           <FactRow key={fact.label} label={fact.label} value={fact.value} />
