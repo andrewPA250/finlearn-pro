@@ -44,4 +44,8 @@ export interface MarketInstrument {
   assetId?: AssetId;
   /** Presente solo per strumenti `"delayed"`: simbolo nel formato atteso dall'API Finnhub. */
   finnhubSymbol?: string;
+  /** Simbolo TradingView (es. "NASDAQ:AAPL"). Quando presente, la pagina asset mostra il widget TradingView. */
+  tradingViewSymbol?: string;
+  /** Simbolo Yahoo Finance (es. "AAPL", "BTC-USD", "^GSPC"). Usato dal yahooProvider. */
+  yahooSymbol?: string;
 }

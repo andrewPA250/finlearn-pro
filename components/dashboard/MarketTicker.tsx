@@ -23,6 +23,18 @@ function formatDate(date: string): string {
  * `quotes` senza assumerne la lunghezza: un futuro catalogo Markets con
  * decine di asset richiede solo di estendere l'array, non di modificare
  * questo componente.
+ *
+ * TODO (ticker Bloomberg-style — Step futuro):
+ *   - Sostituire questo layout statico con una strip a scorrimento continuo
+ *     (`overflow-hidden` + CSS `animation: ticker-scroll linear infinite`).
+ *   - Passare `quotes` da `getAllAssetQuotes()` (tutti i 15 asset reali) invece
+ *     dei soli 3 locali, dopo aver verificato il tempo di build su Vercel.
+ *   - Ogni chip deve essere un `<Link href="/asset/[symbol]">` cliccabile.
+ *   - Per dati live/WebSocket (Finnhub Premium): sostituire il server component
+ *     con un client component che sottoscrive `wss://ws.finnhub.io` e chiama
+ *     `router.refresh()` ogni N secondi per far rivalidare solo il ticker.
+ *   - Performance: valutare `React.memo` sui chip e `stale-while-revalidate`
+ *     a livello HTTP per evitare flash durante il refresh.
  */
 export function MarketTicker({ quotes, variant = "compact" }: MarketTickerProps) {
   if (quotes.length === 0) return null;

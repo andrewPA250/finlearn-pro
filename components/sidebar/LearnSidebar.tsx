@@ -45,7 +45,7 @@ export function LearnSidebar() {
         </div>
       </div>
 
-      <nav className="flex flex-1 flex-col gap-1">
+      <nav className="flex flex-col gap-1">
         {LESSON_IDS.map((id) => {
           const unlocked = isLessonUnlocked(id);
           const completed = getLessonProgress(id).lessonCompleted;

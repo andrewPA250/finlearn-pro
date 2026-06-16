@@ -1,4 +1,5 @@
-import type { ProviderQuote, QuoteProvider } from "./types";
+import type { MarketDataPoint } from "@/types/market";
+import type { ProviderQuote, ProviderCandles, QuoteProvider, CandleProvider } from "./types";
 
 /**
  * Frankfurter provider (Step 13.x): tassi di cambio forex via Frankfurter.app
@@ -20,6 +21,10 @@ import type { ProviderQuote, QuoteProvider } from "./types";
  * - GBPUSD: 1 GBP = ? USD  →  1 / (rates.GBP da USD base)
  * - USDJPY: 1 USD = ? JPY  →  rates.JPY da USD base
  */
+
+interface FrankfurterHistoryResponse {
+  rates: Record<string, Record<string, number>>;
+}
 
 interface FrankfurterResponse {
   amount: number;
@@ -59,8 +64,32 @@ const TO_CURRENCIES = Array.from(
 
 const BASE_URL = "https://api.frankfurter.app";
 
-class FrankfurterProvider implements QuoteProvider {
+/** Start date for historical series (deterministic URL → stable ISR cache key). */
+const HISTORY_START = "2020-01-01";
+
+class FrankfurterProvider implements QuoteProvider, CandleProvider {
   readonly source = "frankfurter-ecb" as const;
+
+  async getCandles(symbol: string): Promise<ProviderCandles | null> {
+    const config = FOREX_CONFIG[symbol];
+    if (!config) return null;
+    try {
+      const url = `${BASE_URL}/${HISTORY_START}..?from=USD&to=${TO_CURRENCIES}`;
+      const res = await fetch(url, { next: { revalidate: 86400 } });
+      if (!res.ok) return null;
+      const data: FrankfurterHistoryResponse = await res.json();
+      if (!data.rates) return null;
+      const points: MarketDataPoint[] = Object.entries(data.rates)
+        .sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0))
+        .map(([date, rates]) => ({ date, value: config.compute(rates) }))
+        .filter((p) => p.value > 0);
+      if (points.length === 0) return null;
+      return { symbol, points, freshness: "eod", source: this.source };
+    } catch {
+      return null;
+    }
+  }
+
 
   async getQuote(symbol: string): Promise<ProviderQuote | null> {
     const config = FOREX_CONFIG[symbol];
@@ -125,7 +154,7 @@ class FrankfurterProvider implements QuoteProvider {
   }
 }
 
-export const frankfurterProvider: QuoteProvider = new FrankfurterProvider();
+export const frankfurterProvider: QuoteProvider & CandleProvider = new FrankfurterProvider();
 
 /**
  * Come aggiungere un nuovo pair forex Frankfurter:

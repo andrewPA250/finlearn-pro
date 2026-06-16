@@ -6,7 +6,7 @@
 
 ---
 
-## Stato attuale: Step 9 (spec) completato — Auth e lancio pubblico: Supabase Auth (email+password, conferma email, reset password), route protection, progressi cloud con migrazione one-time da localStorage, pagina profilo (modifica nome, reset progressi, logout). Step 10.1 (Brand Identity + Design System), 10.2 (Header globale), 10.2bis (Search Overlay), 10.4 (Nuova Home FinanceHub), 10.3 (Sidebar contestuale Learn), 10.5 (Markets Module Foundation), 10.6 (Search + Markets Integration), 10.7 (Asset Page Foundation), 11 (Real Market Data Expansion — catalogo a 34 strumenti), 12 (Data Provider Architecture), 13 (Finnhub Provider Integration) e **13.x (Crypto + Forex Provider — CoinGecko + Frankfurter)** **completati** — vedi rispettive sezioni "Handoff" in fondo. Micro-fix UX "toggle mostra/nascondi password" (Login/Register/Reset) **completato**. Prossimo step: da definire con l'utente.
+## Stato attuale: Step 9 (spec) completato — Auth e lancio pubblico: Supabase Auth (email+password, conferma email, reset password), route protection, progressi cloud con migrazione one-time da localStorage, pagina profilo (modifica nome, reset progressi, logout). Step 10.1 (Brand Identity + Design System), 10.2 (Header globale), 10.2bis (Search Overlay), 10.4 (Nuova Home FinanceHub), 10.3 (Sidebar contestuale Learn), 10.5 (Markets Module Foundation), 10.6 (Search + Markets Integration), 10.7 (Asset Page Foundation), 11 (Real Market Data Expansion — catalogo a 34 strumenti), 12 (Data Provider Architecture), 13 (Finnhub Provider Integration), 13.x (Crypto + Forex Provider — CoinGecko + Frankfurter), 13.1 (Asset & Data Clarity UX Polish), **13.1.1 (Market Status & Data Freshness Logic)**, **13.2 (Asset Charts Foundation)**, **13.2.1 (TradingView Chart Integration)**, **13.2.2 (Yahoo Finance Provider Integration)** e **13.2.3 (Dual Chart Experience)** **completati** — vedi rispettive sezioni "Handoff" in fondo. Micro-fix UX "toggle mostra/nascondi password" (Login/Register/Reset) **completato**. Prossimo step: da definire con l'utente.
 
 Riferimento spec: [finlearn-mvp-spec.md](finlearn-mvp-spec.md)
 
@@ -1397,4 +1397,389 @@ Se questa conversazione viene ripresa in una nuova chat, il prompt di avvio dovr
 2. `lib/providers/index.ts`: aggiungere `SIMBOLO: frankfurterProvider`
 3. `lib/markets/catalog.ts`: `status: "delayed"`
 
+---
+
+## Handoff -- Step 13.1 completato (Asset & Data Clarity UX Polish)
+
+**Stato complessivo**: Step 13.1 ridisegna le pagine asset per maggiore professionalità e leggibilità. Nessun nuovo provider, nessun dato simulato. `npx tsc --noEmit` e `npm run build` passano senza errori.
+
+**File creati in Step 13.1**:
+
+- `components/ui/InfoTooltip.tsx` (**NUOVO**) -- componente client riutilizzabile: icona ⓘ con tooltip contestuale. Hover su desktop, tap su mobile, click-outside per chiudere. `aria-label` per accessibilità. Usato in AssetHero (accanto al badge) e AssetOverviewSection (accanto alle metriche).
+
+**File modificati in Step 13.1**:
+
+- `lib/market/ticker.ts` -- aggiunge `formatQuoteChangeDetail(quote)`: variazione assoluta + percentuale, es. "+5,47 (+1,82%)", usata nell'hero per gerarchia visiva del prezzo.
+- `components/asset/AssetHero.tsx` -- redesign completo. 4 blocchi: (1) breadcrumb "← Markets", (2) riga metadati "AZIONI · [Delayed][ⓘ] · Finnhub · Updated 15 Jun 2026", (3) nome h1 + simbolo p, (4) prezzo grande + variazione assoluta + percentuale. Placeholder distinti per "soon" vs "unavailable".
+- `components/asset/AssetOverviewSection.tsx` -- redesign. Rimuove campi ridondanti (nome, simbolo, stato, data — già in hero). Mostra: Prezzo[ⓘ], Variazione[ⓘ], Fonte[ⓘ], Categoria. Solo campi con dati reali. Nessun campo vuoto.
+- `components/asset/AssetStatusBadge.tsx` -- terminologia inglese: "Delayed" (era "Dati ritardati"), "EOD" (era "Dati EOD"), "Unavailable" (era "Non disponibile"). "Live" e "Soon" invariati.
+- `components/markets/MarketStatusBadge.tsx` -- aria-label aggiornati: "Delayed", "EOD", "Unavailable".
+- `components/sidebar/LearnSidebar.tsx` -- rimosso `flex-1` dal `<nav>`: il blocco Workbench ora appare subito sotto la lista lezioni, senza richiedere scroll.
+- `components/dashboard/MarketTicker.tsx` -- aggiunto TODO architetturale (Step futuro) per ticker Bloomberg-style: scorrimento continuo, tutti gli asset, chip cliccabili, WebSocket Finnhub Premium.
+
+**Gerarchia visiva hero (P1)**:
+```
+← Markets
+
+AZIONI · [Delayed][ⓘ] · Finnhub · Updated 15 Jun 2026
+
+Apple Inc.
+AAPL
+
+296,42
++5,29 (+1,82%)
+```
+
+**Terminologia badge (P2)**:
+
+| Freshness | Badge prima | Badge ora |
+|-----------|-------------|-----------|
+| delayed | "Dati ritardati" (ambra) | "Delayed" (ambra) |
+| eod | "Dati EOD" (verde) | "EOD" (verde) |
+| live | "Live" (verde) | "Live" (verde) — invariato |
+| null | "Non disponibile" (grigio) | "Unavailable" (grigio) |
+| soon | "Soon" (blu) | "Soon" (blu) — invariato |
+
+**Tooltip (P3)**: testi per freshness:
+- delayed: "Dato fornito dal provider. Può essere ritardato rispetto al mercato reale."
+- eod: "Ultimo dato disponibile di fine giornata."
+- live: "Dato aggiornato in tempo quasi reale."
+- unavailable: "Dato non disponibile dal provider attuale."
+
+**Performance (P7)**: nessuna modifica — nessun problema di render/fetch duplicati rilevato nel dev environment. I fetch duplicate sono già gestiti da Next.js ISR cache.
+
+**Verifica eseguita**:
+- `npx tsc --noEmit`: nessun errore
+- `npm run build`: build pulita, 14 route invariate
+- `/asset/AAPL`: hero "AZIONI · Delayed · Finnhub · Updated 15 Jun 2026", prezzo "296,42", variazione "+5,29 (+1,82%)", Overview con Prezzo/Variazione/Fonte/Categoria + InfoTooltip su ogni metrica ✓
+- `/asset/NVDA`: identico pattern Finnhub ✓
+- `/asset/BTCUSD`: "CRYPTO · Delayed · CoinGecko · Updated 16 Jun 2026" ✓
+- `/asset/EURUSD`: "FOREX · EOD · BCE / Frankfurter · Updated 15 Jun 2026" ✓
+- `/asset/NDX` (soon): "INDICI · Soon", nessun prezzo, overview minimal ✓
+- `/markets`: dot ambra per Delayed (azioni/ETF/crypto), dot verde per EOD (indici/forex/commodities), dot grigio assente ✓
+
+**Nota EURUSD variazione assoluta**: la variazione forex (es. +0.004) viene arrotondata a "+0,00" con 2 decimali. Dato atteso — `formatQuoteValue` usa sempre 2 decimali per "index" unit. Nessun dato inventato. Futura miglioria: aumentare i decimali per asset forex nel formatter.
+
+---
+
+## Handoff -- Step 13.2 completato (Market Status & Data Freshness Logic)
+
+**Stato complessivo**: Step 13.2 introduce una classificazione professionale della freshness dei dati di mercato: 7 stati distinti con badge, tooltip contestuali e timestamp intelligenti. `npx tsc --noEmit` e `npm run build` passano senza errori.
+
+**Problema risolto**: Step 13.1 usava "Delayed" per tutto (Finnhub dentro/fuori mercato + CoinGecko). Questo era impreciso: un dato dell'ultimo close dell'azionario non è uguale a un dato crypto aggiornato 30 secondi fa.
+
+**File creati in Step 13.2**:
+
+- `lib/providers/freshnessUtils.ts` (**NUOVO**) — logica centralizzata per la classificazione freshness:
+  - `isUSMarketOpen(now?)`: stima se NYSE/NASDAQ è aperto (weekday + orari 9:30-16:00 ET, DST semplificato, festività ignorate per spec)
+  - `getFinnhubFreshness(now?)`: "delayed" se mercato aperto, "market-closed" se chiuso
+  - `getCoinGeckoFreshness(lastUpdatedAt, now?)`: "near-live" se dato < 5 min, "delayed" altrimenti
+- `components/ui/LocalTime.tsx` (**NUOVO**) — client component per orario locale:
+  - Server-side: renderizza in UTC come fallback sicuro
+  - Client-side (useEffect): aggiorna con orario locale reale
+  - `suppressHydrationWarning` evita warning React per il cambio UTC→locale
+  - Formati: `"time"` → "HH:MM", `"datetime"` → "DD Mon HH:MM"
+
+**File modificati in Step 13.1.1** (ex "Step 13.2" — rinominato per fare spazio al vero Step 13.2):
+
+- `lib/providers/types.ts` — `DataFreshness` aggiunge `"near-live" | "market-closed"`; `ProviderQuote` aggiunge `timestamp?: number` (Unix secondi)
+- `lib/providers/finnhubProvider.ts` — usa `getFinnhubFreshness()` invece di `"delayed"` hardcoded; aggiunge `timestamp: data.t`
+- `lib/providers/coinGeckoProvider.ts` — usa `getCoinGeckoFreshness(coin.last_updated_at)` invece di `"delayed"` hardcoded; aggiunge `timestamp: coin.last_updated_at`
+- `lib/market/ticker.ts` — aggiunge `timestamp?: number` a `TickerQuote`; propagato in `quoteFromProvider`
+- `components/asset/AssetStatusBadge.tsx` — gestisce tutti e 7 gli stati: Live/Near Live/Delayed/Market Closed/EOD/Unavailable/Soon
+- `components/markets/MarketStatusBadge.tsx` — dot per ogni stato: verde (live/near-live/eod), ambra (delayed), grigio chiaro (market-closed), grigio scuro (unavailable), badge blu (soon)
+- `components/asset/AssetHero.tsx` — timestamp contestuale basato su freshness:
+  - `near-live` / `delayed` / `live` → "Updated `<LocalTime format="time" />`"
+  - `market-closed` → "Last Trade `<LocalTime format="datetime" />`"
+  - `eod` (no timestamp) → "Updated DD Mon YYYY"
+
+**Nuova classificazione freshness**:
+
+| Stato | Trigger | Badge | Dot markets | Timestamp |
+|-------|---------|-------|-------------|-----------|
+| live | futuro (WebSocket) | verde "Live" | verde | Updated HH:MM |
+| near-live | CoinGecko < 5 min | verde "Near Live" | verde | Updated HH:MM |
+| delayed | Finnhub (mercato aperto) | ambra "Delayed" | ambra | Updated HH:MM |
+| market-closed | Finnhub (mercato chiuso) | grigio "Market Closed" | grigio chiaro | Last Trade DD Mon HH:MM |
+| eod | Frankfurter/local-static | verde "EOD" | verde | Updated DD Mon YYYY |
+| unavailable | provider presente, dato null | grigio "Unavailable" | grigio scuro | — |
+| soon | nessun provider | blu "Soon" | badge blu | — |
+
+**Tooltip per ogni stato**:
+- near-live: "Dato aggiornato frequentemente tramite provider esterno. Può avere un piccolo ritardo rispetto al mercato reale."
+- delayed: "Dato con ritardo di circa 15 minuti rispetto al mercato in tempo reale (Finnhub free tier)."
+- market-closed: "Il mercato USA è attualmente chiuso. Il dato mostra l'ultimo prezzo disponibile dalla sessione precedente."
+- eod: "Ultimo dato disponibile di fine giornata."
+- unavailable: "Il provider attuale non restituisce dati per questo strumento."
+
+**`isUSMarketOpen` — note implementative**:
+- Solo weekday UTC (esclude sabato/domenica)
+- DST semplificato: EDT (UTC-4) dal ~10 Mar al ~3 Nov; EST (UTC-5) altrimenti
+- Market hours: 9:30–16:00 ET → 13:30–20:00 UTC (EDT) o 14:30–21:00 UTC (EST)
+- Festività USA: IGNORATE (come da spec)
+- Tolleranza ±1 ora intorno alle transizioni DST — accettabile
+
+**Verifica eseguita**:
+- `npx tsc --noEmit`: nessun errore
+- `npm run build`: build pulita, 14 route invariate
+- `/asset/AAPL`: "MARKET CLOSED · Last Trade 15 Jun 22:00" (ora locale CEST dopo hydration) ✓
+- `/asset/NVDA`: "MARKET CLOSED · Last Trade 15 Jun 22:00" ✓
+- `/asset/BTCUSD`: "NEAR LIVE · Updated 11:43" (CoinGecko last_updated_at < 5 min) ✓
+- `/asset/ETHUSD`: "NEAR LIVE · Updated [ora]" ✓ (stessa logica BTCUSD)
+- `/asset/EURUSD`: "EOD · Updated 15 Jun 2026" (Frankfurter, no timestamp) ✓
+
+**Prossimo step**: Step 13.2 (Asset Charts Foundation) — vedi sezione sotto.
+
+---
+
+## Handoff — Step 13.2 completato: Asset Charts Foundation
+
+**Obiettivo**: sostituire il placeholder Chart nelle asset page con un primo grafico reale quando esistono dati storici disponibili.
+
+**Architettura**:
+
+I tre provider esistenti ora implementano sia `QuoteProvider` che `CandleProvider`. La logica candle è separata dalla logica quote: nessuna modifica ai fetch di quotazione esistenti.
+
+**Provider candle — stato attuale**:
+
+| Provider | Endpoint | Stato | Asset |
+|----------|----------|-------|-------|
+| `localStaticProvider` | `public/data/*.json` (fs) | ✅ Funzionante | SPX, XAUUSD, US10Y |
+| `frankfurterProvider` | `https://api.frankfurter.app/2020-01-01..?from=USD&to=...` | ✅ Funzionante | EURUSD, GBPUSD, USDJPY |
+| `coinGeckoProvider` | `/coins/{id}/market_chart?days=max` | ❌ Richiede auth (HTTP 401) | BTCUSD, ETHUSD → fallback |
+| `finnhubProvider` | `/stock/candle?resolution=D` | ❌ Non disponibile free tier | AAPL, MSFT, NVDA… → fallback |
+
+**File creati in Step 13.2**:
+
+- `components/asset/AssetChartSection.tsx` — client component; timeframe 1M/6M/1Y/MAX; Recharts LineChart; downsampling a ≤600 punti per performance; formatters `formatYAxis`/`formatTooltipValue` contestuali all'unità (%, $k, decimali); fallback elegante se nessun dato
+
+**File modificati in Step 13.2**:
+
+- `lib/providers/coinGeckoProvider.ts` — aggiunto `CandleProvider` (ritorna null per 401)
+- `lib/providers/finnhubProvider.ts` — aggiunto `CandleProvider` (ritorna null per free tier limit)
+- `lib/providers/frankfurterProvider.ts` — aggiunto `CandleProvider` (storico dal 2020-01-01)
+- `lib/providers/index.ts` — `CANDLE_PROVIDERS` esteso a tutti i 18 simboli del catalogo
+- `components/asset/AssetView.tsx` — aggiunge prop `candles: MarketDataPoint[]`; sostituisce `AssetSectionPlaceholder title="Chart"` con `AssetChartSection`; Stats/News/Learn in 3 colonne
+- `app/asset/[symbol]/page.tsx` — fetch parallelo `Promise.all([getInstrumentQuote, getAssetCandles])` 
+
+**ISR caching candle**:
+
+- `localStaticProvider`: lettura file sincrona, nessun revalidate
+- `frankfurterProvider`: `revalidate: 86400` (24h, URL deterministico `2020-01-01..`)
+- `finnhubProvider`: `revalidate: 86400` (24h, URL deterministico con timestamp arrotondato al giorno)
+- `coinGeckoProvider`: `revalidate: 86400` (non usato in pratica finché l'endpoint non è accessibile)
+
+**Verifica eseguita**:
+- `npx tsc --noEmit`: nessun errore
+- `npm run build`: build pulita, 14 route invariate
+- `/asset/SPX`: Chart ✓ — 1Y view "Aug 25"→"Jun 26", Y "5.8k"→"7.7k"
+- `/asset/US10Y`: Chart ✓ — Y "3.75%"→"4.75%" (unit: "percent" → % suffix)
+- `/asset/EURUSD`: Chart ✓ — Y "1.1400"→"1.2000" (4 decimali, formato forex)
+- `/asset/BTCUSD`: Fallback ✓ — "Historical chart not available yet for BTCUSD"
+- `/asset/AAPL`: Fallback ✓ — "Historical chart not available yet for AAPL"
+
+**Come abilitare i chart mancanti in futuro**:
+- **BTCUSD/ETHUSD**: aggiungere una CoinGecko Demo API key a `.env.local` (`COINGECKO_API_KEY`) e passarla nell'header `x-cg-demo-api-key` nel fetch candle (modificare solo `coinGeckoProvider.ts`)
+- **AAPL/MSFT/etc.**: Finnhub candle richiede piano a pagamento; in alternativa usare Alpha Vantage/Polygon.io con API key esistente o nuova (nuovo provider)
+
+**Foundation per candlestick/indicatori futuri**:
+- `ProviderCandles.points: MarketDataPoint[]` — interfaccia già pronta per sostituire LineChart con CandlestickChart (aggiungere OHLCV a `MarketDataPoint` o creare `CandlePoint`)
+- `AssetChartSection` — pronto per aggiungere overlay (MA, Bollinger, RSI) con la stessa architettura del Workbench (`series: SeriesMeta[]`)
+- `CANDLE_PROVIDERS` — aggiungere un simbolo = aggiungere 1 riga nella mappa
+
+**Prossimo step**: Step 13.2.1 (TradingView Chart Integration) — vedi sezione "Handoff — Step 13.2.1 completato" in fondo.
+
+---
+
+## Handoff — Step 13.2.1 completato: TradingView Chart Integration + Stabilization
+
+**Obiettivo**: Integrare TradingView Advanced Chart widget nelle asset page. Stabilization pass completo (issue 1–10 affrontati).
+
+### Architettura finale: chart mode routing
+
+```
+resolveChartMode(instrument, candles) in AssetView:
+  status === "live" && candles ≥ 2  → Recharts   (stessa fonte della hero quote → coherente)
+  tradingViewSymbol presente         → TradingView (unica fonte di prezzo; hero price soppressa)
+  altrimenti                         → Recharts con candles disponibili, o fallback
+```
+
+**Single source of truth**: quando TradingView è il grafico, il prezzo numerico del provider viene soppresso dall'`AssetHero` (`hasTradingViewChart` prop). Il widget TV è l'unica fonte di prezzo visibile sulla pagina.
+
+### File modificati (tutti gli step)
+
+- `types/markets.ts` — `tradingViewSymbol?: string` su `MarketInstrument`
+- `lib/markets/catalog.ts` — `tradingViewSymbol` su tutti i 34 strumenti; fix simboli: `SP:SPX` → `TVC:SPX`, `OANDA:XAUUSD` → `TVC:GOLD`
+- `components/asset/TradingViewChart.tsx` — **CREATO**: `VALIDATED_TV_SYMBOLS` whitelist (34 simboli verificati); se il simbolo non è nel set → fallback sicuro (mai AAPL); caricamento `tv.js` tramite module-level promise (una sola volta); dark candlestick, `allow_symbol_change: false`, cleanup su unmount
+- `components/asset/AssetChartSection.tsx` — prop `tradingViewSymbol?`; routing TV → Recharts → fallback
+- `components/asset/AssetView.tsx` — `resolveChartMode()` helper; `hasTradingViewChart` passa alla hero; `tvSymbol` passa al chart section
+- `components/asset/AssetHero.tsx` — prop `hasTradingViewChart?`: quando true, sopprime il blocco prezzo (section 4) per evitare conflitti
+
+### Simboli TradingView per asset catalogo
+
+| Simbolo | TradingView Symbol | Categoria |
+|---------|-------------------|-----------|
+| SPX     | SP:SPX            | index     |
+| NDX     | NASDAQ:NDX        | index     |
+| DJI     | DJ:DJI            | index     |
+| RUT     | TVC:RUT           | index     |
+| AAPL    | NASDAQ:AAPL       | equity    |
+| MSFT    | NASDAQ:MSFT       | equity    |
+| NVDA    | NASDAQ:NVDA       | equity    |
+| AMZN    | NASDAQ:AMZN       | equity    |
+| GOOGL   | NASDAQ:GOOGL      | equity    |
+| META    | NASDAQ:META       | equity    |
+| TSLA    | NASDAQ:TSLA       | equity    |
+| AMD     | NASDAQ:AMD        | equity    |
+| PLTR    | NASDAQ:PLTR       | equity    |
+| SPY     | AMEX:SPY          | etf       |
+| QQQ     | NASDAQ:QQQ        | etf       |
+| VOO     | AMEX:VOO          | etf       |
+| VTI     | AMEX:VTI          | etf       |
+| SCHD    | AMEX:SCHD         | etf       |
+| AGG     | AMEX:AGG          | etf       |
+| BND     | AMEX:BND          | etf       |
+| BTCUSD  | BINANCE:BTCUSDT   | crypto    |
+| ETHUSD  | BINANCE:ETHUSDT   | crypto    |
+| XRPUSD  | BINANCE:XRPUSDT   | crypto    |
+| ADAUSD  | BINANCE:ADAUSDT   | crypto    |
+| EURUSD  | FX:EURUSD         | forex     |
+| GBPUSD  | FX:GBPUSD         | forex     |
+| USDJPY  | FX:USDJPY         | forex     |
+| XAUUSD  | OANDA:XAUUSD      | commodity |
+| XAGUSD  | TVC:SILVER        | commodity |
+| WTI     | TVC:USOIL         | commodity |
+| NATGAS  | TVC:NATURALGAS    | commodity |
+| US10Y   | TVC:US10Y         | bond      |
+| US02Y   | TVC:US02Y         | bond      |
+| US30Y   | TVC:US30Y         | bond      |
+
+### Architettura chart routing
+
+```
+instrument.tradingViewSymbol?
+  → sì → <TradingViewChart tvSymbol={...} />   (420px mobile / 500px desktop)
+  → no  → candles?.length >= 2?
+             → sì → Recharts LineChart (timeframe 1M/6M/1Y/MAX)
+             → no  → testo fallback
+```
+
+Il provider layer (quote, badge, freshness) rimane completamente indipendente dal grafico.
+
+### Come aggiungere nuovi asset con TradingView
+
+1. Aggiungere lo strumento in `lib/markets/catalog.ts` con `tradingViewSymbol: "EXCHANGE:TICKER"`.
+2. Opzionalmente collegare un `QuoteProvider` in `lib/providers/index.ts` per quote e badge live.
+3. Nient'altro: `AssetChartSection` usa automaticamente il simbolo TV appena presente.
+
+Per trovare il simbolo TradingView corretto: aprire TradingView.com → cercare l'asset → copiare la stringa `EXCHANGE:TICKER` dalla barra di ricerca.
+
+### Verifica eseguita
+
+- `npx tsc --noEmit`: nessun errore
+- `npm run build`: build pulita, 14 route invariate
+- `/asset/AAPL` → TradingView widget ✓ (container `tv_NASDAQ_AAPL`, iframe iniettato, `window.TradingView` caricato)
+- `/asset/NVDA` → TradingView widget ✓ (container `tv_NASDAQ_NVDA`)
+- `/asset/BTCUSD` → TradingView widget ✓ (container `tv_BINANCE_BTCUSDT`)
+- `/asset/ETHUSD` → TradingView widget ✓ (container `tv_BINANCE_ETHUSDT`)
+- `/asset/EURUSD` → TradingView widget ✓ (container `tv_FX_EURUSD`)
+- `/asset/SPX` → Recharts ✓ (live/local, hero price 7431 coerente con grafico, `TVC:SPX` in catalog ma non usato per coerenza)
+- `/asset/XAUUSD` → Recharts ✓ (live/local, hero price coerente)
+- `/asset/US10Y` → Recharts ✓ (live/local, hero price "4.45%", coerente)
+- `/asset/AAPL` → TradingView `NASDAQ:AAPL` ✓, hero price soppressa
+- `/asset/NVDA` → TradingView `NASDAQ:NVDA` ✓
+- `/asset/MSFT` → TradingView `NASDAQ:MSFT` ✓
+- `/asset/TSLA` → TradingView `NASDAQ:TSLA` ✓
+- `/asset/BTCUSD` → TradingView `BINANCE:BTCUSDT` ✓, hero price soppressa
+- `/asset/ETHUSD` → TradingView `BINANCE:ETHUSDT` ✓
+- `/asset/EURUSD` → TradingView `FX:EURUSD` ✓, hero price soppressa
+- `/asset/GBPUSD` → TradingView `FX:GBPUSD` ✓
+- `/asset/SPY` → TradingView `AMEX:SPY` ✓
+- `/asset/VOO` → TradingView `AMEX:VOO` ✓ (status "soon", nessuna hero price; grafico disponibile)
+- Zero errori console (tutti i test)
+- Mobile (375px): nessun overflow orizzontale, chart height 422px, iframe width 325px
+
+**Come aggiungere nuovi asset con TradingView**:
+1. Aggiungere a `lib/markets/catalog.ts` con `tradingViewSymbol: "EXCHANGE:TICKER"`
+2. Aggiungere lo stesso simbolo a `VALIDATED_TV_SYMBOLS` in `TradingViewChart.tsx` dopo averlo verificato su TradingView.com
+3. Opzionalmente collegare un `QuoteProvider` per quote/badge live
+4. Nient'altro — `resolveChartMode` in `AssetView` gestisce automaticamente
+
 **Prossimo step**: da definire con l'utente.
+
+---
+
+## Handoff — Step 13.2.2 completato: Yahoo Finance Provider Integration
+
+### Obiettivo
+
+Sostituire tutti i provider precedenti (Finnhub, CoinGecko, Frankfurter) con Yahoo Finance come unica fonte di dati per tutti i 32 strumenti del catalogo. Unica fonte di verità (quote + candele + stats dallo stesso provider), hero price sempre visibile, sezione `AssetStatsSection` con 10 campi.
+
+### File creati
+
+- `lib/providers/yahooProvider.ts` — provider completo yahoo-finance2: quote (60s), candele via `chart()` (86400s), freshness mapping. Istanziato come classe (`new YahooFinanceClass()`), cast `as unknown as` per evitare conditional type `never`. Mappa simboli catalogo → Yahoo (es. SPX → `^GSPC`, BTCUSD → `BTC-USD`, EURUSD → `EURUSD=X`).
+- `lib/providers/freshnessUtils.ts` — `getYahooFreshness(marketState, alwaysOpen)`: crypto/forex → "near-live"; "REGULAR" → "delayed"; altri → "market-closed".
+- `components/asset/AssetStatsSection.tsx` — stats card con 10 campi (Prev. Close, Open, Day Range, 52W Range, Volume, Avg. Volume, Market Cap, P/E, EPS, Dividend Yield). Volume/AvgVolume soppressi quando 0 (forex/bond/indici).
+
+### File modificati
+
+- `lib/providers/types.ts` — aggiunto `"yahoo"` a `ProviderSource`, interfaccia `ProviderStats`, campo `stats?` su `ProviderQuote`.
+- `lib/market/ticker.ts` — campo `stats?` su `TickerQuote`; passaggio stats in `quoteFromProvider`.
+- `types/markets.ts` — campo `yahooSymbol?: string` su `MarketInstrument`.
+- `lib/markets/catalog.ts` — `yahooSymbol` aggiunto a tutti i 32 strumenti; status → "delayed" per tutti i Yahoo-covered; `tradingViewSymbol` preservato invariato.
+- `lib/providers/index.ts` — tutti i 32 simboli instradati a `yahooProvider` in `QUOTE_PROVIDERS` e `CANDLE_PROVIDERS`.
+- `components/asset/AssetView.tsx` — aggiunta `<AssetStatsSection>` nel grid inferiore.
+
+### Decisioni tecniche
+
+- **yahoo-finance2 v3**: default export è la CLASSE, non un singleton — `new YahooFinanceClass()`.
+- **`chart()` al posto di `historical()`**: `historical()` deprecata in v3; `chart()` usa `adjclose` (lowercase).
+- **`unstable_cache`**: yahoo-finance2 non usa `fetch` patchato di Next.js → cache ISR manuale.
+- **Cast `as unknown as`**: conditional types di yahoo-finance2 col flag `validateResult: false` producono `never`; soluzione: interfacce locali minimali + cast.
+- **ALWAYS_OPEN_SYMBOLS**: crypto + forex → freshness "near-live" indipendente da `marketState`.
+- **PERCENT_SYMBOLS**: US10Y, US30Y → `AssetUnit = "percent"`.
+
+### Problemi risolti
+
+- `yahooFinance.quote()` tornava null silenziosamente → radice: API v3, scoperto con `node -e` diretto.
+- Volume "0" mostrato per forex/bond → fix: guard `&& stats.volume > 0`.
+- Cache stale del router Next.js → fix: `Remove-Item -Recurse -Force .next` + riavvio.
+
+---
+
+## Handoff — Step 13.2.3 completato: Dual Chart Experience
+
+### Obiettivo
+
+Toggle modale nella sezione Chart: **Synchronized** (default, Recharts Yahoo) vs **Advanced** (TradingView iframe). Hero price + stats sempre visibili in entrambe le modalità. Persistenza localStorage. Lazy mount TradingView.
+
+### File modificati
+
+- `components/asset/AssetChartSection.tsx` — **riscritto**: `ChartMode = "sync" | "advanced"`, `LS_KEY = "finlearn_chartMode"`. Toggle pill (Synchronized / Advanced ↗). Hydration-safe localStorage: `useState(false)` per `hydrated` + `useEffect`. `showTV = hydrated && tvAvailable && mode === "advanced"`. Disclosure banner in Advanced mode. Timeframe buttons visibili solo in sync mode. Attribution visibile solo in sync mode. `validateTradingViewSymbol()` riusato invariato.
+- `components/asset/AssetView.tsx` — rimosso `resolveChartMode()`, rimosso `hasTradingViewChart` prop. Sempre passa `tvSymbol={instrument.tradingViewSymbol}` a `AssetChartSection`.
+- `components/asset/AssetHero.tsx` — rimosso prop `hasTradingViewChart?: boolean` e condizionale associato. Hero price sempre visibile quando quote disponibile.
+
+### Comportamento
+
+| Modalità | Chart | Hero price | Stats | Timeframes | Disclosure |
+|----------|-------|-----------|-------|-----------|-----------|
+| Synchronized | Recharts | ✓ | ✓ | ✓ | — |
+| Advanced | TradingView | ✓ | ✓ | — | ✓ |
+
+- Toggle nascosto se il simbolo non è in `VALIDATED_TV_SYMBOLS`.
+- TradingView non carica finché l'utente non seleziona "Advanced" (lazy mount).
+- Preferenza salvata in `localStorage` chiave `finlearn_chartMode`.
+- SSR-safe: render iniziale sempre "Synchronized" (localStorage non letto sul server).
+
+### Verifica eseguita
+
+- `npx tsc --noEmit`: nessun errore
+- AAPL sync → advanced → sync: Recharts/TV/Recharts ✓
+- Advanced mode persiste dopo reload ✓
+- BTCUSD: near-live, stats crypto (no PE/dividend) ✓
+- EURUSD: near-live, stats forex (no volume/market cap) ✓
+- US10Y: delayed, assi e stats in % ✓
+- XAUUSD: delayed, stats commodity ✓
+- SPX: delayed, stats indice (no PE/market cap) ✓
+- Mobile 390px: toggle + timeframes visibili, chart renders ✓
+- Nessun errore console di runtime nella sessione corrente

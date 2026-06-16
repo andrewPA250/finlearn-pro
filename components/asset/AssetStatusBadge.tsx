@@ -8,44 +8,63 @@ interface AssetStatusBadgeProps {
 }
 
 /**
- * Badge di stato per l'header della pagina asset.
- * - "soon" → badge "Soon"
- * - freshness "eod" → "Dati EOD" (verde)
- * - freshness "delayed" → "Dati ritardati" (ambra)
- * - freshness "live" → "Live" (verde brillante)
- * - provider presente ma nessun dato → "Non disponibile" (grigio)
+ * Badge di stato per l'header della pagina asset (Step 13.1, aggiornato 13.2).
+ *
+ * | freshness       | Colore  | Testo          |
+ * |-----------------|---------|----------------|
+ * | live            | verde   | Live           |
+ * | near-live       | teal    | Near Live      |
+ * | delayed         | ambra   | Delayed        |
+ * | market-closed   | grigio+ | Market Closed  |
+ * | eod             | verde   | EOD            |
+ * | null/unavailable| grigio  | Unavailable    |
+ * | soon (status)   | blu     | Soon           |
  */
 export function AssetStatusBadge({ status, freshness }: AssetStatusBadgeProps) {
   if (status === "soon") return <SoonBadge />;
 
-  if (freshness === "eod") {
-    return (
-      <span className="rounded-full bg-accent-green/15 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-accent-green">
-        Dati EOD
-      </span>
-    );
-  }
+  switch (freshness) {
+    case "live":
+      return (
+        <span className="rounded-full bg-accent-green/20 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-accent-green">
+          Live
+        </span>
+      );
 
-  if (freshness === "delayed") {
-    return (
-      <span className="rounded-full bg-accent-amber/15 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-accent-amber">
-        Dati ritardati
-      </span>
-    );
-  }
+    case "near-live":
+      return (
+        <span className="rounded-full bg-accent-green/15 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-accent-green">
+          Near Live
+        </span>
+      );
 
-  if (freshness === "live") {
-    return (
-      <span className="rounded-full bg-accent-green/20 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-accent-green">
-        Live
-      </span>
-    );
-  }
+    case "delayed":
+      return (
+        <span className="rounded-full bg-accent-amber/15 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-accent-amber">
+          Delayed
+        </span>
+      );
 
-  // Provider registrato ma nessun dato a runtime
-  return (
-    <span className="rounded-full bg-bg-sidebar px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-text-secondary/60">
-      Non disponibile
-    </span>
-  );
+    case "market-closed":
+      return (
+        <span className="rounded-full bg-text-secondary/10 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-text-secondary">
+          Market Closed
+        </span>
+      );
+
+    case "eod":
+      return (
+        <span className="rounded-full bg-accent-green/15 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-accent-green">
+          EOD
+        </span>
+      );
+
+    default:
+      // Provider registrato ma nessun dato a runtime
+      return (
+        <span className="rounded-full bg-bg-sidebar px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-text-secondary/60">
+          Unavailable
+        </span>
+      );
+  }
 }

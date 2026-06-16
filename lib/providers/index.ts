@@ -4,53 +4,101 @@ import { localStaticProvider } from "./localStaticProvider";
 import { finnhubProvider } from "./finnhubProvider";
 import { coinGeckoProvider } from "./coinGeckoProvider";
 import { frankfurterProvider } from "./frankfurterProvider";
+import { yahooProvider } from "./yahooProvider";
 import type { AssetAvailability, CandleProvider, ProviderQuote, QuoteProvider } from "./types";
 
 export * from "./types";
-export { localStaticProvider, finnhubProvider, coinGeckoProvider, frankfurterProvider };
+export { localStaticProvider, finnhubProvider, coinGeckoProvider, frankfurterProvider, yahooProvider };
 
 /**
  * Registro provider per simbolo catalogo (Step 12 architettura,
- * Step 13 Finnhub, Step 13.x CoinGecko + Frankfurter).
+ * Step 13 Finnhub, Step 13.x CoinGecko + Frankfurter,
+ * Step 13.2.2 Yahoo Finance — provider primario per tutti gli asset).
  *
- * Ogni simbolo punta a un solo QuoteProvider; il provider decide
- * internamente come recuperare il dato. Cambiare provider per un simbolo
- * (es. passare da Finnhub a un feed live) richiede solo di aggiornare
- * questa mappa — zero modifiche alle pagine/componenti.
+ * Yahoo Finance è ora il provider primario per indici, azioni, ETF, crypto,
+ * forex, commodities e bond. Finnhub/CoinGecko/Frankfurter restano nel
+ * codebase ma non vengono più usati come provider primari.
  */
 const QUOTE_PROVIDERS: Record<string, QuoteProvider> = {
-  // Provider locale EOD — serie storiche JSON (FRED / Stooq)
-  SPX: localStaticProvider,
-  XAUUSD: localStaticProvider,
-  US10Y: localStaticProvider,
-
-  // Finnhub — azioni e ETF USA (delayed ~15 min, free tier)
-  AAPL: finnhubProvider,
-  MSFT: finnhubProvider,
-  NVDA: finnhubProvider,
-  AMZN: finnhubProvider,
-  GOOGL: finnhubProvider,
-  META: finnhubProvider,
-  TSLA: finnhubProvider,
-  AMD: finnhubProvider,
-  SPY: finnhubProvider,
-  QQQ: finnhubProvider,
-
-  // CoinGecko — crypto (delayed ~1-2 min, no API key)
-  BTCUSD: coinGeckoProvider,
-  ETHUSD: coinGeckoProvider,
-
-  // Frankfurter (BCE) — forex (EOD, no API key)
-  EURUSD: frankfurterProvider,
-  GBPUSD: frankfurterProvider,
-  USDJPY: frankfurterProvider,
+  // Yahoo Finance — provider primario per tutti gli asset supportati
+  // Indici
+  SPX:    yahooProvider,
+  NDX:    yahooProvider,
+  DJI:    yahooProvider,
+  RUT:    yahooProvider,
+  // Azioni
+  AAPL:   yahooProvider,
+  MSFT:   yahooProvider,
+  NVDA:   yahooProvider,
+  AMZN:   yahooProvider,
+  GOOGL:  yahooProvider,
+  META:   yahooProvider,
+  TSLA:   yahooProvider,
+  AMD:    yahooProvider,
+  PLTR:   yahooProvider,
+  // ETF
+  SPY:    yahooProvider,
+  QQQ:    yahooProvider,
+  VOO:    yahooProvider,
+  VTI:    yahooProvider,
+  SCHD:   yahooProvider,
+  AGG:    yahooProvider,
+  BND:    yahooProvider,
+  // Crypto
+  BTCUSD: yahooProvider,
+  ETHUSD: yahooProvider,
+  XRPUSD: yahooProvider,
+  ADAUSD: yahooProvider,
+  // Forex
+  EURUSD: yahooProvider,
+  GBPUSD: yahooProvider,
+  USDJPY: yahooProvider,
+  // Commodities
+  XAUUSD: yahooProvider,
+  XAGUSD: yahooProvider,
+  WTI:    yahooProvider,
+  NATGAS: yahooProvider,
+  // Bond yields
+  US10Y:  yahooProvider,
+  US30Y:  yahooProvider,
 };
 
-/** Registro candele: solo i 3 dataset locali forniscono serie storiche. */
+/** Registro candele: tutti i provider che supportano serie storiche daily. */
 const CANDLE_PROVIDERS: Partial<Record<string, CandleProvider>> = {
-  SPX: localStaticProvider,
-  XAUUSD: localStaticProvider,
-  US10Y: localStaticProvider,
+  // Yahoo Finance — storico daily da 2010 per tutti gli asset supportati
+  SPX:    yahooProvider,
+  NDX:    yahooProvider,
+  DJI:    yahooProvider,
+  RUT:    yahooProvider,
+  AAPL:   yahooProvider,
+  MSFT:   yahooProvider,
+  NVDA:   yahooProvider,
+  AMZN:   yahooProvider,
+  GOOGL:  yahooProvider,
+  META:   yahooProvider,
+  TSLA:   yahooProvider,
+  AMD:    yahooProvider,
+  PLTR:   yahooProvider,
+  SPY:    yahooProvider,
+  QQQ:    yahooProvider,
+  VOO:    yahooProvider,
+  VTI:    yahooProvider,
+  SCHD:   yahooProvider,
+  AGG:    yahooProvider,
+  BND:    yahooProvider,
+  BTCUSD: yahooProvider,
+  ETHUSD: yahooProvider,
+  XRPUSD: yahooProvider,
+  ADAUSD: yahooProvider,
+  EURUSD: yahooProvider,
+  GBPUSD: yahooProvider,
+  USDJPY: yahooProvider,
+  XAUUSD: yahooProvider,
+  XAGUSD: yahooProvider,
+  WTI:    yahooProvider,
+  NATGAS: yahooProvider,
+  US10Y:  yahooProvider,
+  US30Y:  yahooProvider,
 };
 
 /**

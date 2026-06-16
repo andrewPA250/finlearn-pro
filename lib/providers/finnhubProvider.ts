@@ -1,5 +1,7 @@
+import type { MarketDataPoint } from "@/types/market";
 import type { AssetUnit } from "@/lib/market";
-import type { ProviderQuote, QuoteProvider } from "./types";
+import type { ProviderQuote, ProviderCandles, QuoteProvider, CandleProvider } from "./types";
+import { getFinnhubFreshness } from "./freshnessUtils";
 
 /**
  * Finnhub provider (Step 13): quotazioni ritardate via REST per azioni e ETF USA.
@@ -59,6 +61,12 @@ const FINNHUB_UNITS: Record<string, AssetUnit> = {
   QQQ: "index",
 };
 
+interface FinnhubCandleResponse {
+  c: number[];  // close prices
+  t: number[];  // Unix timestamps
+  s: string;    // "ok" | "no_data"
+}
+
 interface FinnhubQuoteResponse {
   c: number;   // current price
   d: number;   // change
@@ -66,8 +74,38 @@ interface FinnhubQuoteResponse {
   t: number;   // unix timestamp of last trade
 }
 
-class FinnhubQuoteProvider implements QuoteProvider {
+class FinnhubQuoteProvider implements QuoteProvider, CandleProvider {
   readonly source = "finnhub" as const;
+
+  async getCandles(symbol: string): Promise<ProviderCandles | null> {
+    const apiKey = process.env.FINNHUB_API_KEY;
+    const finnhubSymbol = FINNHUB_SYMBOL_MAP[symbol];
+    if (!apiKey || !finnhubSymbol) return null;
+
+    // Round to day boundary so the URL stays deterministic within a day (ISR cache key).
+    const todayStart = new Date();
+    todayStart.setUTCHours(0, 0, 0, 0);
+    const to = Math.floor(todayStart.getTime() / 1000) + 86400 - 1;
+    const from = to - 5 * 365 * 24 * 3600;
+
+    try {
+      const url =
+        `https://finnhub.io/api/v1/stock/candle` +
+        `?symbol=${encodeURIComponent(finnhubSymbol)}&resolution=D` +
+        `&from=${from}&to=${to}&token=${apiKey}`;
+      const res = await fetch(url, { next: { revalidate: 86400 } });
+      if (!res.ok) return null;
+      const data: FinnhubCandleResponse = await res.json();
+      if (data.s !== "ok" || !data.c?.length) return null;
+      const points: MarketDataPoint[] = data.c.map((price, i) => ({
+        date: new Date(data.t[i] * 1000).toISOString().slice(0, 10),
+        value: price,
+      }));
+      return { symbol, points, freshness: "eod", source: this.source };
+    } catch {
+      return null;
+    }
+  }
 
   async getQuote(symbol: string): Promise<ProviderQuote | null> {
     const apiKey = process.env.FINNHUB_API_KEY;
@@ -92,7 +130,8 @@ class FinnhubQuoteProvider implements QuoteProvider {
         change: data.d ?? 0,
         changePercent: data.dp ?? 0,
         date,
-        freshness: "delayed",
+        timestamp: data.t,
+        freshness: getFinnhubFreshness(),
         source: this.source,
       };
     } catch {
@@ -101,7 +140,7 @@ class FinnhubQuoteProvider implements QuoteProvider {
   }
 }
 
-export const finnhubProvider: QuoteProvider = new FinnhubQuoteProvider();
+export const finnhubProvider: QuoteProvider & CandleProvider = new FinnhubQuoteProvider();
 
 /**
  * Come aggiungere un nuovo asset Finnhub (azioni/ETF USA) in futuro:

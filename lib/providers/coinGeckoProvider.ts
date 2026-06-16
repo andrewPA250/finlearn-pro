@@ -1,4 +1,6 @@
-import type { ProviderQuote, QuoteProvider } from "./types";
+import type { MarketDataPoint } from "@/types/market";
+import type { ProviderQuote, ProviderCandles, QuoteProvider, CandleProvider } from "./types";
+import { getCoinGeckoFreshness } from "./freshnessUtils";
 
 /**
  * CoinGecko provider (Step 13.x): prezzi crypto via CoinGecko public API.
@@ -40,8 +42,29 @@ const COINGECKO_URL =
   `https://api.coingecko.com/api/v3/simple/price` +
   `?ids=${ALL_IDS}&vs_currencies=usd&include_24hr_change=true&include_last_updated_at=true`;
 
-class CoinGeckoProvider implements QuoteProvider {
+class CoinGeckoProvider implements QuoteProvider, CandleProvider {
   readonly source = "coingecko" as const;
+
+  async getCandles(symbol: string): Promise<ProviderCandles | null> {
+    const coinId = COINGECKO_ID_MAP[symbol];
+    if (!coinId) return null;
+    try {
+      const url =
+        `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart` +
+        `?vs_currency=usd&days=max&interval=daily`;
+      const res = await fetch(url, { next: { revalidate: 86400 } });
+      if (!res.ok) return null;
+      const data: { prices: [number, number][] } = await res.json();
+      if (!data.prices?.length) return null;
+      const points: MarketDataPoint[] = data.prices.map(([ts, price]) => ({
+        date: new Date(ts).toISOString().slice(0, 10),
+        value: price,
+      }));
+      return { symbol, points, freshness: "eod", source: this.source };
+    } catch {
+      return null;
+    }
+  }
 
   async getQuote(symbol: string): Promise<ProviderQuote | null> {
     const coinId = COINGECKO_ID_MAP[symbol];
@@ -69,7 +92,8 @@ class CoinGeckoProvider implements QuoteProvider {
         change,
         changePercent,
         date,
-        freshness: "delayed",
+        timestamp: coin.last_updated_at,
+        freshness: getCoinGeckoFreshness(coin.last_updated_at),
         source: this.source,
       };
     } catch {
@@ -78,7 +102,7 @@ class CoinGeckoProvider implements QuoteProvider {
   }
 }
 
-export const coinGeckoProvider: QuoteProvider = new CoinGeckoProvider();
+export const coinGeckoProvider: QuoteProvider & CandleProvider = new CoinGeckoProvider();
 
 /**
  * Come aggiungere una nuova crypto CoinGecko:

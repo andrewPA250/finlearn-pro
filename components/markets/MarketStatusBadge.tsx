@@ -8,22 +8,38 @@ interface MarketStatusBadgeProps {
 }
 
 /**
- * Indicatore di stato per uno strumento del catalogo Markets.
- * - "soon" → badge "Soon"
- * - "live"/"delayed" + freshness "eod" o "live" → pallino verde
- * - "live"/"delayed" + freshness "delayed" → pallino ambra (dati ritardati)
- * - "live"/"delayed" + nessuna freshness (dati temporaneamente non disponibili) → pallino grigio
+ * Indicatore di stato (dot) per uno strumento del catalogo Markets (Step 13.2).
+ *
+ * | freshness       | Dot                           |
+ * |-----------------|-------------------------------|
+ * | live            | verde brillante               |
+ * | near-live       | verde                         |
+ * | eod             | verde                         |
+ * | delayed         | ambra                         |
+ * | market-closed   | grigio chiaro                 |
+ * | null/unavailable| grigio scuro                  |
+ * | soon (status)   | badge "Soon"                  |
  */
 export function MarketStatusBadge({ status, freshness }: MarketStatusBadgeProps) {
   if (status === "soon") return <SoonBadge />;
 
-  if (!freshness) {
-    return <span className="h-1.5 w-1.5 rounded-full bg-text-secondary/40" aria-label="Non disponibile" />;
-  }
+  switch (freshness) {
+    case "live":
+      return <span className="h-1.5 w-1.5 rounded-full bg-accent-green" aria-label="Live" />;
 
-  if (freshness === "delayed") {
-    return <span className="h-1.5 w-1.5 rounded-full bg-accent-amber" aria-label="Dati ritardati" />;
-  }
+    case "near-live":
+      return <span className="h-1.5 w-1.5 rounded-full bg-accent-green" aria-label="Near Live" />;
 
-  return <span className="h-1.5 w-1.5 rounded-full bg-accent-green" aria-label="Dati EOD" />;
+    case "eod":
+      return <span className="h-1.5 w-1.5 rounded-full bg-accent-green" aria-label="EOD" />;
+
+    case "delayed":
+      return <span className="h-1.5 w-1.5 rounded-full bg-accent-amber" aria-label="Delayed" />;
+
+    case "market-closed":
+      return <span className="h-1.5 w-1.5 rounded-full bg-text-secondary/40" aria-label="Market Closed" />;
+
+    default:
+      return <span className="h-1.5 w-1.5 rounded-full bg-text-secondary/20" aria-label="Unavailable" />;
+  }
 }
