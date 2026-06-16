@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import type { User } from "@supabase/supabase-js";
 import { createClient } from "@/lib/supabase/client";
 import { useProgress } from "@/lib/progress/ProgressContext";
+import { useSettings } from "@/lib/settings/SettingsContext";
+import { t } from "@/lib/settings/i18n";
 import { getNextAccessibleLessonId } from "@/lib/access";
 import { ChevronDownIcon, LogoMark, SearchIcon, UserIcon } from "@/components/layout/icons";
 import { SoonBadge } from "@/components/layout/SoonBadge";
@@ -23,6 +25,7 @@ export function Header() {
   const pathname = usePathname() ?? "";
   const router = useRouter();
   const { state } = useProgress();
+  const settings = useSettings();
   const [user, setUser] = useState<User | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -157,6 +160,11 @@ export function Header() {
                 />
                 <div className="absolute right-0 top-full z-40 mt-2 w-56 rounded-card border border-bg-border bg-bg-card p-2 shadow-lg">
                   <p className="truncate px-3 py-1.5 text-xs text-text-muted">{user.email}</p>
+                  <div className="flex gap-2 px-3 py-1.5 text-[10px] text-text-muted/70">
+                    <span>{t(settings.language === "en" ? "english" : "italiano", settings.language)}</span>
+                    <span>•</span>
+                    <span>{settings.currency}</span>
+                  </div>
                   <hr className="my-1 border-bg-border" />
                   <Link
                     href="/profile"
@@ -164,7 +172,7 @@ export function Header() {
                     className="flex items-center gap-2.5 rounded-card px-3 py-2 text-sm text-text-secondary transition duration-150 ease-in-out hover:bg-bg-hover hover:text-text-primary"
                   >
                     <UserIcon className="h-4 w-4" />
-                    Profile
+                    {t("profile", settings.language)}
                   </Link>
                   <Link
                     href="/settings"
@@ -172,7 +180,7 @@ export function Header() {
                     className="flex items-center gap-2.5 rounded-card px-3 py-2 text-sm text-text-secondary transition duration-150 ease-in-out hover:bg-bg-hover hover:text-text-primary"
                   >
                     <span>⚙</span>
-                    Settings
+                    {t("settings", settings.language)}
                   </Link>
                   <hr className="my-1 border-bg-border" />
                   <button
@@ -180,7 +188,7 @@ export function Header() {
                     onClick={handleLogout}
                     className="flex w-full items-center gap-2.5 rounded-card px-3 py-2 text-left text-sm text-negative transition duration-150 ease-in-out hover:bg-bg-hover"
                   >
-                    Sign Out
+                    {t("signOut", settings.language)}
                   </button>
                 </div>
               </>

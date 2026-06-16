@@ -1783,3 +1783,136 @@ Toggle modale nella sezione Chart: **Synchronized** (default, Recharts Yahoo) vs
 - SPX: delayed, stats indice (no PE/market cap) ✓
 - Mobile 390px: toggle + timeframes visibili, chart renders ✓
 - Nessun errore console di runtime nella sessione corrente
+
+---
+
+## Handoff — Phase 3A completato: Asset Page 2.0
+
+### Obiettivo
+
+Trasformare le pagine asset da layout generico in stack card a design professionale stile finance-terminal: hero 2-colonne, stats grid con 52W range bar, SMA trend compatto, Fundamentals/About side-by-side, sticky section nav.
+
+### File modificati
+
+1. **`components/asset/AssetHero.tsx`** — Complete rewrite
+   - 2-column layout on desktop: left = symbol pill + category badge + metadata, right = 4xl price block
+   - Cyan category badge + status badge with InfoTooltip preserved
+   - Quick actions: "Open in Quant Lab →" (conditional), "Compare", "★ Watch" (disabled placeholders)
+   - English labels throughout
+
+2. **`components/asset/AssetStatsSection.tsx`** — Grid layout
+   - Responsive `grid-cols-2 / sm:3 / lg:4` cell layout
+   - Added: Market Cap, P/E Ratio, EPS (TTM) from `ProviderStats`
+   - **52W range bar integrated**: Low–High with cyan progress bar, position %, quartile label
+   - Section has `id="stats"` for sticky nav
+
+3. **`components/asset/AssetMarketContext.tsx`** — SMA-only compact
+   - Removed 52W bar (moved to stats)
+   - 2-col: SMA value left, trend badge + delta% right
+   - Uses `positive`/`negative` colors
+
+4. **`components/asset/AssetChartSection.tsx`** — Color updates
+   - Mode toggle: `accent-purple/15` → `bg-cyan-bg text-cyan`
+   - Recharts stroke: `#6C63FF` → `#00d4b8`
+   - Border: `bg-sidebar` → `bg-border`; added `id="chart"`
+
+5. **`components/asset/AssetView.tsx`** — New layout architecture
+   - **Removed** `AssetOverviewSection` (redundant)
+   - **Added** sticky section nav: Chart / Statistics / Fundamentals / News / Learn (all with anchor links)
+   - **Fundamentals + About/KeyFacts side-by-side** on desktop; graceful fallback on mobile
+   - News (2/3) + Learn (1/3) at bottom
+
+6. **Minor updates** — border & typography system-wide
+   - All card borders: `bg-sidebar` → `bg-border`
+   - Section headings: new size/weight for visual consistency
+   - News hover color: `accent-purple` → `cyan`
+   - Learn cards: background color refinement
+
+### QA Results
+
+- ✅ `npm run build` passes, 15/15 pages
+- ✅ All 4 test assets 200: AAPL, BTCUSD, SPX, QQQ
+- ✅ Sections verified: "Market Statistics", "52-Week Range", "Trend vs 200", "Fundamentals", "Latest News"
+- ✅ Section nav anchors wired: all 5 section IDs match nav href
+
+### Design Rationale
+
+- **52W in stats grid**: eliminates redundant section, keeps market context tightly grouped
+- **Side-by-side Fundamentals/About**: dense professional layout; scales on mobile
+- **Sticky section nav**: long pages need quick jumping
+- **Cyan color identity**: aligns with Phase 1A design system
+
+---
+
+## Handoff — Phase 4A completato: Dashboard & Navigation 2.0
+
+### Obiettivo
+
+Creare una vera dashboard centrale con market intelligence: overview card, market pulse (status + breadth + VIX), categoria heatmap, top movers. Markets page con sidebar nav contestuale, filter tab client-side. Zero nuovi API/provider.
+
+### File creati
+
+1. **`components/dashboard/DashboardView.tsx`** — Complete rewrite (3-row layout)
+   - **Row 1**: Market Overview (SPX, NDX, DJI, BTC, Gold) + Market Pulse (open/closed status, breadth bar, VIX level, asset count)
+   - **Row 2**: Category Heatmap (7 colored squares by avg % change) + Top Movers (top 5 gainers + losers)
+   - **Row 3**: Watchlist placeholder (cyan SOON) + News Widget (5 SPX headlines from Finnhub) + AI Insights placeholder (color-ai SOON)
+   - Market open/close derived from SPX freshness with pulsing dot
+   - All data from `getAllAssetQuotes()` + `getAssetNews()` — no new APIs
+
+2. **`components/markets/MarketsSidebar.tsx`** — Context sidebar (desktop lg+)
+   - Markets nav: Overview/Stocks/Crypto/Indices/ETFs/Commodities/Forex/Bonds
+   - Tools section: Heatmap link, Calendar SOON, Screener SOON
+   - Personal: Watchlist SOON
+   - Client component with state management for active tab
+
+3. **`components/markets/MarketsTopMovers.tsx`** — Gainers/Losers snapshot
+   - Top 3 gainers + top 3 losers from live quotes
+   - Clickable to asset pages
+   - Compact layout
+
+4. **`components/markets/MarketsFilter.tsx`** — Client filter tabs
+   - All, Stocks, Crypto, Indices, ETFs, Commodities, Forex, Bonds
+   - Client-side instant filtering, no re-fetch
+   - Tab state in React
+
+### File modificati
+
+- **`app/dashboard/page.tsx`** — Added parallel `getAssetNews` fetch, removed LESSON_META
+- **`components/markets/MarketsView.tsx`** — Restructured with sidebar + filter layout
+  - Removed old MarketTicker integration
+  - Now uses sidebar + top movers + filter
+
+### QA Results
+
+- ✅ `npm run build` passes, 15/15 pages, no regressions
+- ✅ All routes return 200: /, /markets, /dashboard, /asset/*, /settings
+- ✅ Markets page: Top Movers section visible, category filter tabs functional, sidebar structure present
+- ✅ Dashboard: Market Overview, Pulse, Heatmap, Top Movers, News sections all render
+- ✅ Zero regressions: homepage and asset pages fully intact
+
+### Design Decisions
+
+- **Category Heatmap**: visual at-a-glance market sentiment via color (red/green/neutral)
+- **Top Movers computed from live quotes**: no new data source needed
+- **News section from SPX news**: single feed, not per-symbol (simplicity)
+- **Sidebar desktop-only**: responsive design delegates filter tabs to mobile
+- **Dashboard auth-protected**: follows middleware routing (can QA when logged in)
+
+### Known Limitations
+
+- Dashboard is auth-protected (middleware redirect)
+- Markets sidebar is desktop-only (`lg:flex`); mobile uses horizontal filter tabs
+- Category card headers still Italian (catalog untouched per constraints)
+- Future: `/dashboard` can become main landing page via middleware routing only
+
+---
+
+## Stato attuale
+
+**Fasi completate**:
+- Phase 1A ✅ — Global Shell Refresh (tokens, globals.css, Header, /settings skeleton)
+- Phase 2A ✅ — Homepage 2.0 (complete rewrite, 8 sections, live data)
+- Phase 3A ✅ — Asset Page 2.0 (2-col hero, stats grid with 52W, SMA trend, side-by-side fundamentals, sticky nav)
+- Phase 4A ✅ — Dashboard & Navigation 2.0 (3-row dashboard, Markets sidebar, top movers, category heatmap, filter tabs)
+
+**Prossimo step**: Definire con l'utente (Phase 2B Markets/Dashboard estensione, Phase 3B+ feature aggiuntive, o mobile optimization).

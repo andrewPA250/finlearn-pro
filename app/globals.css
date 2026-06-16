@@ -39,6 +39,37 @@
   --accent-amber: #F59E0B;
 }
 
+/* Light theme */
+html.light {
+  /* ========== BRAND COLORS (Cyan primary) ========== */
+  --color-cyan: #0091a4;
+  --color-cyan-dark: #006b7a;
+  --color-cyan-light: #00c7d4;
+  --color-cyan-bg: #cef4f8;
+
+  /* ========== BACKGROUND SCALE ========== */
+  --bg-base: #ffffff;
+  --bg-primary: #f8fafb;
+  --bg-card: #ffffff;
+  --bg-sidebar: #f1f5f9;
+  --bg-hover: #e2e8f0;
+  --bg-border: #cbd5e1;
+  --bg-border-em: #94a3b8;
+
+  /* ========== TEXT SCALE ========== */
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --text-disabled: #94a3b8;
+
+  /* ========== SEMANTIC COLORS ========== */
+  --color-positive: #16a34a;
+  --color-negative: #dc2626;
+  --color-caution: #ea580c;
+  --color-ai: #7c3aed;
+  --color-info: #0284c7;
+}
+
 html,
 body {
   color: var(--text-primary);
@@ -50,6 +81,11 @@ body {
   background-attachment: fixed;
   /* Difesa contro overflow orizzontale su mobile (es. tooltip del grafico vicino al bordo). */
   overflow-x: hidden;
+}
+
+html.light,
+html.light body {
+  background-image: none;
 }
 
 ::selection {

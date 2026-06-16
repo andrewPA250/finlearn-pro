@@ -1,25 +1,30 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useSettings } from "@/lib/settings/SettingsContext";
+import { t } from "@/lib/settings/i18n";
+import type { Theme, Language, Currency, Timezone } from "@/lib/settings/types";
 
 export default function SettingsPage() {
-  const [language, setLanguage] = useState("en");
-  const [theme, setTheme] = useState("dark");
-  const [currency, setCurrency] = useState("usd");
+  const settings = useSettings();
 
   return (
     <div className="min-h-screen bg-bg-primary">
       {/* Back link */}
       <div className="border-b border-bg-border bg-bg-sidebar px-6 py-4">
-        <Link href="/markets" className="flex items-center gap-2 text-sm text-cyan hover:text-cyan-light">
-          ← Back to Markets
+        <Link
+          href="/markets"
+          className="flex items-center gap-2 text-sm text-cyan hover:text-cyan-light"
+        >
+          ← {t("back", settings.language)}
         </Link>
       </div>
 
       {/* Settings container */}
       <div className="mx-auto max-w-2xl px-6 py-8">
-        <h1 className="text-3xl font-bold text-text-primary mb-8">Settings</h1>
+        <h1 className="text-3xl font-bold text-text-primary mb-8">
+          {t("settings", settings.language)}
+        </h1>
 
         {/* Settings sidebar + content */}
         <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
@@ -27,34 +32,40 @@ export default function SettingsPage() {
           <div className="md:col-span-1">
             <nav className="space-y-2">
               <div className="text-xs font-semibold text-text-muted uppercase tracking-wide mb-3">
-                Preferences
+                {t("preferences", settings.language)}
               </div>
               <a
                 href="#appearance"
                 className="block rounded-card px-3 py-2 text-sm text-cyan font-medium bg-cyan-bg/30"
               >
-                Appearance
+                {t("appearance", settings.language)}
               </a>
               <a
                 href="#language"
                 className="block rounded-card px-3 py-2 text-sm text-text-secondary hover:bg-bg-hover hover:text-text-primary transition"
               >
-                Language & Region
+                {t("languageRegion", settings.language)}
               </a>
               <a
                 href="#currency"
                 className="block rounded-card px-3 py-2 text-sm text-text-secondary hover:bg-bg-hover hover:text-text-primary transition"
               >
-                Currency
+                {t("currency", settings.language)}
+              </a>
+              <a
+                href="#timezone"
+                className="block rounded-card px-3 py-2 text-sm text-text-secondary hover:bg-bg-hover hover:text-text-primary transition"
+              >
+                {t("timezone", settings.language)}
               </a>
               <div className="text-xs font-semibold text-text-muted uppercase tracking-wide mb-3 mt-6">
-                Account
+                {t("account", settings.language)}
               </div>
               <a
                 href="/profile"
                 className="block rounded-card px-3 py-2 text-sm text-text-secondary hover:bg-bg-hover hover:text-text-primary transition"
               >
-                Profile
+                {t("profile", settings.language)}
               </a>
             </nav>
           </div>
@@ -62,103 +73,161 @@ export default function SettingsPage() {
           {/* Main content */}
           <div className="md:col-span-3 space-y-6">
             {/* Appearance Section */}
-            <section id="appearance" className="rounded-card border border-bg-border bg-bg-card p-6">
-              <h2 className="text-lg font-semibold text-text-primary mb-4">Appearance</h2>
+            <section
+              id="appearance"
+              className="rounded-card border border-bg-border bg-bg-card p-6"
+            >
+              <h2 className="text-lg font-semibold text-text-primary mb-4">
+                {t("appearance", settings.language)}
+              </h2>
 
               <div className="space-y-4">
                 <div>
-                  <label className="text-sm font-medium text-text-secondary mb-2 block">Theme</label>
+                  <label className="text-sm font-medium text-text-secondary mb-2 block">
+                    {t("theme", settings.language)}
+                  </label>
                   <div className="flex gap-2">
-                    {[
-                      { value: "light", label: "Light" },
-                      { value: "dark", label: "Dark", active: true },
-                      { value: "auto", label: "Auto" },
-                    ].map((option) => (
+                    {(["dark", "light", "system"] as const).map((theme) => (
                       <button
-                        key={option.value}
-                        onClick={() => setTheme(option.value)}
+                        key={theme}
+                        onClick={() => settings.setTheme(theme as Theme)}
                         className={`rounded-card px-4 py-2 text-sm font-medium transition ${
-                          theme === option.value
+                          settings.theme === theme
                             ? "bg-cyan text-bg-primary"
                             : "bg-bg-hover text-text-secondary hover:text-text-primary"
                         }`}
                       >
-                        {option.label}
+                        {t(theme, settings.language)}
                       </button>
                     ))}
                   </div>
-                  <p className="text-xs text-text-muted mt-2">Choose how FinanceHub looks on your device</p>
+                  <p className="text-xs text-text-muted mt-2">
+                    {t("chooseTheme", settings.language)}
+                  </p>
                 </div>
 
                 <div className="border-t border-bg-border pt-4">
                   <label className="flex items-center justify-between py-2">
-                    <span className="text-sm font-medium text-text-secondary">Compact Mode</span>
-                    <input type="checkbox" className="w-4 h-4" />
+                    <span className="text-sm font-medium text-text-secondary">
+                      {t("compactMode", settings.language)}
+                    </span>
+                    <input
+                      type="checkbox"
+                      className="w-4 h-4"
+                      disabled
+                    />
                   </label>
-                  <p className="text-xs text-text-muted">Reduce spacing in tables and lists</p>
+                  <p className="text-xs text-text-muted">
+                    {t("reduceSpacing", settings.language)}
+                  </p>
                 </div>
               </div>
             </section>
 
             {/* Language Section */}
-            <section id="language" className="rounded-card border border-bg-border bg-bg-card p-6">
-              <h2 className="text-lg font-semibold text-text-primary mb-4">Language & Region</h2>
+            <section
+              id="language"
+              className="rounded-card border border-bg-border bg-bg-card p-6"
+            >
+              <h2 className="text-lg font-semibold text-text-primary mb-4">
+                {t("languageRegion", settings.language)}
+              </h2>
 
               <div className="space-y-4">
                 <div>
-                  <label className="text-sm font-medium text-text-secondary mb-2 block">Language</label>
+                  <label className="text-sm font-medium text-text-secondary mb-2 block">
+                    {t("language", settings.language)}
+                  </label>
                   <div className="flex gap-2 flex-wrap">
-                    {[
-                      { value: "en", label: "English" },
-                      { value: "it", label: "Italiano" },
-                      { value: "es", label: "Español" },
-                      { value: "de", label: "Deutsch" },
-                    ].map((option) => (
+                    {(["en", "it"] as const).map((lang) => (
                       <button
-                        key={option.value}
-                        onClick={() => setLanguage(option.value)}
+                        key={lang}
+                        onClick={() => settings.setLanguage(lang as Language)}
                         className={`rounded-card px-3 py-1.5 text-xs font-medium transition ${
-                          language === option.value
+                          settings.language === lang
                             ? "bg-cyan text-bg-primary"
                             : "bg-bg-hover text-text-secondary hover:text-text-primary"
                         }`}
                       >
-                        {option.label}
+                        {t(lang === "en" ? "english" : "italiano", settings.language)}
                       </button>
                     ))}
                   </div>
-                  <p className="text-xs text-text-muted mt-2">Select your preferred language</p>
+                  <p className="text-xs text-text-muted mt-2">
+                    {t("selectLanguage", settings.language)}
+                  </p>
                 </div>
               </div>
             </section>
 
             {/* Currency Section */}
-            <section id="currency" className="rounded-card border border-bg-border bg-bg-card p-6">
-              <h2 className="text-lg font-semibold text-text-primary mb-4">Currency</h2>
+            <section
+              id="currency"
+              className="rounded-card border border-bg-border bg-bg-card p-6"
+            >
+              <h2 className="text-lg font-semibold text-text-primary mb-4">
+                {t("currency", settings.language)}
+              </h2>
 
               <div className="space-y-4">
                 <div>
-                  <label className="text-sm font-medium text-text-secondary mb-2 block">Default Currency</label>
+                  <label className="text-sm font-medium text-text-secondary mb-2 block">
+                    {t("currency", settings.language)}
+                  </label>
                   <div className="flex gap-2 flex-wrap">
-                    {[
-                      { value: "usd", label: "USD ($)" },
-                      { value: "eur", label: "EUR (€)" },
-                      { value: "gbp", label: "GBP (£)" },
-                    ].map((option) => (
+                    {(["USD", "EUR", "GBP"] as const).map((currency) => (
                       <button
-                        key={option.value}
-                        onClick={() => setCurrency(option.value)}
+                        key={currency}
+                        onClick={() => settings.setCurrency(currency as Currency)}
                         className={`rounded-card px-3 py-1.5 text-xs font-medium transition ${
-                          currency === option.value
+                          settings.currency === currency
                             ? "bg-cyan text-bg-primary"
                             : "bg-bg-hover text-text-secondary hover:text-text-primary"
                         }`}
                       >
-                        {option.label}
+                        {t(currency.toLowerCase() as "usd" | "eur" | "gbp", settings.language)}
                       </button>
                     ))}
                   </div>
-                  <p className="text-xs text-text-muted mt-2">Used for price displays and conversions</p>
+                  <p className="text-xs text-text-muted mt-2">
+                    {t("selectCurrency", settings.language)}
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            {/* Timezone Section */}
+            <section
+              id="timezone"
+              className="rounded-card border border-bg-border bg-bg-card p-6"
+            >
+              <h2 className="text-lg font-semibold text-text-primary mb-4">
+                {t("timezone", settings.language)}
+              </h2>
+
+              <div className="space-y-4">
+                <div>
+                  <label className="text-sm font-medium text-text-secondary mb-2 block">
+                    {t("timezone", settings.language)}
+                  </label>
+                  <div className="flex gap-2 flex-wrap">
+                    {(["local", "UTC"] as const).map((tz) => (
+                      <button
+                        key={tz}
+                        onClick={() => settings.setTimezone(tz as Timezone)}
+                        className={`rounded-card px-3 py-1.5 text-xs font-medium transition ${
+                          settings.timezone === tz
+                            ? "bg-cyan text-bg-primary"
+                            : "bg-bg-hover text-text-secondary hover:text-text-primary"
+                        }`}
+                      >
+                        {t(tz.toLowerCase() as "local" | "utc", settings.language)}
+                      </button>
+                    ))}
+                  </div>
+                  <p className="text-xs text-text-muted mt-2">
+                    {t("selectTimezone", settings.language)}
+                  </p>
                 </div>
               </div>
             </section>
@@ -166,7 +235,7 @@ export default function SettingsPage() {
             {/* Info box */}
             <div className="rounded-card border border-bg-border bg-cyan-bg/10 p-4">
               <p className="text-xs text-text-muted">
-                Settings are stored locally on your device. Account-level preferences will be added in Phase 2.
+                {t("settingsStored", settings.language)}
               </p>
             </div>
           </div>
