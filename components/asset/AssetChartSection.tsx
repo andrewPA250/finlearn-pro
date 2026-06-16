@@ -311,7 +311,7 @@ export function AssetChartSection({ symbol, candles, unit, source, tvSymbol }: A
       {/* ── Source attribution (sync mode only) ────────────────────────────── */}
       {!showTV && hasData && (
         <p className="mt-2 text-[10px] text-text-secondary/50">
-          {getSourceLabel(source)} · Historical daily close prices. Quote timestamp may differ from chart's last close.
+          {getSourceLabel(source)} · Historical daily close prices. Quote timestamp may differ from chart&apos;s last close.
         </p>
       )}
     </section>
