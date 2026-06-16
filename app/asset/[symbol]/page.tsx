@@ -11,7 +11,7 @@ export default async function AssetPage({ params }: { params: { symbol: string }
 
   const categoryLabel = MARKET_CATEGORIES.find((c) => c.id === instrument.category)?.label ?? instrument.category;
 
-  const [providerQuote, candles, news] = await Promise.all([
+  const [providerQuote, candles, newsResult] = await Promise.all([
     getInstrumentQuote(instrument),
     getAssetCandles(instrument.symbol),
     getAssetNews(instrument.symbol, instrument.finnhubSymbol, instrument.category),
@@ -24,7 +24,7 @@ export default async function AssetPage({ params }: { params: { symbol: string }
       categoryLabel={categoryLabel}
       quote={quote}
       candles={candles}
-      news={news}
+      newsResult={newsResult}
     />
   );
 }

@@ -1,7 +1,7 @@
 import type { MarketDataPoint } from "@/types/market";
 import type { MarketInstrument } from "@/types/markets";
 import type { TickerQuote } from "@/lib/market/ticker";
-import type { NewsItem } from "@/lib/assetNews";
+import type { NewsResult } from "@/lib/assetNews";
 import { computeMarketContext } from "@/lib/assetContext";
 import { AssetHero } from "@/components/asset/AssetHero";
 import { AssetOverviewSection } from "@/components/asset/AssetOverviewSection";
@@ -18,10 +18,10 @@ interface AssetViewProps {
   categoryLabel: string;
   quote: TickerQuote | null;
   candles: MarketDataPoint[];
-  news: NewsItem[];
+  newsResult: NewsResult;
 }
 
-export function AssetView({ instrument, categoryLabel, quote, candles, news }: AssetViewProps) {
+export function AssetView({ instrument, categoryLabel, quote, candles, newsResult }: AssetViewProps) {
   const context = computeMarketContext(
     quote?.value ?? null,
     quote?.stats ?? undefined,
@@ -71,7 +71,7 @@ export function AssetView({ instrument, categoryLabel, quote, candles, news }: A
 
         {/* 2-col: News · Learn */}
         <div className="grid gap-4 sm:grid-cols-2">
-          <AssetLatestNews news={news} assetName={instrument.name} />
+          <AssetLatestNews newsResult={newsResult} assetName={instrument.name} />
           <AssetLearnReferences category={instrument.category} />
         </div>
       </div>
