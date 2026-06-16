@@ -1,10 +1,20 @@
 import { getAllAssetQuotes } from "@/lib/providers";
 import { quoteFromProvider } from "@/lib/market/ticker";
+import { getAssetNews } from "@/lib/assetNews";
 import { DashboardView } from "@/components/dashboard/DashboardView";
-import { LESSON_META } from "@/lib/lessons";
 
 export default async function DashboardPage() {
-  const tickerQuotes = (await getAllAssetQuotes()).map(quoteFromProvider);
+  const [rawQuotes, newsResult] = await Promise.all([
+    getAllAssetQuotes(),
+    getAssetNews("SPX", undefined, "index").catch(() => ({
+      topNews: [],
+      allNews: [],
+      source: "empty" as const,
+      status: "error" as const,
+    })),
+  ]);
 
-  return <DashboardView lessonMeta={LESSON_META} tickerQuotes={tickerQuotes} />;
+  const tickerQuotes = rawQuotes.map(quoteFromProvider);
+
+  return <DashboardView tickerQuotes={tickerQuotes} newsResult={newsResult} />;
 }
