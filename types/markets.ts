@@ -26,7 +26,13 @@ export interface MarketCategory {
  * `public/data/*.json`); `status: "soon"` indica un placeholder in attesa di
  * un provider dati.
  */
-export type MarketInstrumentStatus = "live" | "soon";
+/**
+ * Stato dati di uno strumento nel catalogo:
+ * - `"live"`: dati reali EOD da file locali (SPX, XAUUSD, US10Y)
+ * - `"delayed"`: dati ritardati da provider esterno (Finnhub, free tier)
+ * - `"soon"`: nessun provider ancora collegato
+ */
+export type MarketInstrumentStatus = "live" | "delayed" | "soon";
 
 export interface MarketInstrument {
   /** Ticker mostrato in UI e usato nella route `/asset/[symbol]`. */
@@ -34,6 +40,8 @@ export interface MarketInstrument {
   name: string;
   category: MarketCategoryId;
   status: MarketInstrumentStatus;
-  /** Presente solo per strumenti `"live"`: collega ai dataset esistenti in `lib/market.ts`. */
+  /** Presente solo per strumenti `"live"`: collega ai dataset locali (`public/data/*.json`). */
   assetId?: AssetId;
+  /** Presente solo per strumenti `"delayed"`: simbolo nel formato atteso dall'API Finnhub. */
+  finnhubSymbol?: string;
 }

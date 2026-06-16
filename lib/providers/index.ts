@@ -1,82 +1,95 @@
-import type { AssetId, MarketDataPoint } from "@/types/market";
+import type { MarketDataPoint } from "@/types/market";
 import type { MarketInstrument } from "@/types/markets";
 import { localStaticProvider } from "./localStaticProvider";
-import type { AssetAvailability, MarketDataProvider, ProviderQuote } from "./types";
+import { finnhubProvider } from "./finnhubProvider";
+import { coinGeckoProvider } from "./coinGeckoProvider";
+import { frankfurterProvider } from "./frankfurterProvider";
+import type { AssetAvailability, CandleProvider, ProviderQuote, QuoteProvider } from "./types";
 
 export * from "./types";
-export { localStaticProvider };
+export { localStaticProvider, finnhubProvider, coinGeckoProvider, frankfurterProvider };
 
 /**
- * Registro provider → asset (Step 12).
+ * Registro provider per simbolo catalogo (Step 12 architettura,
+ * Step 13 Finnhub, Step 13.x CoinGecko + Frankfurter).
  *
- * Per ogni `AssetId` indica quale `MarketDataProvider` lo serve. Oggi tutti
- * e 3 gli asset reali (`sp500`/`gold`/`us10y`) usano `localStaticProvider`.
- *
- * **Aggiungere un provider futuro per una categoria** (es. un provider
- * realtime per le azioni, un provider crypto, un provider forex):
- * 1. Implementare `MarketDataProvider` (vedi `./types`) in un nuovo file
- *    `lib/providers/<nome>Provider.ts` (es. `equitiesProvider.ts`),
- *    impostando `source`/`freshness` appropriati (es. `"delayed"`/`"live"`).
- * 2. Aggiungere le voci `AssetId → provider` qui sotto.
- * 3. Se necessario, implementare **fallback**: `getAssetQuote`/`getAssetCandles`
- *    possono provare un provider primario e, se ritorna `null`, ricadere su
- *    un secondo provider (es. dati EOD come backup di un feed realtime) —
- *    il chiamante (pagine/componenti) non cambia.
- *
- * Nessuna di queste modifiche tocca `/markets`, `/asset/[symbol]`, la Search
- * o il Workbench: tutti leggono solo le funzioni esportate da questo modulo.
+ * Ogni simbolo punta a un solo QuoteProvider; il provider decide
+ * internamente come recuperare il dato. Cambiare provider per un simbolo
+ * (es. passare da Finnhub a un feed live) richiede solo di aggiornare
+ * questa mappa — zero modifiche alle pagine/componenti.
  */
-const PROVIDERS_BY_ASSET: Partial<Record<AssetId, MarketDataProvider>> = {
-  sp500: localStaticProvider,
-  gold: localStaticProvider,
-  us10y: localStaticProvider,
+const QUOTE_PROVIDERS: Record<string, QuoteProvider> = {
+  // Provider locale EOD — serie storiche JSON (FRED / Stooq)
+  SPX: localStaticProvider,
+  XAUUSD: localStaticProvider,
+  US10Y: localStaticProvider,
+
+  // Finnhub — azioni e ETF USA (delayed ~15 min, free tier)
+  AAPL: finnhubProvider,
+  MSFT: finnhubProvider,
+  NVDA: finnhubProvider,
+  AMZN: finnhubProvider,
+  GOOGL: finnhubProvider,
+  META: finnhubProvider,
+  TSLA: finnhubProvider,
+  AMD: finnhubProvider,
+  SPY: finnhubProvider,
+  QQQ: finnhubProvider,
+
+  // CoinGecko — crypto (delayed ~1-2 min, no API key)
+  BTCUSD: coinGeckoProvider,
+  ETHUSD: coinGeckoProvider,
+
+  // Frankfurter (BCE) — forex (EOD, no API key)
+  EURUSD: frankfurterProvider,
+  GBPUSD: frankfurterProvider,
+  USDJPY: frankfurterProvider,
 };
 
-const PROVIDED_ASSET_IDS = Object.keys(PROVIDERS_BY_ASSET) as AssetId[];
+/** Registro candele: solo i 3 dataset locali forniscono serie storiche. */
+const CANDLE_PROVIDERS: Partial<Record<string, CandleProvider>> = {
+  SPX: localStaticProvider,
+  XAUUSD: localStaticProvider,
+  US10Y: localStaticProvider,
+};
 
 /**
- * Disponibilità dati per uno strumento del catalogo Markets
- * (`MARKET_INSTRUMENTS`, `lib/markets/catalog.ts`):
- * - `"soon"` se lo strumento non ha `assetId` (placeholder catalogo, nessun
- *   provider può ancora servirlo)
- * - `"available"` se è registrato un provider per il suo `assetId`
- * - `"error"` se ha un `assetId` ma nessun provider è registrato (config
- *   incoerente — non dovrebbe accadere con il catalogo attuale)
- *
- * Pensata per badge futuri (es. Watchlist) che vogliano distinguere "non
- * ancora collegato" da "collegato ma momentaneamente non disponibile".
+ * Disponibilità dati per uno strumento: il registro `QUOTE_PROVIDERS` è
+ * la fonte unica di verità — se il simbolo è registrato, il provider esiste.
+ * `"soon"` = nessun provider, `"available"` = provider registrato (può
+ * comunque ritornare `null` a runtime se il servizio esterno non risponde).
  */
 export function getAssetAvailability(instrument: MarketInstrument): AssetAvailability {
-  if (!instrument.assetId) return "soon";
-  return PROVIDERS_BY_ASSET[instrument.assetId] ? "available" : "error";
+  return QUOTE_PROVIDERS[instrument.symbol] ? "available" : "soon";
 }
 
-/** Ultima quotazione per un asset, o `null` se nessun provider la fornisce. */
-export function getAssetQuote(assetId: AssetId): ProviderQuote | null {
-  return PROVIDERS_BY_ASSET[assetId]?.getQuote(assetId) ?? null;
+/** Ultima quotazione per un simbolo catalogo, o `null` se nessun provider la fornisce. */
+export async function getAssetQuote(symbol: string): Promise<ProviderQuote | null> {
+  return QUOTE_PROVIDERS[symbol]?.getQuote(symbol) ?? null;
 }
 
-/** Serie storica per un asset, o `[]` se nessun provider la fornisce (mai dati finti). */
-export function getAssetCandles(assetId: AssetId): MarketDataPoint[] {
-  return PROVIDERS_BY_ASSET[assetId]?.getCandles(assetId)?.points ?? [];
-}
-
-/**
- * Quotazione per uno strumento del catalogo Markets: risolve `assetId` (se
- * presente) e delega a `getAssetQuote`. Ritorna `null` per gli strumenti
- * `"soon"` (nessun `assetId`) — l'asset page mostra il placeholder elegante.
- */
-export function getInstrumentQuote(instrument: MarketInstrument): ProviderQuote | null {
-  return instrument.assetId ? getAssetQuote(instrument.assetId) : null;
+/** Serie storica per un simbolo catalogo (solo asset locali), o `[]`. */
+export async function getAssetCandles(symbol: string): Promise<MarketDataPoint[]> {
+  const provider = CANDLE_PROVIDERS[symbol];
+  if (!provider) return [];
+  const candles = await provider.getCandles(symbol);
+  return candles?.points ?? [];
 }
 
 /**
- * Tutte le quotazioni disponibili oggi (i 3 asset reali). Usata dai ticker
- * di Home e `/markets`: itera sugli `AssetId` registrati, non su un elenco
- * fisso — un futuro provider aggiunto al registro appare qui automaticamente.
+ * Quotazione per uno strumento del catalogo Markets, o `null` per gli
+ * strumenti `"soon"` senza provider.
  */
-export function getAllAssetQuotes(): ProviderQuote[] {
-  return PROVIDED_ASSET_IDS.map((id) => getAssetQuote(id)).filter(
-    (quote): quote is ProviderQuote => quote !== null
-  );
+export async function getInstrumentQuote(instrument: MarketInstrument): Promise<ProviderQuote | null> {
+  return getAssetQuote(instrument.symbol);
+}
+
+/**
+ * Tutte le quotazioni disponibili (locale + Finnhub + CoinGecko + Frankfurter)
+ * in parallelo via `Promise.all`. Next.js ISR cache evita richieste ridondanti.
+ */
+export async function getAllAssetQuotes(): Promise<ProviderQuote[]> {
+  const symbols = Object.keys(QUOTE_PROVIDERS);
+  const quotes = await Promise.all(symbols.map((s) => getAssetQuote(s)));
+  return quotes.filter((q): q is ProviderQuote => q !== null);
 }

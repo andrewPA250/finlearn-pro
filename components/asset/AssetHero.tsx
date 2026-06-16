@@ -28,7 +28,7 @@ export function AssetHero({ instrument, categoryLabel, quote }: AssetHeroProps) 
 
       <div className="mt-4 flex flex-wrap items-center gap-2">
         <p className="text-xs font-bold uppercase tracking-wide text-accent-purple">{categoryLabel}</p>
-        <AssetStatusBadge status={instrument.status} />
+        <AssetStatusBadge status={instrument.status} freshness={quote?.freshness} />
       </div>
 
       <h1 className="mt-1 text-2xl font-bold text-text-primary">

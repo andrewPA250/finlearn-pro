@@ -1,4 +1,3 @@
-import type { AssetId } from "@/types/market";
 import type { AssetUnit } from "@/lib/market";
 import type { DataFreshness, ProviderQuote, ProviderSource } from "@/lib/providers/types";
 
@@ -13,7 +12,8 @@ import type { DataFreshness, ProviderQuote, ProviderSource } from "@/lib/provide
  * ("Live"/"Delayed"/"EOD"/"Unavailable") senza ulteriori modifiche al tipo.
  */
 export interface TickerQuote {
-  id: AssetId;
+  /** Simbolo del catalogo Markets (es. "SPX", "AAPL"). Usato come React key. */
+  id: string;
   label: string;
   unit: AssetUnit;
   value: number;
@@ -27,7 +27,7 @@ export interface TickerQuote {
 /** Adatta la quotazione di un provider (`lib/providers`) al tipo usato dalla UI. */
 export function quoteFromProvider(quote: ProviderQuote): TickerQuote {
   return {
-    id: quote.assetId,
+    id: quote.symbol,
     label: quote.label,
     unit: quote.unit,
     value: quote.value,

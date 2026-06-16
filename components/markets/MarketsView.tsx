@@ -1,4 +1,3 @@
-import type { AssetId } from "@/types/market";
 import type { TickerQuote } from "@/lib/market/ticker";
 import { MARKET_CATEGORIES, getInstrumentsByCategory } from "@/lib/markets/catalog";
 import { MarketTicker } from "@/components/dashboard/MarketTicker";
@@ -15,7 +14,7 @@ interface MarketsViewProps {
  * richiede modifiche a questo componente.
  */
 export function MarketsView({ tickerQuotes }: MarketsViewProps) {
-  const quotesByAssetId: Partial<Record<AssetId, TickerQuote>> = Object.fromEntries(
+  const quotesBySymbol: Record<string, TickerQuote> = Object.fromEntries(
     tickerQuotes.map((quote) => [quote.id, quote])
   );
 
@@ -39,7 +38,7 @@ export function MarketsView({ tickerQuotes }: MarketsViewProps) {
             key={category.id}
             category={category}
             instruments={getInstrumentsByCategory(category.id)}
-            quotesByAssetId={quotesByAssetId}
+            quotesBySymbol={quotesBySymbol}
           />
         ))}
       </div>

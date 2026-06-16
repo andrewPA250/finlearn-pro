@@ -6,7 +6,7 @@
 
 ---
 
-## Stato attuale: Step 9 (spec) completato — Auth e lancio pubblico: Supabase Auth (email+password, conferma email, reset password), route protection, progressi cloud con migrazione one-time da localStorage, pagina profilo (modifica nome, reset progressi, logout). Step 10.1 (Brand Identity + Design System), 10.2 (Header globale), 10.2bis (Search Overlay), 10.4 (Nuova Home FinanceHub), 10.3 (Sidebar contestuale Learn), 10.5 (Markets Module Foundation), 10.6 (Search + Markets Integration), 10.7 (Asset Page Foundation), 11 (Real Market Data Expansion — catalogo a 34 strumenti) e 12 (Data Provider Architecture) **completati** — vedi rispettive sezioni "Handoff" in fondo. Micro-fix UX "toggle mostra/nascondi password" (Login/Register/Reset) **completato**. Prossimo step: da definire con l'utente.
+## Stato attuale: Step 9 (spec) completato — Auth e lancio pubblico: Supabase Auth (email+password, conferma email, reset password), route protection, progressi cloud con migrazione one-time da localStorage, pagina profilo (modifica nome, reset progressi, logout). Step 10.1 (Brand Identity + Design System), 10.2 (Header globale), 10.2bis (Search Overlay), 10.4 (Nuova Home FinanceHub), 10.3 (Sidebar contestuale Learn), 10.5 (Markets Module Foundation), 10.6 (Search + Markets Integration), 10.7 (Asset Page Foundation), 11 (Real Market Data Expansion — catalogo a 34 strumenti), 12 (Data Provider Architecture), 13 (Finnhub Provider Integration) e **13.x (Crypto + Forex Provider — CoinGecko + Frankfurter)** **completati** — vedi rispettive sezioni "Handoff" in fondo. Micro-fix UX "toggle mostra/nascondi password" (Login/Register/Reset) **completato**. Prossimo step: da definire con l'utente.
 
 Riferimento spec: [finlearn-mvp-spec.md](finlearn-mvp-spec.md)
 
@@ -1289,3 +1289,112 @@ Se questa conversazione viene ripresa in una nuova chat, il prompt di avvio dovr
 - `/dashboard`: redirect (manual) a `/login` come da route protection esistente — comportamento invariato, nessuna regressione introdotta dal refactor provider
 
 **Prossimo step**: da definire con l'utente (es. primo provider esterno reale per una categoria, Watchlist/Portfolio, grafico reale in Asset/Chart con `getAssetCandles`).
+
+
+---
+
+## Handoff -- Step 13 completato (Finnhub Provider Integration)
+
+**Stato complessivo**: Step 1-9 + Step 7.5 + Step 10.x + Step 11 + Step 12 + Step 13 + micro-fix password completati. `npx tsc --noEmit` e `npm run build` passano senza errori (14 route invariate).
+
+**File modificati in Step 13**:
+
+- `lib/providers/types.ts` -- interfacce async (Promise<X|null>); `ProviderQuote.symbol: string` (era `assetId: AssetId`); `ProviderSource` include `"finnhub"`
+- `lib/providers/localStaticProvider.ts` -- metodi async; parametro `symbol: string` (simbolo catalogo); mappa interna `SYMBOL_TO_ASSET_ID`
+- `lib/providers/finnhubProvider.ts` (**NUOVO**) -- `FinnhubQuoteProvider`: `source:"finnhub"`, `freshness:"delayed"`, fetch con `{ next: { revalidate: 60 } }`, `process.env.FINNHUB_API_KEY` (mai NEXT_PUBLIC_*), ritorna null se `c===0` o `t===0`
+- `lib/providers/index.ts` -- riscritto: `QUOTE_PROVIDERS: Record<string, QuoteProvider>` (16 simboli) + `CANDLE_PROVIDERS` (3 locali); tutte le funzioni async con `Promise.all`
+- `types/markets.ts` -- `MarketInstrumentStatus` aggiunge `"delayed"`; `MarketInstrument` aggiunge `finnhubSymbol?: string`
+- `lib/markets/catalog.ts` -- 13 strumenti da `"soon"` a `"delayed"` + `finnhubSymbol` (AAPL/MSFT/NVDA/AMZN/GOOGL/META/TSLA/AMD/SPY/QQQ/BTCUSD/ETHUSD/EURUSD)
+- `lib/market/ticker.ts` -- `TickerQuote.id: string` (era `AssetId`); `quoteFromProvider` usa `quote.symbol`
+- `app/globals.css` + `tailwind.config.ts` -- design token `--accent-amber: #F59E0B`
+- `components/markets/MarketStatusBadge.tsx` -- prop `freshness?: DataFreshness`; pallino ambra per `"delayed"`
+- `components/markets/MarketListRow.tsx` -- `hasProvider`/`hasData`; link per tutti strumenti con provider; passa `freshness` al badge
+- `components/markets/MarketListSection.tsx` + `MarketsView.tsx` -- `quotesBySymbol` (era `quotesByAssetId`), lookup per `instrument.symbol`
+- `components/asset/AssetStatusBadge.tsx` -- "Dati ritardati" (ambra) per delayed, "Non disponibile" (grigio) se no dati
+- `components/asset/AssetHero.tsx` + `AssetOverviewSection.tsx` -- freshness propagata al badge e alla label "Stato"
+- `app/dashboard/page.tsx`, `app/markets/page.tsx`, `app/asset/[symbol]/page.tsx`, `app/workbench/page.tsx` -- tutti async + await
+
+**Cosa NON e cambiato**: `types/market.ts` (`AssetId` resta `"sp500"|"gold"|"us10y"`), `lib/market.ts`, `components/workbench/*`, auth/Supabase/progressi/quiz/lezioni.
+
+**Dove mettere FINNHUB_API_KEY**:
+- `.env.local` (locale): `FINNHUB_API_KEY=<tua_key>` (gia presente al momento dello step)
+- **Vercel** (produzione): Project Settings -> Environment Variables -> Name: `FINNHUB_API_KEY` (senza `NEXT_PUBLIC_`, server-only)
+
+**Come aggiungere futuri asset Finnhub** (in 3 passi):
+1. `lib/providers/finnhubProvider.ts`: aggiungere a `FINNHUB_SYMBOL_MAP`, `FINNHUB_LABELS`, `FINNHUB_UNITS`
+2. `lib/providers/index.ts`: aggiungere `SIMBOLO: finnhubProvider` a `QUOTE_PROVIDERS`
+3. `lib/markets/catalog.ts`: impostare `status: "delayed"` + `finnhubSymbol` per lo strumento
+
+**Note su BTCUSD/ETHUSD**: Finnhub free tier non copre il feed Binance crypto -- mostrano "Non disponibile" (comportamento corretto, nessun dato finto). Per abilitarli occorre piano Finnhub con crypto access, o un provider alternativo (l'infrastruttura e pronta).
+
+**Verifica eseguita**:
+- `npx tsc --noEmit`: nessun errore
+- `npm run build`: 14 route, build pulita
+- `/markets`: AAPL/MSFT/NVDA/AMZN/GOOGL/META/TSLA/AMD/SPY/QQQ con prezzi reali + pallino ambra; SPX pallino verde (EOD); PLTR/resto "Soon"
+- `/asset/AAPL`: badge "Dati ritardati", prezzo 296,42, variazione +1.82%
+- `/asset/NVDA`: "Dati ritardati", prezzo 212,45 (confermato via fetch)
+- `/asset/BTCUSD`: "Non disponibile" -- fallback corretto per free tier
+
+---
+
+## Handoff -- Step 13.x completato (Crypto + Forex Provider — CoinGecko + Frankfurter)
+
+**Stato complessivo**: Step 13.x aggiunge dati reali per crypto (BTCUSD, ETHUSD) e forex (EURUSD, GBPUSD, USDJPY) tramite provider gratuiti senza API key. `npx tsc --noEmit` e `npm run build` passano senza errori.
+
+**Problema risolto**: Finnhub free tier restituisce 403 "You don't have access to this resource" per tutti i simboli crypto (BINANCE:BTCUSDT, BINANCE:ETHUSDT, COINBASE:BTC-USD) e forex (OANDA:EUR_USD). Testati esplicitamente, confermato come limite di piano — non errore di simbolo.
+
+**Soluzione**: due provider gratuiti aggiuntivi, nessuna nuova API key.
+
+**File creati in Step 13.x**:
+
+- `lib/providers/coinGeckoProvider.ts` (**NUOVO**) -- `CoinGeckoProvider`: `source:"coingecko"`, `freshness:"delayed"`, fetch batch `bitcoin+ethereum` via `api.coingecko.com/api/v3/simple/price`, `{ next: { revalidate: 60 } }`. Variazione da `usd_24h_change`. Ritorna null se `coin.usd === 0`.
+- `lib/providers/frankfurterProvider.ts` (**NUOVO**) -- `FrankfurterProvider`: `source:"frankfurter-ecb"`, `freshness:"eod"`, due fetch parallele (`/latest` + `/3-days-ago`) su `api.frankfurter.app`. Converte da USD-base: EURUSD = `1/rates.EUR`, GBPUSD = `1/rates.GBP`, USDJPY = `rates.JPY`. Variazione calcolata vs chiusura precedente. `{ next: { revalidate: 3600 } }`.
+
+**File modificati in Step 13.x**:
+
+- `lib/providers/types.ts` -- `ProviderSource` aggiunge `"coingecko" | "frankfurter-ecb"`
+- `lib/providers/index.ts` -- aggiunge `BTCUSD/ETHUSD: coinGeckoProvider` e `EURUSD/GBPUSD/USDJPY: frankfurterProvider` a `QUOTE_PROVIDERS`; aggiunge import dei due nuovi provider
+- `lib/markets/catalog.ts` -- BTCUSD/ETHUSD/EURUSD/GBPUSD/USDJPY: `status: "delayed"` (erano "soon" per GBPUSD/USDJPY, erano "delayed" ma senza provider per BTC/ETH)
+- `app/globals.css` + `tailwind.config.ts` -- design token `--accent-amber: #F59E0B` (già presenti da Step 13, confermati)
+- `components/asset/AssetStatusBadge.tsx` -- badge freshness-driven: "Dati EOD" (verde) per `"eod"`, "Dati ritardati" (ambra) per `"delayed"`, "Non disponibile" (grigio) per null
+- `components/markets/MarketStatusBadge.tsx` -- pallino ambra per tutti i delayed
+
+**Fix TypeScript**: `Array.from(new Set(...))` invece di `[...new Set(...)]` per evitare TS2802 (`downlevelIteration` non abilitato in questo tsconfig).
+
+**Stato dati per simbolo (verificato a runtime)**:
+
+| Simbolo | Provider | Freshness | Badge UI | Note |
+|---------|----------|-----------|----------|------|
+| SPX | local-static | eod | Dati EOD (verde) | Serie storica JSON locale |
+| XAUUSD | local-static | eod | Dati EOD (verde) | Serie storica JSON locale |
+| US10Y | local-static | eod | Dati EOD (verde) | Serie storica JSON locale |
+| AAPL / MSFT / NVDA / AMZN / GOOGL / META / TSLA / AMD | finnhub | delayed | Dati ritardati (ambra) | Free tier ~15 min ritardo |
+| SPY / QQQ | finnhub | delayed | Dati ritardati (ambra) | Free tier ~15 min ritardo |
+| BTCUSD | coingecko | delayed | Dati ritardati (ambra) | Prezzo USD + variazione 24h |
+| ETHUSD | coingecko | delayed | Dati ritardati (ambra) | Prezzo USD + variazione 24h |
+| EURUSD | frankfurter-ecb | eod | Dati EOD (verde) | BCE, aggiornamento giornaliero |
+| GBPUSD | frankfurter-ecb | eod | Dati EOD (verde) | BCE, aggiornamento giornaliero |
+| USDJPY | frankfurter-ecb | eod | Dati EOD (verde) | BCE, aggiornamento giornaliero |
+| NDX / DJI / RUT / PLTR / XRPUSD / ADAUSD / … | — | — | Soon (grigio) | Nessun provider registrato |
+
+**Verifica eseguita**:
+- `npx tsc --noEmit`: nessun errore
+- `npm run build`: build pulita
+- `/asset/BTCUSD`: "Dati ritardati" ✓
+- `/asset/ETHUSD`: "Dati ritardati" ✓
+- `/asset/EURUSD`: "Dati EOD" ✓
+- `/asset/GBPUSD`: "Dati EOD" ✓
+- `/asset/USDJPY`: "Dati EOD" ✓
+- `/markets`: BTCUSD/ETHUSD/EURUSD/GBPUSD/USDJPY tutti presenti con dati reali
+
+**Come aggiungere nuove crypto (CoinGecko)**:
+1. `lib/providers/coinGeckoProvider.ts`: aggiungere a `COINGECKO_ID_MAP` e `COINGECKO_LABELS`
+2. `lib/providers/index.ts`: aggiungere `SIMBOLO: coinGeckoProvider`
+3. `lib/markets/catalog.ts`: `status: "delayed"`
+
+**Come aggiungere nuove coppie forex (Frankfurter)**:
+1. `lib/providers/frankfurterProvider.ts`: aggiungere a `FOREX_CONFIG` con `label`, `currency`, `compute`
+2. `lib/providers/index.ts`: aggiungere `SIMBOLO: frankfurterProvider`
+3. `lib/markets/catalog.ts`: `status: "delayed"`
+
+**Prossimo step**: da definire con l'utente.

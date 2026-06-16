@@ -1,8 +1,8 @@
-import type { AssetId, MarketDataPoint } from "@/types/market";
+import type { MarketDataPoint } from "@/types/market";
 import type { AssetUnit } from "@/lib/market";
 
 /**
- * Tipi condivisi del livello "data provider" (Step 12).
+ * Tipi condivisi del livello "data provider" (Step 12, aggiornati Step 13).
  *
  * Questo file non importa `fs`/`path`: è sicuro da importare anche da
  * componenti client (es. `lib/market/ticker.ts`) per tipizzare quotazioni
@@ -12,34 +12,30 @@ import type { AssetUnit } from "@/lib/market";
 /**
  * Quanto sono "fresci" i dati restituiti da un provider:
  * - "live": quotazione realtime/streaming
- * - "delayed": realtime con ritardo (es. 15 minuti)
- * - "eod": fine giornata (end-of-day) — i 3 dataset locali attuali
+ * - "delayed": realtime con ritardo (es. 15 minuti — Finnhub free tier)
+ * - "eod": fine giornata (end-of-day) — i 3 dataset locali statici
  * - "unavailable": nessun dato (provider assente o asset non coperto)
  */
 export type DataFreshness = "live" | "delayed" | "eod" | "unavailable";
 
 /**
- * Origine dei dati. Stringa estendibile: oggi solo `"local-static"`
- * (i 3 file `public/data/*.json`). Provider futuri aggiungeranno altri
- * valori (es. `"alpha-vantage"`, `"polygon"`, `"fmp"`) senza modificare
- * questo tipo, che resta `string` per evitare un union da aggiornare ad
- * ogni nuovo provider.
+ * Origine dei dati. Stringa estendibile: `"local-static"` per i file JSON
+ * locali, `"finnhub"` per il provider Finnhub (Step 13).
  */
-export type ProviderSource = "local-static" | (string & {});
+export type ProviderSource = "local-static" | "finnhub" | "coingecko" | "frankfurter-ecb" | (string & {});
 
 /**
- * Disponibilità dati per uno strumento, indipendente dal catalogo
- * (`MarketInstrumentStatus` in `types/markets.ts`, che è "live"/"soon" a
- * livello di catalogo/UI):
+ * Disponibilità dati per uno strumento:
  * - "available": un provider ha restituito dati validi
- * - "soon": nessun provider associato a questo asset (placeholder catalogo)
- * - "error": un provider è associato ma la lettura è fallita
+ * - "soon": nessun provider associato a questo strumento
+ * - "error": provider associato ma lettura fallita
  */
 export type AssetAvailability = "available" | "soon" | "error";
 
 /** Quotazione "ultimo valore + variazione" restituita da un provider. */
 export interface ProviderQuote {
-  assetId: AssetId;
+  /** Simbolo del catalogo Markets (es. "SPX", "AAPL", "BTCUSD"). */
+  symbol: string;
   label: string;
   unit: AssetUnit;
   value: number;
@@ -53,31 +49,23 @@ export interface ProviderQuote {
 
 /** Serie storica ("candele"/punti) restituita da un provider. */
 export interface ProviderCandles {
-  assetId: AssetId;
+  symbol: string;
   points: MarketDataPoint[];
   freshness: DataFreshness;
   source: ProviderSource;
 }
 
-/** Provider che sa restituire l'ultima quotazione per un `AssetId`. */
+/** Provider che sa restituire l'ultima quotazione per un simbolo catalogo. */
 export interface QuoteProvider {
   readonly source: ProviderSource;
-  /** `null` se il provider non ha (ancora) dati validi per `assetId`. */
-  getQuote(assetId: AssetId): ProviderQuote | null;
+  getQuote(symbol: string): Promise<ProviderQuote | null>;
 }
 
-/** Provider che sa restituire la serie storica per un `AssetId`. */
+/** Provider che sa restituire la serie storica per un simbolo catalogo. */
 export interface CandleProvider {
   readonly source: ProviderSource;
-  /** `null` se il provider non ha (ancora) dati validi per `assetId`. */
-  getCandles(assetId: AssetId): ProviderCandles | null;
+  getCandles(symbol: string): Promise<ProviderCandles | null>;
 }
 
-/**
- * Provider completo: quote + candele. Un provider concreto (locale o
- * futuro esterno) implementa questa interfaccia per uno o più `AssetId`.
- * Vedi `lib/providers/localStaticProvider.ts` per l'implementazione locale
- * e `lib/providers/index.ts` per come si registra/seleziona un provider per
- * ciascun asset.
- */
+/** Provider completo: quote + candele. */
 export interface MarketDataProvider extends QuoteProvider, CandleProvider {}

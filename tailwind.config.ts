@@ -15,6 +15,7 @@ const config: Config = {
         "accent-purple": "var(--accent-purple)",
         "accent-green": "var(--accent-green)",
         "accent-blue": "var(--accent-blue)",
+        "accent-amber": "var(--accent-amber)",
         "text-primary": "var(--text-primary)",
         "text-secondary": "var(--text-secondary)",
         error: "var(--error)",

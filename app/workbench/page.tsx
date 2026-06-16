@@ -4,7 +4,7 @@ import { getAssetCandles } from "@/lib/providers";
 import { WorkbenchView } from "@/components/workbench/WorkbenchView";
 import { WorkbenchAccessGuard } from "@/components/progress/WorkbenchAccessGuard";
 
-export default function WorkbenchPage({
+export default async function WorkbenchPage({
   searchParams,
 }: {
   searchParams: { lesson?: string };
@@ -14,10 +14,11 @@ export default function WorkbenchPage({
     Number.isInteger(lessonId) && lessonId >= 1 && lessonId <= 6 ? lessonId : undefined;
   const lessonMeta = validLessonId ? getLessonMeta(validLessonId) : undefined;
 
+  // getAssetCandles accetta simboli catalogo ("SPX", "XAUUSD", "US10Y")
   const rawData: Record<AssetId, MarketDataPoint[]> = {
-    sp500: getAssetCandles("sp500"),
-    gold: getAssetCandles("gold"),
-    us10y: getAssetCandles("us10y"),
+    sp500: await getAssetCandles("SPX"),
+    gold: await getAssetCandles("XAUUSD"),
+    us10y: await getAssetCandles("US10Y"),
   };
 
   const view = <WorkbenchView rawData={rawData} lessonMeta={lessonMeta} />;

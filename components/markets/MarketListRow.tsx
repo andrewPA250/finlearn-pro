@@ -6,7 +6,7 @@ import { MarketStatusBadge } from "@/components/markets/MarketStatusBadge";
 
 interface MarketListRowProps {
   instrument: MarketInstrument;
-  /** Quotazione reale, presente solo per strumenti `status: "live"` con `assetId` collegato. */
+  /** Quotazione reale, presente per strumenti con provider (status "live" o "delayed"). */
   quote?: TickerQuote;
 }
 
@@ -14,14 +14,13 @@ const rowClassName =
   "grid grid-cols-[1fr_5.5rem_5rem_1.75rem] items-center gap-2 px-4 py-2 text-xs transition duration-150 ease-in-out";
 
 /**
- * Riga del "Market List Pattern" (Step 10.5): simbolo, nome, valore,
- * variazione, stato. Componente generico riusabile in futuro per Watchlist
- * e Portfolio — basta passare uno `MarketInstrument` (+ quotazione
- * opzionale). Gli strumenti `"live"` collegano a `/asset/[symbol]`, quelli
- * `"soon"` restano non interattivi con un badge "Soon".
+ * Riga del "Market List Pattern": simbolo, nome, valore, variazione, stato.
+ * Gli strumenti con provider ("live"/"delayed") sono cliccabili e collegano
+ * a `/asset/[symbol]`. Gli strumenti "soon" restano non interattivi.
  */
 export function MarketListRow({ instrument, quote }: MarketListRowProps) {
-  const live = instrument.status === "live" && quote !== undefined;
+  const hasProvider = instrument.status !== "soon";
+  const hasData = hasProvider && quote !== undefined;
 
   const content = (
     <>
@@ -30,22 +29,22 @@ export function MarketListRow({ instrument, quote }: MarketListRowProps) {
         <span className="truncate text-text-secondary">{instrument.name}</span>
       </div>
       <span className="text-right font-mono text-text-primary">
-        {live ? formatQuoteValue(quote) : <span className="text-text-secondary/40">—</span>}
+        {hasData ? formatQuoteValue(quote) : <span className="text-text-secondary/40">—</span>}
       </span>
       <span
         className={`text-right font-mono font-bold ${
-          live ? (quote.change >= 0 ? "text-accent-green" : "text-error") : "text-text-secondary/40"
+          hasData ? (quote.change >= 0 ? "text-accent-green" : "text-error") : "text-text-secondary/40"
         }`}
       >
-        {live ? formatQuoteChange(quote) : "—"}
+        {hasData ? formatQuoteChange(quote) : "—"}
       </span>
       <span className="flex justify-end">
-        <MarketStatusBadge status={live ? "live" : "soon"} />
+        <MarketStatusBadge status={instrument.status} freshness={quote?.freshness} />
       </span>
     </>
   );
 
-  if (live) {
+  if (hasProvider) {
     return (
       <Link href={`/asset/${instrument.symbol}`} className={`${rowClassName} hover:bg-bg-sidebar`}>
         {content}

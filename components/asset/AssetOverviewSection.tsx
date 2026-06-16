@@ -1,6 +1,17 @@
-import type { MarketInstrument } from "@/types/markets";
+import type { MarketInstrument, MarketInstrumentStatus } from "@/types/markets";
+import type { DataFreshness } from "@/lib/providers/types";
 import type { TickerQuote } from "@/lib/market/ticker";
 import { formatQuoteChange, formatQuoteValue } from "@/lib/market/ticker";
+
+function getStatusLabel(status: MarketInstrumentStatus, freshness?: DataFreshness): string {
+  if (status === "soon") return "Soon";
+  switch (freshness) {
+    case "eod": return "Dati EOD";
+    case "delayed": return "Dati ritardati";
+    case "live": return "Live";
+    default: return "Non disponibile";
+  }
+}
 
 interface AssetOverviewSectionProps {
   instrument: MarketInstrument;
@@ -24,7 +35,7 @@ export function AssetOverviewSection({ instrument, categoryLabel, quote }: Asset
     { label: "Simbolo", value: instrument.symbol },
     { label: "Nome", value: instrument.name },
     { label: "Categoria", value: categoryLabel },
-    { label: "Stato", value: instrument.status === "live" ? "Dati EOD" : "Soon" },
+    { label: "Stato", value: getStatusLabel(instrument.status, quote?.freshness) },
   ];
 
   if (quote) {

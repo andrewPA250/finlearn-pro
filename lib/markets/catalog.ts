@@ -45,36 +45,36 @@ export const MARKET_INSTRUMENTS: MarketInstrument[] = [
   { symbol: "DJI", name: "Dow Jones Industrial Average", category: "index", status: "soon" },
   { symbol: "RUT", name: "Russell 2000", category: "index", status: "soon" },
 
-  // Azioni
-  { symbol: "AAPL", name: "Apple Inc.", category: "equity", status: "soon" },
-  { symbol: "MSFT", name: "Microsoft Corp.", category: "equity", status: "soon" },
-  { symbol: "NVDA", name: "NVIDIA Corp.", category: "equity", status: "soon" },
-  { symbol: "AMZN", name: "Amazon.com Inc.", category: "equity", status: "soon" },
-  { symbol: "GOOGL", name: "Alphabet Inc. (Classe A)", category: "equity", status: "soon" },
-  { symbol: "META", name: "Meta Platforms Inc.", category: "equity", status: "soon" },
-  { symbol: "TSLA", name: "Tesla Inc.", category: "equity", status: "soon" },
-  { symbol: "AMD", name: "Advanced Micro Devices Inc.", category: "equity", status: "soon" },
+  // Azioni — dati ritardati via Finnhub
+  { symbol: "AAPL", name: "Apple Inc.", category: "equity", status: "delayed", finnhubSymbol: "AAPL" },
+  { symbol: "MSFT", name: "Microsoft Corp.", category: "equity", status: "delayed", finnhubSymbol: "MSFT" },
+  { symbol: "NVDA", name: "NVIDIA Corp.", category: "equity", status: "delayed", finnhubSymbol: "NVDA" },
+  { symbol: "AMZN", name: "Amazon.com Inc.", category: "equity", status: "delayed", finnhubSymbol: "AMZN" },
+  { symbol: "GOOGL", name: "Alphabet Inc. (Classe A)", category: "equity", status: "delayed", finnhubSymbol: "GOOGL" },
+  { symbol: "META", name: "Meta Platforms Inc.", category: "equity", status: "delayed", finnhubSymbol: "META" },
+  { symbol: "TSLA", name: "Tesla Inc.", category: "equity", status: "delayed", finnhubSymbol: "TSLA" },
+  { symbol: "AMD", name: "Advanced Micro Devices Inc.", category: "equity", status: "delayed", finnhubSymbol: "AMD" },
   { symbol: "PLTR", name: "Palantir Technologies Inc.", category: "equity", status: "soon" },
 
-  // ETF
-  { symbol: "SPY", name: "SPDR S&P 500 ETF", category: "etf", status: "soon" },
-  { symbol: "QQQ", name: "Invesco QQQ Trust", category: "etf", status: "soon" },
+  // ETF — dati ritardati via Finnhub
+  { symbol: "SPY", name: "SPDR S&P 500 ETF", category: "etf", status: "delayed", finnhubSymbol: "SPY" },
+  { symbol: "QQQ", name: "Invesco QQQ Trust", category: "etf", status: "delayed", finnhubSymbol: "QQQ" },
   { symbol: "VOO", name: "Vanguard S&P 500 ETF", category: "etf", status: "soon" },
   { symbol: "VTI", name: "Vanguard Total Stock Market ETF", category: "etf", status: "soon" },
   { symbol: "SCHD", name: "Schwab US Dividend Equity ETF", category: "etf", status: "soon" },
   { symbol: "AGG", name: "iShares Core US Aggregate Bond ETF", category: "etf", status: "soon" },
   { symbol: "BND", name: "Vanguard Total Bond Market ETF", category: "etf", status: "soon" },
 
-  // Crypto
-  { symbol: "BTCUSD", name: "Bitcoin", category: "crypto", status: "soon" },
-  { symbol: "ETHUSD", name: "Ethereum", category: "crypto", status: "soon" },
+  // Crypto — dati ritardati via CoinGecko (no API key, ~1-2 min)
+  { symbol: "BTCUSD", name: "Bitcoin", category: "crypto", status: "delayed" },
+  { symbol: "ETHUSD", name: "Ethereum", category: "crypto", status: "delayed" },
   { symbol: "XRPUSD", name: "XRP", category: "crypto", status: "soon" },
   { symbol: "ADAUSD", name: "Cardano", category: "crypto", status: "soon" },
 
-  // Forex
-  { symbol: "EURUSD", name: "Euro / Dollaro USA", category: "forex", status: "soon" },
-  { symbol: "GBPUSD", name: "Sterlina / Dollaro USA", category: "forex", status: "soon" },
-  { symbol: "USDJPY", name: "Dollaro USA / Yen Giapponese", category: "forex", status: "soon" },
+  // Forex — dati EOD via Frankfurter (BCE, no API key)
+  { symbol: "EURUSD", name: "Euro / Dollaro USA", category: "forex", status: "delayed" },
+  { symbol: "GBPUSD", name: "Sterlina / Dollaro USA", category: "forex", status: "delayed" },
+  { symbol: "USDJPY", name: "Dollaro USA / Yen Giapponese", category: "forex", status: "delayed" },
 
   // Commodities
   { symbol: "XAUUSD", name: "Oro", category: "commodity", assetId: "gold", status: "live" },

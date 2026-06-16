@@ -6,6 +6,13 @@ import type { MarketDataProvider, ProviderCandles, ProviderQuote } from "./types
 
 const DATA_DIR = path.join(process.cwd(), "public", "data");
 
+/** Mappa dal simbolo catalogo all'`AssetId` usato dai file locali. */
+const SYMBOL_TO_ASSET_ID: Record<string, AssetId> = {
+  SPX: "sp500",
+  XAUUSD: "gold",
+  US10Y: "us10y",
+};
+
 function readJsonFile(fileName: string): MarketDataPoint[] {
   try {
     const raw = fs.readFileSync(path.join(DATA_DIR, fileName), "utf-8");
@@ -17,32 +24,33 @@ function readJsonFile(fileName: string): MarketDataPoint[] {
 }
 
 /**
- * Provider locale "static EOD" (Step 12): legge le serie storiche già
- * presenti in `public/data/*.json` (`sp500`, `gold`, `us10y` — gli stessi
- * file usati da Home/Markets/Workbench/Asset page da Step 1).
+ * Provider locale "static EOD" (Step 12): legge le serie storiche in
+ * `public/data/*.json` per SPX, XAUUSD, US10Y.
  *
  * - `source`: `"local-static"`
- * - `freshness`: sempre `"eod"` (fine giornata) — coerente con l'origine
- *   dei dati (FRED/Stooq, vedi `ASSET_SOURCE_LABELS` in `lib/market.ts`)
- * - `getCandles`/`getQuote` ritornano `null` se il file non esiste o non
- *   contiene almeno 2 punti validi: **nessun dato finto**, mai un valore
- *   inventato per coprire un asset privo di serie reale.
+ * - `freshness`: sempre `"eod"` (fine giornata)
+ * - Accetta simboli catalogo ("SPX", "XAUUSD", "US10Y"); mappa internamente
+ *   all'`AssetId` per leggere il file corretto.
+ * - Ritorna `null` se il file non esiste o non contiene dati validi:
+ *   **mai dati finti**.
  *
- * Server-only: usa `fs`/`path`, va importato solo da Server Components
- * (`app/**\/page.tsx`) o da altri moduli server-only come
- * `lib/providers/index.ts` — mai da componenti `"use client"`.
+ * Server-only: usa `fs`/`path`.
  */
 class LocalStaticMarketDataProvider implements MarketDataProvider {
   readonly source = "local-static" as const;
 
-  getCandles(assetId: AssetId): ProviderCandles | null {
+  async getCandles(symbol: string): Promise<ProviderCandles | null> {
+    const assetId = SYMBOL_TO_ASSET_ID[symbol];
+    if (!assetId) return null;
     const points = sanitizeSeries(readJsonFile(ASSET_FILE_NAMES[assetId]));
     if (points.length === 0) return null;
-    return { assetId, points, freshness: "eod", source: this.source };
+    return { symbol, points, freshness: "eod", source: this.source };
   }
 
-  getQuote(assetId: AssetId): ProviderQuote | null {
-    const candles = this.getCandles(assetId);
+  async getQuote(symbol: string): Promise<ProviderQuote | null> {
+    const assetId = SYMBOL_TO_ASSET_ID[symbol];
+    if (!assetId) return null;
+    const candles = await this.getCandles(symbol);
     if (!candles || candles.points.length < 2) return null;
 
     const last = candles.points[candles.points.length - 1];
@@ -51,7 +59,7 @@ class LocalStaticMarketDataProvider implements MarketDataProvider {
     const changePercent = prev.value !== 0 ? (change / prev.value) * 100 : 0;
 
     return {
-      assetId,
+      symbol,
       label: ASSET_LABELS[assetId],
       unit: ASSET_UNITS[assetId],
       value: last.value,
