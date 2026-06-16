@@ -3,7 +3,8 @@ const yahooFinance = new YahooFinanceClass({ suppressNotices: ["yahooSurvey", "r
 import { unstable_cache } from "next/cache";
 import type { MarketDataPoint } from "@/types/market";
 import type { AssetUnit } from "@/lib/market";
-import type { ProviderQuote, ProviderCandles, ProviderStats, QuoteProvider, CandleProvider } from "./types";
+import type { MarketCategoryId } from "@/types/markets";
+import type { ProviderQuote, ProviderCandles, ProviderStats, ProviderFundamentals, QuoteProvider, CandleProvider } from "./types";
 import { getYahooFreshness } from "./freshnessUtils";
 
 /**
@@ -290,3 +291,130 @@ class YahooProvider implements QuoteProvider, CandleProvider {
 }
 
 export const yahooProvider: QuoteProvider & CandleProvider = new YahooProvider();
+
+// ---------------------------------------------------------------------------
+// Fundamentals — additional quote fields + quoteSummary income statement
+// ---------------------------------------------------------------------------
+
+/** Extended quote fields available from Yahoo's quote endpoint beyond basics. */
+interface YFQuoteRawFundamentals extends YFQuoteRaw {
+  forwardPE?:            number | null;
+  beta?:                 number | null;
+  priceToBook?:          number | null;
+  // ETF-specific
+  totalAssets?:          number | null;
+  yield?:                number | null;
+  fundFamily?:           string | null;
+  category?:             string | null;
+  // Crypto-specific
+  circulatingSupply?:    number | null;
+}
+
+interface YFFinancialDataRaw {
+  totalRevenue?:         number | null;
+  ebitda?:               number | null;
+  grossMargins?:         number | null;
+  profitMargins?:        number | null;
+  operatingMargins?:     number | null;
+  returnOnEquity?:       number | null;
+  returnOnAssets?:       number | null;
+  debtToEquity?:         number | null;
+}
+
+interface YFTopHoldingsRaw {
+  annualReportExpenseRatio?: number | null;
+}
+
+interface YFQuoteSummaryRaw {
+  financialData?: YFFinancialDataRaw;
+  topHoldings?:   YFTopHoldingsRaw;
+}
+
+/** Categories that warrant a full quoteSummary call (income statement available). */
+const DEEP_FETCH_CATEGORIES = new Set<MarketCategoryId>(["equity", "etf"]);
+
+/**
+ * Fundamentals fetch — cached for 1 hour.
+ * Calls Yahoo quote (for valuation/ETF/crypto fields) and optionally
+ * quoteSummary (financialData + topHoldings) for equity/ETF income statement data.
+ * validateResult:false suppresses Yahoo validation errors on non-standard symbols.
+ */
+const _fetchFundamentals = unstable_cache(
+  async (yahooSymbol: string, deepFetch: boolean): Promise<ProviderFundamentals | null> => {
+    try {
+      const raw = await yahooFinance.quote(yahooSymbol);
+      const q = raw as unknown as YFQuoteRawFundamentals;
+
+      const f: ProviderFundamentals = {
+        // Valuation from quote
+        trailingPE:      q.trailingPE                    ?? undefined,
+        forwardPE:       q.forwardPE                     ?? undefined,
+        priceToBook:     q.priceToBook                   ?? undefined,
+        beta:            q.beta                          ?? undefined,
+        eps:             q.epsTrailingTwelveMonths        ?? undefined,
+        dividendYield:   q.trailingAnnualDividendYield != null
+                           ? q.trailingAnnualDividendYield * 100
+                           : undefined,
+        // Market data
+        marketCap:       q.marketCap                     ?? undefined,
+        avgVolume:       q.averageDailyVolume3Month       ?? undefined,
+        fiftyTwoWeekHigh:q.fiftyTwoWeekHigh               ?? undefined,
+        fiftyTwoWeekLow: q.fiftyTwoWeekLow                ?? undefined,
+        // ETF-specific
+        netAssets:       q.totalAssets                   ?? undefined,
+        fundYield:       q.yield                         ?? undefined,
+        fundFamily:      q.fundFamily                    ?? undefined,
+        fundCategory:    q.category                      ?? undefined,
+        // Crypto-specific
+        circulatingSupply: q.circulatingSupply            ?? undefined,
+      };
+
+      if (deepFetch) {
+        try {
+          const summary = await yahooFinance.quoteSummary(yahooSymbol, {
+            modules: ["financialData", "topHoldings"],
+            validateResult: false,
+          } as Parameters<typeof yahooFinance.quoteSummary>[1]);
+          const s = summary as unknown as YFQuoteSummaryRaw;
+          const fd = s.financialData;
+          if (fd) {
+            f.revenue         = fd.totalRevenue      ?? undefined;
+            f.ebitda          = fd.ebitda             ?? undefined;
+            f.grossMargin     = fd.grossMargins       ?? undefined;
+            f.profitMargin    = fd.profitMargins      ?? undefined;
+            f.operatingMargin = fd.operatingMargins   ?? undefined;
+            f.returnOnEquity  = fd.returnOnEquity     ?? undefined;
+            f.returnOnAssets  = fd.returnOnAssets     ?? undefined;
+            f.debtToEquity    = fd.debtToEquity       ?? undefined;
+          }
+          const th = s.topHoldings;
+          if (th?.annualReportExpenseRatio != null) {
+            f.expenseRatio = th.annualReportExpenseRatio;
+          }
+        } catch { /* quoteSummary fails for indices/non-US symbols — ignore */ }
+      }
+
+      // Return null if nothing populated (symbol not supported)
+      const hasData = Object.values(f).some((v) => v != null);
+      return hasData ? f : null;
+    } catch {
+      return null;
+    }
+  },
+  ["yahoo-fundamentals"],
+  { revalidate: 3600 },
+);
+
+/**
+ * Public fundamentals getter.
+ * Returns null for forex/commodity/bond (no meaningful fundamentals available).
+ */
+export async function getAssetFundamentals(
+  catalogSymbol: string,
+  category: MarketCategoryId,
+): Promise<ProviderFundamentals | null> {
+  if (category === "forex" || category === "bond" || category === "commodity") return null;
+  const yahooSymbol = YAHOO_SYMBOL_MAP[catalogSymbol];
+  if (!yahooSymbol) return null;
+  return _fetchFundamentals(yahooSymbol, DEEP_FETCH_CATEGORIES.has(category));
+}

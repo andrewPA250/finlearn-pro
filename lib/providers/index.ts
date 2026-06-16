@@ -4,11 +4,11 @@ import { localStaticProvider } from "./localStaticProvider";
 import { finnhubProvider } from "./finnhubProvider";
 import { coinGeckoProvider } from "./coinGeckoProvider";
 import { frankfurterProvider } from "./frankfurterProvider";
-import { yahooProvider } from "./yahooProvider";
+import { yahooProvider, getAssetFundamentals } from "./yahooProvider";
 import type { AssetAvailability, CandleProvider, ProviderQuote, QuoteProvider } from "./types";
 
 export * from "./types";
-export { localStaticProvider, finnhubProvider, coinGeckoProvider, frankfurterProvider, yahooProvider };
+export { localStaticProvider, finnhubProvider, coinGeckoProvider, frankfurterProvider, yahooProvider, getAssetFundamentals };
 
 /**
  * Registro provider per simbolo catalogo (Step 12 architettura,

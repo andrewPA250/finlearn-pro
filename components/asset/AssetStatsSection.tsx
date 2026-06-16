@@ -31,13 +31,6 @@ function fmtVolume(vol: number): string {
   return vol.toLocaleString("it-IT");
 }
 
-function fmtMarketCap(cap: number): string {
-  if (cap >= 1_000_000_000_000) return `$${(cap / 1_000_000_000_000).toFixed(2)}T`;
-  if (cap >= 1_000_000_000)     return `$${(cap / 1_000_000_000).toFixed(2)}B`;
-  if (cap >= 1_000_000)         return `$${(cap / 1_000_000).toFixed(2)}M`;
-  return `$${cap.toLocaleString("it-IT")}`;
-}
-
 // ---------------------------------------------------------------------------
 // Stat row sub-component
 // ---------------------------------------------------------------------------
@@ -73,35 +66,12 @@ export function AssetStatsSection({ stats, unit = "index" }: AssetStatsSectionPr
           : null,
     },
     {
-      label: "52W Range",
-      value:
-        stats.fiftyTwoWeekLow != null && stats.fiftyTwoWeekHigh != null
-          ? fmtRange(stats.fiftyTwoWeekLow, stats.fiftyTwoWeekHigh, unit)
-          : null,
-    },
-    {
       label: "Volume",
       value: stats.volume != null && stats.volume > 0 ? fmtVolume(stats.volume) : null,
     },
     {
       label: "Avg. Volume",
       value: stats.avgVolume != null && stats.avgVolume > 0 ? fmtVolume(stats.avgVolume) : null,
-    },
-    {
-      label: "Market Cap",
-      value: stats.marketCap != null ? fmtMarketCap(stats.marketCap) : null,
-    },
-    {
-      label: "P/E Ratio",
-      value: stats.pe != null ? stats.pe.toFixed(2) : null,
-    },
-    {
-      label: "EPS (TTM)",
-      value: stats.eps != null ? fmt(stats.eps, unit) : null,
-    },
-    {
-      label: "Dividend Yield",
-      value: stats.dividendYield != null ? `${stats.dividendYield.toFixed(2)}%` : null,
     },
   ];
 

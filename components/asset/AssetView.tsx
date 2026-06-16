@@ -2,14 +2,16 @@ import type { MarketDataPoint } from "@/types/market";
 import type { MarketInstrument } from "@/types/markets";
 import type { TickerQuote } from "@/lib/market/ticker";
 import type { NewsResult } from "@/lib/assetNews";
+import type { ProviderFundamentals } from "@/lib/providers/types";
 import { computeMarketContext } from "@/lib/assetContext";
 import { AssetHero } from "@/components/asset/AssetHero";
 import { AssetOverviewSection } from "@/components/asset/AssetOverviewSection";
 import { AssetChartSection } from "@/components/asset/AssetChartSection";
 import { AssetStatsSection } from "@/components/asset/AssetStatsSection";
+import { AssetFundamentals } from "@/components/asset/AssetFundamentals";
+import { AssetMarketContext } from "@/components/asset/AssetMarketContext";
 import { AssetAbout } from "@/components/asset/AssetAbout";
 import { AssetKeyFacts } from "@/components/asset/AssetKeyFacts";
-import { AssetMarketContext } from "@/components/asset/AssetMarketContext";
 import { AssetLatestNews } from "@/components/asset/AssetLatestNews";
 import { AssetLearnReferences } from "@/components/asset/AssetLearnReferences";
 
@@ -19,9 +21,10 @@ interface AssetViewProps {
   quote: TickerQuote | null;
   candles: MarketDataPoint[];
   newsResult: NewsResult;
+  fundamentals: ProviderFundamentals | null;
 }
 
-export function AssetView({ instrument, categoryLabel, quote, candles, newsResult }: AssetViewProps) {
+export function AssetView({ instrument, categoryLabel, quote, candles, newsResult, fundamentals }: AssetViewProps) {
   const context = computeMarketContext(
     quote?.value ?? null,
     quote?.stats ?? undefined,
@@ -33,7 +36,7 @@ export function AssetView({ instrument, categoryLabel, quote, candles, newsResul
 
   return (
     <div className="mx-auto flex max-w-platform flex-col gap-4 p-6">
-      {/* Hero */}
+      {/* 1 — Hero */}
       <AssetHero
         instrument={instrument}
         categoryLabel={categoryLabel}
@@ -41,10 +44,10 @@ export function AssetView({ instrument, categoryLabel, quote, candles, newsResul
       />
 
       <div className="grid animate-fade-in-up gap-4" style={{ animationDelay: "60ms" }}>
-        {/* Overview */}
+        {/* 2 — Overview */}
         <AssetOverviewSection instrument={instrument} categoryLabel={categoryLabel} quote={quote} />
 
-        {/* Chart */}
+        {/* 3 — Chart */}
         <AssetChartSection
           symbol={instrument.symbol}
           candles={candles.length > 0 ? candles : null}
@@ -53,23 +56,28 @@ export function AssetView({ instrument, categoryLabel, quote, candles, newsResul
           tvSymbol={instrument.tradingViewSymbol}
         />
 
-        {/* About */}
+        {/* 4 — Stats */}
+        {quote?.stats ? (
+          <AssetStatsSection stats={quote.stats} unit={quote.unit} />
+        ) : null}
+
+        {/* 5 — Fundamentals */}
+        {fundamentals ? (
+          <AssetFundamentals fundamentals={fundamentals} category={instrument.category} />
+        ) : null}
+
+        {/* 6 — Market Context */}
+        {hasContext ? (
+          <AssetMarketContext context={context} unit={quote?.unit ?? "index"} />
+        ) : null}
+
+        {/* 7 — About */}
         <AssetAbout symbol={instrument.symbol} category={instrument.category} />
 
-        {/* 3-col: Stats · Key Facts · Market Context */}
-        <div className="grid gap-4 sm:grid-cols-3">
-          {quote?.stats ? (
-            <AssetStatsSection stats={quote.stats} unit={quote.unit} />
-          ) : null}
+        {/* 8 — Key Facts */}
+        <AssetKeyFacts symbol={instrument.symbol} category={instrument.category} />
 
-          <AssetKeyFacts symbol={instrument.symbol} category={instrument.category} />
-
-          {hasContext ? (
-            <AssetMarketContext context={context} unit={quote?.unit ?? "index"} />
-          ) : null}
-        </div>
-
-        {/* 2-col: News · Learn */}
+        {/* 9+10 — News · Learn */}
         <div className="grid gap-4 sm:grid-cols-2">
           <AssetLatestNews newsResult={newsResult} assetName={instrument.name} />
           <AssetLearnReferences category={instrument.category} />

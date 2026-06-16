@@ -46,7 +46,7 @@ export type ProviderSource =
 export type AssetAvailability = "available" | "soon" | "error";
 
 /**
- * Metriche fondamentali e di mercato aggiuntive (Yahoo Finance).
+ * Metriche intraday e di mercato di base (Yahoo Finance quote endpoint).
  * Tutti i campi sono opzionali: non tutti i provider/strumenti li espongono.
  */
 export interface ProviderStats {
@@ -63,6 +63,50 @@ export interface ProviderStats {
   dividendYield?: number;
   fiftyTwoWeekHigh?: number;
   fiftyTwoWeekLow?: number;
+}
+
+/**
+ * Dati fondamentali approfonditi (Yahoo Finance quote + quoteSummary).
+ * Separati da ProviderStats perché richiedono fetch addizionale (revalidate: 3600).
+ * Tutti i campi opzionali — disponibilità varia per categoria asset.
+ */
+export interface ProviderFundamentals {
+  // ─── Valuation ───────────────────────────────────────────────────────────
+  trailingPE?: number;
+  forwardPE?: number;
+  priceToBook?: number;
+  beta?: number;
+  eps?: number;
+  /** Dividend yield in % (es. 0.52 = 0.52%). */
+  dividendYield?: number;
+  // ─── Income Statement (quoteSummary.financialData) ───────────────────────
+  revenue?: number;
+  ebitda?: number;
+  /** 0–1 decimal (es. 0.264 = 26.4%) */
+  grossMargin?: number;
+  profitMargin?: number;
+  operatingMargin?: number;
+  // ─── Returns ─────────────────────────────────────────────────────────────
+  /** 0–1 decimal */
+  returnOnEquity?: number;
+  returnOnAssets?: number;
+  // ─── Balance Sheet ───────────────────────────────────────────────────────
+  debtToEquity?: number;
+  // ─── Market Data (duplicated from stats for standalone component use) ────
+  marketCap?: number;
+  avgVolume?: number;
+  fiftyTwoWeekHigh?: number;
+  fiftyTwoWeekLow?: number;
+  // ─── ETF-specific ────────────────────────────────────────────────────────
+  netAssets?: number;
+  /** 0–1 decimal trailing yield */
+  fundYield?: number;
+  /** e.g. 0.0003 = 0.03% */
+  expenseRatio?: number;
+  fundFamily?: string;
+  fundCategory?: string;
+  // ─── Crypto-specific ─────────────────────────────────────────────────────
+  circulatingSupply?: number;
 }
 
 /** Quotazione "ultimo valore + variazione" restituita da un provider. */
