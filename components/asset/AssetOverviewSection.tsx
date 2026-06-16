@@ -11,11 +11,12 @@ interface AssetOverviewSectionProps {
 
 function getSourceLabel(source: string): string {
   switch (source) {
-    case "finnhub": return "Finnhub";
-    case "coingecko": return "CoinGecko";
+    case "yahoo":           return "Yahoo Finance";
+    case "finnhub":         return "Finnhub";
+    case "coingecko":       return "CoinGecko";
     case "frankfurter-ecb": return "BCE / Frankfurter";
-    case "local-static": return "Local";
-    default: return source;
+    case "local-static":    return "Local";
+    default:                return source;
   }
 }
 
