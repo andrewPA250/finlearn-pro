@@ -4,6 +4,7 @@ import { quoteFromProvider } from "@/lib/market/ticker";
 import { MARKET_CATEGORIES, getInstrumentBySymbol } from "@/lib/markets/catalog";
 import { getAssetNews } from "@/lib/assetNews";
 import { AssetView } from "@/components/asset/AssetView";
+import { AssetUnavailable } from "@/components/asset/AssetUnavailable";
 
 export default async function AssetPage({ params }: { params: { symbol: string } }) {
   const instrument = getInstrumentBySymbol(params.symbol);
@@ -18,6 +19,17 @@ export default async function AssetPage({ params }: { params: { symbol: string }
     getAssetFundamentals(instrument.symbol, instrument.category),
   ]);
   const quote = providerQuote ? quoteFromProvider(providerQuote) : null;
+
+  // If no quote data is available, show unavailable state
+  if (!quote) {
+    return (
+      <AssetUnavailable
+        instrument={instrument}
+        categoryLabel={categoryLabel}
+        reason="no_quote"
+      />
+    );
+  }
 
   return (
     <AssetView

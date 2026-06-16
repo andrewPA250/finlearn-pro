@@ -25,22 +25,79 @@ import { getYahooFreshness } from "./freshnessUtils";
 // Mappa simbolo catalogo → simbolo Yahoo Finance
 // ---------------------------------------------------------------------------
 const YAHOO_SYMBOL_MAP: Record<string, string> = {
-  // Indici
+  // Indici (7)
   SPX:    "^GSPC",
   NDX:    "^NDX",
   DJI:    "^DJI",
   RUT:    "^RUT",
-  // Azioni
+  VIX:    "^VIX",
+  DAX:    "^GDAXI",
+  FTSE:   "^FTSE",
+  N225:   "^N225",
+
+  // Azioni — Mega Cap (24)
   AAPL:   "AAPL",
   MSFT:   "MSFT",
   NVDA:   "NVDA",
   AMZN:   "AMZN",
   GOOGL:  "GOOGL",
+  GOOG:   "GOOG",
   META:   "META",
   TSLA:   "TSLA",
   AMD:    "AMD",
+  NFLX:   "NFLX",
+  INTC:   "INTC",
+  AVGO:   "AVGO",
+  ORCL:   "ORCL",
+  CRM:    "CRM",
+  ADBE:   "ADBE",
+  CSCO:   "CSCO",
+  IBM:    "IBM",
+  QCOM:   "QCOM",
+  TXN:    "TXN",
+  SHOP:   "SHOP",
+  UBER:   "UBER",
   PLTR:   "PLTR",
-  // ETF
+
+  // Azioni — Financial (10)
+  JPM:    "JPM",
+  BAC:    "BAC",
+  WFC:    "WFC",
+  GS:     "GS",
+  MS:     "MS",
+  C:      "C",
+  V:      "V",
+  MA:     "MA",
+  PYPL:   "PYPL",
+  "BRK.B":"BRK-B",
+
+  // Azioni — Consumer/Defensive (13)
+  KO:     "KO",
+  PEP:    "PEP",
+  MCD:    "MCD",
+  SBUX:   "SBUX",
+  NKE:    "NKE",
+  WMT:    "WMT",
+  COST:   "COST",
+  PG:     "PG",
+  JNJ:    "JNJ",
+  UNH:    "UNH",
+  HD:     "HD",
+  LOW:    "LOW",
+  DIS:    "DIS",
+
+  // Azioni — Energy/Industrials (9)
+  XOM:    "XOM",
+  CVX:    "CVX",
+  COP:    "COP",
+  BA:     "BA",
+  CAT:    "CAT",
+  GE:     "GE",
+  LMT:    "LMT",
+  RTX:    "RTX",
+  DE:     "DE",
+
+  // ETF (17)
   SPY:    "SPY",
   QQQ:    "QQQ",
   VOO:    "VOO",
@@ -48,21 +105,45 @@ const YAHOO_SYMBOL_MAP: Record<string, string> = {
   SCHD:   "SCHD",
   AGG:    "AGG",
   BND:    "BND",
-  // Crypto
+  VXUS:   "VXUS",
+  VEA:    "VEA",
+  VWO:    "VWO",
+  IWM:    "IWM",
+  DIA:    "DIA",
+  XLK:    "XLK",
+  XLF:    "XLF",
+  XLE:    "XLE",
+  XLV:    "XLV",
+  XLY:    "XLY",
+
+  // Crypto (12)
   BTCUSD: "BTC-USD",
   ETHUSD: "ETH-USD",
   XRPUSD: "XRP-USD",
   ADAUSD: "ADA-USD",
-  // Forex
+  SOLUSD: "SOL-USD",
+  DOGEUSD:"DOGE-USD",
+  AVAXUSD:"AVAX-USD",
+  LINKUSD:"LINK-USD",
+  DOTUSD: "DOT-USD",
+  LTCUSD: "LTC-USD",
+  BCHUSD: "BCH-USD",
+  UNIUSD: "UNI-USD",
+
+  // Forex (3)
   EURUSD: "EURUSD=X",
   GBPUSD: "GBPUSD=X",
   USDJPY: "USDJPY=X",
-  // Commodities (futures front-month)
+
+  // Commodities (6)
   XAUUSD: "GC=F",
   XAGUSD: "SI=F",
   WTI:    "CL=F",
+  BRENT:  "BZ=F",
   NATGAS: "NG=F",
-  // Bond yields
+  COPPER: "HG=F",
+
+  // Bond yields (2)
   US10Y:  "^TNX",
   US30Y:  "^TYX",
 };

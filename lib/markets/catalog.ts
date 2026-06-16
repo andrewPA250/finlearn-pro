@@ -168,7 +168,7 @@ function createBond(opts: BondOptions): MarketInstrument {
  * primario. TradingView symbols aggiunti dove validati.
  */
 export const MARKET_INSTRUMENTS: MarketInstrument[] = [
-  // ─── INDICES (8 total) ───────────────────────────────────────────────────
+  // ─── INDICES (7 total) ───────────────────────────────────────────────────
   createIndex({ symbol: "SPX",  name: "S&P 500",                          yahooSymbol: "^GSPC", tradingViewSymbol: "TVC:SPX", assetId: "sp500" }),
   createIndex({ symbol: "NDX",  name: "Nasdaq 100",                       yahooSymbol: "^NDX", tradingViewSymbol: "NASDAQ:NDX" }),
   createIndex({ symbol: "DJI",  name: "Dow Jones Industrial Average",     yahooSymbol: "^DJI", tradingViewSymbol: "DJ:DJI" }),
@@ -177,6 +177,7 @@ export const MARKET_INSTRUMENTS: MarketInstrument[] = [
   createIndex({ symbol: "DAX",  name: "DAX Performance Index",            yahooSymbol: "^GDAXI", tradingViewSymbol: "XETR:DAX" }),
   createIndex({ symbol: "FTSE", name: "FTSE 100",                         yahooSymbol: "^FTSE", tradingViewSymbol: "TVC:UKX" }),
   createIndex({ symbol: "N225", name: "Nikkei 225",                       yahooSymbol: "^N225", tradingViewSymbol: "TVC:NI225" }),
+  // createIndex({ symbol: "CAC40", name: "CAC 40", yahooSymbol: "^FCHI", tradingViewSymbol: "EURONEXT:PX1" }), // Limited data — disabled
 
   // ─── MEGA CAP STOCKS (18 total) ──────────────────────────────────────────
   createStock({ symbol: "AAPL",  name: "Apple Inc.",                       yahooSymbol: "AAPL", finnhubSymbol: "AAPL" }),
@@ -212,7 +213,7 @@ export const MARKET_INSTRUMENTS: MarketInstrument[] = [
   createStock({ symbol: "V",     name: "Visa Inc.",                        yahooSymbol: "V", finnhubSymbol: "V", tradingViewSymbol: "NYSE:V" }),
   createStock({ symbol: "MA",    name: "Mastercard Inc.",                  yahooSymbol: "MA", finnhubSymbol: "MA", tradingViewSymbol: "NYSE:MA" }),
   createStock({ symbol: "PYPL",  name: "PayPal Holdings Inc.",             yahooSymbol: "PYPL", finnhubSymbol: "PYPL" }),
-  createStock({ symbol: "BRK.B", name: "Berkshire Hathaway Inc. Class B",  yahooSymbol: "BRK-B", tradingViewSymbol: "NYSE:BRK.B" }),
+  createStock({ symbol: "BRK.B", name: "Berkshire Hathaway Inc. Class B",  yahooSymbol: "BRK-B", tradingViewSymbol: "NYSE:BRK/B" }),
 
   // ─── CONSUMER / DEFENSIVE STOCKS (13 total) ──────────────────────────────
   createStock({ symbol: "KO",    name: "Coca-Cola Co.",                    yahooSymbol: "KO", finnhubSymbol: "KO" }),
@@ -286,10 +287,10 @@ export const MARKET_INSTRUMENTS: MarketInstrument[] = [
   createCommodity({ symbol: "NATGAS", name: "Gas naturale",      yahooSymbol: "NG=F", tradingViewSymbol: "TVC:NATGAS" }),
   createCommodity({ symbol: "COPPER", name: "Rame",              yahooSymbol: "HG=F", tradingViewSymbol: "COMEX:HG1!" }),
 
-  // ─── BONDS / RATES (3 total) ─────────────────────────────────────────────
+  // ─── BONDS / RATES (2 total) ────────────────────────────────────────────
   createBond({ symbol: "US10Y", name: "US Treasury 10Y", yahooSymbol: "^TNX", tradingViewSymbol: "TVC:US10Y", assetId: "us10y" }),
-  createBond({ symbol: "US02Y", name: "US Treasury 2Y",  tradingViewSymbol: "TVC:US02Y" }),
   createBond({ symbol: "US30Y", name: "US Treasury 30Y", yahooSymbol: "^TYX", tradingViewSymbol: "TVC:US30Y" }),
+  // Note: US02Y and CAC40 disabled — limited or no Yahoo Finance data
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
