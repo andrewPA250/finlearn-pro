@@ -62,12 +62,12 @@ export function Header() {
   const learnHref = `/lessons/${getNextAccessibleLessonId(state)}`;
 
   const navItems: NavItem[] = [
-    { label: "Home", href: "/dashboard", isActive: (p) => p === "/dashboard" },
     { label: "Markets", href: "/markets", isActive: (p) => p.startsWith("/markets") || p.startsWith("/asset") },
+    { label: "Analytics", soon: true },
     { label: "Learn", href: learnHref, isActive: (p) => p.startsWith("/lessons") },
     { label: "Portfolio", soon: true },
     { label: "AI", soon: true },
-    { label: "Workbench", href: "/workbench", isActive: (p) => p === "/workbench" },
+    { label: "Quant Lab", soon: true },
   ];
 
   return (
@@ -99,10 +99,10 @@ export function Header() {
             <Link
               key={item.label}
               href={item.href!}
-              className={`rounded-card px-3 py-1.5 text-sm transition duration-150 ease-in-out ${
+              className={`rounded-card px-3 py-1.5 text-sm font-medium transition duration-150 ease-in-out ${
                 active
-                  ? "bg-accent-purple/15 font-bold text-text-primary"
-                  : "text-text-secondary hover:bg-bg-card hover:text-text-primary"
+                  ? "bg-cyan-bg text-cyan font-semibold"
+                  : "text-text-secondary hover:bg-bg-hover hover:text-text-primary"
               }`}
             >
               {item.label}
@@ -114,11 +114,11 @@ export function Header() {
       <button
         type="button"
         onClick={() => setSearchOpen(true)}
-        className="hidden max-w-xs flex-1 items-center gap-2 rounded-card border border-bg-card bg-bg-primary px-3 py-1.5 text-sm text-text-secondary transition duration-150 ease-in-out hover:border-accent-purple/40 lg:flex"
+        className="hidden max-w-xs flex-1 items-center gap-2 rounded-card border border-bg-border bg-bg-sidebar px-3 py-1.5 text-sm text-text-secondary transition duration-150 ease-in-out hover:border-cyan/30 hover:bg-bg-hover lg:flex"
       >
         <SearchIcon className="h-4 w-4" />
-        <span className="flex-1 text-left text-text-secondary/60">Cerca...</span>
-        <kbd className="rounded border border-text-secondary/20 px-1.5 py-0.5 font-mono text-[10px]">
+        <span className="flex-1 text-left text-text-muted">Search assets, stocks, ETFs…</span>
+        <kbd className="rounded border border-text-disabled/30 px-1.5 py-0.5 font-mono text-[10px] text-text-disabled">
           Ctrl K
         </kbd>
       </button>
@@ -138,10 +138,10 @@ export function Header() {
             <button
               type="button"
               onClick={() => setMenuOpen((open) => !open)}
-              className="flex items-center gap-1.5 rounded-card px-2 py-1.5 transition duration-150 ease-in-out hover:bg-bg-card"
+              className="flex items-center gap-1.5 rounded-card px-2 py-1.5 transition duration-150 ease-in-out hover:bg-bg-hover"
               aria-label="Menu account"
             >
-              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-accent-purple/15 text-xs font-bold text-accent-purple">
+              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-cyan-bg/50 text-xs font-bold text-cyan">
                 {user.email ? user.email[0]?.toUpperCase() : <UserIcon className="h-4 w-4" />}
               </span>
               <ChevronDownIcon className="h-3.5 w-3.5 text-text-secondary" />
@@ -155,22 +155,32 @@ export function Header() {
                   className="fixed inset-0 z-30 cursor-default"
                   onClick={() => setMenuOpen(false)}
                 />
-                <div className="absolute right-0 top-full z-40 mt-2 w-56 rounded-card border border-bg-card bg-bg-sidebar p-2 shadow-lg">
-                  <p className="truncate px-3 py-1.5 text-xs text-text-secondary">{user.email}</p>
+                <div className="absolute right-0 top-full z-40 mt-2 w-56 rounded-card border border-bg-border bg-bg-card p-2 shadow-lg">
+                  <p className="truncate px-3 py-1.5 text-xs text-text-muted">{user.email}</p>
+                  <hr className="my-1 border-bg-border" />
                   <Link
                     href="/profile"
                     onClick={() => setMenuOpen(false)}
-                    className="flex items-center gap-2.5 rounded-card px-3 py-2 text-sm text-text-secondary transition duration-150 ease-in-out hover:bg-bg-card hover:text-text-primary"
+                    className="flex items-center gap-2.5 rounded-card px-3 py-2 text-sm text-text-secondary transition duration-150 ease-in-out hover:bg-bg-hover hover:text-text-primary"
                   >
                     <UserIcon className="h-4 w-4" />
-                    Profilo
+                    Profile
                   </Link>
+                  <Link
+                    href="/settings"
+                    onClick={() => setMenuOpen(false)}
+                    className="flex items-center gap-2.5 rounded-card px-3 py-2 text-sm text-text-secondary transition duration-150 ease-in-out hover:bg-bg-hover hover:text-text-primary"
+                  >
+                    <span>⚙</span>
+                    Settings
+                  </Link>
+                  <hr className="my-1 border-bg-border" />
                   <button
                     type="button"
                     onClick={handleLogout}
-                    className="flex w-full items-center gap-2.5 rounded-card px-3 py-2 text-left text-sm text-text-secondary transition duration-150 ease-in-out hover:bg-bg-card hover:text-error"
+                    className="flex w-full items-center gap-2.5 rounded-card px-3 py-2 text-left text-sm text-negative transition duration-150 ease-in-out hover:bg-bg-hover"
                   >
-                    Esci
+                    Sign Out
                   </button>
                 </div>
               </>
@@ -179,9 +189,9 @@ export function Header() {
         ) : (
           <Link
             href="/login"
-            className="rounded-card bg-accent-purple px-4 py-1.5 text-sm font-bold text-text-primary transition duration-150 ease-in-out hover:opacity-90"
+            className="rounded-card bg-cyan px-4 py-1.5 text-sm font-semibold text-bg-primary transition duration-150 ease-in-out hover:bg-cyan-dark"
           >
-            Accedi
+            Sign In
           </Link>
         )}
       </div>

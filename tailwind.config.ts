@@ -9,15 +9,38 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        /* Brand colors */
+        cyan: "var(--color-cyan)",
+        "cyan-dark": "var(--color-cyan-dark)",
+        "cyan-light": "var(--color-cyan-light)",
+        "cyan-bg": "var(--color-cyan-bg)",
+
+        /* Background scale */
+        "bg-base": "var(--bg-base)",
         "bg-primary": "var(--bg-primary)",
         "bg-card": "var(--bg-card)",
         "bg-sidebar": "var(--bg-sidebar)",
+        "bg-hover": "var(--bg-hover)",
+        "bg-border": "var(--bg-border)",
+
+        /* Text scale */
+        "text-primary": "var(--text-primary)",
+        "text-secondary": "var(--text-secondary)",
+        "text-muted": "var(--text-muted)",
+        "text-disabled": "var(--text-disabled)",
+
+        /* Semantic */
+        positive: "var(--color-positive)",
+        negative: "var(--color-negative)",
+        caution: "var(--color-caution)",
+        "color-ai": "var(--color-ai)",
+        info: "var(--color-info)",
+
+        /* Legacy (backward compat) */
         "accent-purple": "var(--accent-purple)",
         "accent-green": "var(--accent-green)",
         "accent-blue": "var(--accent-blue)",
         "accent-amber": "var(--accent-amber)",
-        "text-primary": "var(--text-primary)",
-        "text-secondary": "var(--text-secondary)",
         error: "var(--error)",
       },
       fontFamily: {

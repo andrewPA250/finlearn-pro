@@ -3,14 +3,38 @@
 @tailwind utilities;
 
 :root {
-  --bg-primary: #0F1117;
-  --bg-card: #1A1D27;
-  --bg-sidebar: #13151F;
+  /* ========== BRAND COLORS (Cyan primary) ========== */
+  --color-cyan: #00d4b8;
+  --color-cyan-dark: #00b8a0;
+  --color-cyan-light: #00e8cc;
+  --color-cyan-bg: #003d35;
+
+  /* ========== BACKGROUND SCALE ========== */
+  --bg-base: #060a0f;
+  --bg-primary: #0a0e13;
+  --bg-card: #0d1520;
+  --bg-sidebar: #111c29;
+  --bg-hover: #162030;
+  --bg-border: #1e2d3d;
+  --bg-border-em: #2d3f52;
+
+  /* ========== TEXT SCALE ========== */
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-disabled: #475569;
+
+  /* ========== SEMANTIC COLORS ========== */
+  --color-positive: #4ade80;
+  --color-negative: #f87171;
+  --color-caution: #fbbf24;
+  --color-ai: #a78bfa;
+  --color-info: #1b8aff;
+
+  /* ========== LEGACY ALIASES (for backward compatibility) ========== */
   --accent-purple: #6C63FF;
   --accent-green: #00D4A8;
   --accent-blue: #4DA3FF;
-  --text-primary: #F0F0F0;
-  --text-secondary: #8B8FA8;
   --error: #FF6B6B;
   --accent-amber: #F59E0B;
 }
