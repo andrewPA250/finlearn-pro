@@ -177,7 +177,6 @@ export const MARKET_INSTRUMENTS: MarketInstrument[] = [
   createIndex({ symbol: "DAX",  name: "DAX Performance Index",            yahooSymbol: "^GDAXI", tradingViewSymbol: "XETR:DAX" }),
   createIndex({ symbol: "FTSE", name: "FTSE 100",                         yahooSymbol: "^FTSE", tradingViewSymbol: "TVC:UKX" }),
   createIndex({ symbol: "N225", name: "Nikkei 225",                       yahooSymbol: "^N225", tradingViewSymbol: "TVC:NI225" }),
-  // createIndex({ symbol: "CAC40", name: "CAC 40", yahooSymbol: "^FCHI", tradingViewSymbol: "EURONEXT:PX1" }), // Limited data — disabled
 
   // ─── MEGA CAP STOCKS (18 total) ──────────────────────────────────────────
   createStock({ symbol: "AAPL",  name: "Apple Inc.",                       yahooSymbol: "AAPL", finnhubSymbol: "AAPL" }),
@@ -291,7 +290,6 @@ export const MARKET_INSTRUMENTS: MarketInstrument[] = [
   // ─── BONDS / RATES (2 total) ────────────────────────────────────────────
   createBond({ symbol: "US10Y", name: "US Treasury 10Y", yahooSymbol: "^TNX", tradingViewSymbol: "TVC:US10Y", assetId: "us10y" }),
   createBond({ symbol: "US30Y", name: "US Treasury 30Y", yahooSymbol: "^TYX", tradingViewSymbol: "TVC:US30Y" }),
-  // Note: CAC40 disabled — limited or no Yahoo Finance data
 
   // ─── PHARMACEUTICAL & HEALTHCARE (16 total) ──────────────────────────────
   createStock({ symbol: "TMO",   name: "Thermo Fisher Scientific Inc.",     yahooSymbol: "TMO", finnhubSymbol: "TMO" }),
