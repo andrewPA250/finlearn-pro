@@ -66,7 +66,7 @@ export function Header() {
 
   const navItems: NavItem[] = [
     { label: "Markets", href: "/markets", isActive: (p) => p.startsWith("/markets") || p.startsWith("/asset") },
-    { label: "Analytics", soon: true },
+    { label: "Analytics", href: "/analytics/compare", isActive: (p) => p.startsWith("/analytics") },
     { label: "Learn", href: learnHref, isActive: (p) => p.startsWith("/lessons") },
     { label: "Portfolio", soon: true },
     { label: "AI", soon: true },
