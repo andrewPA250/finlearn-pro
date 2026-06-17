@@ -699,16 +699,6 @@ export const MARKET_INSTRUMENTS: MarketInstrument[] = [
 
   // ─── ADDITIONAL FINANCIAL & SERVICES (8 total) ──────────────────────────────
   createStock({ symbol: "AON",   name: "Aon PLC",                                yahooSymbol: "AON",   tradingViewSymbol: "NYSE:AON" }),
-  createStock({ symbol: "PLD",   name: "Prologis Inc.",                          yahooSymbol: "PLD",   tradingViewSymbol: "NYSE:PLD" }),
-  createStock({ symbol: "UPS",   name: "United Parcel Service Inc.",             yahooSymbol: "UPS",   tradingViewSymbol: "NYSE:UPS" }),
-  createStock({ symbol: "FDX",   name: "FedEx Corporation",                      yahooSymbol: "FDX",   tradingViewSymbol: "NYSE:FDX" }),
-  createStock({ symbol: "CCEP",  name: "Coca-Cola Europacific Partners",         yahooSymbol: "CCEP",  tradingViewSymbol: "NASDAQ:CCEP" }),
-  createStock({ symbol: "PEP",   name: "PepsiCo Inc.",                           yahooSymbol: "PEP",   tradingViewSymbol: "NASDAQ:PEP" }),
-  createStock({ symbol: "HSY",   name: "The Hershey Company",                    yahooSymbol: "HSY",   tradingViewSymbol: "NYSE:HSY" }),
-  createStock({ symbol: "MKC",   name: "McCormick & Company Inc.",               yahooSymbol: "MKC",   tradingViewSymbol: "NYSE:MKC" }),
-
-  // ─── INTERNATIONAL: EUROPE EXPANDED (14 total) ─────────────────────────────
-  createStock({ symbol: "TTE",   name: "TotalEnergies SE",                       yahooSymbol: "TTE",   tradingViewSymbol: "NYSE:TTE" }),
   createStock({ symbol: "BP",    name: "BP PLC",                                 yahooSymbol: "BP",    tradingViewSymbol: "NYSE:BP" }),
   createStock({ symbol: "SHEL",  name: "Shell PLC",                              yahooSymbol: "SHEL",  tradingViewSymbol: "NYSE:SHEL" }),
   createStock({ symbol: "RIO",   name: "Rio Tinto PLC",                          yahooSymbol: "RIO",   tradingViewSymbol: "NYSE:RIO" }),

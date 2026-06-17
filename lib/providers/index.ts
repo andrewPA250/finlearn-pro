@@ -75,11 +75,77 @@ export async function getInstrumentQuote(instrument: MarketInstrument): Promise<
 }
 
 /**
- * Tutte le quotazioni disponibili (locale + Finnhub + CoinGecko + Frankfurter)
- * in parallelo via `Promise.all`. Next.js ISR cache evita richieste ridondanti.
+ * Tutte le quotazioni disponibili in batch per evitare overload.
+ * Batch size 30, timeout per batch, fallback su valori mancanti.
  */
-export async function getAllAssetQuotes(): Promise<ProviderQuote[]> {
+export async function getAllAssetQuotes(maxConcurrency: number = 30): Promise<ProviderQuote[]> {
   const symbols = Object.keys(QUOTE_PROVIDERS);
-  const quotes = await Promise.all(symbols.map((s) => getAssetQuote(s)));
-  return quotes.filter((q): q is ProviderQuote => q !== null);
+  const results: ProviderQuote[] = [];
+  const failed: string[] = [];
+
+  // Batch fetch with concurrency limit
+  for (let i = 0; i < symbols.length; i += maxConcurrency) {
+    const batch = symbols.slice(i, i + maxConcurrency);
+    const batchPromises = batch.map(async (s) => {
+      try {
+        const quote = await Promise.race([
+          getAssetQuote(s),
+          new Promise<null>((_, reject) =>
+            setTimeout(() => reject(new Error("Quote fetch timeout")), 5000)
+          ),
+        ]);
+        if (quote) results.push(quote);
+        else failed.push(s);
+      } catch {
+        failed.push(s);
+      }
+    });
+    await Promise.all(batchPromises);
+  }
+
+  if (failed.length > 0) {
+    console.warn(`[getAllAssetQuotes] ${failed.length}/${symbols.length} quotes failed (${failed.slice(0, 5).join(", ")}${failed.length > 5 ? "..." : ""})`);
+  }
+
+  return results;
+}
+
+/**
+ * Quotazioni per una categoria specifica (batched).
+ * Fetch solo asset in categoria, evita fetching dei 600.
+ */
+export async function getCategoryQuotes(categoryId: string, maxConcurrency: number = 30): Promise<ProviderQuote[]> {
+  const categorySymbols = MARKET_INSTRUMENTS
+    .filter((i) => i.category === categoryId)
+    .map((i) => i.symbol)
+    .filter((s) => QUOTE_PROVIDERS[s]);
+
+  const results: ProviderQuote[] = [];
+  const failed: string[] = [];
+
+  // Batch fetch
+  for (let i = 0; i < categorySymbols.length; i += maxConcurrency) {
+    const batch = categorySymbols.slice(i, i + maxConcurrency);
+    const batchPromises = batch.map(async (s) => {
+      try {
+        const quote = await Promise.race([
+          getAssetQuote(s),
+          new Promise<null>((_, reject) =>
+            setTimeout(() => reject(new Error("Quote fetch timeout")), 5000)
+          ),
+        ]);
+        if (quote) results.push(quote);
+        else failed.push(s);
+      } catch {
+        failed.push(s);
+      }
+    });
+    await Promise.all(batchPromises);
+  }
+
+  if (failed.length > 0) {
+    console.warn(`[getCategoryQuotes] ${categoryId}: ${failed.length} quotes failed`);
+  }
+
+  return results;
 }

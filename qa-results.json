@@ -1,0 +1,344 @@
+[
+  {
+    "route": "/",
+    "status": 200,
+    "statusText": "✓ OK",
+    "issues": [],
+    "headers": {
+      "vary": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Accept-Encoding",
+      "cache-control": "no-store, must-revalidate",
+      "x-powered-by": "Next.js",
+      "content-type": "text/html; charset=utf-8",
+      "date": "Wed, 17 Jun 2026 17:22:41 GMT",
+      "connection": "keep-alive",
+      "keep-alive": "timeout=5",
+      "transfer-encoding": "chunked"
+    },
+    "contentLength": 109252,
+    "hasContent": true
+  },
+  {
+    "route": "/markets",
+    "status": 200,
+    "statusText": "✓ OK",
+    "issues": [],
+    "headers": {
+      "vary": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Accept-Encoding",
+      "cache-control": "no-store, must-revalidate",
+      "x-powered-by": "Next.js",
+      "content-type": "text/html; charset=utf-8",
+      "date": "Wed, 17 Jun 2026 17:22:43 GMT",
+      "connection": "keep-alive",
+      "keep-alive": "timeout=5",
+      "transfer-encoding": "chunked"
+    },
+    "contentLength": 485921,
+    "hasContent": true
+  },
+  {
+    "route": "/markets/screener",
+    "status": 200,
+    "statusText": "✓ OK",
+    "issues": [],
+    "headers": {
+      "vary": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Accept-Encoding",
+      "cache-control": "no-store, must-revalidate",
+      "x-powered-by": "Next.js",
+      "content-type": "text/html; charset=utf-8",
+      "date": "Wed, 17 Jun 2026 17:22:54 GMT",
+      "connection": "keep-alive",
+      "keep-alive": "timeout=5",
+      "transfer-encoding": "chunked"
+    },
+    "contentLength": 1047211,
+    "hasContent": true
+  },
+  {
+    "route": "/markets/heatmap",
+    "status": 200,
+    "statusText": "✓ OK",
+    "issues": [],
+    "headers": {
+      "vary": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Accept-Encoding",
+      "cache-control": "no-store, must-revalidate",
+      "x-powered-by": "Next.js",
+      "content-type": "text/html; charset=utf-8",
+      "date": "Wed, 17 Jun 2026 17:23:02 GMT",
+      "connection": "keep-alive",
+      "keep-alive": "timeout=5",
+      "transfer-encoding": "chunked"
+    },
+    "contentLength": 481104,
+    "hasContent": true
+  },
+  {
+    "route": "/markets/category/equity",
+    "status": 200,
+    "statusText": "✓ OK",
+    "issues": [],
+    "headers": {
+      "vary": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Accept-Encoding",
+      "cache-control": "no-store, must-revalidate",
+      "x-powered-by": "Next.js",
+      "content-type": "text/html; charset=utf-8",
+      "date": "Wed, 17 Jun 2026 17:23:02 GMT",
+      "connection": "keep-alive",
+      "keep-alive": "timeout=5",
+      "transfer-encoding": "chunked"
+    },
+    "contentLength": 515778,
+    "hasContent": true
+  },
+  {
+    "route": "/markets/category/etf",
+    "status": 200,
+    "statusText": "✓ OK",
+    "issues": [],
+    "headers": {
+      "vary": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Accept-Encoding",
+      "cache-control": "no-store, must-revalidate",
+      "x-powered-by": "Next.js",
+      "content-type": "text/html; charset=utf-8",
+      "date": "Wed, 17 Jun 2026 17:23:02 GMT",
+      "connection": "keep-alive",
+      "keep-alive": "timeout=5",
+      "transfer-encoding": "chunked"
+    },
+    "contentLength": 169327,
+    "hasContent": true
+  },
+  {
+    "route": "/markets/category/crypto",
+    "status": 200,
+    "statusText": "✓ OK",
+    "issues": [],
+    "headers": {
+      "vary": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Accept-Encoding",
+      "cache-control": "no-store, must-revalidate",
+      "x-powered-by": "Next.js",
+      "content-type": "text/html; charset=utf-8",
+      "date": "Wed, 17 Jun 2026 17:23:02 GMT",
+      "connection": "keep-alive",
+      "keep-alive": "timeout=5",
+      "transfer-encoding": "chunked"
+    },
+    "contentLength": 103456,
+    "hasContent": true
+  },
+  {
+    "route": "/markets/category/index",
+    "status": 200,
+    "statusText": "✓ OK",
+    "issues": [],
+    "headers": {
+      "vary": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Accept-Encoding",
+      "cache-control": "no-store, must-revalidate",
+      "x-powered-by": "Next.js",
+      "content-type": "text/html; charset=utf-8",
+      "date": "Wed, 17 Jun 2026 17:23:02 GMT",
+      "connection": "keep-alive",
+      "keep-alive": "timeout=5",
+      "transfer-encoding": "chunked"
+    },
+    "contentLength": 90419,
+    "hasContent": true
+  },
+  {
+    "route": "/markets/category/forex",
+    "status": 200,
+    "statusText": "✓ OK",
+    "issues": [],
+    "headers": {
+      "vary": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Accept-Encoding",
+      "cache-control": "no-store, must-revalidate",
+      "x-powered-by": "Next.js",
+      "content-type": "text/html; charset=utf-8",
+      "date": "Wed, 17 Jun 2026 17:23:03 GMT",
+      "connection": "keep-alive",
+      "keep-alive": "timeout=5",
+      "transfer-encoding": "chunked"
+    },
+    "contentLength": 95694,
+    "hasContent": true
+  },
+  {
+    "route": "/markets/category/commodity",
+    "status": 200,
+    "statusText": "✓ OK",
+    "issues": [],
+    "headers": {
+      "vary": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Accept-Encoding",
+      "cache-control": "no-store, must-revalidate",
+      "x-powered-by": "Next.js",
+      "content-type": "text/html; charset=utf-8",
+      "date": "Wed, 17 Jun 2026 17:23:03 GMT",
+      "connection": "keep-alive",
+      "keep-alive": "timeout=5",
+      "transfer-encoding": "chunked"
+    },
+    "contentLength": 80245,
+    "hasContent": true
+  },
+  {
+    "route": "/markets/category/bond",
+    "status": 200,
+    "statusText": "✓ OK",
+    "issues": [],
+    "headers": {
+      "vary": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Accept-Encoding",
+      "cache-control": "no-store, must-revalidate",
+      "x-powered-by": "Next.js",
+      "content-type": "text/html; charset=utf-8",
+      "date": "Wed, 17 Jun 2026 17:23:03 GMT",
+      "connection": "keep-alive",
+      "keep-alive": "timeout=5",
+      "transfer-encoding": "chunked"
+    },
+    "contentLength": 72551,
+    "hasContent": true
+  },
+  {
+    "route": "/watchlist",
+    "status": 200,
+    "statusText": "✓ OK",
+    "issues": [],
+    "headers": {
+      "vary": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Accept-Encoding",
+      "cache-control": "no-store, must-revalidate",
+      "x-powered-by": "Next.js",
+      "content-type": "text/html; charset=utf-8",
+      "date": "Wed, 17 Jun 2026 17:23:03 GMT",
+      "connection": "keep-alive",
+      "keep-alive": "timeout=5",
+      "transfer-encoding": "chunked"
+    },
+    "contentLength": 156446,
+    "hasContent": true
+  },
+  {
+    "route": "/news",
+    "status": 200,
+    "statusText": "✓ OK",
+    "issues": [],
+    "headers": {
+      "vary": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Accept-Encoding",
+      "cache-control": "no-store, must-revalidate",
+      "x-powered-by": "Next.js",
+      "content-type": "text/html; charset=utf-8",
+      "date": "Wed, 17 Jun 2026 17:23:03 GMT",
+      "connection": "keep-alive",
+      "keep-alive": "timeout=5",
+      "transfer-encoding": "chunked"
+    },
+    "contentLength": 130809,
+    "hasContent": true
+  },
+  {
+    "route": "/analytics/compare",
+    "status": 200,
+    "statusText": "✓ OK",
+    "issues": [],
+    "headers": {
+      "vary": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Accept-Encoding",
+      "cache-control": "no-store, must-revalidate",
+      "x-powered-by": "Next.js",
+      "content-type": "text/html; charset=utf-8",
+      "date": "Wed, 17 Jun 2026 17:23:03 GMT",
+      "connection": "keep-alive",
+      "keep-alive": "timeout=5",
+      "transfer-encoding": "chunked"
+    },
+    "contentLength": 513704,
+    "hasContent": true
+  },
+  {
+    "route": "/asset/AAPL",
+    "status": 200,
+    "statusText": "✓ OK",
+    "issues": [],
+    "headers": {
+      "vary": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Accept-Encoding",
+      "cache-control": "no-store, must-revalidate",
+      "x-powered-by": "Next.js",
+      "content-type": "text/html; charset=utf-8",
+      "date": "Wed, 17 Jun 2026 17:23:03 GMT",
+      "connection": "keep-alive",
+      "keep-alive": "timeout=5",
+      "transfer-encoding": "chunked"
+    },
+    "contentLength": 331816,
+    "hasContent": true
+  },
+  {
+    "route": "/asset/NVDA",
+    "status": 200,
+    "statusText": "✓ OK",
+    "issues": [],
+    "headers": {
+      "vary": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Accept-Encoding",
+      "cache-control": "no-store, must-revalidate",
+      "x-powered-by": "Next.js",
+      "content-type": "text/html; charset=utf-8",
+      "date": "Wed, 17 Jun 2026 17:23:03 GMT",
+      "connection": "keep-alive",
+      "keep-alive": "timeout=5",
+      "transfer-encoding": "chunked"
+    },
+    "contentLength": 333698,
+    "hasContent": true
+  },
+  {
+    "route": "/asset/MSFT",
+    "status": 200,
+    "statusText": "✓ OK",
+    "issues": [],
+    "headers": {
+      "vary": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Accept-Encoding",
+      "cache-control": "no-store, must-revalidate",
+      "x-powered-by": "Next.js",
+      "content-type": "text/html; charset=utf-8",
+      "date": "Wed, 17 Jun 2026 17:23:03 GMT",
+      "connection": "keep-alive",
+      "keep-alive": "timeout=5",
+      "transfer-encoding": "chunked"
+    },
+    "contentLength": 332988,
+    "hasContent": true
+  },
+  {
+    "route": "/asset/BTCUSD",
+    "status": 200,
+    "statusText": "✓ OK",
+    "issues": [],
+    "headers": {
+      "vary": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Accept-Encoding",
+      "cache-control": "no-store, must-revalidate",
+      "x-powered-by": "Next.js",
+      "content-type": "text/html; charset=utf-8",
+      "date": "Wed, 17 Jun 2026 17:23:03 GMT",
+      "connection": "keep-alive",
+      "keep-alive": "timeout=5",
+      "transfer-encoding": "chunked"
+    },
+    "contentLength": 324269,
+    "hasContent": true
+  },
+  {
+    "route": "/settings",
+    "status": 200,
+    "statusText": "✓ OK",
+    "issues": [],
+    "headers": {
+      "vary": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Accept-Encoding",
+      "cache-control": "no-store, must-revalidate",
+      "x-powered-by": "Next.js",
+      "content-type": "text/html; charset=utf-8",
+      "date": "Wed, 17 Jun 2026 17:23:03 GMT",
+      "connection": "keep-alive",
+      "keep-alive": "timeout=5",
+      "transfer-encoding": "chunked"
+    },
+    "contentLength": 55349,
+    "hasContent": true
+  }
+]

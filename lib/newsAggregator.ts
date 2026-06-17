@@ -164,6 +164,25 @@ async function timedFetch(url: string): Promise<Response> {
   }
 }
 
+/**
+ * Strip HTML tags from text. Handles entities, newlines, and extra whitespace.
+ */
+function stripHtml(html: string): string {
+  if (!html) return "";
+  // Remove HTML tags
+  const noTags = html.replace(/<[^>]*>/g, " ");
+  // Decode common HTML entities
+  const decoded = noTags
+    .replace(/&nbsp;/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'");
+  // Clean up extra whitespace
+  return decoded.replace(/\s+/g, " ").trim();
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function normalizeRaw(raw: any[]): Omit<NewsItem, "relevanceScore">[] {
   return raw
@@ -171,8 +190,8 @@ function normalizeRaw(raw: any[]): Omit<NewsItem, "relevanceScore">[] {
     .slice(0, 20)
     .map((item) => ({
       id:       String(item.id ?? item.datetime ?? Math.random()),
-      headline: item.headline as string,
-      summary:  item.summary  ?? "",
+      headline: stripHtml(item.headline as string),
+      summary:  stripHtml(item.summary ?? ""),
       source:   item.source   ?? "",
       url:      item.url      as string,
       datetime: item.datetime ?? 0,

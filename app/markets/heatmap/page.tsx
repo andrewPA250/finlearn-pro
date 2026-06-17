@@ -10,11 +10,15 @@ export const metadata: Metadata = {
 };
 
 export default async function HeatmapPage() {
-  const tickerQuotes = (await getAllAssetQuotes()).map(quoteFromProvider);
+  // Batched fetch with 30 concurrent limit + timeout protection
+  const quotes = await getAllAssetQuotes(30);
+  const tickerQuotes = quotes.map(quoteFromProvider);
 
   const quotesBySymbol: Record<string, ReturnType<typeof quoteFromProvider>> = Object.fromEntries(
     tickerQuotes.map((quote) => [quote.id, quote])
   );
+
+  console.log(`[HeatmapPage] Loaded ${tickerQuotes.length}/${MARKET_INSTRUMENTS.length} quotes`);
 
   return <HeatmapView instruments={MARKET_INSTRUMENTS} quotesBySymbol={quotesBySymbol} />;
 }

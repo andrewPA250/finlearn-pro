@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getAllAssetQuotes } from "@/lib/providers";
+import { getCategoryQuotes } from "@/lib/providers";
 import { quoteFromProvider } from "@/lib/market/ticker";
 import { isValidCategory, getCategoryLabel, getCategoryDescription, getAssetsByCategory } from "@/lib/markets/categoryHelpers";
 import type { MarketCategoryId } from "@/types/markets";
@@ -30,18 +30,18 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
     notFound();
   }
 
-  // Get all quotes and convert to TickerQuote
-  const allQuotes = await getAllAssetQuotes();
-  const quotesBySymbol = Object.fromEntries(
-    allQuotes.map((q) => [q.symbol, quoteFromProvider(q)])
-  );
-
-  // Get all instruments in this category
+  // Get instruments in this category
   const instruments = getAssetsByCategory(categoryId as MarketCategoryId);
 
   if (instruments.length === 0) {
     notFound();
   }
+
+  // Fetch only this category's quotes (not all 600)
+  const categoryQuotes = await getCategoryQuotes(categoryId);
+  const quotesBySymbol = Object.fromEntries(
+    categoryQuotes.map((q) => [q.symbol, quoteFromProvider(q)])
+  );
 
   return (
     <CategoryView

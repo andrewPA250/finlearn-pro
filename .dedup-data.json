@@ -1,0 +1,4801 @@
+{
+  "deduplicated": [
+    {
+      "type": "Index",
+      "paramsStr": "{ symbol: \"SPX\",  name: \"S&P 500\",                          yahooSymbol: \"^GSPC\", tradingViewSymbol: \"TVC:SPX\", assetId: \"sp500\" }",
+      "index": 4789,
+      "symbol": "SPX",
+      "yahooSymbol": "^GSPC",
+      "name": "S&P 500"
+    },
+    {
+      "type": "Index",
+      "paramsStr": "{ symbol: \"NDX\",  name: \"Nasdaq 100\",                       yahooSymbol: \"^NDX\", tradingViewSymbol: \"NASDAQ:NDX\" }",
+      "index": 4936,
+      "symbol": "NDX",
+      "yahooSymbol": "^NDX",
+      "name": "Nasdaq 100"
+    },
+    {
+      "type": "Index",
+      "paramsStr": "{ symbol: \"DJI\",  name: \"Dow Jones Industrial Average\",     yahooSymbol: \"^DJI\", tradingViewSymbol: \"DJ:DJI\" }",
+      "index": 5067,
+      "symbol": "DJI",
+      "yahooSymbol": "^DJI",
+      "name": "Dow Jones Industrial Average"
+    },
+    {
+      "type": "Index",
+      "paramsStr": "{ symbol: \"RUT\",  name: \"Russell 2000\",                     yahooSymbol: \"^RUT\", tradingViewSymbol: \"TVC:RUT\" }",
+      "index": 5194,
+      "symbol": "RUT",
+      "yahooSymbol": "^RUT",
+      "name": "Russell 2000"
+    },
+    {
+      "type": "Index",
+      "paramsStr": "{ symbol: \"VIX\",  name: \"CBOE Volatility Index\",            yahooSymbol: \"^VIX\", tradingViewSymbol: \"TVC:VIX\" }",
+      "index": 5322,
+      "symbol": "VIX",
+      "yahooSymbol": "^VIX",
+      "name": "CBOE Volatility Index"
+    },
+    {
+      "type": "Index",
+      "paramsStr": "{ symbol: \"DAX\",  name: \"DAX Performance Index\",            yahooSymbol: \"^GDAXI\", tradingViewSymbol: \"XETR:DAX\" }",
+      "index": 5450,
+      "symbol": "DAX",
+      "yahooSymbol": "^GDAXI",
+      "name": "DAX Performance Index"
+    },
+    {
+      "type": "Index",
+      "paramsStr": "{ symbol: \"FTSE\", name: \"FTSE 100\",                         yahooSymbol: \"^FTSE\", tradingViewSymbol: \"TVC:UKX\" }",
+      "index": 5581,
+      "symbol": "FTSE",
+      "yahooSymbol": "^FTSE",
+      "name": "FTSE 100"
+    },
+    {
+      "type": "Index",
+      "paramsStr": "{ symbol: \"N225\", name: \"Nikkei 225\",                       yahooSymbol: \"^N225\", tradingViewSymbol: \"TVC:NI225\" }",
+      "index": 5710,
+      "symbol": "N225",
+      "yahooSymbol": "^N225",
+      "name": "Nikkei 225"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"AAPL\",  name: \"Apple Inc.\",                       yahooSymbol: \"AAPL\", finnhubSymbol: \"AAPL\" }",
+      "index": 5921,
+      "symbol": "AAPL",
+      "yahooSymbol": "AAPL",
+      "name": "Apple Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"MSFT\",  name: \"Microsoft Corp.\",                  yahooSymbol: \"MSFT\", finnhubSymbol: \"MSFT\" }",
+      "index": 6043,
+      "symbol": "MSFT",
+      "yahooSymbol": "MSFT",
+      "name": "Microsoft Corp."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"NVDA\",  name: \"NVIDIA Corp.\",                     yahooSymbol: \"NVDA\", finnhubSymbol: \"NVDA\" }",
+      "index": 6165,
+      "symbol": "NVDA",
+      "yahooSymbol": "NVDA",
+      "name": "NVIDIA Corp."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"AMZN\",  name: \"Amazon.com Inc.\",                  yahooSymbol: \"AMZN\", finnhubSymbol: \"AMZN\" }",
+      "index": 6287,
+      "symbol": "AMZN",
+      "yahooSymbol": "AMZN",
+      "name": "Amazon.com Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"GOOGL\", name: \"Alphabet Inc. (Classe A)\",         yahooSymbol: \"GOOGL\", finnhubSymbol: \"GOOGL\" }",
+      "index": 6409,
+      "symbol": "GOOGL",
+      "yahooSymbol": "GOOGL",
+      "name": "Alphabet Inc. (Classe A)"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"GOOG\",  name: \"Alphabet Inc. (Classe C)\",         yahooSymbol: \"GOOG\", finnhubSymbol: \"GOOG\" }",
+      "index": 6533,
+      "symbol": "GOOG",
+      "yahooSymbol": "GOOG",
+      "name": "Alphabet Inc. (Classe C)"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"META\",  name: \"Meta Platforms Inc.\",              yahooSymbol: \"META\", finnhubSymbol: \"META\" }",
+      "index": 6655,
+      "symbol": "META",
+      "yahooSymbol": "META",
+      "name": "Meta Platforms Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"TSLA\",  name: \"Tesla Inc.\",                       yahooSymbol: \"TSLA\", finnhubSymbol: \"TSLA\" }",
+      "index": 6777,
+      "symbol": "TSLA",
+      "yahooSymbol": "TSLA",
+      "name": "Tesla Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"AMD\",   name: \"Advanced Micro Devices Inc.\",      yahooSymbol: \"AMD\", finnhubSymbol: \"AMD\" }",
+      "index": 6899,
+      "symbol": "AMD",
+      "yahooSymbol": "AMD",
+      "name": "Advanced Micro Devices Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"NFLX\",  name: \"Netflix Inc.\",                     yahooSymbol: \"NFLX\", finnhubSymbol: \"NFLX\" }",
+      "index": 7019,
+      "symbol": "NFLX",
+      "yahooSymbol": "NFLX",
+      "name": "Netflix Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"INTC\",  name: \"Intel Corporation\",                yahooSymbol: \"INTC\", finnhubSymbol: \"INTC\" }",
+      "index": 7141,
+      "symbol": "INTC",
+      "yahooSymbol": "INTC",
+      "name": "Intel Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"AVGO\",  name: \"Broadcom Inc.\",                    yahooSymbol: \"AVGO\", finnhubSymbol: \"AVGO\" }",
+      "index": 7263,
+      "symbol": "AVGO",
+      "yahooSymbol": "AVGO",
+      "name": "Broadcom Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"ORCL\",  name: \"Oracle Corporation\",               yahooSymbol: \"ORCL\", finnhubSymbol: \"ORCL\" }",
+      "index": 7385,
+      "symbol": "ORCL",
+      "yahooSymbol": "ORCL",
+      "name": "Oracle Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"CRM\",   name: \"Salesforce Inc.\",                  yahooSymbol: \"CRM\", finnhubSymbol: \"CRM\" }",
+      "index": 7507,
+      "symbol": "CRM",
+      "yahooSymbol": "CRM",
+      "name": "Salesforce Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"ADBE\",  name: \"Adobe Inc.\",                       yahooSymbol: \"ADBE\", finnhubSymbol: \"ADBE\" }",
+      "index": 7627,
+      "symbol": "ADBE",
+      "yahooSymbol": "ADBE",
+      "name": "Adobe Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"CSCO\",  name: \"Cisco Systems Inc.\",               yahooSymbol: \"CSCO\", finnhubSymbol: \"CSCO\" }",
+      "index": 7749,
+      "symbol": "CSCO",
+      "yahooSymbol": "CSCO",
+      "name": "Cisco Systems Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"IBM\",   name: \"International Business Machines\",  yahooSymbol: \"IBM\", finnhubSymbol: \"IBM\" }",
+      "index": 7871,
+      "symbol": "IBM",
+      "yahooSymbol": "IBM",
+      "name": "International Business Machines"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"QCOM\",  name: \"Qualcomm Inc.\",                    yahooSymbol: \"QCOM\", finnhubSymbol: \"QCOM\" }",
+      "index": 7991,
+      "symbol": "QCOM",
+      "yahooSymbol": "QCOM",
+      "name": "Qualcomm Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"TXN\",   name: \"Texas Instruments Inc.\",           yahooSymbol: \"TXN\", finnhubSymbol: \"TXN\" }",
+      "index": 8113,
+      "symbol": "TXN",
+      "yahooSymbol": "TXN",
+      "name": "Texas Instruments Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"SHOP\",  name: \"Shopify Inc.\",                     yahooSymbol: \"SHOP\", finnhubSymbol: \"SHOP\" }",
+      "index": 8233,
+      "symbol": "SHOP",
+      "yahooSymbol": "SHOP",
+      "name": "Shopify Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"UBER\",  name: \"Uber Technologies Inc.\",           yahooSymbol: \"UBER\", finnhubSymbol: \"UBER\" }",
+      "index": 8355,
+      "symbol": "UBER",
+      "yahooSymbol": "UBER",
+      "name": "Uber Technologies Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"PLTR\",  name: \"Palantir Technologies Inc.\",       yahooSymbol: \"PLTR\" }",
+      "index": 8477,
+      "symbol": "PLTR",
+      "yahooSymbol": "PLTR",
+      "name": "Palantir Technologies Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"JPM\",   name: \"JPMorgan Chase & Co.\",             yahooSymbol: \"JPM\", finnhubSymbol: \"JPM\" }",
+      "index": 8656,
+      "symbol": "JPM",
+      "yahooSymbol": "JPM",
+      "name": "JPMorgan Chase & Co."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"BAC\",   name: \"Bank of America Corp.\",            yahooSymbol: \"BAC\", finnhubSymbol: \"BAC\" }",
+      "index": 8776,
+      "symbol": "BAC",
+      "yahooSymbol": "BAC",
+      "name": "Bank of America Corp."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"WFC\",   name: \"Wells Fargo & Co.\",                yahooSymbol: \"WFC\", finnhubSymbol: \"WFC\" }",
+      "index": 8896,
+      "symbol": "WFC",
+      "yahooSymbol": "WFC",
+      "name": "Wells Fargo & Co."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"GS\",    name: \"Goldman Sachs Group Inc.\",         yahooSymbol: \"GS\", finnhubSymbol: \"GS\" }",
+      "index": 9016,
+      "symbol": "GS",
+      "yahooSymbol": "GS",
+      "name": "Goldman Sachs Group Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"MS\",    name: \"Morgan Stanley\",                   yahooSymbol: \"MS\", finnhubSymbol: \"MS\" }",
+      "index": 9134,
+      "symbol": "MS",
+      "yahooSymbol": "MS",
+      "name": "Morgan Stanley"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"C\",     name: \"Citigroup Inc.\",                   yahooSymbol: \"C\", finnhubSymbol: \"C\" }",
+      "index": 9252,
+      "symbol": "C",
+      "yahooSymbol": "C",
+      "name": "Citigroup Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"V\",     name: \"Visa Inc.\",                        yahooSymbol: \"V\", finnhubSymbol: \"V\", tradingViewSymbol: \"NYSE:V\" }",
+      "index": 9368,
+      "symbol": "V",
+      "yahooSymbol": "V",
+      "name": "Visa Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"MA\",    name: \"Mastercard Inc.\",                  yahooSymbol: \"MA\", finnhubSymbol: \"MA\", tradingViewSymbol: \"NYSE:MA\" }",
+      "index": 9513,
+      "symbol": "MA",
+      "yahooSymbol": "MA",
+      "name": "Mastercard Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"PYPL\",  name: \"PayPal Holdings Inc.\",             yahooSymbol: \"PYPL\", finnhubSymbol: \"PYPL\" }",
+      "index": 9661,
+      "symbol": "PYPL",
+      "yahooSymbol": "PYPL",
+      "name": "PayPal Holdings Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"BRK.B\", name: \"Berkshire Hathaway Inc. Class B\",  yahooSymbol: \"BRK-B\", tradingViewSymbol: \"NYSE:BRK/B\" }",
+      "index": 9783,
+      "symbol": "BRK.B",
+      "yahooSymbol": "BRK-B",
+      "name": "Berkshire Hathaway Inc. Class B"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"KO\",    name: \"Coca-Cola Co.\",                    yahooSymbol: \"KO\", finnhubSymbol: \"KO\" }",
+      "index": 9996,
+      "symbol": "KO",
+      "yahooSymbol": "KO",
+      "name": "Coca-Cola Co."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"PEP\",   name: \"PepsiCo Inc.\",                     yahooSymbol: \"PEP\", finnhubSymbol: \"PEP\" }",
+      "index": 10114,
+      "symbol": "PEP",
+      "yahooSymbol": "PEP",
+      "name": "PepsiCo Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"MCD\",   name: \"McDonald's Corp.\",                 yahooSymbol: \"MCD\", finnhubSymbol: \"MCD\" }",
+      "index": 10234,
+      "symbol": "MCD",
+      "yahooSymbol": "MCD",
+      "name": "McDonald's Corp."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"SBUX\",  name: \"Starbucks Corp.\",                  yahooSymbol: \"SBUX\", finnhubSymbol: \"SBUX\" }",
+      "index": 10354,
+      "symbol": "SBUX",
+      "yahooSymbol": "SBUX",
+      "name": "Starbucks Corp."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"NKE\",   name: \"Nike Inc.\",                        yahooSymbol: \"NKE\", finnhubSymbol: \"NKE\" }",
+      "index": 10476,
+      "symbol": "NKE",
+      "yahooSymbol": "NKE",
+      "name": "Nike Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"WMT\",   name: \"Walmart Inc.\",                     yahooSymbol: \"WMT\", finnhubSymbol: \"WMT\" }",
+      "index": 10596,
+      "symbol": "WMT",
+      "yahooSymbol": "WMT",
+      "name": "Walmart Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"COST\",  name: \"Costco Wholesale Corp.\",           yahooSymbol: \"COST\", finnhubSymbol: \"COST\" }",
+      "index": 10716,
+      "symbol": "COST",
+      "yahooSymbol": "COST",
+      "name": "Costco Wholesale Corp."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"PG\",    name: \"Procter & Gamble Co.\",             yahooSymbol: \"PG\", finnhubSymbol: \"PG\" }",
+      "index": 10838,
+      "symbol": "PG",
+      "yahooSymbol": "PG",
+      "name": "Procter & Gamble Co."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"JNJ\",   name: \"Johnson & Johnson\",                yahooSymbol: \"JNJ\", finnhubSymbol: \"JNJ\" }",
+      "index": 10956,
+      "symbol": "JNJ",
+      "yahooSymbol": "JNJ",
+      "name": "Johnson & Johnson"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"UNH\",   name: \"UnitedHealth Group Inc.\",          yahooSymbol: \"UNH\", finnhubSymbol: \"UNH\" }",
+      "index": 11076,
+      "symbol": "UNH",
+      "yahooSymbol": "UNH",
+      "name": "UnitedHealth Group Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"HD\",    name: \"Home Depot Inc.\",                  yahooSymbol: \"HD\", finnhubSymbol: \"HD\" }",
+      "index": 11196,
+      "symbol": "HD",
+      "yahooSymbol": "HD",
+      "name": "Home Depot Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"LOW\",   name: \"Lowe's Companies Inc.\",            yahooSymbol: \"LOW\", finnhubSymbol: \"LOW\" }",
+      "index": 11314,
+      "symbol": "LOW",
+      "yahooSymbol": "LOW",
+      "name": "Lowe's Companies Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"DIS\",   name: \"Walt Disney Co.\",                  yahooSymbol: \"DIS\", finnhubSymbol: \"DIS\" }",
+      "index": 11434,
+      "symbol": "DIS",
+      "yahooSymbol": "DIS",
+      "name": "Walt Disney Co."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"XOM\",   name: \"Exxon Mobil Corp.\",                yahooSymbol: \"XOM\", finnhubSymbol: \"XOM\" }",
+      "index": 11634,
+      "symbol": "XOM",
+      "yahooSymbol": "XOM",
+      "name": "Exxon Mobil Corp."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"CVX\",   name: \"Chevron Corp.\",                    yahooSymbol: \"CVX\", finnhubSymbol: \"CVX\" }",
+      "index": 11754,
+      "symbol": "CVX",
+      "yahooSymbol": "CVX",
+      "name": "Chevron Corp."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"COP\",   name: \"ConocoPhillips\",                   yahooSymbol: \"COP\", finnhubSymbol: \"COP\" }",
+      "index": 11874,
+      "symbol": "COP",
+      "yahooSymbol": "COP",
+      "name": "ConocoPhillips"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"BA\",    name: \"Boeing Co.\",                       yahooSymbol: \"BA\", finnhubSymbol: \"BA\", tradingViewSymbol: \"NYSE:BA\" }",
+      "index": 11994,
+      "symbol": "BA",
+      "yahooSymbol": "BA",
+      "name": "Boeing Co."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"CAT\",   name: \"Caterpillar Inc.\",                 yahooSymbol: \"CAT\", finnhubSymbol: \"CAT\" }",
+      "index": 12142,
+      "symbol": "CAT",
+      "yahooSymbol": "CAT",
+      "name": "Caterpillar Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"GE\",    name: \"GE Aerospace\",                     yahooSymbol: \"GE\", finnhubSymbol: \"GE\" }",
+      "index": 12262,
+      "symbol": "GE",
+      "yahooSymbol": "GE",
+      "name": "GE Aerospace"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"LMT\",   name: \"Lockheed Martin Corp.\",            yahooSymbol: \"LMT\", finnhubSymbol: \"LMT\" }",
+      "index": 12380,
+      "symbol": "LMT",
+      "yahooSymbol": "LMT",
+      "name": "Lockheed Martin Corp."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"RTX\",   name: \"RTX Corporation\",                  yahooSymbol: \"RTX\", finnhubSymbol: \"RTX\" }",
+      "index": 12500,
+      "symbol": "RTX",
+      "yahooSymbol": "RTX",
+      "name": "RTX Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"DE\",    name: \"Deere & Co.\",                      yahooSymbol: \"DE\", finnhubSymbol: \"DE\" }",
+      "index": 12620,
+      "symbol": "DE",
+      "yahooSymbol": "DE",
+      "name": "Deere & Co."
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"SPY\",  name: \"SPDR S&P 500 ETF\",                    yahooSymbol: \"SPY\", finnhubSymbol: \"SPY\" }",
+      "index": 12818,
+      "symbol": "SPY",
+      "yahooSymbol": "SPY",
+      "name": "SPDR S&P 500 ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"QQQ\",  name: \"Invesco QQQ Trust\",                   yahooSymbol: \"QQQ\", finnhubSymbol: \"QQQ\" }",
+      "index": 12938,
+      "symbol": "QQQ",
+      "yahooSymbol": "QQQ",
+      "name": "Invesco QQQ Trust"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"VOO\",  name: \"Vanguard S&P 500 ETF\",                yahooSymbol: \"VOO\" }",
+      "index": 13058,
+      "symbol": "VOO",
+      "yahooSymbol": "VOO",
+      "name": "Vanguard S&P 500 ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"VTI\",  name: \"Vanguard Total Stock Market ETF\",     yahooSymbol: \"VTI\" }",
+      "index": 13156,
+      "symbol": "VTI",
+      "yahooSymbol": "VTI",
+      "name": "Vanguard Total Stock Market ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"SCHD\", name: \"Schwab US Dividend Equity ETF\",       yahooSymbol: \"SCHD\" }",
+      "index": 13254,
+      "symbol": "SCHD",
+      "yahooSymbol": "SCHD",
+      "name": "Schwab US Dividend Equity ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"AGG\",  name: \"iShares Core US Aggregate Bond ETF\",  yahooSymbol: \"AGG\" }",
+      "index": 13353,
+      "symbol": "AGG",
+      "yahooSymbol": "AGG",
+      "name": "iShares Core US Aggregate Bond ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"BND\",  name: \"Vanguard Total Bond Market ETF\",      yahooSymbol: \"BND\" }",
+      "index": 13451,
+      "symbol": "BND",
+      "yahooSymbol": "BND",
+      "name": "Vanguard Total Bond Market ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"VXUS\", name: \"Vanguard Total International Stock\",  yahooSymbol: \"VXUS\" }",
+      "index": 13549,
+      "symbol": "VXUS",
+      "yahooSymbol": "VXUS",
+      "name": "Vanguard Total International Stock"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"VEA\",  name: \"Vanguard FTSE Developed Markets ETF\", yahooSymbol: \"VEA\" }",
+      "index": 13648,
+      "symbol": "VEA",
+      "yahooSymbol": "VEA",
+      "name": "Vanguard FTSE Developed Markets ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"VWO\",  name: \"Vanguard FTSE Emerging Markets ETF\",  yahooSymbol: \"VWO\" }",
+      "index": 13746,
+      "symbol": "VWO",
+      "yahooSymbol": "VWO",
+      "name": "Vanguard FTSE Emerging Markets ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"IWM\",  name: \"iShares Russell 2000 ETF\",            yahooSymbol: \"IWM\" }",
+      "index": 13844,
+      "symbol": "IWM",
+      "yahooSymbol": "IWM",
+      "name": "iShares Russell 2000 ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"DIA\",  name: \"SPDR Dow Jones Industrial Average\",   yahooSymbol: \"DIA\", tradingViewSymbol: \"AMEX:DIA\" }",
+      "index": 13942,
+      "symbol": "DIA",
+      "yahooSymbol": "DIA",
+      "name": "SPDR Dow Jones Industrial Average"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"XLK\",  name: \"Technology Select Sector SPDR Fund\",  yahooSymbol: \"XLK\", tradingViewSymbol: \"AMEX:XLK\" }",
+      "index": 14071,
+      "symbol": "XLK",
+      "yahooSymbol": "XLK",
+      "name": "Technology Select Sector SPDR Fund"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"XLF\",  name: \"Financial Select Sector SPDR Fund\",   yahooSymbol: \"XLF\", tradingViewSymbol: \"AMEX:XLF\" }",
+      "index": 14200,
+      "symbol": "XLF",
+      "yahooSymbol": "XLF",
+      "name": "Financial Select Sector SPDR Fund"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"XLE\",  name: \"Energy Select Sector SPDR Fund\",      yahooSymbol: \"XLE\", tradingViewSymbol: \"AMEX:XLE\" }",
+      "index": 14329,
+      "symbol": "XLE",
+      "yahooSymbol": "XLE",
+      "name": "Energy Select Sector SPDR Fund"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"XLV\",  name: \"Health Care Select Sector SPDR Fund\", yahooSymbol: \"XLV\", tradingViewSymbol: \"AMEX:XLV\" }",
+      "index": 14458,
+      "symbol": "XLV",
+      "yahooSymbol": "XLV",
+      "name": "Health Care Select Sector SPDR Fund"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"XLY\",  name: \"Consumer Discretionary Select Sector\",yahooSymbol: \"XLY\", tradingViewSymbol: \"AMEX:XLY\" }",
+      "index": 14587,
+      "symbol": "XLY",
+      "yahooSymbol": "XLY",
+      "name": "Consumer Discretionary Select Sector"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"ARKK\", name: \"ARK Innovation ETF\",                  yahooSymbol: \"ARKK\" }",
+      "index": 14716,
+      "symbol": "ARKK",
+      "yahooSymbol": "ARKK",
+      "name": "ARK Innovation ETF"
+    },
+    {
+      "type": "Crypto",
+      "paramsStr": "{ symbol: \"BTCUSD\", name: \"Bitcoin\",       yahooSymbol: \"BTC-USD\", tradingViewSymbol: \"BINANCE:BTCUSDT\" }",
+      "index": 14895,
+      "symbol": "BTCUSD",
+      "yahooSymbol": "BTC-USD",
+      "name": "Bitcoin"
+    },
+    {
+      "type": "Crypto",
+      "paramsStr": "{ symbol: \"ETHUSD\", name: \"Ethereum\",      yahooSymbol: \"ETH-USD\", tradingViewSymbol: \"BINANCE:ETHUSDT\" }",
+      "index": 15018,
+      "symbol": "ETHUSD",
+      "yahooSymbol": "ETH-USD",
+      "name": "Ethereum"
+    },
+    {
+      "type": "Crypto",
+      "paramsStr": "{ symbol: \"XRPUSD\", name: \"XRP\",           yahooSymbol: \"XRP-USD\", tradingViewSymbol: \"BINANCE:XRPUSDT\" }",
+      "index": 15141,
+      "symbol": "XRPUSD",
+      "yahooSymbol": "XRP-USD",
+      "name": "XRP"
+    },
+    {
+      "type": "Crypto",
+      "paramsStr": "{ symbol: \"ADAUSD\", name: \"Cardano\",       yahooSymbol: \"ADA-USD\", tradingViewSymbol: \"BINANCE:ADAUSDT\" }",
+      "index": 15264,
+      "symbol": "ADAUSD",
+      "yahooSymbol": "ADA-USD",
+      "name": "Cardano"
+    },
+    {
+      "type": "Crypto",
+      "paramsStr": "{ symbol: \"SOLUSD\", name: \"Solana\",        yahooSymbol: \"SOL-USD\", tradingViewSymbol: \"BINANCE:SOLUSDT\" }",
+      "index": 15387,
+      "symbol": "SOLUSD",
+      "yahooSymbol": "SOL-USD",
+      "name": "Solana"
+    },
+    {
+      "type": "Crypto",
+      "paramsStr": "{ symbol: \"DOGEUSD\", name: \"Dogecoin\",     yahooSymbol: \"DOGE-USD\", tradingViewSymbol: \"BINANCE:DOGEUSDT\" }",
+      "index": 15510,
+      "symbol": "DOGEUSD",
+      "yahooSymbol": "DOGE-USD",
+      "name": "Dogecoin"
+    },
+    {
+      "type": "Crypto",
+      "paramsStr": "{ symbol: \"AVAXUSD\", name: \"Avalanche\",    yahooSymbol: \"AVAX-USD\", tradingViewSymbol: \"BINANCE:AVAXUSDT\" }",
+      "index": 15635,
+      "symbol": "AVAXUSD",
+      "yahooSymbol": "AVAX-USD",
+      "name": "Avalanche"
+    },
+    {
+      "type": "Crypto",
+      "paramsStr": "{ symbol: \"LINKUSD\", name: \"Chainlink\",    yahooSymbol: \"LINK-USD\", tradingViewSymbol: \"BINANCE:LINKUSDT\" }",
+      "index": 15760,
+      "symbol": "LINKUSD",
+      "yahooSymbol": "LINK-USD",
+      "name": "Chainlink"
+    },
+    {
+      "type": "Crypto",
+      "paramsStr": "{ symbol: \"DOTUSD\", name: \"Polkadot\",      yahooSymbol: \"DOT-USD\", tradingViewSymbol: \"BINANCE:DOTUSDT\" }",
+      "index": 15885,
+      "symbol": "DOTUSD",
+      "yahooSymbol": "DOT-USD",
+      "name": "Polkadot"
+    },
+    {
+      "type": "Crypto",
+      "paramsStr": "{ symbol: \"LTCUSD\", name: \"Litecoin\",      yahooSymbol: \"LTC-USD\", tradingViewSymbol: \"BINANCE:LTCUSDT\" }",
+      "index": 16008,
+      "symbol": "LTCUSD",
+      "yahooSymbol": "LTC-USD",
+      "name": "Litecoin"
+    },
+    {
+      "type": "Crypto",
+      "paramsStr": "{ symbol: \"BCHUSD\", name: \"Bitcoin Cash\",  yahooSymbol: \"BCH-USD\", tradingViewSymbol: \"BINANCE:BCHUSDT\" }",
+      "index": 16131,
+      "symbol": "BCHUSD",
+      "yahooSymbol": "BCH-USD",
+      "name": "Bitcoin Cash"
+    },
+    {
+      "type": "Crypto",
+      "paramsStr": "{ symbol: \"UNIUSD\", name: \"Uniswap\",       yahooSymbol: \"UNI-USD\", tradingViewSymbol: \"BINANCE:UNIUSDT\" }",
+      "index": 16254,
+      "symbol": "UNIUSD",
+      "yahooSymbol": "UNI-USD",
+      "name": "Uniswap"
+    },
+    {
+      "type": "Forex",
+      "paramsStr": "{ symbol: \"EURUSD\", name: \"Euro / Dollaro USA\",              yahooSymbol: \"EURUSD=X\", tradingViewSymbol: \"FX:EURUSD\" }",
+      "index": 16457,
+      "symbol": "EURUSD",
+      "yahooSymbol": "EURUSD=X",
+      "name": "Euro / Dollaro USA"
+    },
+    {
+      "type": "Forex",
+      "paramsStr": "{ symbol: \"GBPUSD\", name: \"Sterlina / Dollaro USA\",          yahooSymbol: \"GBPUSD=X\", tradingViewSymbol: \"FX:GBPUSD\" }",
+      "index": 16592,
+      "symbol": "GBPUSD",
+      "yahooSymbol": "GBPUSD=X",
+      "name": "Sterlina / Dollaro USA"
+    },
+    {
+      "type": "Forex",
+      "paramsStr": "{ symbol: \"USDJPY\", name: \"Dollaro USA / Yen Giapponese\",    yahooSymbol: \"USDJPY=X\", tradingViewSymbol: \"FX:USDJPY\" }",
+      "index": 16727,
+      "symbol": "USDJPY",
+      "yahooSymbol": "USDJPY=X",
+      "name": "Dollaro USA / Yen Giapponese"
+    },
+    {
+      "type": "Commodity",
+      "paramsStr": "{ symbol: \"XAUUSD\", name: \"Oro\",               yahooSymbol: \"GC=F\", tradingViewSymbol: \"TVC:GOLD\", assetId: \"gold\" }",
+      "index": 16942,
+      "symbol": "XAUUSD",
+      "yahooSymbol": "GC=F",
+      "name": "Oro"
+    },
+    {
+      "type": "Commodity",
+      "paramsStr": "{ symbol: \"XAGUSD\", name: \"Argento\",           yahooSymbol: \"SI=F\", tradingViewSymbol: \"TVC:SILVER\" }",
+      "index": 17079,
+      "symbol": "XAGUSD",
+      "yahooSymbol": "SI=F",
+      "name": "Argento"
+    },
+    {
+      "type": "Commodity",
+      "paramsStr": "{ symbol: \"WTI\",    name: \"Petrolio WTI\",      yahooSymbol: \"CL=F\", tradingViewSymbol: \"TVC:USOIL\" }",
+      "index": 17201,
+      "symbol": "WTI",
+      "yahooSymbol": "CL=F",
+      "name": "Petrolio WTI"
+    },
+    {
+      "type": "Commodity",
+      "paramsStr": "{ symbol: \"BRENT\",  name: \"Brent Crude Oil\",   yahooSymbol: \"BZ=F\", tradingViewSymbol: \"TVC:UKOIL\" }",
+      "index": 17322,
+      "symbol": "BRENT",
+      "yahooSymbol": "BZ=F",
+      "name": "Brent Crude Oil"
+    },
+    {
+      "type": "Commodity",
+      "paramsStr": "{ symbol: \"NATGAS\", name: \"Gas naturale\",      yahooSymbol: \"NG=F\", tradingViewSymbol: \"TVC:NATGAS\" }",
+      "index": 17443,
+      "symbol": "NATGAS",
+      "yahooSymbol": "NG=F",
+      "name": "Gas naturale"
+    },
+    {
+      "type": "Commodity",
+      "paramsStr": "{ symbol: \"COPPER\", name: \"Rame\",              yahooSymbol: \"HG=F\", tradingViewSymbol: \"COMEX:HG1!\" }",
+      "index": 17565,
+      "symbol": "COPPER",
+      "yahooSymbol": "HG=F",
+      "name": "Rame"
+    },
+    {
+      "type": "Bond",
+      "paramsStr": "{ symbol: \"US10Y\", name: \"US Treasury 10Y\", yahooSymbol: \"^TNX\", tradingViewSymbol: \"TVC:US10Y\", assetId: \"us10y\" }",
+      "index": 17766,
+      "symbol": "US10Y",
+      "yahooSymbol": "^TNX",
+      "name": "US Treasury 10Y"
+    },
+    {
+      "type": "Bond",
+      "paramsStr": "{ symbol: \"US30Y\", name: \"US Treasury 30Y\", yahooSymbol: \"^TYX\", tradingViewSymbol: \"TVC:US30Y\" }",
+      "index": 17897,
+      "symbol": "US30Y",
+      "yahooSymbol": "^TYX",
+      "name": "US Treasury 30Y"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"TMO\",   name: \"Thermo Fisher Scientific Inc.\",     yahooSymbol: \"TMO\", finnhubSymbol: \"TMO\" }",
+      "index": 18090,
+      "symbol": "TMO",
+      "yahooSymbol": "TMO",
+      "name": "Thermo Fisher Scientific Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"ABT\",   name: \"Abbott Laboratories\",               yahooSymbol: \"ABT\", finnhubSymbol: \"ABT\" }",
+      "index": 18211,
+      "symbol": "ABT",
+      "yahooSymbol": "ABT",
+      "name": "Abbott Laboratories"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"MRK\",   name: \"Merck & Co. Inc.\",                  yahooSymbol: \"MRK\", finnhubSymbol: \"MRK\" }",
+      "index": 18332,
+      "symbol": "MRK",
+      "yahooSymbol": "MRK",
+      "name": "Merck & Co. Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"PFE\",   name: \"Pfizer Inc.\",                       yahooSymbol: \"PFE\", finnhubSymbol: \"PFE\" }",
+      "index": 18453,
+      "symbol": "PFE",
+      "yahooSymbol": "PFE",
+      "name": "Pfizer Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"ABBV\",  name: \"AbbVie Inc.\",                       yahooSymbol: \"ABBV\", finnhubSymbol: \"ABBV\" }",
+      "index": 18574,
+      "symbol": "ABBV",
+      "yahooSymbol": "ABBV",
+      "name": "AbbVie Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"LLY\",   name: \"Eli Lilly and Company\",             yahooSymbol: \"LLY\", finnhubSymbol: \"LLY\" }",
+      "index": 18697,
+      "symbol": "LLY",
+      "yahooSymbol": "LLY",
+      "name": "Eli Lilly and Company"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"AMGN\",  name: \"Amgen Inc.\",                        yahooSymbol: \"AMGN\", finnhubSymbol: \"AMGN\" }",
+      "index": 18818,
+      "symbol": "AMGN",
+      "yahooSymbol": "AMGN",
+      "name": "Amgen Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"GILD\",  name: \"Gilead Sciences Inc.\",              yahooSymbol: \"GILD\", finnhubSymbol: \"GILD\" }",
+      "index": 18941,
+      "symbol": "GILD",
+      "yahooSymbol": "GILD",
+      "name": "Gilead Sciences Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"ISRG\",  name: \"Intuitive Surgical Inc.\",           yahooSymbol: \"ISRG\", finnhubSymbol: \"ISRG\" }",
+      "index": 19064,
+      "symbol": "ISRG",
+      "yahooSymbol": "ISRG",
+      "name": "Intuitive Surgical Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"VRTX\",  name: \"Vertex Pharmaceuticals Inc.\",       yahooSymbol: \"VRTX\", finnhubSymbol: \"VRTX\" }",
+      "index": 19187,
+      "symbol": "VRTX",
+      "yahooSymbol": "VRTX",
+      "name": "Vertex Pharmaceuticals Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"REGN\",  name: \"Regeneron Pharmaceuticals Inc.\",    yahooSymbol: \"REGN\", finnhubSymbol: \"REGN\" }",
+      "index": 19310,
+      "symbol": "REGN",
+      "yahooSymbol": "REGN",
+      "name": "Regeneron Pharmaceuticals Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"SYK\",   name: \"Stryker Corporation\",               yahooSymbol: \"SYK\", finnhubSymbol: \"SYK\" }",
+      "index": 19433,
+      "symbol": "SYK",
+      "yahooSymbol": "SYK",
+      "name": "Stryker Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"THC\",   name: \"Tenet Healthcare Corporation\",      yahooSymbol: \"THC\", finnhubSymbol: \"THC\" }",
+      "index": 19554,
+      "symbol": "THC",
+      "yahooSymbol": "THC",
+      "name": "Tenet Healthcare Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"IQV\",   name: \"IQVIA Holdings Inc.\",               yahooSymbol: \"IQV\", finnhubSymbol: \"IQV\" }",
+      "index": 19675,
+      "symbol": "IQV",
+      "yahooSymbol": "IQV",
+      "name": "IQVIA Holdings Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"ZTS\",   name: \"Zoetis Inc.\",                       yahooSymbol: \"ZTS\", finnhubSymbol: \"ZTS\" }",
+      "index": 19796,
+      "symbol": "ZTS",
+      "yahooSymbol": "ZTS",
+      "name": "Zoetis Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"CAH\",   name: \"Cardinal Health Inc.\",              yahooSymbol: \"CAH\", finnhubSymbol: \"CAH\" }",
+      "index": 19917,
+      "symbol": "CAH",
+      "yahooSymbol": "CAH",
+      "name": "Cardinal Health Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"AMAT\",  name: \"Applied Materials Inc.\",            yahooSymbol: \"AMAT\", finnhubSymbol: \"AMAT\" }",
+      "index": 20118,
+      "symbol": "AMAT",
+      "yahooSymbol": "AMAT",
+      "name": "Applied Materials Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"MU\",    name: \"Micron Technology Inc.\",            yahooSymbol: \"MU\", finnhubSymbol: \"MU\" }",
+      "index": 20241,
+      "symbol": "MU",
+      "yahooSymbol": "MU",
+      "name": "Micron Technology Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"LRCX\",  name: \"Lam Research Corporation\",          yahooSymbol: \"LRCX\", finnhubSymbol: \"LRCX\" }",
+      "index": 20360,
+      "symbol": "LRCX",
+      "yahooSymbol": "LRCX",
+      "name": "Lam Research Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"KLAC\",  name: \"KLA Corporation\",                   yahooSymbol: \"KLAC\", finnhubSymbol: \"KLAC\" }",
+      "index": 20483,
+      "symbol": "KLAC",
+      "yahooSymbol": "KLAC",
+      "name": "KLA Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"TSM\",   name: \"Taiwan Semiconductor Mfg Co Ltd\",  yahooSymbol: \"TSM\", finnhubSymbol: \"TSM\" }",
+      "index": 20606,
+      "symbol": "TSM",
+      "yahooSymbol": "TSM",
+      "name": "Taiwan Semiconductor Mfg Co Ltd"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"SLAB\",  name: \"Silicon Laboratories Inc.\",         yahooSymbol: \"SLAB\", finnhubSymbol: \"SLAB\" }",
+      "index": 20726,
+      "symbol": "SLAB",
+      "yahooSymbol": "SLAB",
+      "name": "Silicon Laboratories Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"QRVO\",  name: \"Qorvo Inc.\",                        yahooSymbol: \"QRVO\", finnhubSymbol: \"QRVO\" }",
+      "index": 20849,
+      "symbol": "QRVO",
+      "yahooSymbol": "QRVO",
+      "name": "Qorvo Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"ON\",    name: \"ON Semiconductor Corporation\",      yahooSymbol: \"ON\", finnhubSymbol: \"ON\" }",
+      "index": 20972,
+      "symbol": "ON",
+      "yahooSymbol": "ON",
+      "name": "ON Semiconductor Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"STM\",   name: \"STMicroelectronics N.V.\",           yahooSymbol: \"STM\", finnhubSymbol: \"STM\" }",
+      "index": 21091,
+      "symbol": "STM",
+      "yahooSymbol": "STM",
+      "name": "STMicroelectronics N.V."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"NXP\",   name: \"NXP Semiconductors NV\",             yahooSymbol: \"NXP\", finnhubSymbol: \"NXP\" }",
+      "index": 21212,
+      "symbol": "NXP",
+      "yahooSymbol": "NXP",
+      "name": "NXP Semiconductors NV"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"AKAM\",  name: \"Akamai Technologies Inc.\",          yahooSymbol: \"AKAM\", finnhubSymbol: \"AKAM\" }",
+      "index": 21333,
+      "symbol": "AKAM",
+      "yahooSymbol": "AKAM",
+      "name": "Akamai Technologies Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"UPST\",  name: \"Upstart Holdings Inc.\",             yahooSymbol: \"UPST\", finnhubSymbol: \"UPST\" }",
+      "index": 21533,
+      "symbol": "UPST",
+      "yahooSymbol": "UPST",
+      "name": "Upstart Holdings Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"COIN\",  name: \"Coinbase Global Inc.\",              yahooSymbol: \"COIN\", finnhubSymbol: \"COIN\" }",
+      "index": 21656,
+      "symbol": "COIN",
+      "yahooSymbol": "COIN",
+      "name": "Coinbase Global Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"SOFI\",  name: \"SoFi Technologies Inc.\",            yahooSymbol: \"SOFI\", finnhubSymbol: \"SOFI\" }",
+      "index": 21779,
+      "symbol": "SOFI",
+      "yahooSymbol": "SOFI",
+      "name": "SoFi Technologies Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"AXP\",   name: \"American Express Company\",          yahooSymbol: \"AXP\", finnhubSymbol: \"AXP\" }",
+      "index": 21902,
+      "symbol": "AXP",
+      "yahooSymbol": "AXP",
+      "name": "American Express Company"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"PLD\",   name: \"Prologis Inc.\",                     yahooSymbol: \"PLD\", finnhubSymbol: \"PLD\" }",
+      "index": 22023,
+      "symbol": "PLD",
+      "yahooSymbol": "PLD",
+      "name": "Prologis Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"DLR\",   name: \"Digital Realty Trust Inc.\",         yahooSymbol: \"DLR\", finnhubSymbol: \"DLR\" }",
+      "index": 22144,
+      "symbol": "DLR",
+      "yahooSymbol": "DLR",
+      "name": "Digital Realty Trust Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"NOW\",   name: \"ServiceNow Inc.\",                   yahooSymbol: \"NOW\", finnhubSymbol: \"NOW\" }",
+      "index": 22342,
+      "symbol": "NOW",
+      "yahooSymbol": "NOW",
+      "name": "ServiceNow Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"TEAM\",  name: \"Atlassian Corporation PLC\",         yahooSymbol: \"TEAM\", finnhubSymbol: \"TEAM\" }",
+      "index": 22463,
+      "symbol": "TEAM",
+      "yahooSymbol": "TEAM",
+      "name": "Atlassian Corporation PLC"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"DDOG\",  name: \"Datadog Inc.\",                      yahooSymbol: \"DDOG\", finnhubSymbol: \"DDOG\" }",
+      "index": 22586,
+      "symbol": "DDOG",
+      "yahooSymbol": "DDOG",
+      "name": "Datadog Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"CRWD\",  name: \"CrowdStrike Holdings Inc.\",         yahooSymbol: \"CRWD\", finnhubSymbol: \"CRWD\" }",
+      "index": 22709,
+      "symbol": "CRWD",
+      "yahooSymbol": "CRWD",
+      "name": "CrowdStrike Holdings Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"PANW\",  name: \"Palo Alto Networks Inc.\",           yahooSymbol: \"PANW\", finnhubSymbol: \"PANW\" }",
+      "index": 22832,
+      "symbol": "PANW",
+      "yahooSymbol": "PANW",
+      "name": "Palo Alto Networks Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"NET\",   name: \"Cloudflare Inc.\",                   yahooSymbol: \"NET\", finnhubSymbol: \"NET\" }",
+      "index": 22955,
+      "symbol": "NET",
+      "yahooSymbol": "NET",
+      "name": "Cloudflare Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"SNOW\",  name: \"Snowflake Inc.\",                    yahooSymbol: \"SNOW\", finnhubSymbol: \"SNOW\" }",
+      "index": 23076,
+      "symbol": "SNOW",
+      "yahooSymbol": "SNOW",
+      "name": "Snowflake Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"TWLO\",  name: \"Twilio Inc.\",                       yahooSymbol: \"TWLO\", finnhubSymbol: \"TWLO\" }",
+      "index": 23199,
+      "symbol": "TWLO",
+      "yahooSymbol": "TWLO",
+      "name": "Twilio Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"MOMO\",  name: \"Momo Inc.\",                         yahooSymbol: \"MOMO\", finnhubSymbol: \"MOMO\" }",
+      "index": 23322,
+      "symbol": "MOMO",
+      "yahooSymbol": "MOMO",
+      "name": "Momo Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"ZM\",    name: \"Zoom Video Communications Inc.\",    yahooSymbol: \"ZM\", finnhubSymbol: \"ZM\" }",
+      "index": 23445,
+      "symbol": "ZM",
+      "yahooSymbol": "ZM",
+      "name": "Zoom Video Communications Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"GTLB\",  name: \"Gitlab Inc.\",                       yahooSymbol: \"GTLB\", finnhubSymbol: \"GTLB\" }",
+      "index": 23564,
+      "symbol": "GTLB",
+      "yahooSymbol": "GTLB",
+      "name": "Gitlab Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"WK\",    name: \"Workiva Inc.\",                      yahooSymbol: \"WK\", finnhubSymbol: \"WK\" }",
+      "index": 23687,
+      "symbol": "WK",
+      "yahooSymbol": "WK",
+      "name": "Workiva Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"VRME\",  name: \"Vireo Health International Inc.\",   yahooSymbol: \"VRME\", finnhubSymbol: \"VRME\" }",
+      "index": 23806,
+      "symbol": "VRME",
+      "yahooSymbol": "VRME",
+      "name": "Vireo Health International Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"ABNB\",  name: \"Airbnb Inc.\",                       yahooSymbol: \"ABNB\", finnhubSymbol: \"ABNB\" }",
+      "index": 24009,
+      "symbol": "ABNB",
+      "yahooSymbol": "ABNB",
+      "name": "Airbnb Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"MAR\",   name: \"Marriott International Inc.\",       yahooSymbol: \"MAR\", finnhubSymbol: \"MAR\" }",
+      "index": 24132,
+      "symbol": "MAR",
+      "yahooSymbol": "MAR",
+      "name": "Marriott International Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"CMG\",   name: \"Chipotle Mexican Grill Inc.\",       yahooSymbol: \"CMG\", finnhubSymbol: \"CMG\" }",
+      "index": 24253,
+      "symbol": "CMG",
+      "yahooSymbol": "CMG",
+      "name": "Chipotle Mexican Grill Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"TGT\",   name: \"Target Corporation\",                yahooSymbol: \"TGT\", finnhubSymbol: \"TGT\" }",
+      "index": 24374,
+      "symbol": "TGT",
+      "yahooSymbol": "TGT",
+      "name": "Target Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"CVS\",   name: \"CVS Health Corporation\",            yahooSymbol: \"CVS\", finnhubSymbol: \"CVS\" }",
+      "index": 24495,
+      "symbol": "CVS",
+      "yahooSymbol": "CVS",
+      "name": "CVS Health Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"ELV\",   name: \"Elevance Health Inc.\",              yahooSymbol: \"ELV\", finnhubSymbol: \"ELV\" }",
+      "index": 24616,
+      "symbol": "ELV",
+      "yahooSymbol": "ELV",
+      "name": "Elevance Health Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"TAP\",   name: \"Molson Coors Brewing Company\",      yahooSymbol: \"TAP\", finnhubSymbol: \"TAP\" }",
+      "index": 24737,
+      "symbol": "TAP",
+      "yahooSymbol": "TAP",
+      "name": "Molson Coors Brewing Company"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"ULTA\",  name: \"Ulta Beauty Inc.\",                  yahooSymbol: \"ULTA\", finnhubSymbol: \"ULTA\" }",
+      "index": 24858,
+      "symbol": "ULTA",
+      "yahooSymbol": "ULTA",
+      "name": "Ulta Beauty Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"MHK\",   name: \"Mohawk Industries Inc.\",            yahooSymbol: \"MHK\", finnhubSymbol: \"MHK\" }",
+      "index": 24981,
+      "symbol": "MHK",
+      "yahooSymbol": "MHK",
+      "name": "Mohawk Industries Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"DHI\",   name: \"D.R. Horton Inc.\",                  yahooSymbol: \"DHI\", finnhubSymbol: \"DHI\" }",
+      "index": 25102,
+      "symbol": "DHI",
+      "yahooSymbol": "DHI",
+      "name": "D.R. Horton Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"LEN\",   name: \"Lennar Corporation\",                yahooSymbol: \"LEN\", finnhubSymbol: \"LEN\" }",
+      "index": 25223,
+      "symbol": "LEN",
+      "yahooSymbol": "LEN",
+      "name": "Lennar Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"TOL\",   name: \"Toll Brothers Inc.\",                yahooSymbol: \"TOL\", finnhubSymbol: \"TOL\" }",
+      "index": 25344,
+      "symbol": "TOL",
+      "yahooSymbol": "TOL",
+      "name": "Toll Brothers Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"UAL\",   name: \"United Airlines Holdings Inc.\",     yahooSymbol: \"UAL\", finnhubSymbol: \"UAL\" }",
+      "index": 25465,
+      "symbol": "UAL",
+      "yahooSymbol": "UAL",
+      "name": "United Airlines Holdings Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"DAL\",   name: \"Delta Air Lines Inc.\",              yahooSymbol: \"DAL\", finnhubSymbol: \"DAL\" }",
+      "index": 25586,
+      "symbol": "DAL",
+      "yahooSymbol": "DAL",
+      "name": "Delta Air Lines Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"LUV\",   name: \"Southwest Airlines Co.\",            yahooSymbol: \"LUV\", finnhubSymbol: \"LUV\" }",
+      "index": 25707,
+      "symbol": "LUV",
+      "yahooSymbol": "LUV",
+      "name": "Southwest Airlines Co."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"UPS\",   name: \"United Parcel Service Inc.\",        yahooSymbol: \"UPS\", finnhubSymbol: \"UPS\" }",
+      "index": 25907,
+      "symbol": "UPS",
+      "yahooSymbol": "UPS",
+      "name": "United Parcel Service Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"FDX\",   name: \"FedEx Corporation\",                 yahooSymbol: \"FDX\", finnhubSymbol: \"FDX\" }",
+      "index": 26028,
+      "symbol": "FDX",
+      "yahooSymbol": "FDX",
+      "name": "FedEx Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"XPO\",   name: \"XPO Inc.\",                          yahooSymbol: \"XPO\", finnhubSymbol: \"XPO\" }",
+      "index": 26149,
+      "symbol": "XPO",
+      "yahooSymbol": "XPO",
+      "name": "XPO Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"UNP\",   name: \"Union Pacific Corporation\",         yahooSymbol: \"UNP\", finnhubSymbol: \"UNP\" }",
+      "index": 26270,
+      "symbol": "UNP",
+      "yahooSymbol": "UNP",
+      "name": "Union Pacific Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"CSX\",   name: \"CSX Corporation\",                   yahooSymbol: \"CSX\", finnhubSymbol: \"CSX\" }",
+      "index": 26391,
+      "symbol": "CSX",
+      "yahooSymbol": "CSX",
+      "name": "CSX Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"NSC\",   name: \"Norfolk Southern Railway Company\",  yahooSymbol: \"NSC\", finnhubSymbol: \"NSC\" }",
+      "index": 26512,
+      "symbol": "NSC",
+      "yahooSymbol": "NSC",
+      "name": "Norfolk Southern Railway Company"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"KNX\",   name: \"Knot Offshore Partners LP\",         yahooSymbol: \"KNX\", finnhubSymbol: \"KNX\" }",
+      "index": 26633,
+      "symbol": "KNX",
+      "yahooSymbol": "KNX",
+      "name": "Knot Offshore Partners LP"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"MATX\",  name: \"Mattel Inc.\",                       yahooSymbol: \"MATX\", finnhubSymbol: \"MATX\" }",
+      "index": 26754,
+      "symbol": "MATX",
+      "yahooSymbol": "MATX",
+      "name": "Mattel Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"SOHU\",  name: \"Sohu.com Inc.\",                     yahooSymbol: \"SOHU\", finnhubSymbol: \"SOHU\" }",
+      "index": 26877,
+      "symbol": "SOHU",
+      "yahooSymbol": "SOHU",
+      "name": "Sohu.com Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"NTES\",  name: \"NetEase Inc.\",                      yahooSymbol: \"NTES\", finnhubSymbol: \"NTES\" }",
+      "index": 27000,
+      "symbol": "NTES",
+      "yahooSymbol": "NTES",
+      "name": "NetEase Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"LIN\",   name: \"Linde PLC\",                         yahooSymbol: \"LIN\", finnhubSymbol: \"LIN\" }",
+      "index": 27203,
+      "symbol": "LIN",
+      "yahooSymbol": "LIN",
+      "name": "Linde PLC"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"HON\",   name: \"Honeywell International Inc.\",      yahooSymbol: \"HON\", finnhubSymbol: \"HON\" }",
+      "index": 27324,
+      "symbol": "HON",
+      "yahooSymbol": "HON",
+      "name": "Honeywell International Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"JCI\",   name: \"Johnson Controls International PLC\", yahooSymbol: \"JCI\", finnhubSymbol: \"JCI\" }",
+      "index": 27445,
+      "symbol": "JCI",
+      "yahooSymbol": "JCI",
+      "name": "Johnson Controls International PLC"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"DOW\",   name: \"Dow Inc.\",                          yahooSymbol: \"DOW\", finnhubSymbol: \"DOW\" }",
+      "index": 27567,
+      "symbol": "DOW",
+      "yahooSymbol": "DOW",
+      "name": "Dow Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"DD\",    name: \"DuPont de Nemours Inc.\",            yahooSymbol: \"DD\", finnhubSymbol: \"DD\" }",
+      "index": 27688,
+      "symbol": "DD",
+      "yahooSymbol": "DD",
+      "name": "DuPont de Nemours Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"APD\",   name: \"Air Products and Chemicals Inc.\",   yahooSymbol: \"APD\", finnhubSymbol: \"APD\" }",
+      "index": 27807,
+      "symbol": "APD",
+      "yahooSymbol": "APD",
+      "name": "Air Products and Chemicals Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"SHW\",   name: \"Sherwin-Williams Company\",          yahooSymbol: \"SHW\", finnhubSymbol: \"SHW\" }",
+      "index": 27928,
+      "symbol": "SHW",
+      "yahooSymbol": "SHW",
+      "name": "Sherwin-Williams Company"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"PPG\",   name: \"PPG Industries Inc.\",               yahooSymbol: \"PPG\", finnhubSymbol: \"PPG\" }",
+      "index": 28049,
+      "symbol": "PPG",
+      "yahooSymbol": "PPG",
+      "name": "PPG Industries Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"ECL\",   name: \"Ecolab Inc.\",                       yahooSymbol: \"ECL\", finnhubSymbol: \"ECL\" }",
+      "index": 28170,
+      "symbol": "ECL",
+      "yahooSymbol": "ECL",
+      "name": "Ecolab Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"IFF\",   name: \"International Flavors & Fragrances\",yahooSymbol: \"IFF\", finnhubSymbol: \"IFF\" }",
+      "index": 28291,
+      "symbol": "IFF",
+      "yahooSymbol": "IFF",
+      "name": "International Flavors & Fragrances"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"GGG\",   name: \"Graco Inc.\",                        yahooSymbol: \"GGG\", finnhubSymbol: \"GGG\" }",
+      "index": 28412,
+      "symbol": "GGG",
+      "yahooSymbol": "GGG",
+      "name": "Graco Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"MLM\",   name: \"Martin Marietta Materials Inc.\",    yahooSymbol: \"MLM\", finnhubSymbol: \"MLM\" }",
+      "index": 28533,
+      "symbol": "MLM",
+      "yahooSymbol": "MLM",
+      "name": "Martin Marietta Materials Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"VMC\",   name: \"Vulcan Materials Company\",          yahooSymbol: \"VMC\", finnhubSymbol: \"VMC\" }",
+      "index": 28654,
+      "symbol": "VMC",
+      "yahooSymbol": "VMC",
+      "name": "Vulcan Materials Company"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"NOC\",   name: \"Northrop Grumman Corporation\",      yahooSymbol: \"NOC\", finnhubSymbol: \"NOC\" }",
+      "index": 28854,
+      "symbol": "NOC",
+      "yahooSymbol": "NOC",
+      "name": "Northrop Grumman Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"GD\",    name: \"General Dynamics Corporation\",      yahooSymbol: \"GD\", finnhubSymbol: \"GD\" }",
+      "index": 28975,
+      "symbol": "GD",
+      "yahooSymbol": "GD",
+      "name": "General Dynamics Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"ROK\",   name: \"Rockwell Automation Inc.\",          yahooSymbol: \"ROK\", finnhubSymbol: \"ROK\" }",
+      "index": 29094,
+      "symbol": "ROK",
+      "yahooSymbol": "ROK",
+      "name": "Rockwell Automation Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"EW\",    name: \"Edwards Lifesciences Corp.\",        yahooSymbol: \"EW\", finnhubSymbol: \"EW\" }",
+      "index": 29215,
+      "symbol": "EW",
+      "yahooSymbol": "EW",
+      "name": "Edwards Lifesciences Corp."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"AZO\",   name: \"AutoZone Inc.\",                     yahooSymbol: \"AZO\", finnhubSymbol: \"AZO\" }",
+      "index": 29334,
+      "symbol": "AZO",
+      "yahooSymbol": "AZO",
+      "name": "AutoZone Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"ALK\",   name: \"Alaska Air Group Inc.\",             yahooSymbol: \"ALK\", finnhubSymbol: \"ALK\" }",
+      "index": 29455,
+      "symbol": "ALK",
+      "yahooSymbol": "ALK",
+      "name": "Alaska Air Group Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"BFB\",   name: \"Brown-Forman Corporation Class B\",  yahooSymbol: \"BF-B\", finnhubSymbol: \"BF.B\" }",
+      "index": 29655,
+      "symbol": "BFB",
+      "yahooSymbol": "BF-B",
+      "name": "Brown-Forman Corporation Class B"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"KMB\",   name: \"Kimberly-Clark Corporation\",        yahooSymbol: \"KMB\", finnhubSymbol: \"KMB\" }",
+      "index": 29778,
+      "symbol": "KMB",
+      "yahooSymbol": "KMB",
+      "name": "Kimberly-Clark Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"HSY\",   name: \"Hershey Company\",                   yahooSymbol: \"HSY\", finnhubSymbol: \"HSY\" }",
+      "index": 29899,
+      "symbol": "HSY",
+      "yahooSymbol": "HSY",
+      "name": "Hershey Company"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"TSN\",   name: \"Tyson Foods Inc.\",                  yahooSymbol: \"TSN\", finnhubSymbol: \"TSN\" }",
+      "index": 30020,
+      "symbol": "TSN",
+      "yahooSymbol": "TSN",
+      "name": "Tyson Foods Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"GIS\",   name: \"General Mills Inc.\",                yahooSymbol: \"GIS\", finnhubSymbol: \"GIS\" }",
+      "index": 30141,
+      "symbol": "GIS",
+      "yahooSymbol": "GIS",
+      "name": "General Mills Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"MKC\",   name: \"McCormick & Company Inc.\",          yahooSymbol: \"MKC\", finnhubSymbol: \"MKC\" }",
+      "index": 30262,
+      "symbol": "MKC",
+      "yahooSymbol": "MKC",
+      "name": "McCormick & Company Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"STZ\",   name: \"Constellation Brands Inc.\",         yahooSymbol: \"STZ\", finnhubSymbol: \"STZ\" }",
+      "index": 30383,
+      "symbol": "STZ",
+      "yahooSymbol": "STZ",
+      "name": "Constellation Brands Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"CMCSA\", name: \"Comcast Corporation Class A\",       yahooSymbol: \"CMCSA\", finnhubSymbol: \"CMCSA\" }",
+      "index": 30583,
+      "symbol": "CMCSA",
+      "yahooSymbol": "CMCSA",
+      "name": "Comcast Corporation Class A"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"TMUS\",  name: \"T-Mobile US Inc.\",                  yahooSymbol: \"TMUS\", finnhubSymbol: \"TMUS\" }",
+      "index": 30708,
+      "symbol": "TMUS",
+      "yahooSymbol": "TMUS",
+      "name": "T-Mobile US Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"CHTR\",  name: \"Charter Communications Inc.\",       yahooSymbol: \"CHTR\", finnhubSymbol: \"CHTR\" }",
+      "index": 30831,
+      "symbol": "CHTR",
+      "yahooSymbol": "CHTR",
+      "name": "Charter Communications Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"FOX\",   name: \"Fox Corporation\",                   yahooSymbol: \"FOX\", finnhubSymbol: \"FOX\" }",
+      "index": 30954,
+      "symbol": "FOX",
+      "yahooSymbol": "FOX",
+      "name": "Fox Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"FOXA\",  name: \"Fox Corporation Class A\",           yahooSymbol: \"FOXA\", finnhubSymbol: \"FOXA\" }",
+      "index": 31075,
+      "symbol": "FOXA",
+      "yahooSymbol": "FOXA",
+      "name": "Fox Corporation Class A"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"WBD\",   name: \"Warner Bros. Discovery Inc.\",       yahooSymbol: \"WBD\", finnhubSymbol: \"WBD\" }",
+      "index": 31198,
+      "symbol": "WBD",
+      "yahooSymbol": "WBD",
+      "name": "Warner Bros. Discovery Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"LUMN\",  name: \"Lumen Technologies Inc.\",           yahooSymbol: \"LUMN\", finnhubSymbol: \"LUMN\" }",
+      "index": 31319,
+      "symbol": "LUMN",
+      "yahooSymbol": "LUMN",
+      "name": "Lumen Technologies Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"NEE\",   name: \"NextEra Energy Inc.\",               yahooSymbol: \"NEE\", finnhubSymbol: \"NEE\" }",
+      "index": 31523,
+      "symbol": "NEE",
+      "yahooSymbol": "NEE",
+      "name": "NextEra Energy Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"DUK\",   name: \"Duke Energy Corporation\",           yahooSymbol: \"DUK\", finnhubSymbol: \"DUK\" }",
+      "index": 31644,
+      "symbol": "DUK",
+      "yahooSymbol": "DUK",
+      "name": "Duke Energy Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"SO\",    name: \"Southern Company\",                  yahooSymbol: \"SO\", finnhubSymbol: \"SO\" }",
+      "index": 31765,
+      "symbol": "SO",
+      "yahooSymbol": "SO",
+      "name": "Southern Company"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"EXC\",   name: \"Exelon Corporation\",                yahooSymbol: \"EXC\", finnhubSymbol: \"EXC\" }",
+      "index": 31884,
+      "symbol": "EXC",
+      "yahooSymbol": "EXC",
+      "name": "Exelon Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"AEP\",   name: \"American Electric Power Company Inc\", yahooSymbol: \"AEP\", finnhubSymbol: \"AEP\" }",
+      "index": 32005,
+      "symbol": "AEP",
+      "yahooSymbol": "AEP",
+      "name": "American Electric Power Company Inc"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"XEL\",   name: \"Xcel Energy Inc.\",                  yahooSymbol: \"XEL\", finnhubSymbol: \"XEL\" }",
+      "index": 32128,
+      "symbol": "XEL",
+      "yahooSymbol": "XEL",
+      "name": "Xcel Energy Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"PEG\",   name: \"Public Service Enterprise Group Inc\", yahooSymbol: \"PEG\", finnhubSymbol: \"PEG\" }",
+      "index": 32249,
+      "symbol": "PEG",
+      "yahooSymbol": "PEG",
+      "name": "Public Service Enterprise Group Inc"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"AWK\",   name: \"American Water Works Company Inc.\", yahooSymbol: \"AWK\", finnhubSymbol: \"AWK\" }",
+      "index": 32372,
+      "symbol": "AWK",
+      "yahooSymbol": "AWK",
+      "name": "American Water Works Company Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"SAP\",   name: \"SAP SE\",                            yahooSymbol: \"SAP\", finnhubSymbol: \"SAP\" }",
+      "index": 32574,
+      "symbol": "SAP",
+      "yahooSymbol": "SAP",
+      "name": "SAP SE"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"HEI\",   name: \"Heidelberg Materials AG\",           yahooSymbol: \"HEI\", finnhubSymbol: \"HEI\" }",
+      "index": 32695,
+      "symbol": "HEI",
+      "yahooSymbol": "HEI",
+      "name": "Heidelberg Materials AG"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"MBG\",   name: \"Mercedes-Benz Group AG\",            yahooSymbol: \"MBG\", finnhubSymbol: \"MBG\" }",
+      "index": 32816,
+      "symbol": "MBG",
+      "yahooSymbol": "MBG",
+      "name": "Mercedes-Benz Group AG"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"ALV\",   name: \"Allianz SE\",                        yahooSymbol: \"ALV\", finnhubSymbol: \"ALV\" }",
+      "index": 32937,
+      "symbol": "ALV",
+      "yahooSymbol": "ALV",
+      "name": "Allianz SE"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"OR\",    name: \"L'Oréal S.A.\",                      yahooSymbol: \"OR\", finnhubSymbol: \"OR\" }",
+      "index": 33058,
+      "symbol": "OR",
+      "yahooSymbol": "OR",
+      "name": "L'Oréal S.A."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"NSRGY\", name: \"Nestlé S.A.\",                       yahooSymbol: \"NSRGY\", finnhubSymbol: \"NSRGY\" }",
+      "index": 33177,
+      "symbol": "NSRGY",
+      "yahooSymbol": "NSRGY",
+      "name": "Nestlé S.A."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"NVS\",   name: \"Novartis AG\",                       yahooSymbol: \"NVS\", finnhubSymbol: \"NVS\" }",
+      "index": 33302,
+      "symbol": "NVS",
+      "yahooSymbol": "NVS",
+      "name": "Novartis AG"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"NOK\",   name: \"Nokia Oyj\",                         yahooSymbol: \"NOK\", finnhubSymbol: \"NOK\" }",
+      "index": 33423,
+      "symbol": "NOK",
+      "yahooSymbol": "NOK",
+      "name": "Nokia Oyj"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"ERIC\",  name: \"Ericsson\",                          yahooSymbol: \"ERIC\", finnhubSymbol: \"ERIC\" }",
+      "index": 33544,
+      "symbol": "ERIC",
+      "yahooSymbol": "ERIC",
+      "name": "Ericsson"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"UL\",    name: \"Unilever PLC\",                      yahooSymbol: \"UL\", finnhubSymbol: \"UL\" }",
+      "index": 33667,
+      "symbol": "UL",
+      "yahooSymbol": "UL",
+      "name": "Unilever PLC"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"GSK\",   name: \"GlaxoSmithKline PLC\",               yahooSymbol: \"GSK\", finnhubSymbol: \"GSK\" }",
+      "index": 33786,
+      "symbol": "GSK",
+      "yahooSymbol": "GSK",
+      "name": "GlaxoSmithKline PLC"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"AZN\",   name: \"AstraZeneca PLC\",                   yahooSymbol: \"AZN\", finnhubSymbol: \"AZN\" }",
+      "index": 33907,
+      "symbol": "AZN",
+      "yahooSymbol": "AZN",
+      "name": "AstraZeneca PLC"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"HDB\",   name: \"HDFC Bank Limited\",                 yahooSymbol: \"HDB\", finnhubSymbol: \"HDB\" }",
+      "index": 34110,
+      "symbol": "HDB",
+      "yahooSymbol": "HDB",
+      "name": "HDFC Bank Limited"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"INFY\",  name: \"Infosys Limited\",                   yahooSymbol: \"INFY\", finnhubSymbol: \"INFY\" }",
+      "index": 34231,
+      "symbol": "INFY",
+      "yahooSymbol": "INFY",
+      "name": "Infosys Limited"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"IBN\",   name: \"ICICI Bank Limited\",                yahooSymbol: \"IBN\", finnhubSymbol: \"IBN\" }",
+      "index": 34354,
+      "symbol": "IBN",
+      "yahooSymbol": "IBN",
+      "name": "ICICI Bank Limited"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"WIT\",   name: \"Wipro Limited\",                     yahooSymbol: \"WIT\", finnhubSymbol: \"WIT\" }",
+      "index": 34475,
+      "symbol": "WIT",
+      "yahooSymbol": "WIT",
+      "name": "Wipro Limited"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"HMC\",   name: \"Hyundai Motor Company\",             yahooSymbol: \"HMC\", finnhubSymbol: \"HMC\" }",
+      "index": 34596,
+      "symbol": "HMC",
+      "yahooSymbol": "HMC",
+      "name": "Hyundai Motor Company"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"SFTBY\", name: \"SoftBank Group Corp.\",              yahooSymbol: \"SFTBY\", finnhubSymbol: \"SFTBY\" }",
+      "index": 34717,
+      "symbol": "SFTBY",
+      "yahooSymbol": "SFTBY",
+      "name": "SoftBank Group Corp."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"FAST\",  name: \"Fastenal Company\",                  yahooSymbol: \"FAST\", finnhubSymbol: \"FAST\" }",
+      "index": 34842,
+      "symbol": "FAST",
+      "yahooSymbol": "FAST",
+      "name": "Fastenal Company"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"VROOM\", name: \"Vroom Inc.\",                        yahooSymbol: \"VRM\", finnhubSymbol: \"VRM\" }",
+      "index": 34965,
+      "symbol": "VROOM",
+      "yahooSymbol": "VRM",
+      "name": "Vroom Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"DKNG\",  name: \"DraftKings Inc.\",                   yahooSymbol: \"DKNG\", finnhubSymbol: \"DKNG\" }",
+      "index": 35086,
+      "symbol": "DKNG",
+      "yahooSymbol": "DKNG",
+      "name": "DraftKings Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"PENN\",  name: \"Penn Entertainment Inc.\",           yahooSymbol: \"PENN\", finnhubSymbol: \"PENN\" }",
+      "index": 35209,
+      "symbol": "PENN",
+      "yahooSymbol": "PENN",
+      "name": "Penn Entertainment Inc."
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"GLD\",  name: \"SPDR Gold Shares\",                     yahooSymbol: \"GLD\" }",
+      "index": 35414,
+      "symbol": "GLD",
+      "yahooSymbol": "GLD",
+      "name": "SPDR Gold Shares"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"SLV\",  name: \"iShares Silver Trust\",                  yahooSymbol: \"SLV\" }",
+      "index": 35513,
+      "symbol": "SLV",
+      "yahooSymbol": "SLV",
+      "name": "iShares Silver Trust"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"USO\",  name: \"United States Oil Fund LP\",            yahooSymbol: \"USO\" }",
+      "index": 35613,
+      "symbol": "USO",
+      "yahooSymbol": "USO",
+      "name": "United States Oil Fund LP"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"DBC\",  name: \"Commodities Select Sector SPDR Fund\",   yahooSymbol: \"DBC\" }",
+      "index": 35712,
+      "symbol": "DBC",
+      "yahooSymbol": "DBC",
+      "name": "Commodities Select Sector SPDR Fund"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"GLDM\", name: \"SPDR Gold Minishares ETF\",              yahooSymbol: \"GLDM\" }",
+      "index": 35812,
+      "symbol": "GLDM",
+      "yahooSymbol": "GLDM",
+      "name": "SPDR Gold Minishares ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"EEM\",  name: \"iShares MSCI Emerging Markets ETF\",    yahooSymbol: \"EEM\" }",
+      "index": 35913,
+      "symbol": "EEM",
+      "yahooSymbol": "EEM",
+      "name": "iShares MSCI Emerging Markets ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"IEMG\", name: \"iShares Core MSCI Emerging Markets ETF\", yahooSymbol: \"IEMG\" }",
+      "index": 36012,
+      "symbol": "IEMG",
+      "yahooSymbol": "IEMG",
+      "name": "iShares Core MSCI Emerging Markets ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"EWJ\",  name: \"iShares MSCI Japan ETF\",               yahooSymbol: \"EWJ\" }",
+      "index": 36114,
+      "symbol": "EWJ",
+      "yahooSymbol": "EWJ",
+      "name": "iShares MSCI Japan ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"EWG\",  name: \"iShares MSCI Germany ETF\",             yahooSymbol: \"EWG\" }",
+      "index": 36213,
+      "symbol": "EWG",
+      "yahooSymbol": "EWG",
+      "name": "iShares MSCI Germany ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"EWU\",  name: \"iShares MSCI United Kingdom ETF\",      yahooSymbol: \"EWU\" }",
+      "index": 36312,
+      "symbol": "EWU",
+      "yahooSymbol": "EWU",
+      "name": "iShares MSCI United Kingdom ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"EWH\",  name: \"iShares MSCI Hong Kong ETF\",           yahooSymbol: \"EWH\" }",
+      "index": 36411,
+      "symbol": "EWH",
+      "yahooSymbol": "EWH",
+      "name": "iShares MSCI Hong Kong ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"RSP\",  name: \"Invesco S&P 500 Equal Weight ETF\",     yahooSymbol: \"RSP\" }",
+      "index": 36510,
+      "symbol": "RSP",
+      "yahooSymbol": "RSP",
+      "name": "Invesco S&P 500 Equal Weight ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"DGRO\", name: \"iShares Core Dividend Growth ETF\",     yahooSymbol: \"DGRO\" }",
+      "index": 36609,
+      "symbol": "DGRO",
+      "yahooSymbol": "DGRO",
+      "name": "iShares Core Dividend Growth ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"VYM\",  name: \"Vanguard High Dividend Yield ETF\",     yahooSymbol: \"VYM\" }",
+      "index": 36709,
+      "symbol": "VYM",
+      "yahooSymbol": "VYM",
+      "name": "Vanguard High Dividend Yield ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"HYG\",  name: \"iShares High Yield Corp Bond ETF\",     yahooSymbol: \"HYG\" }",
+      "index": 36808,
+      "symbol": "HYG",
+      "yahooSymbol": "HYG",
+      "name": "iShares High Yield Corp Bond ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"VCIT\", name: \"Vanguard Intermediate-Term Corp Bond\", yahooSymbol: \"VCIT\" }",
+      "index": 36907,
+      "symbol": "VCIT",
+      "yahooSymbol": "VCIT",
+      "name": "Vanguard Intermediate-Term Corp Bond"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"LQD\",  name: \"iShares Investment Grade Corp Bond\",   yahooSymbol: \"LQD\" }",
+      "index": 37007,
+      "symbol": "LQD",
+      "yahooSymbol": "LQD",
+      "name": "iShares Investment Grade Corp Bond"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"VGIT\", name: \"Vanguard Intermediate-Term Govt Bond\",  yahooSymbol: \"VGIT\" }",
+      "index": 37106,
+      "symbol": "VGIT",
+      "yahooSymbol": "VGIT",
+      "name": "Vanguard Intermediate-Term Govt Bond"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"VCSH\", name: \"Vanguard Short-Term Corp Bond ETF\",    yahooSymbol: \"VCSH\" }",
+      "index": 37207,
+      "symbol": "VCSH",
+      "yahooSymbol": "VCSH",
+      "name": "Vanguard Short-Term Corp Bond ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"PSP\",  name: \"Invesco Preferred Stock ETF\",          yahooSymbol: \"PSP\" }",
+      "index": 37307,
+      "symbol": "PSP",
+      "yahooSymbol": "PSP",
+      "name": "Invesco Preferred Stock ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"JEPI\", name: \"JPMorgan Equity Premium Income ETF\",   yahooSymbol: \"JEPI\" }",
+      "index": 37406,
+      "symbol": "JEPI",
+      "yahooSymbol": "JEPI",
+      "name": "JPMorgan Equity Premium Income ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"VGSLX\", name: \"Vanguard Growth And Income ETF\",      yahooSymbol: \"VGSLX\" }",
+      "index": 37506,
+      "symbol": "VGSLX",
+      "yahooSymbol": "VGSLX",
+      "name": "Vanguard Growth And Income ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"SCHB\", name: \"Schwab US Broad Market ETF\",           yahooSymbol: \"SCHB\" }",
+      "index": 37607,
+      "symbol": "SCHB",
+      "yahooSymbol": "SCHB",
+      "name": "Schwab US Broad Market ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"SCHA\", name: \"Schwab US Small-Cap ETF\",              yahooSymbol: \"SCHA\" }",
+      "index": 37707,
+      "symbol": "SCHA",
+      "yahooSymbol": "SCHA",
+      "name": "Schwab US Small-Cap ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"SCHE\", name: \"Schwab US Emerging Markets Equity ETF\", yahooSymbol: \"SCHE\" }",
+      "index": 37807,
+      "symbol": "SCHE",
+      "yahooSymbol": "SCHE",
+      "name": "Schwab US Emerging Markets Equity ETF"
+    },
+    {
+      "type": "Crypto",
+      "paramsStr": "{ symbol: \"BNBUSD\",  name: \"Binance Coin\",      yahooSymbol: \"BNB-USD\", tradingViewSymbol: \"BINANCE:BNBUSDT\" }",
+      "index": 37989,
+      "symbol": "BNBUSD",
+      "yahooSymbol": "BNB-USD",
+      "name": "Binance Coin"
+    },
+    {
+      "type": "Crypto",
+      "paramsStr": "{ symbol: \"MATIUSD\", name: \"Polygon\",           yahooSymbol: \"MATIC-USD\", tradingViewSymbol: \"BINANCE:MATICUSDT\" }",
+      "index": 38117,
+      "symbol": "MATIUSD",
+      "yahooSymbol": "MATIC-USD",
+      "name": "Polygon"
+    },
+    {
+      "type": "Crypto",
+      "paramsStr": "{ symbol: \"FTTUSD\",  name: \"Filecoin\",          yahooSymbol: \"FIL-USD\", tradingViewSymbol: \"BINANCE:FILUSDT\" }",
+      "index": 38249,
+      "symbol": "FTTUSD",
+      "yahooSymbol": "FIL-USD",
+      "name": "Filecoin"
+    },
+    {
+      "type": "Crypto",
+      "paramsStr": "{ symbol: \"VETUSD\",  name: \"VeChain\",           yahooSymbol: \"VET-USD\", tradingViewSymbol: \"BINANCE:VETUSDT\" }",
+      "index": 38377,
+      "symbol": "VETUSD",
+      "yahooSymbol": "VET-USD",
+      "name": "VeChain"
+    },
+    {
+      "type": "Crypto",
+      "paramsStr": "{ symbol: \"ATOMUSD\", name: \"Cosmos\",            yahooSymbol: \"ATOM-USD\", tradingViewSymbol: \"BINANCE:ATOMUSDT\" }",
+      "index": 38505,
+      "symbol": "ATOMUSD",
+      "yahooSymbol": "ATOM-USD",
+      "name": "Cosmos"
+    },
+    {
+      "type": "Crypto",
+      "paramsStr": "{ symbol: \"MONERO\",  name: \"Monero\",            yahooSymbol: \"XMR-USD\", tradingViewSymbol: \"BINANCE:XMRUSDT\" }",
+      "index": 38635,
+      "symbol": "MONERO",
+      "yahooSymbol": "XMR-USD",
+      "name": "Monero"
+    },
+    {
+      "type": "Crypto",
+      "paramsStr": "{ symbol: \"ZCASH\",   name: \"Zcash\",             yahooSymbol: \"ZEC-USD\", tradingViewSymbol: \"BINANCE:ZECUSDT\" }",
+      "index": 38763,
+      "symbol": "ZCASH",
+      "yahooSymbol": "ZEC-USD",
+      "name": "Zcash"
+    },
+    {
+      "type": "Crypto",
+      "paramsStr": "{ symbol: \"THETA\",   name: \"Theta Token\",       yahooSymbol: \"THETA-USD\", tradingViewSymbol: \"BINANCE:THETAUSDT\" }",
+      "index": 38891,
+      "symbol": "THETA",
+      "yahooSymbol": "THETA-USD",
+      "name": "Theta Token"
+    },
+    {
+      "type": "Crypto",
+      "paramsStr": "{ symbol: \"IOTA\",    name: \"IOTA\",              yahooSymbol: \"IOTA-USD\", tradingViewSymbol: \"BINANCE:IOTAUSDT\" }",
+      "index": 39023,
+      "symbol": "IOTA",
+      "yahooSymbol": "IOTA-USD",
+      "name": "IOTA"
+    },
+    {
+      "type": "Crypto",
+      "paramsStr": "{ symbol: \"NEO\",     name: \"Neo\",               yahooSymbol: \"NEO-USD\", tradingViewSymbol: \"BINANCE:NEOUSDT\" }",
+      "index": 39153,
+      "symbol": "NEO",
+      "yahooSymbol": "NEO-USD",
+      "name": "Neo"
+    },
+    {
+      "type": "Crypto",
+      "paramsStr": "{ symbol: \"EOS\",     name: \"EOS\",               yahooSymbol: \"EOS-USD\", tradingViewSymbol: \"BINANCE:EOSUSDT\" }",
+      "index": 39281,
+      "symbol": "EOS",
+      "yahooSymbol": "EOS-USD",
+      "name": "EOS"
+    },
+    {
+      "type": "Crypto",
+      "paramsStr": "{ symbol: \"TRON\",    name: \"TRON\",              yahooSymbol: \"TRX-USD\", tradingViewSymbol: \"BINANCE:TRXUSDT\" }",
+      "index": 39409,
+      "symbol": "TRON",
+      "yahooSymbol": "TRX-USD",
+      "name": "TRON"
+    },
+    {
+      "type": "Crypto",
+      "paramsStr": "{ symbol: \"HEDERA\",  name: \"Hedera Hashgraph\",  yahooSymbol: \"HBAR-USD\", tradingViewSymbol: \"BINANCE:HBARUSDT\" }",
+      "index": 39537,
+      "symbol": "HEDERA",
+      "yahooSymbol": "HBAR-USD",
+      "name": "Hedera Hashgraph"
+    },
+    {
+      "type": "Crypto",
+      "paramsStr": "{ symbol: \"APTOS\",   name: \"Aptos\",             yahooSymbol: \"APT-USD\", tradingViewSymbol: \"BINANCE:APTUSDT\" }",
+      "index": 39667,
+      "symbol": "APTOS",
+      "yahooSymbol": "APT-USD",
+      "name": "Aptos"
+    },
+    {
+      "type": "Commodity",
+      "paramsStr": "{ symbol: \"PALLADIUM\", name: \"Palladium\", yahooSymbol: \"PA=F\", tradingViewSymbol: \"COMEX:PA1!\" }",
+      "index": 39875,
+      "symbol": "PALLADIUM",
+      "yahooSymbol": "PA=F",
+      "name": "Palladium"
+    },
+    {
+      "type": "Commodity",
+      "paramsStr": "{ symbol: \"PLATINUM\",  name: \"Platinum\",  yahooSymbol: \"PL=F\", tradingViewSymbol: \"COMEX:PL1!\" }",
+      "index": 39992,
+      "symbol": "PLATINUM",
+      "yahooSymbol": "PL=F",
+      "name": "Platinum"
+    },
+    {
+      "type": "Commodity",
+      "paramsStr": "{ symbol: \"ZINC\",      name: \"Zinc\",      yahooSymbol: \"ZN=F\", tradingViewSymbol: \"COMEX:ZN1!\" }",
+      "index": 40109,
+      "symbol": "ZINC",
+      "yahooSymbol": "ZN=F",
+      "name": "Zinc"
+    },
+    {
+      "type": "Commodity",
+      "paramsStr": "{ symbol: \"ALUMINUM\",  name: \"Aluminum\",  yahooSymbol: \"ALI=F\", tradingViewSymbol: \"COMEX:ALI1!\" }",
+      "index": 40226,
+      "symbol": "ALUMINUM",
+      "yahooSymbol": "ALI=F",
+      "name": "Aluminum"
+    },
+    {
+      "type": "Commodity",
+      "paramsStr": "{ symbol: \"CORN\",      name: \"Corn\",      yahooSymbol: \"ZC=F\", tradingViewSymbol: \"CBOT:ZC1!\" }",
+      "index": 40345,
+      "symbol": "CORN",
+      "yahooSymbol": "ZC=F",
+      "name": "Corn"
+    },
+    {
+      "type": "Commodity",
+      "paramsStr": "{ symbol: \"WHEAT\",     name: \"Wheat\",     yahooSymbol: \"ZW=F\", tradingViewSymbol: \"CBOT:ZW1!\" }",
+      "index": 40461,
+      "symbol": "WHEAT",
+      "yahooSymbol": "ZW=F",
+      "name": "Wheat"
+    },
+    {
+      "type": "Commodity",
+      "paramsStr": "{ symbol: \"SOYBEANS\",  name: \"Soybeans\",  yahooSymbol: \"ZS=F\", tradingViewSymbol: \"CBOT:ZS1!\" }",
+      "index": 40577,
+      "symbol": "SOYBEANS",
+      "yahooSymbol": "ZS=F",
+      "name": "Soybeans"
+    },
+    {
+      "type": "Commodity",
+      "paramsStr": "{ symbol: \"SUGAR\",     name: \"Sugar\",     yahooSymbol: \"SB=F\", tradingViewSymbol: \"ICEUS:SB1!\" }",
+      "index": 40693,
+      "symbol": "SUGAR",
+      "yahooSymbol": "SB=F",
+      "name": "Sugar"
+    },
+    {
+      "type": "Forex",
+      "paramsStr": "{ symbol: \"CHFUSD\", name: \"Swiss Franc / Dollar USA\",       yahooSymbol: \"CHFUSD=X\", tradingViewSymbol: \"FX:CHFUSD\" }",
+      "index": 40891,
+      "symbol": "CHFUSD",
+      "yahooSymbol": "CHFUSD=X",
+      "name": "Swiss Franc / Dollar USA"
+    },
+    {
+      "type": "Forex",
+      "paramsStr": "{ symbol: \"AUDUSD\", name: \"Australian Dollar / US Dollar\",  yahooSymbol: \"AUDUSD=X\", tradingViewSymbol: \"FX:AUDUSD\" }",
+      "index": 41025,
+      "symbol": "AUDUSD",
+      "yahooSymbol": "AUDUSD=X",
+      "name": "Australian Dollar / US Dollar"
+    },
+    {
+      "type": "Forex",
+      "paramsStr": "{ symbol: \"NZDUSD\", name: \"New Zealand Dollar / US Dollar\", yahooSymbol: \"NZDUSD=X\", tradingViewSymbol: \"FX:NZDUSD\" }",
+      "index": 41159,
+      "symbol": "NZDUSD",
+      "yahooSymbol": "NZDUSD=X",
+      "name": "New Zealand Dollar / US Dollar"
+    },
+    {
+      "type": "Forex",
+      "paramsStr": "{ symbol: \"CADUSD\", name: \"Canadian Dollar / US Dollar\",    yahooSymbol: \"CADUSD=X\", tradingViewSymbol: \"FX:CADUSD\" }",
+      "index": 41293,
+      "symbol": "CADUSD",
+      "yahooSymbol": "CADUSD=X",
+      "name": "Canadian Dollar / US Dollar"
+    },
+    {
+      "type": "Forex",
+      "paramsStr": "{ symbol: \"SGDUSD\", name: \"Singapore Dollar / US Dollar\",   yahooSymbol: \"SGDUSD=X\", tradingViewSymbol: \"FX:SGDUSD\" }",
+      "index": 41427,
+      "symbol": "SGDUSD",
+      "yahooSymbol": "SGDUSD=X",
+      "name": "Singapore Dollar / US Dollar"
+    },
+    {
+      "type": "Forex",
+      "paramsStr": "{ symbol: \"HKDUSD\", name: \"Hong Kong Dollar / US Dollar\",   yahooSymbol: \"HKDUSD=X\", tradingViewSymbol: \"FX:HKDUSD\" }",
+      "index": 41561,
+      "symbol": "HKDUSD",
+      "yahooSymbol": "HKDUSD=X",
+      "name": "Hong Kong Dollar / US Dollar"
+    },
+    {
+      "type": "Forex",
+      "paramsStr": "{ symbol: \"INRUSD\", name: \"Indian Rupee / US Dollar\",       yahooSymbol: \"INRUSD=X\", tradingViewSymbol: \"FX:INRUSD\" }",
+      "index": 41695,
+      "symbol": "INRUSD",
+      "yahooSymbol": "INRUSD=X",
+      "name": "Indian Rupee / US Dollar"
+    },
+    {
+      "type": "Forex",
+      "paramsStr": "{ symbol: \"ZARUSD\", name: \"South African Rand / US Dollar\", yahooSymbol: \"ZARUSD=X\", tradingViewSymbol: \"FX:ZARUSD\" }",
+      "index": 41829,
+      "symbol": "ZARUSD",
+      "yahooSymbol": "ZARUSD=X",
+      "name": "South African Rand / US Dollar"
+    },
+    {
+      "type": "Forex",
+      "paramsStr": "{ symbol: \"BRLUSD\", name: \"Brazilian Real / US Dollar\",     yahooSymbol: \"BRLUSD=X\", tradingViewSymbol: \"FX:BRLUSD\" }",
+      "index": 41963,
+      "symbol": "BRLUSD",
+      "yahooSymbol": "BRLUSD=X",
+      "name": "Brazilian Real / US Dollar"
+    },
+    {
+      "type": "Forex",
+      "paramsStr": "{ symbol: \"MXNUSD\", name: \"Mexican Peso / US Dollar\",       yahooSymbol: \"MXNUSD=X\", tradingViewSymbol: \"FX:MXNUSD\" }",
+      "index": 42097,
+      "symbol": "MXNUSD",
+      "yahooSymbol": "MXNUSD=X",
+      "name": "Mexican Peso / US Dollar"
+    },
+    {
+      "type": "Forex",
+      "paramsStr": "{ symbol: \"GBPEUR\", name: \"British Pound / Euro\",           yahooSymbol: \"GBPEUR=X\", tradingViewSymbol: \"FX:GBPEUR\" }",
+      "index": 42231,
+      "symbol": "GBPEUR",
+      "yahooSymbol": "GBPEUR=X",
+      "name": "British Pound / Euro"
+    },
+    {
+      "type": "Forex",
+      "paramsStr": "{ symbol: \"EURJPY\", name: \"Euro / Japanese Yen\",            yahooSymbol: \"EURJPY=X\", tradingViewSymbol: \"FX:EURJPY\" }",
+      "index": 42365,
+      "symbol": "EURJPY",
+      "yahooSymbol": "EURJPY=X",
+      "name": "Euro / Japanese Yen"
+    },
+    {
+      "type": "Forex",
+      "paramsStr": "{ symbol: \"AUDJPY\", name: \"Australian Dollar / Yen\",        yahooSymbol: \"AUDJPY=X\", tradingViewSymbol: \"FX:AUDJPY\" }",
+      "index": 42499,
+      "symbol": "AUDJPY",
+      "yahooSymbol": "AUDJPY=X",
+      "name": "Australian Dollar / Yen"
+    },
+    {
+      "type": "Forex",
+      "paramsStr": "{ symbol: \"NZDJPY\", name: \"New Zealand Dollar / Yen\",       yahooSymbol: \"NZDJPY=X\", tradingViewSymbol: \"FX:NZDJPY\" }",
+      "index": 42633,
+      "symbol": "NZDJPY",
+      "yahooSymbol": "NZDJPY=X",
+      "name": "New Zealand Dollar / Yen"
+    },
+    {
+      "type": "Forex",
+      "paramsStr": "{ symbol: \"CADJPY\", name: \"Canadian Dollar / Yen\",          yahooSymbol: \"CADJPY=X\", tradingViewSymbol: \"FX:CADJPY\" }",
+      "index": 42767,
+      "symbol": "CADJPY",
+      "yahooSymbol": "CADJPY=X",
+      "name": "Canadian Dollar / Yen"
+    },
+    {
+      "type": "Index",
+      "paramsStr": "{ symbol: \"IXIC\",  name: \"NASDAQ Composite\",                yahooSymbol: \"^IXIC\", tradingViewSymbol: \"NASDAQ:CCMP\" }",
+      "index": 42982,
+      "symbol": "IXIC",
+      "yahooSymbol": "^IXIC",
+      "name": "NASDAQ Composite"
+    },
+    {
+      "type": "Index",
+      "paramsStr": "{ symbol: \"DJT\",   name: \"Dow Jones Transportation Average\", yahooSymbol: \"^DJT\", tradingViewSymbol: \"DJ:DJT\" }",
+      "index": 43115,
+      "symbol": "DJT",
+      "yahooSymbol": "^DJT",
+      "name": "Dow Jones Transportation Average"
+    },
+    {
+      "type": "Index",
+      "paramsStr": "{ symbol: \"NYA\",   name: \"NYSE Composite Index\",            yahooSymbol: \"^NYA\", tradingViewSymbol: \"NYSE:NYA\" }",
+      "index": 43243,
+      "symbol": "NYA",
+      "yahooSymbol": "^NYA",
+      "name": "NYSE Composite Index"
+    },
+    {
+      "type": "Index",
+      "paramsStr": "{ symbol: \"HUI\",   name: \"NYSE Arca Gold Bugs Index\",       yahooSymbol: \"^HUI\", tradingViewSymbol: \"NYSE:HUI\" }",
+      "index": 43372,
+      "symbol": "HUI",
+      "yahooSymbol": "^HUI",
+      "name": "NYSE Arca Gold Bugs Index"
+    },
+    {
+      "type": "Index",
+      "paramsStr": "{ symbol: \"XAU\",   name: \"Gold Index\",                      yahooSymbol: \"^XAU\", tradingViewSymbol: \"TVC:GOLD\" }",
+      "index": 43501,
+      "symbol": "XAU",
+      "yahooSymbol": "^XAU",
+      "name": "Gold Index"
+    },
+    {
+      "type": "Index",
+      "paramsStr": "{ symbol: \"MOVE\",  name: \"ICE BofA Move Index\",             yahooSymbol: \"^MOVE\", tradingViewSymbol: \"TVC:MOVE\" }",
+      "index": 43630,
+      "symbol": "MOVE",
+      "yahooSymbol": "^MOVE",
+      "name": "ICE BofA Move Index"
+    },
+    {
+      "type": "Bond",
+      "paramsStr": "{ symbol: \"US02Y\", name: \"US Treasury 2Y\", yahooSymbol: \"^IRX\", tradingViewSymbol: \"TVC:US2Y\" }",
+      "index": 43841,
+      "symbol": "US02Y",
+      "yahooSymbol": "^IRX",
+      "name": "US Treasury 2Y"
+    },
+    {
+      "type": "Bond",
+      "paramsStr": "{ symbol: \"US05Y\", name: \"US Treasury 5Y\", yahooSymbol: \"^FVX\", tradingViewSymbol: \"TVC:US5Y\" }",
+      "index": 43952,
+      "symbol": "US05Y",
+      "yahooSymbol": "^FVX",
+      "name": "US Treasury 5Y"
+    },
+    {
+      "type": "Bond",
+      "paramsStr": "{ symbol: \"US03M\", name: \"US Treasury 3M Bill\", yahooSymbol: \"^IRX\", tradingViewSymbol: \"TVC:US03M\" }",
+      "index": 44063,
+      "symbol": "US03M",
+      "yahooSymbol": "^IRX",
+      "name": "US Treasury 3M Bill"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"SPGI\",  name: \"S&P Global Inc.\",                       yahooSymbol: \"SPGI\",  tradingViewSymbol: \"NYSE:SPGI\" }",
+      "index": 44484,
+      "symbol": "SPGI",
+      "yahooSymbol": "SPGI",
+      "name": "S&P Global Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"MCO\",   name: \"Moody's Corporation\",                   yahooSymbol: \"MCO\",   tradingViewSymbol: \"NYSE:MCO\" }",
+      "index": 44621,
+      "symbol": "MCO",
+      "yahooSymbol": "MCO",
+      "name": "Moody's Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"ICE\",   name: \"Intercontinental Exchange Inc.\",         yahooSymbol: \"ICE\",   tradingViewSymbol: \"NYSE:ICE\" }",
+      "index": 44757,
+      "symbol": "ICE",
+      "yahooSymbol": "ICE",
+      "name": "Intercontinental Exchange Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"CME\",   name: \"CME Group Inc.\",                         yahooSymbol: \"CME\",   tradingViewSymbol: \"NASDAQ:CME\" }",
+      "index": 44894,
+      "symbol": "CME",
+      "yahooSymbol": "CME",
+      "name": "CME Group Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"BLK\",   name: \"BlackRock Inc.\",                         yahooSymbol: \"BLK\",   tradingViewSymbol: \"NYSE:BLK\" }",
+      "index": 45033,
+      "symbol": "BLK",
+      "yahooSymbol": "BLK",
+      "name": "BlackRock Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"STT\",   name: \"State Street Corporation\",               yahooSymbol: \"STT\",   tradingViewSymbol: \"NYSE:STT\" }",
+      "index": 45170,
+      "symbol": "STT",
+      "yahooSymbol": "STT",
+      "name": "State Street Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"FIS\",   name: \"Fidelity National Information Services\", yahooSymbol: \"FIS\",   tradingViewSymbol: \"NYSE:FIS\" }",
+      "index": 45307,
+      "symbol": "FIS",
+      "yahooSymbol": "FIS",
+      "name": "Fidelity National Information Services"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"GPN\",   name: \"Global Payments Inc.\",                   yahooSymbol: \"GPN\",   tradingViewSymbol: \"NYSE:GPN\" }",
+      "index": 45444,
+      "symbol": "GPN",
+      "yahooSymbol": "GPN",
+      "name": "Global Payments Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"KKR\",   name: \"KKR & Co. Inc.\",                        yahooSymbol: \"KKR\",   tradingViewSymbol: \"NYSE:KKR\" }",
+      "index": 45661,
+      "symbol": "KKR",
+      "yahooSymbol": "KKR",
+      "name": "KKR & Co. Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"BX\",    name: \"Blackstone Inc.\",                        yahooSymbol: \"BX\",    tradingViewSymbol: \"NYSE:BX\" }",
+      "index": 45797,
+      "symbol": "BX",
+      "yahooSymbol": "BX",
+      "name": "Blackstone Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"APO\",   name: \"Apollo Global Management Inc.\",          yahooSymbol: \"APO\",   tradingViewSymbol: \"NYSE:APO\" }",
+      "index": 45933,
+      "symbol": "APO",
+      "yahooSymbol": "APO",
+      "name": "Apollo Global Management Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"CG\",    name: \"Carlyle Group Inc.\",                     yahooSymbol: \"CG\",    tradingViewSymbol: \"NASDAQ:CG\" }",
+      "index": 46070,
+      "symbol": "CG",
+      "yahooSymbol": "CG",
+      "name": "Carlyle Group Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"ARES\",  name: \"Ares Management Corporation\",            yahooSymbol: \"ARES\",  tradingViewSymbol: \"NYSE:ARES\" }",
+      "index": 46208,
+      "symbol": "ARES",
+      "yahooSymbol": "ARES",
+      "name": "Ares Management Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"PGR\",   name: \"Progressive Corporation\",                yahooSymbol: \"PGR\",   tradingViewSymbol: \"NYSE:PGR\" }",
+      "index": 46346,
+      "symbol": "PGR",
+      "yahooSymbol": "PGR",
+      "name": "Progressive Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"AJG\",   name: \"Arthur J. Gallagher & Co.\",              yahooSymbol: \"AJG\",   tradingViewSymbol: \"NYSE:AJG\" }",
+      "index": 46483,
+      "symbol": "AJG",
+      "yahooSymbol": "AJG",
+      "name": "Arthur J. Gallagher & Co."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"CB\",    name: \"Chubb Limited\",                          yahooSymbol: \"CB\",    tradingViewSymbol: \"NYSE:CB\" }",
+      "index": 46620,
+      "symbol": "CB",
+      "yahooSymbol": "CB",
+      "name": "Chubb Limited"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"ALL\",   name: \"Allstate Corporation\",                   yahooSymbol: \"ALL\",   tradingViewSymbol: \"NYSE:ALL\" }",
+      "index": 46756,
+      "symbol": "ALL",
+      "yahooSymbol": "ALL",
+      "name": "Allstate Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"AFL\",   name: \"Aflac Incorporated\",                     yahooSymbol: \"AFL\",   tradingViewSymbol: \"NYSE:AFL\" }",
+      "index": 46893,
+      "symbol": "AFL",
+      "yahooSymbol": "AFL",
+      "name": "Aflac Incorporated"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"PRU\",   name: \"Prudential Financial Inc.\",              yahooSymbol: \"PRU\",   tradingViewSymbol: \"NYSE:PRU\" }",
+      "index": 47030,
+      "symbol": "PRU",
+      "yahooSymbol": "PRU",
+      "name": "Prudential Financial Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"MET\",   name: \"MetLife Inc.\",                           yahooSymbol: \"MET\",   tradingViewSymbol: \"NYSE:MET\" }",
+      "index": 47167,
+      "symbol": "MET",
+      "yahooSymbol": "MET",
+      "name": "MetLife Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"AMT\",   name: \"American Tower Corporation\",             yahooSymbol: \"AMT\",   tradingViewSymbol: \"NYSE:AMT\" }",
+      "index": 47386,
+      "symbol": "AMT",
+      "yahooSymbol": "AMT",
+      "name": "American Tower Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"EQIX\",  name: \"Equinix Inc.\",                           yahooSymbol: \"EQIX\",  tradingViewSymbol: \"NASDAQ:EQIX\" }",
+      "index": 47523,
+      "symbol": "EQIX",
+      "yahooSymbol": "EQIX",
+      "name": "Equinix Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"CCI\",   name: \"Crown Castle Inc.\",                      yahooSymbol: \"CCI\",   tradingViewSymbol: \"NYSE:CCI\" }",
+      "index": 47663,
+      "symbol": "CCI",
+      "yahooSymbol": "CCI",
+      "name": "Crown Castle Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"O\",     name: \"Realty Income Corporation\",              yahooSymbol: \"O\",     tradingViewSymbol: \"NYSE:O\" }",
+      "index": 47800,
+      "symbol": "O",
+      "yahooSymbol": "O",
+      "name": "Realty Income Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"SPG\",   name: \"Simon Property Group Inc.\",              yahooSymbol: \"SPG\",   tradingViewSymbol: \"NYSE:SPG\" }",
+      "index": 47935,
+      "symbol": "SPG",
+      "yahooSymbol": "SPG",
+      "name": "Simon Property Group Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"PSA\",   name: \"Public Storage\",                         yahooSymbol: \"PSA\",   tradingViewSymbol: \"NYSE:PSA\" }",
+      "index": 48072,
+      "symbol": "PSA",
+      "yahooSymbol": "PSA",
+      "name": "Public Storage"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"EQR\",   name: \"Equity Residential\",                     yahooSymbol: \"EQR\",   tradingViewSymbol: \"NYSE:EQR\" }",
+      "index": 48209,
+      "symbol": "EQR",
+      "yahooSymbol": "EQR",
+      "name": "Equity Residential"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"AVB\",   name: \"AvalonBay Communities Inc.\",             yahooSymbol: \"AVB\",   tradingViewSymbol: \"NYSE:AVB\" }",
+      "index": 48346,
+      "symbol": "AVB",
+      "yahooSymbol": "AVB",
+      "name": "AvalonBay Communities Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"WPC\",   name: \"W.P. Carey Inc.\",                        yahooSymbol: \"WPC\",   tradingViewSymbol: \"NYSE:WPC\" }",
+      "index": 48483,
+      "symbol": "WPC",
+      "yahooSymbol": "WPC",
+      "name": "W.P. Carey Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"WELL\",  name: \"Welltower Inc.\",                         yahooSymbol: \"WELL\",  tradingViewSymbol: \"NYSE:WELL\" }",
+      "index": 48620,
+      "symbol": "WELL",
+      "yahooSymbol": "WELL",
+      "name": "Welltower Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"ADP\",   name: \"Automatic Data Processing Inc.\",         yahooSymbol: \"ADP\",   tradingViewSymbol: \"NASDAQ:ADP\" }",
+      "index": 48840,
+      "symbol": "ADP",
+      "yahooSymbol": "ADP",
+      "name": "Automatic Data Processing Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"PAYX\",  name: \"Paychex Inc.\",                           yahooSymbol: \"PAYX\",  tradingViewSymbol: \"NASDAQ:PAYX\" }",
+      "index": 48979,
+      "symbol": "PAYX",
+      "yahooSymbol": "PAYX",
+      "name": "Paychex Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"CTAS\",  name: \"Cintas Corporation\",                     yahooSymbol: \"CTAS\",  tradingViewSymbol: \"NASDAQ:CTAS\" }",
+      "index": 49119,
+      "symbol": "CTAS",
+      "yahooSymbol": "CTAS",
+      "name": "Cintas Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"URI\",   name: \"United Rentals Inc.\",                    yahooSymbol: \"URI\",   tradingViewSymbol: \"NYSE:URI\" }",
+      "index": 49259,
+      "symbol": "URI",
+      "yahooSymbol": "URI",
+      "name": "United Rentals Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"WM\",    name: \"Waste Management Inc.\",                  yahooSymbol: \"WM\",    tradingViewSymbol: \"NYSE:WM\" }",
+      "index": 49396,
+      "symbol": "WM",
+      "yahooSymbol": "WM",
+      "name": "Waste Management Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"RSG\",   name: \"Republic Services Inc.\",                 yahooSymbol: \"RSG\",   tradingViewSymbol: \"NYSE:RSG\" }",
+      "index": 49532,
+      "symbol": "RSG",
+      "yahooSymbol": "RSG",
+      "name": "Republic Services Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"ETN\",   name: \"Eaton Corporation PLC\",                  yahooSymbol: \"ETN\",   tradingViewSymbol: \"NYSE:ETN\" }",
+      "index": 49669,
+      "symbol": "ETN",
+      "yahooSymbol": "ETN",
+      "name": "Eaton Corporation PLC"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"EMR\",   name: \"Emerson Electric Co.\",                   yahooSymbol: \"EMR\",   tradingViewSymbol: \"NYSE:EMR\" }",
+      "index": 49806,
+      "symbol": "EMR",
+      "yahooSymbol": "EMR",
+      "name": "Emerson Electric Co."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"PH\",    name: \"Parker Hannifin Corporation\",            yahooSymbol: \"PH\",    tradingViewSymbol: \"NYSE:PH\" }",
+      "index": 49943,
+      "symbol": "PH",
+      "yahooSymbol": "PH",
+      "name": "Parker Hannifin Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"ITW\",   name: \"Illinois Tool Works Inc.\",               yahooSymbol: \"ITW\",   tradingViewSymbol: \"NASDAQ:ITW\" }",
+      "index": 50079,
+      "symbol": "ITW",
+      "yahooSymbol": "ITW",
+      "name": "Illinois Tool Works Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"MMM\",   name: \"3M Company\",                             yahooSymbol: \"MMM\",   tradingViewSymbol: \"NYSE:MMM\" }",
+      "index": 50218,
+      "symbol": "MMM",
+      "yahooSymbol": "MMM",
+      "name": "3M Company"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"AME\",   name: \"AMETEK Inc.\",                            yahooSymbol: \"AME\",   tradingViewSymbol: \"NYSE:AME\" }",
+      "index": 50355,
+      "symbol": "AME",
+      "yahooSymbol": "AME",
+      "name": "AMETEK Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"GWW\",   name: \"W.W. Grainger Inc.\",                    yahooSymbol: \"GWW\",   tradingViewSymbol: \"NYSE:GWW\" }",
+      "index": 50492,
+      "symbol": "GWW",
+      "yahooSymbol": "GWW",
+      "name": "W.W. Grainger Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"VRSK\",  name: \"Verisk Analytics Inc.\",                  yahooSymbol: \"VRSK\",  tradingViewSymbol: \"NASDAQ:VRSK\" }",
+      "index": 50628,
+      "symbol": "VRSK",
+      "yahooSymbol": "VRSK",
+      "name": "Verisk Analytics Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"CPRT\",  name: \"Copart Inc.\",                            yahooSymbol: \"CPRT\",  tradingViewSymbol: \"NASDAQ:CPRT\" }",
+      "index": 50768,
+      "symbol": "CPRT",
+      "yahooSymbol": "CPRT",
+      "name": "Copart Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"OXY\",   name: \"Occidental Petroleum Corporation\",       yahooSymbol: \"OXY\",   tradingViewSymbol: \"NYSE:OXY\" }",
+      "index": 50989,
+      "symbol": "OXY",
+      "yahooSymbol": "OXY",
+      "name": "Occidental Petroleum Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"PSX\",   name: \"Phillips 66\",                            yahooSymbol: \"PSX\",   tradingViewSymbol: \"NYSE:PSX\" }",
+      "index": 51126,
+      "symbol": "PSX",
+      "yahooSymbol": "PSX",
+      "name": "Phillips 66"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"VLO\",   name: \"Valero Energy Corporation\",              yahooSymbol: \"VLO\",   tradingViewSymbol: \"NYSE:VLO\" }",
+      "index": 51263,
+      "symbol": "VLO",
+      "yahooSymbol": "VLO",
+      "name": "Valero Energy Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"MPC\",   name: \"Marathon Petroleum Corporation\",         yahooSymbol: \"MPC\",   tradingViewSymbol: \"NYSE:MPC\" }",
+      "index": 51400,
+      "symbol": "MPC",
+      "yahooSymbol": "MPC",
+      "name": "Marathon Petroleum Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"SLB\",   name: \"SLB\",                                    yahooSymbol: \"SLB\",   tradingViewSymbol: \"NYSE:SLB\" }",
+      "index": 51537,
+      "symbol": "SLB",
+      "yahooSymbol": "SLB",
+      "name": "SLB"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"HAL\",   name: \"Halliburton Company\",                    yahooSymbol: \"HAL\",   tradingViewSymbol: \"NYSE:HAL\" }",
+      "index": 51674,
+      "symbol": "HAL",
+      "yahooSymbol": "HAL",
+      "name": "Halliburton Company"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"BKR\",   name: \"Baker Hughes Company\",                   yahooSymbol: \"BKR\",   tradingViewSymbol: \"NASDAQ:BKR\" }",
+      "index": 51811,
+      "symbol": "BKR",
+      "yahooSymbol": "BKR",
+      "name": "Baker Hughes Company"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"EOG\",   name: \"EOG Resources Inc.\",                     yahooSymbol: \"EOG\",   tradingViewSymbol: \"NYSE:EOG\" }",
+      "index": 51950,
+      "symbol": "EOG",
+      "yahooSymbol": "EOG",
+      "name": "EOG Resources Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"DVN\",   name: \"Devon Energy Corporation\",               yahooSymbol: \"DVN\",   tradingViewSymbol: \"NYSE:DVN\" }",
+      "index": 52087,
+      "symbol": "DVN",
+      "yahooSymbol": "DVN",
+      "name": "Devon Energy Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"FANG\",  name: \"Diamondback Energy Inc.\",                yahooSymbol: \"FANG\",  tradingViewSymbol: \"NASDAQ:FANG\" }",
+      "index": 52224,
+      "symbol": "FANG",
+      "yahooSymbol": "FANG",
+      "name": "Diamondback Energy Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"KMI\",   name: \"Kinder Morgan Inc.\",                     yahooSymbol: \"KMI\",   tradingViewSymbol: \"NYSE:KMI\" }",
+      "index": 52364,
+      "symbol": "KMI",
+      "yahooSymbol": "KMI",
+      "name": "Kinder Morgan Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"WMB\",   name: \"Williams Companies Inc.\",                yahooSymbol: \"WMB\",   tradingViewSymbol: \"NASDAQ:WMB\" }",
+      "index": 52501,
+      "symbol": "WMB",
+      "yahooSymbol": "WMB",
+      "name": "Williams Companies Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"OKE\",   name: \"ONEOK Inc.\",                             yahooSymbol: \"OKE\",   tradingViewSymbol: \"NYSE:OKE\" }",
+      "index": 52640,
+      "symbol": "OKE",
+      "yahooSymbol": "OKE",
+      "name": "ONEOK Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"CI\",    name: \"Cigna Group\",                            yahooSymbol: \"CI\",    tradingViewSymbol: \"NYSE:CI\" }",
+      "index": 52858,
+      "symbol": "CI",
+      "yahooSymbol": "CI",
+      "name": "Cigna Group"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"HUM\",   name: \"Humana Inc.\",                            yahooSymbol: \"HUM\",   tradingViewSymbol: \"NYSE:HUM\" }",
+      "index": 52994,
+      "symbol": "HUM",
+      "yahooSymbol": "HUM",
+      "name": "Humana Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"MCK\",   name: \"McKesson Corporation\",                   yahooSymbol: \"MCK\",   tradingViewSymbol: \"NYSE:MCK\" }",
+      "index": 53131,
+      "symbol": "MCK",
+      "yahooSymbol": "MCK",
+      "name": "McKesson Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"MDT\",   name: \"Medtronic PLC\",                          yahooSymbol: \"MDT\",   tradingViewSymbol: \"NYSE:MDT\" }",
+      "index": 53268,
+      "symbol": "MDT",
+      "yahooSymbol": "MDT",
+      "name": "Medtronic PLC"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"BSX\",   name: \"Boston Scientific Corporation\",          yahooSymbol: \"BSX\",   tradingViewSymbol: \"NYSE:BSX\" }",
+      "index": 53405,
+      "symbol": "BSX",
+      "yahooSymbol": "BSX",
+      "name": "Boston Scientific Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"BDX\",   name: \"Becton Dickinson and Company\",           yahooSymbol: \"BDX\",   tradingViewSymbol: \"NYSE:BDX\" }",
+      "index": 53542,
+      "symbol": "BDX",
+      "yahooSymbol": "BDX",
+      "name": "Becton Dickinson and Company"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"DHR\",   name: \"Danaher Corporation\",                    yahooSymbol: \"DHR\",   tradingViewSymbol: \"NYSE:DHR\" }",
+      "index": 53679,
+      "symbol": "DHR",
+      "yahooSymbol": "DHR",
+      "name": "Danaher Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"IDXX\",  name: \"IDEXX Laboratories Inc.\",                yahooSymbol: \"IDXX\",  tradingViewSymbol: \"NASDAQ:IDXX\" }",
+      "index": 53816,
+      "symbol": "IDXX",
+      "yahooSymbol": "IDXX",
+      "name": "IDEXX Laboratories Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"DXCM\",  name: \"DexCom Inc.\",                            yahooSymbol: \"DXCM\",  tradingViewSymbol: \"NASDAQ:DXCM\" }",
+      "index": 53956,
+      "symbol": "DXCM",
+      "yahooSymbol": "DXCM",
+      "name": "DexCom Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"MRNA\",  name: \"Moderna Inc.\",                           yahooSymbol: \"MRNA\",  tradingViewSymbol: \"NASDAQ:MRNA\" }",
+      "index": 54096,
+      "symbol": "MRNA",
+      "yahooSymbol": "MRNA",
+      "name": "Moderna Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"BIIB\",  name: \"Biogen Inc.\",                            yahooSymbol: \"BIIB\",  tradingViewSymbol: \"NASDAQ:BIIB\" }",
+      "index": 54236,
+      "symbol": "BIIB",
+      "yahooSymbol": "BIIB",
+      "name": "Biogen Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"ILMN\",  name: \"Illumina Inc.\",                          yahooSymbol: \"ILMN\",  tradingViewSymbol: \"NASDAQ:ILMN\" }",
+      "index": 54376,
+      "symbol": "ILMN",
+      "yahooSymbol": "ILMN",
+      "name": "Illumina Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"ZBH\",   name: \"Zimmer Biomet Holdings Inc.\",            yahooSymbol: \"ZBH\",   tradingViewSymbol: \"NYSE:ZBH\" }",
+      "index": 54516,
+      "symbol": "ZBH",
+      "yahooSymbol": "ZBH",
+      "name": "Zimmer Biomet Holdings Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"RMD\",   name: \"ResMed Inc.\",                            yahooSymbol: \"RMD\",   tradingViewSymbol: \"NYSE:RMD\" }",
+      "index": 54653,
+      "symbol": "RMD",
+      "yahooSymbol": "RMD",
+      "name": "ResMed Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"GEHC\",  name: \"GE HealthCare Technologies Inc.\",        yahooSymbol: \"GEHC\",  tradingViewSymbol: \"NASDAQ:GEHC\" }",
+      "index": 54790,
+      "symbol": "GEHC",
+      "yahooSymbol": "GEHC",
+      "name": "GE HealthCare Technologies Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"A\",     name: \"Agilent Technologies Inc.\",              yahooSymbol: \"A\",     tradingViewSymbol: \"NYSE:A\" }",
+      "index": 54930,
+      "symbol": "A",
+      "yahooSymbol": "A",
+      "name": "Agilent Technologies Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"BKNG\",  name: \"Booking Holdings Inc.\",                  yahooSymbol: \"BKNG\",  tradingViewSymbol: \"NASDAQ:BKNG\" }",
+      "index": 55146,
+      "symbol": "BKNG",
+      "yahooSymbol": "BKNG",
+      "name": "Booking Holdings Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"EXPE\",  name: \"Expedia Group Inc.\",                     yahooSymbol: \"EXPE\",  tradingViewSymbol: \"NASDAQ:EXPE\" }",
+      "index": 55286,
+      "symbol": "EXPE",
+      "yahooSymbol": "EXPE",
+      "name": "Expedia Group Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"ROST\",  name: \"Ross Stores Inc.\",                       yahooSymbol: \"ROST\",  tradingViewSymbol: \"NASDAQ:ROST\" }",
+      "index": 55426,
+      "symbol": "ROST",
+      "yahooSymbol": "ROST",
+      "name": "Ross Stores Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"TJX\",   name: \"TJX Companies Inc.\",                     yahooSymbol: \"TJX\",   tradingViewSymbol: \"NYSE:TJX\" }",
+      "index": 55566,
+      "symbol": "TJX",
+      "yahooSymbol": "TJX",
+      "name": "TJX Companies Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"DLTR\",  name: \"Dollar Tree Inc.\",                       yahooSymbol: \"DLTR\",  tradingViewSymbol: \"NASDAQ:DLTR\" }",
+      "index": 55703,
+      "symbol": "DLTR",
+      "yahooSymbol": "DLTR",
+      "name": "Dollar Tree Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"DG\",    name: \"Dollar General Corporation\",             yahooSymbol: \"DG\",    tradingViewSymbol: \"NYSE:DG\" }",
+      "index": 55843,
+      "symbol": "DG",
+      "yahooSymbol": "DG",
+      "name": "Dollar General Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"KR\",    name: \"Kroger Co.\",                             yahooSymbol: \"KR\",    tradingViewSymbol: \"NYSE:KR\" }",
+      "index": 55979,
+      "symbol": "KR",
+      "yahooSymbol": "KR",
+      "name": "Kroger Co."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"SYY\",   name: \"Sysco Corporation\",                      yahooSymbol: \"SYY\",   tradingViewSymbol: \"NYSE:SYY\" }",
+      "index": 56115,
+      "symbol": "SYY",
+      "yahooSymbol": "SYY",
+      "name": "Sysco Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"YUM\",   name: \"Yum! Brands Inc.\",                       yahooSymbol: \"YUM\",   tradingViewSymbol: \"NYSE:YUM\" }",
+      "index": 56252,
+      "symbol": "YUM",
+      "yahooSymbol": "YUM",
+      "name": "Yum! Brands Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"DPZ\",   name: \"Domino's Pizza Inc.\",                    yahooSymbol: \"DPZ\",   tradingViewSymbol: \"NASDAQ:DPZ\" }",
+      "index": 56389,
+      "symbol": "DPZ",
+      "yahooSymbol": "DPZ",
+      "name": "Domino's Pizza Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"F\",     name: \"Ford Motor Company\",                     yahooSymbol: \"F\",     tradingViewSymbol: \"NYSE:F\" }",
+      "index": 56528,
+      "symbol": "F",
+      "yahooSymbol": "F",
+      "name": "Ford Motor Company"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"GM\",    name: \"General Motors Company\",                 yahooSymbol: \"GM\",    tradingViewSymbol: \"NYSE:GM\" }",
+      "index": 56663,
+      "symbol": "GM",
+      "yahooSymbol": "GM",
+      "name": "General Motors Company"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"RIVN\",  name: \"Rivian Automotive Inc.\",                 yahooSymbol: \"RIVN\",  tradingViewSymbol: \"NASDAQ:RIVN\" }",
+      "index": 56799,
+      "symbol": "RIVN",
+      "yahooSymbol": "RIVN",
+      "name": "Rivian Automotive Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"TSCO\",  name: \"Tractor Supply Company\",                 yahooSymbol: \"TSCO\",  tradingViewSymbol: \"NASDAQ:TSCO\" }",
+      "index": 56939,
+      "symbol": "TSCO",
+      "yahooSymbol": "TSCO",
+      "name": "Tractor Supply Company"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"RCL\",   name: \"Royal Caribbean Cruises Ltd.\",           yahooSymbol: \"RCL\",   tradingViewSymbol: \"NYSE:RCL\" }",
+      "index": 57079,
+      "symbol": "RCL",
+      "yahooSymbol": "RCL",
+      "name": "Royal Caribbean Cruises Ltd."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"TTD\",   name: \"Trade Desk Inc.\",                        yahooSymbol: \"TTD\",   tradingViewSymbol: \"NASDAQ:TTD\" }",
+      "index": 57298,
+      "symbol": "TTD",
+      "yahooSymbol": "TTD",
+      "name": "Trade Desk Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"RBLX\",  name: \"Roblox Corporation\",                     yahooSymbol: \"RBLX\",  tradingViewSymbol: \"NYSE:RBLX\" }",
+      "index": 57437,
+      "symbol": "RBLX",
+      "yahooSymbol": "RBLX",
+      "name": "Roblox Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"ARM\",   name: \"Arm Holdings PLC\",                       yahooSymbol: \"ARM\",   tradingViewSymbol: \"NASDAQ:ARM\" }",
+      "index": 57575,
+      "symbol": "ARM",
+      "yahooSymbol": "ARM",
+      "name": "Arm Holdings PLC"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"SMCI\",  name: \"Super Micro Computer Inc.\",              yahooSymbol: \"SMCI\",  tradingViewSymbol: \"NASDAQ:SMCI\" }",
+      "index": 57714,
+      "symbol": "SMCI",
+      "yahooSymbol": "SMCI",
+      "name": "Super Micro Computer Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"DELL\",  name: \"Dell Technologies Inc.\",                 yahooSymbol: \"DELL\",  tradingViewSymbol: \"NYSE:DELL\" }",
+      "index": 57854,
+      "symbol": "DELL",
+      "yahooSymbol": "DELL",
+      "name": "Dell Technologies Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"MDB\",   name: \"MongoDB Inc.\",                           yahooSymbol: \"MDB\",   tradingViewSymbol: \"NASDAQ:MDB\" }",
+      "index": 57992,
+      "symbol": "MDB",
+      "yahooSymbol": "MDB",
+      "name": "MongoDB Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"ZS\",    name: \"Zscaler Inc.\",                           yahooSymbol: \"ZS\",    tradingViewSymbol: \"NASDAQ:ZS\" }",
+      "index": 58131,
+      "symbol": "ZS",
+      "yahooSymbol": "ZS",
+      "name": "Zscaler Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"MELI\",  name: \"MercadoLibre Inc.\",                      yahooSymbol: \"MELI\",  tradingViewSymbol: \"NASDAQ:MELI\" }",
+      "index": 58269,
+      "symbol": "MELI",
+      "yahooSymbol": "MELI",
+      "name": "MercadoLibre Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"TTWO\",  name: \"Take-Two Interactive Software Inc.\",     yahooSymbol: \"TTWO\",  tradingViewSymbol: \"NASDAQ:TTWO\" }",
+      "index": 58409,
+      "symbol": "TTWO",
+      "yahooSymbol": "TTWO",
+      "name": "Take-Two Interactive Software Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"SNAP\",  name: \"Snap Inc.\",                              yahooSymbol: \"SNAP\",  tradingViewSymbol: \"NYSE:SNAP\" }",
+      "index": 58549,
+      "symbol": "SNAP",
+      "yahooSymbol": "SNAP",
+      "name": "Snap Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"PINS\",  name: \"Pinterest Inc.\",                         yahooSymbol: \"PINS\",  tradingViewSymbol: \"NYSE:PINS\" }",
+      "index": 58687,
+      "symbol": "PINS",
+      "yahooSymbol": "PINS",
+      "name": "Pinterest Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"LYFT\",  name: \"Lyft Inc.\",                              yahooSymbol: \"LYFT\",  tradingViewSymbol: \"NASDAQ:LYFT\" }",
+      "index": 58825,
+      "symbol": "LYFT",
+      "yahooSymbol": "LYFT",
+      "name": "Lyft Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"HOOD\",  name: \"Robinhood Markets Inc.\",                 yahooSymbol: \"HOOD\",  tradingViewSymbol: \"NASDAQ:HOOD\" }",
+      "index": 58965,
+      "symbol": "HOOD",
+      "yahooSymbol": "HOOD",
+      "name": "Robinhood Markets Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"DOCS\",  name: \"Doximity Inc.\",                          yahooSymbol: \"DOCS\",  tradingViewSymbol: \"NYSE:DOCS\" }",
+      "index": 59105,
+      "symbol": "DOCS",
+      "yahooSymbol": "DOCS",
+      "name": "Doximity Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"HUBS\",  name: \"HubSpot Inc.\",                           yahooSymbol: \"HUBS\",  tradingViewSymbol: \"NYSE:HUBS\" }",
+      "index": 59243,
+      "symbol": "HUBS",
+      "yahooSymbol": "HUBS",
+      "name": "HubSpot Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"OKTA\",  name: \"Okta Inc.\",                              yahooSymbol: \"OKTA\",  tradingViewSymbol: \"NASDAQ:OKTA\" }",
+      "index": 59381,
+      "symbol": "OKTA",
+      "yahooSymbol": "OKTA",
+      "name": "Okta Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"S\",     name: \"SentinelOne Inc.\",                       yahooSymbol: \"S\",     tradingViewSymbol: \"NYSE:S\" }",
+      "index": 59521,
+      "symbol": "S",
+      "yahooSymbol": "S",
+      "name": "SentinelOne Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"DOCU\",  name: \"DocuSign Inc.\",                          yahooSymbol: \"DOCU\",  tradingViewSymbol: \"NASDAQ:DOCU\" }",
+      "index": 59656,
+      "symbol": "DOCU",
+      "yahooSymbol": "DOCU",
+      "name": "DocuSign Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"PATH\",  name: \"UiPath Inc.\",                            yahooSymbol: \"PATH\",  tradingViewSymbol: \"NYSE:PATH\" }",
+      "index": 59796,
+      "symbol": "PATH",
+      "yahooSymbol": "PATH",
+      "name": "UiPath Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"AFRM\",  name: \"Affirm Holdings Inc.\",                   yahooSymbol: \"AFRM\",  tradingViewSymbol: \"NASDAQ:AFRM\" }",
+      "index": 59934,
+      "symbol": "AFRM",
+      "yahooSymbol": "AFRM",
+      "name": "Affirm Holdings Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"APP\",   name: \"AppLovin Corporation\",                   yahooSymbol: \"APP\",   tradingViewSymbol: \"NASDAQ:APP\" }",
+      "index": 60074,
+      "symbol": "APP",
+      "yahooSymbol": "APP",
+      "name": "AppLovin Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"DT\",    name: \"Dynatrace Holdings Inc.\",                yahooSymbol: \"DT\",    tradingViewSymbol: \"NYSE:DT\" }",
+      "index": 60213,
+      "symbol": "DT",
+      "yahooSymbol": "DT",
+      "name": "Dynatrace Holdings Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"ESTC\",  name: \"Elastic N.V.\",                           yahooSymbol: \"ESTC\",  tradingViewSymbol: \"NYSE:ESTC\" }",
+      "index": 60349,
+      "symbol": "ESTC",
+      "yahooSymbol": "ESTC",
+      "name": "Elastic N.V."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"ROKU\",  name: \"Roku Inc.\",                              yahooSymbol: \"ROKU\",  tradingViewSymbol: \"NASDAQ:ROKU\" }",
+      "index": 60487,
+      "symbol": "ROKU",
+      "yahooSymbol": "ROKU",
+      "name": "Roku Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"ASML\",  name: \"ASML Holding N.V.\",                      yahooSymbol: \"ASML\",  tradingViewSymbol: \"NASDAQ:ASML\" }",
+      "index": 60708,
+      "symbol": "ASML",
+      "yahooSymbol": "ASML",
+      "name": "ASML Holding N.V."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"MRVL\",  name: \"Marvell Technology Inc.\",                yahooSymbol: \"MRVL\",  tradingViewSymbol: \"NASDAQ:MRVL\" }",
+      "index": 60848,
+      "symbol": "MRVL",
+      "yahooSymbol": "MRVL",
+      "name": "Marvell Technology Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"ADI\",   name: \"Analog Devices Inc.\",                    yahooSymbol: \"ADI\",   tradingViewSymbol: \"NASDAQ:ADI\" }",
+      "index": 60988,
+      "symbol": "ADI",
+      "yahooSymbol": "ADI",
+      "name": "Analog Devices Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"FTNT\",  name: \"Fortinet Inc.\",                          yahooSymbol: \"FTNT\",  tradingViewSymbol: \"NASDAQ:FTNT\" }",
+      "index": 61127,
+      "symbol": "FTNT",
+      "yahooSymbol": "FTNT",
+      "name": "Fortinet Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"HPQ\",   name: \"HP Inc.\",                                yahooSymbol: \"HPQ\",   tradingViewSymbol: \"NYSE:HPQ\" }",
+      "index": 61267,
+      "symbol": "HPQ",
+      "yahooSymbol": "HPQ",
+      "name": "HP Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"NTAP\",  name: \"NetApp Inc.\",                            yahooSymbol: \"NTAP\",  tradingViewSymbol: \"NASDAQ:NTAP\" }",
+      "index": 61404,
+      "symbol": "NTAP",
+      "yahooSymbol": "NTAP",
+      "name": "NetApp Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"CHKP\",  name: \"Check Point Software Technologies Ltd.\", yahooSymbol: \"CHKP\",  tradingViewSymbol: \"NASDAQ:CHKP\" }",
+      "index": 61544,
+      "symbol": "CHKP",
+      "yahooSymbol": "CHKP",
+      "name": "Check Point Software Technologies Ltd."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"FCX\",   name: \"Freeport-McMoRan Inc.\",                  yahooSymbol: \"FCX\",   tradingViewSymbol: \"NYSE:FCX\" }",
+      "index": 61766,
+      "symbol": "FCX",
+      "yahooSymbol": "FCX",
+      "name": "Freeport-McMoRan Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"NUE\",   name: \"Nucor Corporation\",                      yahooSymbol: \"NUE\",   tradingViewSymbol: \"NYSE:NUE\" }",
+      "index": 61903,
+      "symbol": "NUE",
+      "yahooSymbol": "NUE",
+      "name": "Nucor Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"STLD\",  name: \"Steel Dynamics Inc.\",                    yahooSymbol: \"STLD\",  tradingViewSymbol: \"NASDAQ:STLD\" }",
+      "index": 62040,
+      "symbol": "STLD",
+      "yahooSymbol": "STLD",
+      "name": "Steel Dynamics Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"CLF\",   name: \"Cleveland-Cliffs Inc.\",                  yahooSymbol: \"CLF\",   tradingViewSymbol: \"NYSE:CLF\" }",
+      "index": 62180,
+      "symbol": "CLF",
+      "yahooSymbol": "CLF",
+      "name": "Cleveland-Cliffs Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"ALB\",   name: \"Albemarle Corporation\",                  yahooSymbol: \"ALB\",   tradingViewSymbol: \"NYSE:ALB\" }",
+      "index": 62317,
+      "symbol": "ALB",
+      "yahooSymbol": "ALB",
+      "name": "Albemarle Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"BALL\",  name: \"Ball Corporation\",                       yahooSymbol: \"BALL\",  tradingViewSymbol: \"NYSE:BALL\" }",
+      "index": 62454,
+      "symbol": "BALL",
+      "yahooSymbol": "BALL",
+      "name": "Ball Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"PKG\",   name: \"Packaging Corp of America\",              yahooSymbol: \"PKG\",   tradingViewSymbol: \"NYSE:PKG\" }",
+      "index": 62592,
+      "symbol": "PKG",
+      "yahooSymbol": "PKG",
+      "name": "Packaging Corp of America"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"IP\",    name: \"International Paper Company\",            yahooSymbol: \"IP\",    tradingViewSymbol: \"NYSE:IP\" }",
+      "index": 62729,
+      "symbol": "IP",
+      "yahooSymbol": "IP",
+      "name": "International Paper Company"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"GOLD\",  name: \"Barrick Gold Corporation\",               yahooSymbol: \"GOLD\",  tradingViewSymbol: \"NYSE:GOLD\" }",
+      "index": 62865,
+      "symbol": "GOLD",
+      "yahooSymbol": "GOLD",
+      "name": "Barrick Gold Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"FNV\",   name: \"Franco-Nevada Corporation\",              yahooSymbol: \"FNV\",   tradingViewSymbol: \"NYSE:FNV\" }",
+      "index": 63003,
+      "symbol": "FNV",
+      "yahooSymbol": "FNV",
+      "name": "Franco-Nevada Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"WPM\",   name: \"Wheaton Precious Metals Corp.\",          yahooSymbol: \"WPM\",   tradingViewSymbol: \"NYSE:WPM\" }",
+      "index": 63140,
+      "symbol": "WPM",
+      "yahooSymbol": "WPM",
+      "name": "Wheaton Precious Metals Corp."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"LHX\",   name: \"L3Harris Technologies Inc.\",             yahooSymbol: \"LHX\",   tradingViewSymbol: \"NYSE:LHX\" }",
+      "index": 63359,
+      "symbol": "LHX",
+      "yahooSymbol": "LHX",
+      "name": "L3Harris Technologies Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"LDOS\",  name: \"Leidos Holdings Inc.\",                   yahooSymbol: \"LDOS\",  tradingViewSymbol: \"NYSE:LDOS\" }",
+      "index": 63496,
+      "symbol": "LDOS",
+      "yahooSymbol": "LDOS",
+      "name": "Leidos Holdings Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"HII\",   name: \"Huntington Ingalls Industries Inc.\",     yahooSymbol: \"HII\",   tradingViewSymbol: \"NYSE:HII\" }",
+      "index": 63634,
+      "symbol": "HII",
+      "yahooSymbol": "HII",
+      "name": "Huntington Ingalls Industries Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"PCAR\",  name: \"PACCAR Inc.\",                            yahooSymbol: \"PCAR\",  tradingViewSymbol: \"NASDAQ:PCAR\" }",
+      "index": 63771,
+      "symbol": "PCAR",
+      "yahooSymbol": "PCAR",
+      "name": "PACCAR Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"GEN\",   name: \"Gen Digital Inc.\",                       yahooSymbol: \"GEN\",   tradingViewSymbol: \"NASDAQ:GEN\" }",
+      "index": 63911,
+      "symbol": "GEN",
+      "yahooSymbol": "GEN",
+      "name": "Gen Digital Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"CCL\",   name: \"Carnival Corporation & PLC\",             yahooSymbol: \"CCL\",   tradingViewSymbol: \"NYSE:CCL\" }",
+      "index": 64050,
+      "symbol": "CCL",
+      "yahooSymbol": "CCL",
+      "name": "Carnival Corporation & PLC"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"AON\",   name: \"Aon PLC\",                                yahooSymbol: \"AON\",   tradingViewSymbol: \"NYSE:AON\" }",
+      "index": 64270,
+      "symbol": "AON",
+      "yahooSymbol": "AON",
+      "name": "Aon PLC"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"CCEP\",  name: \"Coca-Cola Europacific Partners\",         yahooSymbol: \"CCEP\",  tradingViewSymbol: \"NASDAQ:CCEP\" }",
+      "index": 64818,
+      "symbol": "CCEP",
+      "yahooSymbol": "CCEP",
+      "name": "Coca-Cola Europacific Partners"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"TTE\",   name: \"TotalEnergies SE\",                       yahooSymbol: \"TTE\",   tradingViewSymbol: \"NYSE:TTE\" }",
+      "index": 65453,
+      "symbol": "TTE",
+      "yahooSymbol": "TTE",
+      "name": "TotalEnergies SE"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"BP\",    name: \"BP PLC\",                                 yahooSymbol: \"BP\",    tradingViewSymbol: \"NYSE:BP\" }",
+      "index": 65590,
+      "symbol": "BP",
+      "yahooSymbol": "BP",
+      "name": "BP PLC"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"SHEL\",  name: \"Shell PLC\",                              yahooSymbol: \"SHEL\",  tradingViewSymbol: \"NYSE:SHEL\" }",
+      "index": 65726,
+      "symbol": "SHEL",
+      "yahooSymbol": "SHEL",
+      "name": "Shell PLC"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"RIO\",   name: \"Rio Tinto PLC\",                          yahooSymbol: \"RIO\",   tradingViewSymbol: \"NYSE:RIO\" }",
+      "index": 65864,
+      "symbol": "RIO",
+      "yahooSymbol": "RIO",
+      "name": "Rio Tinto PLC"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"BHP\",   name: \"BHP Group Limited\",                      yahooSymbol: \"BHP\",   tradingViewSymbol: \"NYSE:BHP\" }",
+      "index": 66001,
+      "symbol": "BHP",
+      "yahooSymbol": "BHP",
+      "name": "BHP Group Limited"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"SPOT\",  name: \"Spotify Technology S.A.\",                yahooSymbol: \"SPOT\",  tradingViewSymbol: \"NYSE:SPOT\" }",
+      "index": 66138,
+      "symbol": "SPOT",
+      "yahooSymbol": "SPOT",
+      "name": "Spotify Technology S.A."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"SAN\",   name: \"Banco Santander S.A.\",                   yahooSymbol: \"SAN\",   tradingViewSymbol: \"NYSE:SAN\" }",
+      "index": 66276,
+      "symbol": "SAN",
+      "yahooSymbol": "SAN",
+      "name": "Banco Santander S.A."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"BBVA\",  name: \"Banco Bilbao Vizcaya Argentaria S.A.\",   yahooSymbol: \"BBVA\",  tradingViewSymbol: \"NYSE:BBVA\" }",
+      "index": 66413,
+      "symbol": "BBVA",
+      "yahooSymbol": "BBVA",
+      "name": "Banco Bilbao Vizcaya Argentaria S.A."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"ING\",   name: \"ING Groep N.V.\",                         yahooSymbol: \"ING\",   tradingViewSymbol: \"NYSE:ING\" }",
+      "index": 66551,
+      "symbol": "ING",
+      "yahooSymbol": "ING",
+      "name": "ING Groep N.V."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"PHG\",   name: \"Philips N.V.\",                           yahooSymbol: \"PHG\",   tradingViewSymbol: \"NASDAQ:PHG\" }",
+      "index": 66688,
+      "symbol": "PHG",
+      "yahooSymbol": "PHG",
+      "name": "Philips N.V."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"AEM\",   name: \"Agnico Eagle Mines Limited\",             yahooSymbol: \"AEM\",   tradingViewSymbol: \"NYSE:AEM\" }",
+      "index": 66827,
+      "symbol": "AEM",
+      "yahooSymbol": "AEM",
+      "name": "Agnico Eagle Mines Limited"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"CNQ\",   name: \"Canadian Natural Resources Limited\",     yahooSymbol: \"CNQ\",   tradingViewSymbol: \"NYSE:CNQ\" }",
+      "index": 66964,
+      "symbol": "CNQ",
+      "yahooSymbol": "CNQ",
+      "name": "Canadian Natural Resources Limited"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"SU\",    name: \"Suncor Energy Inc.\",                     yahooSymbol: \"SU\",    tradingViewSymbol: \"NYSE:SU\" }",
+      "index": 67101,
+      "symbol": "SU",
+      "yahooSymbol": "SU",
+      "name": "Suncor Energy Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"BABA\",  name: \"Alibaba Group Holding Limited\",          yahooSymbol: \"BABA\",  tradingViewSymbol: \"NYSE:BABA\" }",
+      "index": 67318,
+      "symbol": "BABA",
+      "yahooSymbol": "BABA",
+      "name": "Alibaba Group Holding Limited"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"BIDU\",  name: \"Baidu Inc.\",                             yahooSymbol: \"BIDU\",  tradingViewSymbol: \"NASDAQ:BIDU\" }",
+      "index": 67456,
+      "symbol": "BIDU",
+      "yahooSymbol": "BIDU",
+      "name": "Baidu Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"JD\",    name: \"JD.com Inc.\",                            yahooSymbol: \"JD\",    tradingViewSymbol: \"NASDAQ:JD\" }",
+      "index": 67596,
+      "symbol": "JD",
+      "yahooSymbol": "JD",
+      "name": "JD.com Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"PDD\",   name: \"PDD Holdings Inc.\",                      yahooSymbol: \"PDD\",   tradingViewSymbol: \"NASDAQ:PDD\" }",
+      "index": 67734,
+      "symbol": "PDD",
+      "yahooSymbol": "PDD",
+      "name": "PDD Holdings Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"SE\",    name: \"Sea Limited\",                            yahooSymbol: \"SE\",    tradingViewSymbol: \"NYSE:SE\" }",
+      "index": 67873,
+      "symbol": "SE",
+      "yahooSymbol": "SE",
+      "name": "Sea Limited"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"VALE\",  name: \"Vale S.A.\",                              yahooSymbol: \"VALE\",  tradingViewSymbol: \"NYSE:VALE\" }",
+      "index": 68009,
+      "symbol": "VALE",
+      "yahooSymbol": "VALE",
+      "name": "Vale S.A."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"ITUB\",  name: \"Itaú Unibanco Holding S.A.\",             yahooSymbol: \"ITUB\",  tradingViewSymbol: \"NYSE:ITUB\" }",
+      "index": 68147,
+      "symbol": "ITUB",
+      "yahooSymbol": "ITUB",
+      "name": "Itaú Unibanco Holding S.A."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"BBD\",   name: \"Banco Bradesco S.A.\",                    yahooSymbol: \"BBD\",   tradingViewSymbol: \"NYSE:BBD\" }",
+      "index": 68285,
+      "symbol": "BBD",
+      "yahooSymbol": "BBD",
+      "name": "Banco Bradesco S.A."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"AMX\",   name: \"América Móvil SAB de CV\",                yahooSymbol: \"AMX\",   tradingViewSymbol: \"NYSE:AMX\" }",
+      "index": 68422,
+      "symbol": "AMX",
+      "yahooSymbol": "AMX",
+      "name": "América Móvil SAB de CV"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"RY\",    name: \"Royal Bank of Canada\",                   yahooSymbol: \"RY\",    tradingViewSymbol: \"NYSE:RY\" }",
+      "index": 68559,
+      "symbol": "RY",
+      "yahooSymbol": "RY",
+      "name": "Royal Bank of Canada"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"TD\",    name: \"Toronto-Dominion Bank\",                  yahooSymbol: \"TD\",    tradingViewSymbol: \"NYSE:TD\" }",
+      "index": 68695,
+      "symbol": "TD",
+      "yahooSymbol": "TD",
+      "name": "Toronto-Dominion Bank"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"NIO\",   name: \"NIO Inc.\",                               yahooSymbol: \"NIO\",   tradingViewSymbol: \"NYSE:NIO\" }",
+      "index": 68831,
+      "symbol": "NIO",
+      "yahooSymbol": "NIO",
+      "name": "NIO Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"TCOM\",  name: \"Trip.com Group Limited\",                 yahooSymbol: \"TCOM\",  tradingViewSymbol: \"NASDAQ:TCOM\" }",
+      "index": 68968,
+      "symbol": "TCOM",
+      "yahooSymbol": "TCOM",
+      "name": "Trip.com Group Limited"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"KB\",    name: \"KB Financial Group Inc.\",                yahooSymbol: \"KB\",    tradingViewSymbol: \"NYSE:KB\" }",
+      "index": 69108,
+      "symbol": "KB",
+      "yahooSymbol": "KB",
+      "name": "KB Financial Group Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"GRAB\",  name: \"Grab Holdings Limited\",                  yahooSymbol: \"GRAB\",  tradingViewSymbol: \"NASDAQ:GRAB\" }",
+      "index": 69244,
+      "symbol": "GRAB",
+      "yahooSymbol": "GRAB",
+      "name": "Grab Holdings Limited"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"TEVA\",  name: \"Teva Pharmaceutical Industries Ltd.\",    yahooSymbol: \"TEVA\",  tradingViewSymbol: \"NYSE:TEVA\" }",
+      "index": 69384,
+      "symbol": "TEVA",
+      "yahooSymbol": "TEVA",
+      "name": "Teva Pharmaceutical Industries Ltd."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"LYV\",   name: \"Live Nation Entertainment Inc.\",         yahooSymbol: \"LYV\",   tradingViewSymbol: \"NYSE:LYV\" }",
+      "index": 69605,
+      "symbol": "LYV",
+      "yahooSymbol": "LYV",
+      "name": "Live Nation Entertainment Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"EA\",    name: \"Electronic Arts Inc.\",                   yahooSymbol: \"EA\",    tradingViewSymbol: \"NASDAQ:EA\" }",
+      "index": 69742,
+      "symbol": "EA",
+      "yahooSymbol": "EA",
+      "name": "Electronic Arts Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"POOL\",  name: \"Pool Corporation\",                       yahooSymbol: \"POOL\",  tradingViewSymbol: \"NASDAQ:POOL\" }",
+      "index": 69880,
+      "symbol": "POOL",
+      "yahooSymbol": "POOL",
+      "name": "Pool Corporation"
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"NDAQ\",  name: \"Nasdaq Inc.\",                             yahooSymbol: \"NDAQ\",  tradingViewSymbol: \"NASDAQ:NDAQ\" }",
+      "index": 70020,
+      "symbol": "NDAQ",
+      "yahooSymbol": "NDAQ",
+      "name": "Nasdaq Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"MSCI\",  name: \"MSCI Inc.\",                               yahooSymbol: \"MSCI\",  tradingViewSymbol: \"NYSE:MSCI\" }",
+      "index": 70161,
+      "symbol": "MSCI",
+      "yahooSymbol": "MSCI",
+      "name": "MSCI Inc."
+    },
+    {
+      "type": "Stock",
+      "paramsStr": "{ symbol: \"BR\",    name: \"Broadridge Financial Solutions Inc.\",     yahooSymbol: \"BR\",    tradingViewSymbol: \"NYSE:BR\" }",
+      "index": 70300,
+      "symbol": "BR",
+      "yahooSymbol": "BR",
+      "name": "Broadridge Financial Solutions Inc."
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"IVV\",   name: \"iShares Core S&P 500 ETF\",                yahooSymbol: \"IVV\",   tradingViewSymbol: \"AMEX:IVV\" }",
+      "index": 70519,
+      "symbol": "IVV",
+      "yahooSymbol": "IVV",
+      "name": "iShares Core S&P 500 ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"SPLG\",  name: \"SPDR Portfolio S&P 500 ETF\",              yahooSymbol: \"SPLG\",  tradingViewSymbol: \"AMEX:SPLG\" }",
+      "index": 70655,
+      "symbol": "SPLG",
+      "yahooSymbol": "SPLG",
+      "name": "SPDR Portfolio S&P 500 ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"SCHG\",  name: \"Schwab US Large-Cap Growth ETF\",          yahooSymbol: \"SCHG\",  tradingViewSymbol: \"AMEX:SCHG\" }",
+      "index": 70792,
+      "symbol": "SCHG",
+      "yahooSymbol": "SCHG",
+      "name": "Schwab US Large-Cap Growth ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"VIG\",   name: \"Vanguard Dividend Appreciation ETF\",      yahooSymbol: \"VIG\",   tradingViewSymbol: \"AMEX:VIG\" }",
+      "index": 70929,
+      "symbol": "VIG",
+      "yahooSymbol": "VIG",
+      "name": "Vanguard Dividend Appreciation ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"HDV\",   name: \"iShares Core High Dividend ETF\",          yahooSymbol: \"HDV\",   tradingViewSymbol: \"AMEX:HDV\" }",
+      "index": 71065,
+      "symbol": "HDV",
+      "yahooSymbol": "HDV",
+      "name": "iShares Core High Dividend ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"JEPQ\",  name: \"JPMorgan Nasdaq Equity Premium Income ETF\",yahooSymbol: \"JEPQ\", tradingViewSymbol: \"AMEX:JEPQ\" }",
+      "index": 71201,
+      "symbol": "JEPQ",
+      "yahooSymbol": "JEPQ",
+      "name": "JPMorgan Nasdaq Equity Premium Income ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"QQQM\",  name: \"Invesco Nasdaq 100 ETF\",                  yahooSymbol: \"QQQM\",  tradingViewSymbol: \"NASDAQ:QQQM\" }",
+      "index": 71338,
+      "symbol": "QQQM",
+      "yahooSymbol": "QQQM",
+      "name": "Invesco Nasdaq 100 ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"BIL\",   name: \"SPDR Bloomberg 1-3 Month T-Bill ETF\",     yahooSymbol: \"BIL\",   tradingViewSymbol: \"AMEX:BIL\" }",
+      "index": 71560,
+      "symbol": "BIL",
+      "yahooSymbol": "BIL",
+      "name": "SPDR Bloomberg 1-3 Month T-Bill ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"SHY\",   name: \"iShares 1-3 Year Treasury Bond ETF\",      yahooSymbol: \"SHY\",   tradingViewSymbol: \"NASDAQ:SHY\" }",
+      "index": 71696,
+      "symbol": "SHY",
+      "yahooSymbol": "SHY",
+      "name": "iShares 1-3 Year Treasury Bond ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"TIP\",   name: \"iShares TIPS Bond ETF\",                   yahooSymbol: \"TIP\",   tradingViewSymbol: \"AMEX:TIP\" }",
+      "index": 71834,
+      "symbol": "TIP",
+      "yahooSymbol": "TIP",
+      "name": "iShares TIPS Bond ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"TLT\",   name: \"iShares 20+ Year Treasury Bond ETF\",      yahooSymbol: \"TLT\",   tradingViewSymbol: \"NASDAQ:TLT\" }",
+      "index": 71970,
+      "symbol": "TLT",
+      "yahooSymbol": "TLT",
+      "name": "iShares 20+ Year Treasury Bond ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"IEF\",   name: \"iShares 7-10 Year Treasury Bond ETF\",     yahooSymbol: \"IEF\",   tradingViewSymbol: \"NASDAQ:IEF\" }",
+      "index": 72108,
+      "symbol": "IEF",
+      "yahooSymbol": "IEF",
+      "name": "iShares 7-10 Year Treasury Bond ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"VNQ\",   name: \"Vanguard Real Estate ETF\",                yahooSymbol: \"VNQ\",   tradingViewSymbol: \"AMEX:VNQ\" }",
+      "index": 72329,
+      "symbol": "VNQ",
+      "yahooSymbol": "VNQ",
+      "name": "Vanguard Real Estate ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"XLI\",   name: \"Industrial Select Sector SPDR Fund\",      yahooSymbol: \"XLI\",   tradingViewSymbol: \"AMEX:XLI\" }",
+      "index": 72465,
+      "symbol": "XLI",
+      "yahooSymbol": "XLI",
+      "name": "Industrial Select Sector SPDR Fund"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"XLP\",   name: \"Consumer Staples Select Sector SPDR\",     yahooSymbol: \"XLP\",   tradingViewSymbol: \"AMEX:XLP\" }",
+      "index": 72601,
+      "symbol": "XLP",
+      "yahooSymbol": "XLP",
+      "name": "Consumer Staples Select Sector SPDR"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"XLB\",   name: \"Materials Select Sector SPDR Fund\",       yahooSymbol: \"XLB\",   tradingViewSymbol: \"AMEX:XLB\" }",
+      "index": 72737,
+      "symbol": "XLB",
+      "yahooSymbol": "XLB",
+      "name": "Materials Select Sector SPDR Fund"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"XLU\",   name: \"Utilities Select Sector SPDR Fund\",       yahooSymbol: \"XLU\",   tradingViewSymbol: \"AMEX:XLU\" }",
+      "index": 72873,
+      "symbol": "XLU",
+      "yahooSymbol": "XLU",
+      "name": "Utilities Select Sector SPDR Fund"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"XLRE\",  name: \"Real Estate Select Sector SPDR Fund\",     yahooSymbol: \"XLRE\",  tradingViewSymbol: \"AMEX:XLRE\" }",
+      "index": 73009,
+      "symbol": "XLRE",
+      "yahooSymbol": "XLRE",
+      "name": "Real Estate Select Sector SPDR Fund"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"XLC\",   name: \"Communication Services Select Sector SPDR\", yahooSymbol: \"XLC\", tradingViewSymbol: \"AMEX:XLC\" }",
+      "index": 73146,
+      "symbol": "XLC",
+      "yahooSymbol": "XLC",
+      "name": "Communication Services Select Sector SPDR"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"IBB\",   name: \"iShares Biotechnology ETF\",               yahooSymbol: \"IBB\",   tradingViewSymbol: \"NASDAQ:IBB\" }",
+      "index": 73364,
+      "symbol": "IBB",
+      "yahooSymbol": "IBB",
+      "name": "iShares Biotechnology ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"SOXX\",  name: \"iShares Semiconductor ETF\",               yahooSymbol: \"SOXX\",  tradingViewSymbol: \"NASDAQ:SOXX\" }",
+      "index": 73502,
+      "symbol": "SOXX",
+      "yahooSymbol": "SOXX",
+      "name": "iShares Semiconductor ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"KBWB\",  name: \"Invesco KBW Bank ETF\",                    yahooSymbol: \"KBWB\",  tradingViewSymbol: \"NASDAQ:KBWB\" }",
+      "index": 73641,
+      "symbol": "KBWB",
+      "yahooSymbol": "KBWB",
+      "name": "Invesco KBW Bank ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"GDX\",   name: \"VanEck Gold Miners ETF\",                  yahooSymbol: \"GDX\",   tradingViewSymbol: \"AMEX:GDX\" }",
+      "index": 73780,
+      "symbol": "GDX",
+      "yahooSymbol": "GDX",
+      "name": "VanEck Gold Miners ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"GDXJ\",  name: \"VanEck Junior Gold Miners ETF\",           yahooSymbol: \"GDXJ\",  tradingViewSymbol: \"AMEX:GDXJ\" }",
+      "index": 73916,
+      "symbol": "GDXJ",
+      "yahooSymbol": "GDXJ",
+      "name": "VanEck Junior Gold Miners ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"XOP\",   name: \"SPDR S&P Oil & Gas Exploration ETF\",      yahooSymbol: \"XOP\",   tradingViewSymbol: \"AMEX:XOP\" }",
+      "index": 74053,
+      "symbol": "XOP",
+      "yahooSymbol": "XOP",
+      "name": "SPDR S&P Oil & Gas Exploration ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"HACK\",  name: \"ETFMG Prime Cyber Security ETF\",          yahooSymbol: \"HACK\",  tradingViewSymbol: \"AMEX:HACK\" }",
+      "index": 74189,
+      "symbol": "HACK",
+      "yahooSymbol": "HACK",
+      "name": "ETFMG Prime Cyber Security ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"SKYY\",  name: \"First Trust Cloud Computing ETF\",         yahooSymbol: \"SKYY\",  tradingViewSymbol: \"NASDAQ:SKYY\" }",
+      "index": 74326,
+      "symbol": "SKYY",
+      "yahooSymbol": "SKYY",
+      "name": "First Trust Cloud Computing ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"BOTZ\",  name: \"Global X Robotics & AI ETF\",              yahooSymbol: \"BOTZ\",  tradingViewSymbol: \"NASDAQ:BOTZ\" }",
+      "index": 74465,
+      "symbol": "BOTZ",
+      "yahooSymbol": "BOTZ",
+      "name": "Global X Robotics & AI ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"FINX\",  name: \"Global X FinTech ETF\",                    yahooSymbol: \"FINX\",  tradingViewSymbol: \"NASDAQ:FINX\" }",
+      "index": 74604,
+      "symbol": "FINX",
+      "yahooSymbol": "FINX",
+      "name": "Global X FinTech ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"AIQ\",   name: \"Global X Artificial Intelligence ETF\",    yahooSymbol: \"AIQ\",   tradingViewSymbol: \"NASDAQ:AIQ\" }",
+      "index": 74743,
+      "symbol": "AIQ",
+      "yahooSymbol": "AIQ",
+      "name": "Global X Artificial Intelligence ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"ROBO\",  name: \"ROBO Global Robotics & Automation ETF\",   yahooSymbol: \"ROBO\",  tradingViewSymbol: \"NASDAQ:ROBO\" }",
+      "index": 74881,
+      "symbol": "ROBO",
+      "yahooSymbol": "ROBO",
+      "name": "ROBO Global Robotics & Automation ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"IJR\",   name: \"iShares Core S&P Small-Cap ETF\",          yahooSymbol: \"IJR\",   tradingViewSymbol: \"AMEX:IJR\" }",
+      "index": 75102,
+      "symbol": "IJR",
+      "yahooSymbol": "IJR",
+      "name": "iShares Core S&P Small-Cap ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"VEU\",   name: \"Vanguard FTSE All-World ex-US ETF\",       yahooSymbol: \"VEU\",   tradingViewSymbol: \"AMEX:VEU\" }",
+      "index": 75238,
+      "symbol": "VEU",
+      "yahooSymbol": "VEU",
+      "name": "Vanguard FTSE All-World ex-US ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"VT\",    name: \"Vanguard Total World Stock ETF\",          yahooSymbol: \"VT\",    tradingViewSymbol: \"AMEX:VT\" }",
+      "index": 75374,
+      "symbol": "VT",
+      "yahooSymbol": "VT",
+      "name": "Vanguard Total World Stock ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"MCHI\",  name: \"iShares MSCI China ETF\",                  yahooSymbol: \"MCHI\",  tradingViewSymbol: \"NASDAQ:MCHI\" }",
+      "index": 75509,
+      "symbol": "MCHI",
+      "yahooSymbol": "MCHI",
+      "name": "iShares MSCI China ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"EWZ\",   name: \"iShares MSCI Brazil ETF\",                 yahooSymbol: \"EWZ\",   tradingViewSymbol: \"AMEX:EWZ\" }",
+      "index": 75648,
+      "symbol": "EWZ",
+      "yahooSymbol": "EWZ",
+      "name": "iShares MSCI Brazil ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"EWC\",   name: \"iShares MSCI Canada ETF\",                 yahooSymbol: \"EWC\",   tradingViewSymbol: \"AMEX:EWC\" }",
+      "index": 75784,
+      "symbol": "EWC",
+      "yahooSymbol": "EWC",
+      "name": "iShares MSCI Canada ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"EWT\",   name: \"iShares MSCI Taiwan ETF\",                 yahooSymbol: \"EWT\",   tradingViewSymbol: \"AMEX:EWT\" }",
+      "index": 75920,
+      "symbol": "EWT",
+      "yahooSymbol": "EWT",
+      "name": "iShares MSCI Taiwan ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"EWY\",   name: \"iShares MSCI South Korea ETF\",            yahooSymbol: \"EWY\",   tradingViewSymbol: \"AMEX:EWY\" }",
+      "index": 76056,
+      "symbol": "EWY",
+      "yahooSymbol": "EWY",
+      "name": "iShares MSCI South Korea ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"EWA\",   name: \"iShares MSCI Australia ETF\",              yahooSymbol: \"EWA\",   tradingViewSymbol: \"AMEX:EWA\" }",
+      "index": 76192,
+      "symbol": "EWA",
+      "yahooSymbol": "EWA",
+      "name": "iShares MSCI Australia ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"EWI\",   name: \"iShares MSCI Italy ETF\",                  yahooSymbol: \"EWI\",   tradingViewSymbol: \"AMEX:EWI\" }",
+      "index": 76328,
+      "symbol": "EWI",
+      "yahooSymbol": "EWI",
+      "name": "iShares MSCI Italy ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"EWP\",   name: \"iShares MSCI Spain ETF\",                  yahooSymbol: \"EWP\",   tradingViewSymbol: \"AMEX:EWP\" }",
+      "index": 76464,
+      "symbol": "EWP",
+      "yahooSymbol": "EWP",
+      "name": "iShares MSCI Spain ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"EWQ\",   name: \"iShares MSCI France ETF\",                 yahooSymbol: \"EWQ\",   tradingViewSymbol: \"AMEX:EWQ\" }",
+      "index": 76600,
+      "symbol": "EWQ",
+      "yahooSymbol": "EWQ",
+      "name": "iShares MSCI France ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"VGK\",   name: \"Vanguard FTSE Europe ETF\",                yahooSymbol: \"VGK\",   tradingViewSymbol: \"AMEX:VGK\" }",
+      "index": 76736,
+      "symbol": "VGK",
+      "yahooSymbol": "VGK",
+      "name": "Vanguard FTSE Europe ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"VPL\",   name: \"Vanguard FTSE Pacific ETF\",               yahooSymbol: \"VPL\",   tradingViewSymbol: \"AMEX:VPL\" }",
+      "index": 76872,
+      "symbol": "VPL",
+      "yahooSymbol": "VPL",
+      "name": "Vanguard FTSE Pacific ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"ACWI\",  name: \"iShares MSCI ACWI ETF\",                   yahooSymbol: \"ACWI\",  tradingViewSymbol: \"NASDAQ:ACWI\" }",
+      "index": 77008,
+      "symbol": "ACWI",
+      "yahooSymbol": "ACWI",
+      "name": "iShares MSCI ACWI ETF"
+    },
+    {
+      "type": "ETF",
+      "paramsStr": "{ symbol: \"IEUR\",  name: \"iShares Core MSCI Europe ETF\",            yahooSymbol: \"IEUR\",  tradingViewSymbol: \"AMEX:IEUR\" }",
+      "index": 77147,
+      "symbol": "IEUR",
+      "yahooSymbol": "IEUR",
+      "name": "iShares Core MSCI Europe ETF"
+    },
+    {
+      "type": "Index",
+      "paramsStr": "{ symbol: \"CAC40\",    name: \"CAC 40 (France)\",               yahooSymbol: \"^FCHI\",    tradingViewSymbol: \"EURONEXT:CAC40\" }",
+      "index": 77366,
+      "symbol": "CAC40",
+      "yahooSymbol": "^FCHI",
+      "name": "CAC 40 (France)"
+    },
+    {
+      "type": "Index",
+      "paramsStr": "{ symbol: \"IBEX35\",   name: \"IBEX 35 (Spain)\",               yahooSymbol: \"^IBEX\",    tradingViewSymbol: \"BME:IBEX\" }",
+      "index": 77506,
+      "symbol": "IBEX35",
+      "yahooSymbol": "^IBEX",
+      "name": "IBEX 35 (Spain)"
+    },
+    {
+      "type": "Index",
+      "paramsStr": "{ symbol: \"SMI\",      name: \"SMI Swiss Market Index\",        yahooSymbol: \"^SSMI\",    tradingViewSymbol: \"TVC:SMI\" }",
+      "index": 77640,
+      "symbol": "SMI",
+      "yahooSymbol": "^SSMI",
+      "name": "SMI Swiss Market Index"
+    },
+    {
+      "type": "Index",
+      "paramsStr": "{ symbol: \"AEX\",      name: \"AEX (Netherlands)\",             yahooSymbol: \"^AEX\",     tradingViewSymbol: \"TVC:AEX\" }",
+      "index": 77773,
+      "symbol": "AEX",
+      "yahooSymbol": "^AEX",
+      "name": "AEX (Netherlands)"
+    },
+    {
+      "type": "Index",
+      "paramsStr": "{ symbol: \"HSI\",      name: \"Hang Seng Index (Hong Kong)\",   yahooSymbol: \"^HSI\",     tradingViewSymbol: \"TVC:HSI\" }",
+      "index": 77906,
+      "symbol": "HSI",
+      "yahooSymbol": "^HSI",
+      "name": "Hang Seng Index (Hong Kong)"
+    },
+    {
+      "type": "Index",
+      "paramsStr": "{ symbol: \"KOSPI\",    name: \"KOSPI (South Korea)\",           yahooSymbol: \"^KS11\",    tradingViewSymbol: \"KRX:KOSPI\" }",
+      "index": 78039,
+      "symbol": "KOSPI",
+      "yahooSymbol": "^KS11",
+      "name": "KOSPI (South Korea)"
+    },
+    {
+      "type": "Index",
+      "paramsStr": "{ symbol: \"SENSEX\",   name: \"BSE SENSEX (India)\",            yahooSymbol: \"^BSESN\",   tradingViewSymbol: \"BSE:SENSEX\" }",
+      "index": 78174,
+      "symbol": "SENSEX",
+      "yahooSymbol": "^BSESN",
+      "name": "BSE SENSEX (India)"
+    },
+    {
+      "type": "Index",
+      "paramsStr": "{ symbol: \"ASX200\",   name: \"S&P/ASX 200 (Australia)\",       yahooSymbol: \"^AXJO\",    tradingViewSymbol: \"ASX:XJO\" }",
+      "index": 78310,
+      "symbol": "ASX200",
+      "yahooSymbol": "^AXJO",
+      "name": "S&P/ASX 200 (Australia)"
+    },
+    {
+      "type": "Index",
+      "paramsStr": "{ symbol: \"TSX\",      name: \"S&P/TSX Composite (Canada)\",    yahooSymbol: \"^GSPTSE\",  tradingViewSymbol: \"TVC:TSX\" }",
+      "index": 78443,
+      "symbol": "TSX",
+      "yahooSymbol": "^GSPTSE",
+      "name": "S&P/TSX Composite (Canada)"
+    },
+    {
+      "type": "Index",
+      "paramsStr": "{ symbol: \"IBOVESPA\", name: \"Bovespa Index (Brazil)\",        yahooSymbol: \"^BVSP\",    tradingViewSymbol: \"BMFBOVESPA:IBOV\" }",
+      "index": 78576,
+      "symbol": "IBOVESPA",
+      "yahooSymbol": "^BVSP",
+      "name": "Bovespa Index (Brazil)"
+    },
+    {
+      "type": "Index",
+      "paramsStr": "{ symbol: \"STOXX50\",  name: \"Euro Stoxx 50\",                 yahooSymbol: \"^STOXX50E\",tradingViewSymbol: \"TVC:SX5E\" }",
+      "index": 78717,
+      "symbol": "STOXX50",
+      "yahooSymbol": "^STOXX50E",
+      "name": "Euro Stoxx 50"
+    },
+    {
+      "type": "Index",
+      "paramsStr": "{ symbol: \"NIFTY50\",  name: \"NIFTY 50 (India)\",              yahooSymbol: \"^NSEI\",    tradingViewSymbol: \"NSE:NIFTY\" }",
+      "index": 78851,
+      "symbol": "NIFTY50",
+      "yahooSymbol": "^NSEI",
+      "name": "NIFTY 50 (India)"
+    },
+    {
+      "type": "Index",
+      "paramsStr": "{ symbol: \"TWII\",     name: \"Taiwan Weighted Index\",         yahooSymbol: \"^TWII\",    tradingViewSymbol: \"TWSE:Y9999\" }",
+      "index": 78986,
+      "symbol": "TWII",
+      "yahooSymbol": "^TWII",
+      "name": "Taiwan Weighted Index"
+    },
+    {
+      "type": "Index",
+      "paramsStr": "{ symbol: \"STI\",      name: \"Straits Times Index (Singapore)\",yahooSymbol: \"^STI\",     tradingViewSymbol: \"SGX:STI\" }",
+      "index": 79122,
+      "symbol": "STI",
+      "yahooSymbol": "^STI",
+      "name": "Straits Times Index (Singapore)"
+    },
+    {
+      "type": "Crypto",
+      "paramsStr": "{ symbol: \"AAVEUSD\",  name: \"Aave\",           yahooSymbol: \"AAVE-USD\",  tradingViewSymbol: \"BINANCE:AAVEUSDT\" }",
+      "index": 79338,
+      "symbol": "AAVEUSD",
+      "yahooSymbol": "AAVE-USD",
+      "name": "Aave"
+    },
+    {
+      "type": "Crypto",
+      "paramsStr": "{ symbol: \"NEARUSD\",  name: \"NEAR Protocol\",  yahooSymbol: \"NEAR-USD\",  tradingViewSymbol: \"BINANCE:NEARUSDT\" }",
+      "index": 79467,
+      "symbol": "NEARUSD",
+      "yahooSymbol": "NEAR-USD",
+      "name": "NEAR Protocol"
+    },
+    {
+      "type": "Crypto",
+      "paramsStr": "{ symbol: \"SANDUSD\",  name: \"The Sandbox\",    yahooSymbol: \"SAND-USD\",  tradingViewSymbol: \"BINANCE:SANDUSDT\" }",
+      "index": 79596,
+      "symbol": "SANDUSD",
+      "yahooSymbol": "SAND-USD",
+      "name": "The Sandbox"
+    },
+    {
+      "type": "Crypto",
+      "paramsStr": "{ symbol: \"MANAUSD\",  name: \"Decentraland\",   yahooSymbol: \"MANA-USD\",  tradingViewSymbol: \"BINANCE:MANAUSDT\" }",
+      "index": 79725,
+      "symbol": "MANAUSD",
+      "yahooSymbol": "MANA-USD",
+      "name": "Decentraland"
+    },
+    {
+      "type": "Crypto",
+      "paramsStr": "{ symbol: \"ARBUSD\",   name: \"Arbitrum\",       yahooSymbol: \"ARB-USD\",   tradingViewSymbol: \"BINANCE:ARBUSDT\" }",
+      "index": 79854,
+      "symbol": "ARBUSD",
+      "yahooSymbol": "ARB-USD",
+      "name": "Arbitrum"
+    },
+    {
+      "type": "Crypto",
+      "paramsStr": "{ symbol: \"OPUSD\",    name: \"Optimism\",       yahooSymbol: \"OP-USD\",    tradingViewSymbol: \"BINANCE:OPUSDT\" }",
+      "index": 79982,
+      "symbol": "OPUSD",
+      "yahooSymbol": "OP-USD",
+      "name": "Optimism"
+    },
+    {
+      "type": "Crypto",
+      "paramsStr": "{ symbol: \"RNDRUSD\",  name: \"Render\",         yahooSymbol: \"RNDR-USD\",  tradingViewSymbol: \"BINANCE:RNDRUSDT\" }",
+      "index": 80109,
+      "symbol": "RNDRUSD",
+      "yahooSymbol": "RNDR-USD",
+      "name": "Render"
+    },
+    {
+      "type": "Crypto",
+      "paramsStr": "{ symbol: \"LDOUSD\",   name: \"Lido DAO\",       yahooSymbol: \"LDO-USD\",   tradingViewSymbol: \"BINANCE:LDOUSDT\" }",
+      "index": 80238,
+      "symbol": "LDOUSD",
+      "yahooSymbol": "LDO-USD",
+      "name": "Lido DAO"
+    },
+    {
+      "type": "Crypto",
+      "paramsStr": "{ symbol: \"INJUSD\",   name: \"Injective\",      yahooSymbol: \"INJ-USD\",   tradingViewSymbol: \"BINANCE:INJUSDT\" }",
+      "index": 80366,
+      "symbol": "INJUSD",
+      "yahooSymbol": "INJ-USD",
+      "name": "Injective"
+    },
+    {
+      "type": "Crypto",
+      "paramsStr": "{ symbol: \"SUIUSD\",   name: \"Sui\",            yahooSymbol: \"SUI-USD\",   tradingViewSymbol: \"BINANCE:SUIUSDT\" }",
+      "index": 80494,
+      "symbol": "SUIUSD",
+      "yahooSymbol": "SUI-USD",
+      "name": "Sui"
+    },
+    {
+      "type": "Crypto",
+      "paramsStr": "{ symbol: \"STXUSD\",   name: \"Stacks\",         yahooSymbol: \"STX-USD\",   tradingViewSymbol: \"BINANCE:STXUSDT\" }",
+      "index": 80622,
+      "symbol": "STXUSD",
+      "yahooSymbol": "STX-USD",
+      "name": "Stacks"
+    },
+    {
+      "type": "Crypto",
+      "paramsStr": "{ symbol: \"GALAUSD\",  name: \"Gala\",           yahooSymbol: \"GALA-USD\",  tradingViewSymbol: \"BINANCE:GALAUSDT\" }",
+      "index": 80750,
+      "symbol": "GALAUSD",
+      "yahooSymbol": "GALA-USD",
+      "name": "Gala"
+    },
+    {
+      "type": "Forex",
+      "paramsStr": "{ symbol: \"GBPJPY\",  name: \"British Pound / Japanese Yen\",    yahooSymbol: \"GBPJPY=X\",  tradingViewSymbol: \"FX:GBPJPY\" }",
+      "index": 80961,
+      "symbol": "GBPJPY",
+      "yahooSymbol": "GBPJPY=X",
+      "name": "British Pound / Japanese Yen"
+    },
+    {
+      "type": "Forex",
+      "paramsStr": "{ symbol: \"GBPCHF\",  name: \"British Pound / Swiss Franc\",     yahooSymbol: \"GBPCHF=X\",  tradingViewSymbol: \"FX:GBPCHF\" }",
+      "index": 81098,
+      "symbol": "GBPCHF",
+      "yahooSymbol": "GBPCHF=X",
+      "name": "British Pound / Swiss Franc"
+    },
+    {
+      "type": "Forex",
+      "paramsStr": "{ symbol: \"GBPAUD\",  name: \"British Pound / Australian Dollar\",yahooSymbol: \"GBPAUD=X\",  tradingViewSymbol: \"FX:GBPAUD\" }",
+      "index": 81235,
+      "symbol": "GBPAUD",
+      "yahooSymbol": "GBPAUD=X",
+      "name": "British Pound / Australian Dollar"
+    },
+    {
+      "type": "Forex",
+      "paramsStr": "{ symbol: \"GBPNZD\",  name: \"British Pound / New Zealand Dollar\",yahooSymbol: \"GBPNZD=X\", tradingViewSymbol: \"FX:GBPNZD\" }",
+      "index": 81373,
+      "symbol": "GBPNZD",
+      "yahooSymbol": "GBPNZD=X",
+      "name": "British Pound / New Zealand Dollar"
+    },
+    {
+      "type": "Forex",
+      "paramsStr": "{ symbol: \"EURCHF\",  name: \"Euro / Swiss Franc\",               yahooSymbol: \"EURCHF=X\",  tradingViewSymbol: \"FX:EURCHF\" }",
+      "index": 81511,
+      "symbol": "EURCHF",
+      "yahooSymbol": "EURCHF=X",
+      "name": "Euro / Swiss Franc"
+    },
+    {
+      "type": "Forex",
+      "paramsStr": "{ symbol: \"EURAUD\",  name: \"Euro / Australian Dollar\",         yahooSymbol: \"EURAUD=X\",  tradingViewSymbol: \"FX:EURAUD\" }",
+      "index": 81649,
+      "symbol": "EURAUD",
+      "yahooSymbol": "EURAUD=X",
+      "name": "Euro / Australian Dollar"
+    },
+    {
+      "type": "Forex",
+      "paramsStr": "{ symbol: \"EURCAD\",  name: \"Euro / Canadian Dollar\",           yahooSymbol: \"EURCAD=X\",  tradingViewSymbol: \"FX:EURCAD\" }",
+      "index": 81787,
+      "symbol": "EURCAD",
+      "yahooSymbol": "EURCAD=X",
+      "name": "Euro / Canadian Dollar"
+    },
+    {
+      "type": "Forex",
+      "paramsStr": "{ symbol: \"EURNZD\",  name: \"Euro / New Zealand Dollar\",        yahooSymbol: \"EURNZD=X\",  tradingViewSymbol: \"FX:EURNZD\" }",
+      "index": 81925,
+      "symbol": "EURNZD",
+      "yahooSymbol": "EURNZD=X",
+      "name": "Euro / New Zealand Dollar"
+    },
+    {
+      "type": "Forex",
+      "paramsStr": "{ symbol: \"EURGBP\",  name: \"Euro / British Pound\",             yahooSymbol: \"EURGBP=X\",  tradingViewSymbol: \"FX:EURGBP\" }",
+      "index": 82063,
+      "symbol": "EURGBP",
+      "yahooSymbol": "EURGBP=X",
+      "name": "Euro / British Pound"
+    },
+    {
+      "type": "Forex",
+      "paramsStr": "{ symbol: \"USDCHF\",  name: \"US Dollar / Swiss Franc\",          yahooSymbol: \"USDCHF=X\",  tradingViewSymbol: \"FX:USDCHF\" }",
+      "index": 82201,
+      "symbol": "USDCHF",
+      "yahooSymbol": "USDCHF=X",
+      "name": "US Dollar / Swiss Franc"
+    },
+    {
+      "type": "Forex",
+      "paramsStr": "{ symbol: \"USDCAD\",  name: \"US Dollar / Canadian Dollar\",      yahooSymbol: \"USDCAD=X\",  tradingViewSymbol: \"FX:USDCAD\" }",
+      "index": 82339,
+      "symbol": "USDCAD",
+      "yahooSymbol": "USDCAD=X",
+      "name": "US Dollar / Canadian Dollar"
+    },
+    {
+      "type": "Forex",
+      "paramsStr": "{ symbol: \"AUDCAD\",  name: \"Australian Dollar / Canadian Dollar\",yahooSymbol: \"AUDCAD=X\", tradingViewSymbol: \"FX:AUDCAD\" }",
+      "index": 82477,
+      "symbol": "AUDCAD",
+      "yahooSymbol": "AUDCAD=X",
+      "name": "Australian Dollar / Canadian Dollar"
+    },
+    {
+      "type": "Forex",
+      "paramsStr": "{ symbol: \"AUDNZD\",  name: \"Australian Dollar / New Zealand Dollar\",yahooSymbol: \"AUDNZD=X\",tradingViewSymbol: \"FX:AUDNZD\" }",
+      "index": 82616,
+      "symbol": "AUDNZD",
+      "yahooSymbol": "AUDNZD=X",
+      "name": "Australian Dollar / New Zealand Dollar"
+    },
+    {
+      "type": "Forex",
+      "paramsStr": "{ symbol: \"CHFJPY\",  name: \"Swiss Franc / Japanese Yen\",       yahooSymbol: \"CHFJPY=X\",  tradingViewSymbol: \"FX:CHFJPY\" }",
+      "index": 82757,
+      "symbol": "CHFJPY",
+      "yahooSymbol": "CHFJPY=X",
+      "name": "Swiss Franc / Japanese Yen"
+    },
+    {
+      "type": "Commodity",
+      "paramsStr": "{ symbol: \"HEATINGOIL\", name: \"Heating Oil\",   yahooSymbol: \"HO=F\",  tradingViewSymbol: \"NYMEX:HO1!\" }",
+      "index": 82977,
+      "symbol": "HEATINGOIL",
+      "yahooSymbol": "HO=F",
+      "name": "Heating Oil"
+    },
+    {
+      "type": "Commodity",
+      "paramsStr": "{ symbol: \"RBOB\",       name: \"RBOB Gasoline\", yahooSymbol: \"RB=F\",  tradingViewSymbol: \"NYMEX:RB1!\" }",
+      "index": 83100,
+      "symbol": "RBOB",
+      "yahooSymbol": "RB=F",
+      "name": "RBOB Gasoline"
+    },
+    {
+      "type": "Commodity",
+      "paramsStr": "{ symbol: \"COFFEE\",     name: \"Coffee\",        yahooSymbol: \"KC=F\",  tradingViewSymbol: \"ICEUS:KC1!\" }",
+      "index": 83223,
+      "symbol": "COFFEE",
+      "yahooSymbol": "KC=F",
+      "name": "Coffee"
+    },
+    {
+      "type": "Commodity",
+      "paramsStr": "{ symbol: \"COCOA\",      name: \"Cocoa\",         yahooSymbol: \"CC=F\",  tradingViewSymbol: \"ICEUS:CC1!\" }",
+      "index": 83346,
+      "symbol": "COCOA",
+      "yahooSymbol": "CC=F",
+      "name": "Cocoa"
+    },
+    {
+      "type": "Commodity",
+      "paramsStr": "{ symbol: \"COTTON\",     name: \"Cotton\",        yahooSymbol: \"CT=F\",  tradingViewSymbol: \"ICEUS:CT1!\" }",
+      "index": 83469,
+      "symbol": "COTTON",
+      "yahooSymbol": "CT=F",
+      "name": "Cotton"
+    },
+    {
+      "type": "Commodity",
+      "paramsStr": "{ symbol: \"OATS\",       name: \"Oats\",          yahooSymbol: \"ZO=F\",  tradingViewSymbol: \"CBOT:ZO1!\" }",
+      "index": 83592,
+      "symbol": "OATS",
+      "yahooSymbol": "ZO=F",
+      "name": "Oats"
+    },
+    {
+      "type": "Bond",
+      "paramsStr": "{ symbol: \"DE10Y\",  name: \"Germany 10Y Bund\",      tradingViewSymbol: \"TVC:DE10Y\" }",
+      "index": 83796,
+      "symbol": "DE10Y",
+      "name": "Germany 10Y Bund"
+    },
+    {
+      "type": "Bond",
+      "paramsStr": "{ symbol: \"DE02Y\",  name: \"Germany 2Y Schatz\",     tradingViewSymbol: \"TVC:DE02Y\" }",
+      "index": 83895,
+      "symbol": "DE02Y",
+      "name": "Germany 2Y Schatz"
+    },
+    {
+      "type": "Bond",
+      "paramsStr": "{ symbol: \"UK10Y\",  name: \"UK 10Y Gilt\",           tradingViewSymbol: \"TVC:GB10Y\" }",
+      "index": 83994,
+      "symbol": "UK10Y",
+      "name": "UK 10Y Gilt"
+    },
+    {
+      "type": "Bond",
+      "paramsStr": "{ symbol: \"UK02Y\",  name: \"UK 2Y Gilt\",            tradingViewSymbol: \"TVC:GB02Y\" }",
+      "index": 84093,
+      "symbol": "UK02Y",
+      "name": "UK 2Y Gilt"
+    },
+    {
+      "type": "Bond",
+      "paramsStr": "{ symbol: \"JP10Y\",  name: \"Japan 10Y JGB\",         tradingViewSymbol: \"TVC:JP10Y\" }",
+      "index": 84192,
+      "symbol": "JP10Y",
+      "name": "Japan 10Y JGB"
+    },
+    {
+      "type": "Bond",
+      "paramsStr": "{ symbol: \"IT10Y\",  name: \"Italy 10Y BTP\",         tradingViewSymbol: \"TVC:IT10Y\" }",
+      "index": 84291,
+      "symbol": "IT10Y",
+      "name": "Italy 10Y BTP"
+    },
+    {
+      "type": "Bond",
+      "paramsStr": "{ symbol: \"ES10Y\",  name: \"Spain 10Y Bono\",        tradingViewSymbol: \"TVC:ES10Y\" }",
+      "index": 84390,
+      "symbol": "ES10Y",
+      "name": "Spain 10Y Bono"
+    },
+    {
+      "type": "Bond",
+      "paramsStr": "{ symbol: \"FR10Y\",  name: \"France 10Y OAT\",        tradingViewSymbol: \"TVC:FR10Y\" }",
+      "index": 84489,
+      "symbol": "FR10Y",
+      "name": "France 10Y OAT"
+    },
+    {
+      "type": "Bond",
+      "paramsStr": "{ symbol: \"AU10Y\",  name: \"Australia 10Y Bond\",    tradingViewSymbol: \"TVC:AU10Y\" }",
+      "index": 84588,
+      "symbol": "AU10Y",
+      "name": "Australia 10Y Bond"
+    },
+    {
+      "type": "Bond",
+      "paramsStr": "{ symbol: \"CA10Y\",  name: \"Canada 10Y Bond\",       tradingViewSymbol: \"TVC:CA10Y\" }",
+      "index": 84687,
+      "symbol": "CA10Y",
+      "name": "Canada 10Y Bond"
+    },
+    {
+      "type": "Bond",
+      "paramsStr": "{ symbol: \"CN10Y\",  name: \"China 10Y Bond\",        tradingViewSymbol: \"TVC:CN10Y\" }",
+      "index": 84786,
+      "symbol": "CN10Y",
+      "name": "China 10Y Bond"
+    },
+    {
+      "type": "Bond",
+      "paramsStr": "{ symbol: \"BR10Y\",  name: \"Brazil 10Y Bond\",       tradingViewSymbol: \"TVC:BR10Y\" }",
+      "index": 84885,
+      "symbol": "BR10Y",
+      "name": "Brazil 10Y Bond"
+    }
+  ],
+  "duplicates": [
+    {
+      "symbol": "PEP",
+      "count": 2,
+      "entries": [
+        {
+          "type": "Stock",
+          "yahoo": "✓",
+          "name": "PepsiCo Inc."
+        },
+        {
+          "type": "Stock",
+          "yahoo": "✓",
+          "name": "PepsiCo Inc."
+        }
+      ]
+    },
+    {
+      "symbol": "PLD",
+      "count": 2,
+      "entries": [
+        {
+          "type": "Stock",
+          "yahoo": "✓",
+          "name": "Prologis Inc."
+        },
+        {
+          "type": "Stock",
+          "yahoo": "✓",
+          "name": "Prologis Inc."
+        }
+      ]
+    },
+    {
+      "symbol": "UPS",
+      "count": 2,
+      "entries": [
+        {
+          "type": "Stock",
+          "yahoo": "✓",
+          "name": "United Parcel Service Inc."
+        },
+        {
+          "type": "Stock",
+          "yahoo": "✓",
+          "name": "United Parcel Service Inc."
+        }
+      ]
+    },
+    {
+      "symbol": "FDX",
+      "count": 2,
+      "entries": [
+        {
+          "type": "Stock",
+          "yahoo": "✓",
+          "name": "FedEx Corporation"
+        },
+        {
+          "type": "Stock",
+          "yahoo": "✓",
+          "name": "FedEx Corporation"
+        }
+      ]
+    },
+    {
+      "symbol": "HSY",
+      "count": 2,
+      "entries": [
+        {
+          "type": "Stock",
+          "yahoo": "✓",
+          "name": "Hershey Company"
+        },
+        {
+          "type": "Stock",
+          "yahoo": "✓",
+          "name": "The Hershey Company"
+        }
+      ]
+    },
+    {
+      "symbol": "MKC",
+      "count": 2,
+      "entries": [
+        {
+          "type": "Stock",
+          "yahoo": "✓",
+          "name": "McCormick & Company Inc."
+        },
+        {
+          "type": "Stock",
+          "yahoo": "✓",
+          "name": "McCormick & Company Inc."
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "missing_symbol": 0,
+    "missing_name": 0,
+    "missing_yahoo": 0,
+    "total_valid": 587,
+    "by_type": {
+      "Index": 28,
+      "Stock": 362,
+      "ETF": 90,
+      "Crypto": 38,
+      "Forex": 32,
+      "Commodity": 20,
+      "Bond": 17
+    }
+  }
+}
