@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { ChartIcon, DashboardIcon, BookIcon, UserIcon } from "@/components/layout/icons";
 
 const ITEMS = [
-  { href: "/dashboard", label: "Home", Icon: DashboardIcon, isActive: (p: string) => p === "/dashboard" },
+  { href: "/", label: "Home", Icon: DashboardIcon, isActive: (p: string) => p === "/" },
   { href: "/lessons/1", label: "Lezioni", Icon: BookIcon, isActive: (p: string) => p.startsWith("/lessons") },
   { href: "/workbench", label: "Grafico", Icon: ChartIcon, isActive: (p: string) => p === "/workbench" },
   { href: "/profile", label: "Profilo", Icon: UserIcon, isActive: (p: string) => p === "/profile" },

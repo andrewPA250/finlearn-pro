@@ -2,7 +2,7 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
 // Route accessibili solo da utenti autenticati: redirect a /login se assenti.
-const PROTECTED_PATHS = ["/dashboard", "/lessons", "/workbench", "/profile"];
+const PROTECTED_PATHS = ["/lessons", "/workbench", "/profile"];
 
 // Route di auth: redirect a /dashboard se l'utente ha già una sessione.
 // /reset-password NON è incluso: vi si accede con una sessione di recovery
@@ -58,7 +58,7 @@ export async function updateSession(request: NextRequest) {
 
   if (user && isAuthOnly) {
     const url = request.nextUrl.clone();
-    url.pathname = "/dashboard";
+    url.pathname = "/";
     url.search = "";
     return NextResponse.redirect(url);
   }
