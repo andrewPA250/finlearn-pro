@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Image from "next/image";
 import type { NewsItem } from "@/lib/assetNews";
 import { useSettings } from "@/lib/settings/SettingsContext";
 import { t } from "@/lib/settings/i18n";
@@ -127,17 +128,20 @@ export function NewsView({ news }: NewsViewProps) {
               href={item.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group rounded-card border border-border-base bg-bg-secondary p-4 transition hover:border-cyan/50 hover:bg-bg-hover"
+              className="block group rounded-card border border-bg-border bg-bg-card p-4 transition hover:border-cyan/50 hover:bg-bg-hover"
             >
               <div className="flex gap-4">
                 {/* Image */}
                 {item.image && (
-                  <img
+                  <Image
                     src={item.image}
                     alt={item.headline}
+                    width={160}
+                    height={96}
+                    unoptimized
                     className="h-24 w-40 flex-shrink-0 rounded-lg object-cover"
                     onError={(e) => {
-                      e.currentTarget.style.display = "none";
+                      (e.currentTarget as HTMLImageElement).style.display = "none";
                     }}
                   />
                 )}

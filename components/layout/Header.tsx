@@ -73,6 +73,7 @@ export function Header() {
     { label: t("learn", lang), href: learnHref, isActive: (p) => p.startsWith("/lessons") },
     { label: t("portfolio", lang), href: "/portfolio", isActive: (p) => p.startsWith("/portfolio") },
     { label: "Alerts", href: "/alerts", isActive: (p) => p.startsWith("/alerts") },
+    { label: "Calendar", href: "/calendar", isActive: (p) => p.startsWith("/calendar") },
     { label: t("ai", lang), soon: true },
     { label: t("quantLab", lang), soon: true },
   ];
