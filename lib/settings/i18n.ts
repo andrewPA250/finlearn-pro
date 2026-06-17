@@ -68,10 +68,11 @@ export const translations = {
     "forex": "Forex",
     "bonds": "Bonds",
 
-    // Heatmap / Screener
+    // Heatmap / Screener / News
     "heatmap": "Heatmap",
     "screener": "Screener",
     "watchlist": "Watchlist",
+    "news": "News",
     "filters": "Filters",
     "search": "Search",
     "categories": "Categories",
@@ -172,10 +173,11 @@ export const translations = {
     "forex": "Forex",
     "bonds": "Obbligazioni",
 
-    // Heatmap / Screener
+    // Heatmap / Screener / News
     "heatmap": "Heatmap",
     "screener": "Screener",
     "watchlist": "Watchlist",
+    "news": "Notizie",
     "filters": "Filtri",
     "search": "Cerca",
     "categories": "Categorie",

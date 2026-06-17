@@ -35,6 +35,7 @@ function toolsNav(lang: Language) {
   return [
     { id: "heatmap",  label: t("heatmap", lang),  href: "/markets/heatmap" },
     { id: "screener", label: t("screener", lang), href: "/markets/screener" },
+    { id: "news",     label: t("news", lang),     href: "/news" },
   ];
 }
 

@@ -339,7 +339,7 @@ export default async function HomePage() {
           <div className="mx-auto max-w-platform px-6 py-10">
             <div className="mb-5 flex items-center justify-between">
               <h2 className="text-sm font-semibold text-text-primary uppercase tracking-wide">Latest Market News</h2>
-              <Link href="/markets" className="text-xs text-cyan hover:text-cyan-light transition-colors">
+              <Link href="/news" className="text-xs text-cyan hover:text-cyan-light transition-colors">
                 View all news →
               </Link>
             </div>
