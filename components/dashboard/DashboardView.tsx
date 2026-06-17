@@ -3,6 +3,7 @@ import type { TickerQuote } from "@/lib/market/ticker";
 import type { NewsResult } from "@/lib/assetNews";
 import { formatQuoteValue, formatQuoteChange } from "@/lib/market/ticker";
 import { MARKET_CATEGORIES, getInstrumentsByCategory } from "@/lib/markets/catalog";
+import { WatchlistWidget } from "@/components/dashboard/WatchlistWidget";
 
 interface DashboardViewProps {
   tickerQuotes: TickerQuote[];
@@ -281,26 +282,6 @@ function TopMoversCard({
               : <p className="text-xs text-text-muted py-2">No data</p>}
           </div>
         </div>
-      </div>
-    </section>
-  );
-}
-
-function WatchlistWidget() {
-  return (
-    <section className="rounded-card border border-bg-border bg-bg-card p-5 flex flex-col">
-      <h2 className="text-[10px] font-semibold uppercase tracking-widest text-text-muted mb-4">
-        Watchlist
-      </h2>
-      <div className="flex-1 flex flex-col items-center justify-center py-6 text-center">
-        <div className="h-9 w-9 rounded-full bg-bg-sidebar flex items-center justify-center mb-3">
-          <span className="text-lg">★</span>
-        </div>
-        <p className="text-sm font-medium text-text-primary mb-1">Save assets to watch</p>
-        <p className="text-xs text-text-muted mb-4">Track your favorite markets in one place</p>
-        <span className="rounded px-2.5 py-1 text-[10px] font-bold bg-cyan-bg/40 text-cyan">
-          Coming Soon
-        </span>
       </div>
     </section>
   );

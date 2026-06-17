@@ -7,6 +7,7 @@ import type { User } from "@supabase/supabase-js";
 import { createClient } from "@/lib/supabase/client";
 import { useProgress } from "@/lib/progress/ProgressContext";
 import { useSettings } from "@/lib/settings/SettingsContext";
+import { useWatchlist } from "@/lib/watchlist/WatchlistContext";
 import { t } from "@/lib/settings/i18n";
 import { getNextAccessibleLessonId } from "@/lib/access";
 import { ChevronDownIcon, LogoMark, SearchIcon, UserIcon } from "@/components/layout/icons";
@@ -26,6 +27,7 @@ export function Header() {
   const router = useRouter();
   const { state } = useProgress();
   const settings = useSettings();
+  const { symbols: watchlistSymbols } = useWatchlist();
   const [user, setUser] = useState<User | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -182,6 +184,10 @@ export function Header() {
                     <span>⚙</span>
                     {t("settings", settings.language)}
                   </Link>
+                  <div className="flex items-center gap-2.5 rounded-card px-3 py-2 text-sm text-text-secondary cursor-default">
+                    <span>★</span>
+                    <span>Watchlist ({watchlistSymbols.length})</span>
+                  </div>
                   <hr className="my-1 border-bg-border" />
                   <button
                     type="button"

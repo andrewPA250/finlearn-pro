@@ -6,6 +6,7 @@ import { ContextSidebar } from "@/components/sidebar/ContextSidebar";
 import { BottomNav } from "@/components/layout/BottomNav";
 import { ProgressProvider } from "@/lib/progress/ProgressContext";
 import { SettingsProvider } from "@/lib/settings/SettingsContext";
+import { WatchlistProvider } from "@/lib/watchlist/WatchlistContext";
 import { MarketRibbon } from "@/components/market/MarketRibbon";
 import { getRibbonQuotes } from "@/lib/markets/getRibbonQuotes";
 
@@ -38,7 +39,8 @@ export default async function RootLayout({
         className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}
       >
         <SettingsProvider>
-          <ProgressProvider>
+          <WatchlistProvider>
+            <ProgressProvider>
             <Header />
             <MarketRibbon quotes={ribbonQuotes} />
             <div className="flex min-h-[calc(100vh-3.5rem)]">
@@ -49,6 +51,7 @@ export default async function RootLayout({
             </div>
             <BottomNav />
           </ProgressProvider>
+          </WatchlistProvider>
         </SettingsProvider>
       </body>
     </html>

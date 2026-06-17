@@ -6,6 +6,7 @@ import { formatQuoteValue, formatQuoteChangeDetail } from "@/lib/market/ticker";
 import { AssetStatusBadge } from "@/components/asset/AssetStatusBadge";
 import { InfoTooltip } from "@/components/ui/InfoTooltip";
 import { LocalTime } from "@/components/ui/LocalTime";
+import { WatchButton } from "@/components/asset/WatchButton";
 
 interface AssetHeroProps {
   instrument: MarketInstrument;
@@ -141,12 +142,7 @@ export function AssetHero({ instrument, categoryLabel, quote }: AssetHeroProps) 
         >
           Compare
         </button>
-        <button
-          disabled
-          className="inline-flex cursor-not-allowed items-center gap-1.5 rounded-card border border-bg-border px-3 py-1.5 text-xs font-semibold text-text-disabled opacity-40"
-        >
-          ★ Watch
-        </button>
+        <WatchButton symbol={instrument.symbol} />
       </div>
     </div>
   );
