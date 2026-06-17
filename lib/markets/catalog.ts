@@ -309,13 +309,11 @@ export const MARKET_INSTRUMENTS: MarketInstrument[] = [
   createStock({ symbol: "ZTS",   name: "Zoetis Inc.",                       yahooSymbol: "ZTS", finnhubSymbol: "ZTS" }),
   createStock({ symbol: "CAH",   name: "Cardinal Health Inc.",              yahooSymbol: "CAH", finnhubSymbol: "CAH" }),
 
-  // ─── SEMICONDUCTORS & TECH HARDWARE (13 total) ───────────────────────────
+  // ─── SEMICONDUCTORS & TECH HARDWARE (11 total) ───────────────────────────
   createStock({ symbol: "AMAT",  name: "Applied Materials Inc.",            yahooSymbol: "AMAT", finnhubSymbol: "AMAT" }),
   createStock({ symbol: "MU",    name: "Micron Technology Inc.",            yahooSymbol: "MU", finnhubSymbol: "MU" }),
   createStock({ symbol: "LRCX",  name: "Lam Research Corporation",          yahooSymbol: "LRCX", finnhubSymbol: "LRCX" }),
   createStock({ symbol: "KLAC",  name: "KLA Corporation",                   yahooSymbol: "KLAC", finnhubSymbol: "KLAC" }),
-  createStock({ symbol: "NVDA",  name: "NVIDIA Corporation",                yahooSymbol: "NVDA", finnhubSymbol: "NVDA" }),
-  createStock({ symbol: "ASML",  name: "ASML Holding NV",                   yahooSymbol: "ASML", finnhubSymbol: "ASML" }),
   createStock({ symbol: "TSM",   name: "Taiwan Semiconductor Mfg Co Ltd",  yahooSymbol: "TSM", finnhubSymbol: "TSM" }),
   createStock({ symbol: "SLAB",  name: "Silicon Laboratories Inc.",         yahooSymbol: "SLAB", finnhubSymbol: "SLAB" }),
   createStock({ symbol: "QRVO",  name: "Qorvo Inc.",                        yahooSymbol: "QRVO", finnhubSymbol: "QRVO" }),
@@ -391,10 +389,9 @@ export const MARKET_INSTRUMENTS: MarketInstrument[] = [
   createStock({ symbol: "MLM",   name: "Martin Marietta Materials Inc.",    yahooSymbol: "MLM", finnhubSymbol: "MLM" }),
   createStock({ symbol: "VMC",   name: "Vulcan Materials Company",          yahooSymbol: "VMC", finnhubSymbol: "VMC" }),
 
-  // ─── DEFENSE & AEROSPACE (7 total) ──────────────────────────────────────
+  // ─── DEFENSE & AEROSPACE (6 total) ──────────────────────────────────────
   createStock({ symbol: "NOC",   name: "Northrop Grumman Corporation",      yahooSymbol: "NOC", finnhubSymbol: "NOC" }),
   createStock({ symbol: "GD",    name: "General Dynamics Corporation",      yahooSymbol: "GD", finnhubSymbol: "GD" }),
-  createStock({ symbol: "LMT",   name: "Lockheed Martin Corporation",       yahooSymbol: "LMT", finnhubSymbol: "LMT" }),
   createStock({ symbol: "ROK",   name: "Rockwell Automation Inc.",          yahooSymbol: "ROK", finnhubSymbol: "ROK" }),
   createStock({ symbol: "EW",    name: "Edwards Lifesciences Corp.",        yahooSymbol: "EW", finnhubSymbol: "EW" }),
   createStock({ symbol: "AZO",   name: "AutoZone Inc.",                     yahooSymbol: "AZO", finnhubSymbol: "AZO" }),
@@ -428,8 +425,7 @@ export const MARKET_INSTRUMENTS: MarketInstrument[] = [
   createStock({ symbol: "PEG",   name: "Public Service Enterprise Group Inc", yahooSymbol: "PEG", finnhubSymbol: "PEG" }),
   createStock({ symbol: "AWK",   name: "American Water Works Company Inc.", yahooSymbol: "AWK", finnhubSymbol: "AWK" }),
 
-  // ─── EUROPEAN STOCKS - MAJOR CAPS (13 total) ──────────────────────────────
-  createStock({ symbol: "ASML",  name: "ASML Holding N.V.",                 yahooSymbol: "ASML", finnhubSymbol: "ASML" }),
+  // ─── EUROPEAN STOCKS - MAJOR CAPS (12 total) ──────────────────────────────
   createStock({ symbol: "SAP",   name: "SAP SE",                            yahooSymbol: "SAP", finnhubSymbol: "SAP" }),
   createStock({ symbol: "HEI",   name: "Heidelberg Materials AG",           yahooSymbol: "HEI", finnhubSymbol: "HEI" }),
   createStock({ symbol: "MBG",   name: "Mercedes-Benz Group AG",            yahooSymbol: "MBG", finnhubSymbol: "MBG" }),

@@ -3,6 +3,7 @@ import { getRibbonQuotes } from "@/lib/markets/getRibbonQuotes";
 import { getAssetNews } from "@/lib/assetNews";
 import { LESSON_META } from "@/lib/lessonsMeta";
 import { FeaturedMarketsTabs } from "@/components/home/FeaturedMarketsTabs";
+import { getCatalogStats } from "@/lib/markets/catalog";
 import type { TickerQuote } from "@/lib/market/ticker";
 
 // ---------------------------------------------------------------------------
@@ -106,6 +107,7 @@ export default async function HomePage() {
     getAssetNews("SPX", undefined, "index").catch(() => ({ topNews: [], allNews: [], source: "empty" as const, status: "error" as const })),
   ]);
 
+  const catalogStats = getCatalogStats();
   const lessons = LESSON_META.slice(0, 4);
   const topNews = newsResult.topNews.slice(0, 4);
 
@@ -140,7 +142,7 @@ export default async function HomePage() {
             <div>
               <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-cyan/20 bg-cyan-bg/30 px-3 py-1.5 text-[11px] font-semibold text-cyan">
                 <span className="h-1.5 w-1.5 rounded-full bg-cyan" />
-                Real Market Data · 120+ Assets
+                Real Market Data · {catalogStats.total}+ Assets
               </div>
 
               <h1 className="mb-4 text-4xl font-extrabold leading-tight tracking-tight text-text-primary md:text-5xl">
@@ -171,11 +173,11 @@ export default async function HomePage() {
               {/* Quick stats */}
               <div className="mt-10 flex gap-8">
                 <div>
-                  <p className="text-2xl font-extrabold font-mono text-text-primary">120+</p>
+                  <p className="text-2xl font-extrabold font-mono text-text-primary">{catalogStats.total}+</p>
                   <p className="text-[11px] text-text-muted mt-0.5">Assets tracked</p>
                 </div>
                 <div>
-                  <p className="text-2xl font-extrabold font-mono text-text-primary">10</p>
+                  <p className="text-2xl font-extrabold font-mono text-text-primary">{Object.keys(catalogStats.byCategory).length}</p>
                   <p className="text-[11px] text-text-muted mt-0.5">Asset classes</p>
                 </div>
                 <div>
@@ -264,7 +266,7 @@ export default async function HomePage() {
                 </div>
                 <p className="mb-2 text-sm font-semibold text-text-primary">Markets</p>
                 <p className="text-xs leading-relaxed text-text-muted">
-                  Explore 120+ assets across stocks, ETFs, crypto, forex, commodities and more.
+                  Explore {catalogStats.total}+ assets across stocks, ETFs, crypto, forex, commodities and more.
                 </p>
                 <p className="mt-3 text-xs text-cyan">Explore →</p>
               </div>

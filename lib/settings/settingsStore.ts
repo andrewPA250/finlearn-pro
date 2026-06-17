@@ -79,10 +79,11 @@ export function applyTheme(theme: Theme): void {
       ? window.matchMedia("(prefers-color-scheme: dark)").matches
       : theme === "dark";
 
-  if (isDarkPreferred) {
-    html.classList.add("dark");
+  // CSS uses html.light for light mode; :root is the dark default
+  if (!isDarkPreferred) {
+    html.classList.add("light");
   } else {
-    html.classList.remove("dark");
+    html.classList.remove("light");
   }
 }
 

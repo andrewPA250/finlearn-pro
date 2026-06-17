@@ -6,6 +6,8 @@ import type { MarketInstrument } from "@/types/markets";
 import type { TickerQuote } from "@/lib/market/ticker";
 import { MarketsSidebar } from "@/components/markets/MarketsSidebar";
 import { MARKET_CATEGORIES } from "@/lib/markets/catalog";
+import { useSettings } from "@/lib/settings/SettingsContext";
+import { t } from "@/lib/settings/i18n";
 
 interface ScreenerViewProps {
   instruments: MarketInstrument[];
@@ -16,6 +18,8 @@ type SortField = "symbol" | "name" | "price" | "change" | "marketCap" | "pe" | "
 type SortOrder = "asc" | "desc";
 
 export function ScreenerView({ instruments, quotesBySymbol }: ScreenerViewProps) {
+  const { language, currency } = useSettings();
+  const lang = language;
   // Filters state
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
@@ -44,7 +48,15 @@ export function ScreenerView({ instruments, quotesBySymbol }: ScreenerViewProps)
     const dyMin = dividendYieldMin ? Number(dividendYieldMin) : 0;
     const dyMax = dividendYieldMax ? Number(dividendYieldMax) : Infinity;
 
-    const filtered = instruments.filter((instrument) => {
+    // Deduplicate by symbol — keep first occurrence
+    const seen = new Set<string>();
+    const deduped = instruments.filter((i) => {
+      if (seen.has(i.symbol)) return false;
+      seen.add(i.symbol);
+      return true;
+    });
+
+    const filtered = deduped.filter((instrument) => {
       const quote = quotesBySymbol[instrument.symbol];
 
       // Must have valid quote with positive price
@@ -187,18 +199,28 @@ export function ScreenerView({ instruments, quotesBySymbol }: ScreenerViewProps)
     setDividendYieldMax("");
   }
 
-  const getCategoryLabel = (cat: string) => {
-    const category = MARKET_CATEGORIES.find((c) => c.id === cat);
-    return category?.label || cat;
+  const CAT_KEY: Record<string, Parameters<typeof t>[0]> = {
+    equity: "stocks",
+    etf: "etf",
+    index: "indices",
+    crypto: "crypto",
+    forex: "forex",
+    commodity: "commodities",
+    bond: "bonds",
   };
+
+  const getCategoryLabel = (cat: string): string =>
+    CAT_KEY[cat] ? t(CAT_KEY[cat], lang) : cat;
 
   return (
     <div className="mx-auto max-w-platform px-4 py-6 md:px-6">
       {/* Page header */}
       <div className="mb-6 animate-fade-in-up">
-        <h1 className="text-2xl font-bold text-text-primary">Market Screener</h1>
+        <h1 className="text-2xl font-bold text-text-primary">{t("marketScreener", lang)}</h1>
         <p className="mt-0.5 text-sm text-text-secondary">
-          Discover and filter 313+ global assets by category, price, performance, and fundamentals.
+          {lang === "it"
+            ? `Scopri e filtra ${instruments.length}+ asset globali per categoria, prezzo, performance e fondamentali.`
+            : `Discover and filter ${instruments.length}+ global assets by category, price, performance, and fundamentals.`}
         </p>
       </div>
 
@@ -212,12 +234,12 @@ export function ScreenerView({ instruments, quotesBySymbol }: ScreenerViewProps)
           {/* Filters panel */}
           <div className="mb-6 rounded-card border border-border-base bg-bg-secondary p-4">
             <div className="mb-4 flex items-center justify-between">
-              <h2 className="font-semibold text-text-primary">Filters</h2>
+              <h2 className="font-semibold text-text-primary">{t("filters", lang)}</h2>
               <button
                 onClick={resetFilters}
                 className="text-xs text-cyan hover:underline"
               >
-                Reset All
+                {t("resetAll", lang)}
               </button>
             </div>
 
@@ -225,7 +247,7 @@ export function ScreenerView({ instruments, quotesBySymbol }: ScreenerViewProps)
               {/* Search */}
               <div className="lg:col-span-2">
                 <label className="mb-1 block text-xs font-medium text-text-secondary">
-                  Search
+                  {t("search", lang)}
                 </label>
                 <input
                   type="text"
@@ -367,7 +389,7 @@ export function ScreenerView({ instruments, quotesBySymbol }: ScreenerViewProps)
 
             {/* Category filter */}
             <div className="mt-4 pt-4 border-t border-border-base">
-              <p className="mb-2 text-xs font-medium text-text-secondary">Categories</p>
+              <p className="mb-2 text-xs font-medium text-text-secondary">{t("categories", lang)}</p>
               <div className="flex flex-wrap gap-2">
                 {MARKET_CATEGORIES.map((cat) => (
                   <button
@@ -379,7 +401,7 @@ export function ScreenerView({ instruments, quotesBySymbol }: ScreenerViewProps)
                         : "bg-bg-primary text-text-secondary hover:bg-bg-hover"
                     }`}
                   >
-                    {cat.label}
+                    {getCategoryLabel(cat.id)}
                   </button>
                 ))}
               </div>
@@ -390,7 +412,7 @@ export function ScreenerView({ instruments, quotesBySymbol }: ScreenerViewProps)
           <div className="rounded-card border border-border-base bg-bg-secondary overflow-hidden">
             <div className="flex items-center justify-between border-b border-border-base px-4 py-3">
               <p className="text-sm text-text-secondary">
-                <span className="font-semibold text-text-primary">{results.length}</span> results
+                <span className="font-semibold text-text-primary">{results.length}</span> {t("results", lang)}
               </p>
             </div>
 
@@ -495,7 +517,7 @@ export function ScreenerView({ instruments, quotesBySymbol }: ScreenerViewProps)
                           </span>
                         </td>
                         <td className="px-3 py-3 text-right font-mono tabular-nums">
-                          ${quote.value.toFixed(quote.value > 100 ? 0 : 2)}
+                          {currency === "EUR" ? "€" : currency === "GBP" ? "£" : "$"}{quote.value.toFixed(quote.value > 100 ? 0 : 2)}
                         </td>
                         <td
                           className={`px-3 py-3 text-right font-mono tabular-nums ${
@@ -532,7 +554,7 @@ export function ScreenerView({ instruments, quotesBySymbol }: ScreenerViewProps)
 
             {results.length === 0 && (
               <div className="px-4 py-8 text-center text-text-secondary">
-                No assets match your filters. Try adjusting your criteria.
+                {t("noResultsFilter", lang)}
               </div>
             )}
           </div>

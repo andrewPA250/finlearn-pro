@@ -3,22 +3,9 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { SoonBadge } from "@/components/layout/SoonBadge";
-
-const MARKET_NAV = [
-  { id: "overview", label: "Overview", href: "/markets" },
-  { id: "equity", label: "Stocks", href: "/markets/category/equity" },
-  { id: "crypto", label: "Crypto", href: "/markets/category/crypto" },
-  { id: "index", label: "Indices", href: "/markets/category/index" },
-  { id: "etf", label: "ETFs", href: "/markets/category/etf" },
-  { id: "commodity", label: "Commodities", href: "/markets/category/commodity" },
-  { id: "forex", label: "Forex", href: "/markets/category/forex" },
-  { id: "bond", label: "Bonds", href: "/markets/category/bond" },
-];
-
-const TOOLS_NAV = [
-  { id: "heatmap", label: "Heatmap", href: "/markets/heatmap" },
-  { id: "screener", label: "Screener", href: "/markets/screener" },
-];
+import { useSettings } from "@/lib/settings/SettingsContext";
+import { t } from "@/lib/settings/i18n";
+import type { Language } from "@/lib/settings/types";
 
 function SidebarSection({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -31,49 +18,65 @@ function SidebarSection({ title, children }: { title: string; children: React.Re
   );
 }
 
+function navLink(lang: Language) {
+  return [
+    { id: "overview", label: t("overview", lang), href: "/markets" },
+    { id: "equity",   label: t("stocks", lang),      href: "/markets/category/equity" },
+    { id: "crypto",   label: t("crypto", lang),      href: "/markets/category/crypto" },
+    { id: "index",    label: t("indices", lang),     href: "/markets/category/index" },
+    { id: "etf",      label: t("etf", lang),         href: "/markets/category/etf" },
+    { id: "commodity",label: t("commodities", lang), href: "/markets/category/commodity" },
+    { id: "forex",    label: t("forex", lang),       href: "/markets/category/forex" },
+    { id: "bond",     label: t("bonds", lang),       href: "/markets/category/bond" },
+  ];
+}
+
+function toolsNav(lang: Language) {
+  return [
+    { id: "heatmap",  label: t("heatmap", lang),  href: "/markets/heatmap" },
+    { id: "screener", label: t("screener", lang), href: "/markets/screener" },
+  ];
+}
+
+function personalNav(lang: Language) {
+  return [
+    { id: "watchlist", label: t("watchlist", lang), href: "/watchlist" },
+  ];
+}
+
 export function MarketsSidebar() {
   const pathname = usePathname();
+  const { language } = useSettings();
 
   function isActive(href: string): boolean {
     if (href === "/markets") return pathname === "/markets";
     return pathname.startsWith(href);
   }
 
+  const linkClass = (href: string) =>
+    `flex items-center rounded-card px-3 py-1.5 text-sm transition duration-150 ${
+      isActive(href)
+        ? "bg-cyan-bg/40 font-semibold text-cyan"
+        : "text-text-secondary hover:bg-bg-hover hover:text-text-primary"
+    }`;
+
   return (
     <aside className="hidden w-48 shrink-0 flex-col gap-5 lg:flex">
       <div className="sticky top-28 flex flex-col gap-5">
-        {/* Markets nav */}
-        <SidebarSection title="Markets">
+        <SidebarSection title={t("markets", language)}>
           <nav className="flex flex-col gap-0.5">
-            {MARKET_NAV.map((item) => (
-              <Link
-                key={item.id}
-                href={item.href}
-                className={`flex items-center rounded-card px-3 py-1.5 text-sm transition duration-150 ${
-                  isActive(item.href)
-                    ? "bg-cyan-bg/40 font-semibold text-cyan"
-                    : "text-text-secondary hover:bg-bg-hover hover:text-text-primary"
-                }`}
-              >
+            {navLink(language).map((item) => (
+              <Link key={item.id} href={item.href} className={linkClass(item.href)}>
                 {item.label}
               </Link>
             ))}
           </nav>
         </SidebarSection>
 
-        {/* Tools */}
-        <SidebarSection title="Tools">
+        <SidebarSection title={t("tools", language)}>
           <nav className="flex flex-col gap-0.5">
-            {TOOLS_NAV.map((item) => (
-              <Link
-                key={item.id}
-                href={item.href}
-                className={`flex items-center rounded-card px-3 py-1.5 text-sm transition duration-150 ${
-                  isActive(item.href)
-                    ? "bg-cyan-bg/40 font-semibold text-cyan"
-                    : "text-text-secondary hover:bg-bg-hover hover:text-text-primary"
-                }`}
-              >
+            {toolsNav(language).map((item) => (
+              <Link key={item.id} href={item.href} className={linkClass(item.href)}>
                 {item.label}
               </Link>
             ))}
@@ -83,12 +86,13 @@ export function MarketsSidebar() {
           </nav>
         </SidebarSection>
 
-        {/* Personal */}
-        <SidebarSection title="Personal">
+        <SidebarSection title={t("personal", language)}>
           <nav className="flex flex-col gap-0.5">
-            <div className="flex items-center gap-2 rounded-card px-3 py-1.5 text-sm text-text-secondary/50 cursor-default">
-              Watchlist <SoonBadge />
-            </div>
+            {personalNav(language).map((item) => (
+              <Link key={item.id} href={item.href} className={linkClass(item.href)}>
+                {item.label}
+              </Link>
+            ))}
           </nav>
         </SidebarSection>
       </div>

@@ -66,13 +66,14 @@ export function Header() {
 
   const learnHref = `/lessons/${getNextAccessibleLessonId(state)}`;
 
+  const lang = settings.language;
   const navItems: NavItem[] = [
-    { label: "Markets", href: "/markets", isActive: (p) => p.startsWith("/markets") || p.startsWith("/asset") },
-    { label: "Analytics", href: "/analytics/compare", isActive: (p) => p.startsWith("/analytics") },
-    { label: "Learn", href: learnHref, isActive: (p) => p.startsWith("/lessons") },
-    { label: "Portfolio", soon: true },
-    { label: "AI", soon: true },
-    { label: "Quant Lab", soon: true },
+    { label: t("markets", lang), href: "/markets", isActive: (p) => p.startsWith("/markets") || p.startsWith("/asset") },
+    { label: t("analytics", lang), href: "/analytics/compare", isActive: (p) => p.startsWith("/analytics") },
+    { label: t("learn", lang), href: learnHref, isActive: (p) => p.startsWith("/lessons") },
+    { label: t("portfolio", lang), soon: true },
+    { label: t("ai", lang), soon: true },
+    { label: t("quantLab", lang), soon: true },
   ];
 
   return (
