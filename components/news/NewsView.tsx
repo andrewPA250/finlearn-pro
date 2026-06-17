@@ -132,16 +132,14 @@ export function NewsView({ news }: NewsViewProps) {
               <div className="flex gap-4">
                 {/* Image */}
                 {item.image && (
-                  <div className="flex-shrink-0 overflow-hidden rounded">
-                    <img
-                      src={item.image}
-                      alt={item.headline}
-                      className="h-24 w-40 object-cover"
-                      onError={(e) => {
-                        e.currentTarget.style.display = "none";
-                      }}
-                    />
-                  </div>
+                  <img
+                    src={item.image}
+                    alt={item.headline}
+                    className="h-24 w-40 flex-shrink-0 rounded-lg object-cover"
+                    onError={(e) => {
+                      e.currentTarget.style.display = "none";
+                    }}
+                  />
                 )}
 
                 {/* Content */}
