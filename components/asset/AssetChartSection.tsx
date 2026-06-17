@@ -13,6 +13,8 @@ import {
 import type { MarketDataPoint } from "@/types/market";
 import type { AssetUnit } from "@/lib/market";
 import type { ProviderSource } from "@/lib/providers/types";
+import type { TickerQuote } from "@/lib/market/ticker";
+import { synchronizeCandles } from "@/lib/market/synchronizeCandles";
 import { TradingViewChart, validateTradingViewSymbol } from "@/components/asset/TradingViewChart";
 
 // ---------------------------------------------------------------------------
@@ -25,6 +27,7 @@ type ChartTimeframe = "1M" | "6M" | "1Y" | "MAX";
 interface AssetChartSectionProps {
   symbol: string;
   candles: MarketDataPoint[] | null;
+  quote: TickerQuote | null;
   unit: AssetUnit;
   source: ProviderSource;
   /** TradingView symbol — when present the Advanced mode toggle becomes available. */
@@ -126,7 +129,7 @@ function makeTooltip(unit: AssetUnit) {
 // Component
 // ---------------------------------------------------------------------------
 
-export function AssetChartSection({ symbol, candles, unit, source, tvSymbol }: AssetChartSectionProps) {
+export function AssetChartSection({ symbol, candles, quote, unit, source, tvSymbol }: AssetChartSectionProps) {
   const [timeframe, setTimeframe] = useState<ChartTimeframe>("1Y");
   const [mode, setMode]           = useState<ChartMode>("sync");
   const [hydrated, setHydrated]   = useState(false);
@@ -154,11 +157,12 @@ export function AssetChartSection({ symbol, candles, unit, source, tvSymbol }: A
 
   const filtered = useMemo(() => {
     if (!candles || candles.length === 0) return [];
+    // Synchronize chart: append latest quote to candles so chart latest point matches hero price
+    let data = synchronizeCandles(candles, quote);
     const tf = TIMEFRAMES.find((t) => t.value === timeframe);
-    let data = candles;
     if (tf?.days) {
       const cutoff = new Date(Date.now() - tf.days * 86_400_000).toISOString().slice(0, 10);
-      data = candles.filter((p) => p.date >= cutoff);
+      data = data.filter((p) => p.date >= cutoff);
     }
     // Downsample to ≤600 points to keep SVG rendering fast.
     const MAX_POINTS = 600;
@@ -167,7 +171,7 @@ export function AssetChartSection({ symbol, candles, unit, source, tvSymbol }: A
       data = data.filter((_, i) => i % step === 0 || i === data.length - 1);
     }
     return data;
-  }, [candles, timeframe]);
+  }, [candles, quote, timeframe]);
 
   const hasData = filtered.length >= 2;
 
@@ -311,7 +315,7 @@ export function AssetChartSection({ symbol, candles, unit, source, tvSymbol }: A
       {/* ── Source attribution (sync mode only) ────────────────────────────── */}
       {!showTV && hasData && (
         <p className="mt-2 text-[10px] text-text-secondary/50">
-          {getSourceLabel(source)} · Historical daily close prices. Quote timestamp may differ from chart&apos;s last close.
+          {getSourceLabel(source)} · Historical closes + latest quote · Synchronized for accuracy.
         </p>
       )}
     </section>

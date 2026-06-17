@@ -14,6 +14,7 @@ import {
 } from "recharts";
 import { MARKET_INSTRUMENTS } from "@/lib/markets/catalog";
 import { normalizeBase100, sanitizeSeries } from "@/lib/market";
+import { synchronizeCandles } from "@/lib/market/synchronizeCandles";
 import type { CompareAsset } from "@/app/analytics/compare/page";
 import type { MarketDataPoint } from "@/types/market";
 
@@ -179,11 +180,11 @@ export function CompareView({ assets }: { assets: CompareAsset[] }) {
     return () => document.removeEventListener("pointerdown", onPointerDown);
   }, []);
 
-  // ── Sanitize + filter candles per period ─────────────────────────────────
+  // ── Sanitize + synchronize + filter candles per period ──────────────────────
   const filteredCandles = useMemo(
     () =>
       assets.map((a) =>
-        filterByPeriod(sanitizeSeries(a.candles), period)
+        filterByPeriod(sanitizeSeries(synchronizeCandles(a.candles, a.quote)), period)
       ),
     [assets, period]
   );
@@ -771,7 +772,7 @@ export function CompareView({ assets }: { assets: CompareAsset[] }) {
 
         {/* Footer note */}
         <p className="text-center text-xs text-text-disabled">
-          Data from Yahoo Finance · Calculations based on daily close prices · Not financial advice
+          Yahoo Finance · Historical closes + latest quote · Metrics based on price history · Not financial advice
         </p>
       </div>
     </div>

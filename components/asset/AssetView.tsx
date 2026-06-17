@@ -71,6 +71,7 @@ export function AssetView({ instrument, categoryLabel, quote, candles, newsResul
         <AssetChartSection
           symbol={instrument.symbol}
           candles={candles.length > 0 ? candles : null}
+          quote={quote}
           unit={quote?.unit ?? "index"}
           source={quote?.source ?? "local-static"}
           tvSymbol={instrument.tradingViewSymbol}
