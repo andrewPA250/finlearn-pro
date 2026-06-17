@@ -7,6 +7,8 @@ import { BottomNav } from "@/components/layout/BottomNav";
 import { ProgressProvider } from "@/lib/progress/ProgressContext";
 import { SettingsProvider } from "@/lib/settings/SettingsContext";
 import { WatchlistProvider } from "@/lib/watchlist/WatchlistContext";
+import { PortfolioProvider } from "@/lib/portfolio/PortfolioContext";
+import { AlertsProvider } from "@/lib/alerts/AlertsContext";
 import { MarketRibbon } from "@/components/market/MarketRibbon";
 import { getRibbonQuotes } from "@/lib/markets/getRibbonQuotes";
 
@@ -40,6 +42,8 @@ export default async function RootLayout({
       >
         <SettingsProvider>
           <WatchlistProvider>
+            <PortfolioProvider>
+            <AlertsProvider>
             <ProgressProvider>
             <Header />
             <MarketRibbon quotes={ribbonQuotes} />
@@ -51,6 +55,8 @@ export default async function RootLayout({
             </div>
             <BottomNav />
           </ProgressProvider>
+            </AlertsProvider>
+            </PortfolioProvider>
           </WatchlistProvider>
         </SettingsProvider>
       </body>

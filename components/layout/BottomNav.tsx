@@ -2,12 +2,12 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChartIcon, DashboardIcon, BookIcon, UserIcon } from "@/components/layout/icons";
+import { ChartIcon, DashboardIcon, PortfolioIcon, UserIcon } from "@/components/layout/icons";
 
 const ITEMS = [
   { href: "/", label: "Home", Icon: DashboardIcon, isActive: (p: string) => p === "/" },
-  { href: "/lessons/1", label: "Lezioni", Icon: BookIcon, isActive: (p: string) => p.startsWith("/lessons") },
-  { href: "/workbench", label: "Grafico", Icon: ChartIcon, isActive: (p: string) => p === "/workbench" },
+  { href: "/markets", label: "Markets", Icon: ChartIcon, isActive: (p: string) => p.startsWith("/markets") || p.startsWith("/asset") },
+  { href: "/portfolio", label: "Portfolio", Icon: PortfolioIcon, isActive: (p: string) => p.startsWith("/portfolio") },
   { href: "/profile", label: "Profilo", Icon: UserIcon, isActive: (p: string) => p === "/profile" },
 ];
 

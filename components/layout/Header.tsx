@@ -71,7 +71,8 @@ export function Header() {
     { label: t("markets", lang), href: "/markets", isActive: (p) => p.startsWith("/markets") || p.startsWith("/asset") },
     { label: t("analytics", lang), href: "/analytics/compare", isActive: (p) => p.startsWith("/analytics") },
     { label: t("learn", lang), href: learnHref, isActive: (p) => p.startsWith("/lessons") },
-    { label: t("portfolio", lang), soon: true },
+    { label: t("portfolio", lang), href: "/portfolio", isActive: (p) => p.startsWith("/portfolio") },
+    { label: "Alerts", href: "/alerts", isActive: (p) => p.startsWith("/alerts") },
     { label: t("ai", lang), soon: true },
     { label: t("quantLab", lang), soon: true },
   ];
