@@ -19,11 +19,15 @@ export function ScreenerView({ instruments, quotesBySymbol }: ScreenerViewProps)
   // Filters state
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, 100000]);
+  const [priceMin, setPriceMin] = useState("");
+  const [priceMax, setPriceMax] = useState("");
   const [changeFilter, setChangeFilter] = useState<"all" | "positive" | "negative">("all");
-  const [marketCapRange, setMarketCapRange] = useState<[number, number] | null>(null);
-  const [peRange, setPeRange] = useState<[number, number] | null>(null);
-  const [dividendYieldRange, setDividendYieldRange] = useState<[number, number] | null>(null);
+  const [marketCapMin, setMarketCapMin] = useState("");
+  const [marketCapMax, setMarketCapMax] = useState("");
+  const [peMin, setPeMin] = useState("");
+  const [peMax, setPeMax] = useState("");
+  const [dividendYieldMin, setDividendYieldMin] = useState("");
+  const [dividendYieldMax, setDividendYieldMax] = useState("");
 
   // Sorting state
   const [sortField, setSortField] = useState<SortField>("symbol");
@@ -31,8 +35,20 @@ export function ScreenerView({ instruments, quotesBySymbol }: ScreenerViewProps)
 
   // Compute filtered and sorted results
   const results = useMemo(() => {
+    const priceRangeMin = priceMin ? Number(priceMin) : 0;
+    const priceRangeMax = priceMax ? Number(priceMax) : Infinity;
+    const mcapMin = marketCapMin ? Number(marketCapMin) * 1e9 : 0;
+    const mcapMax = marketCapMax ? Number(marketCapMax) * 1e9 : Infinity;
+    const peMinVal = peMin ? Number(peMin) : 0;
+    const peMaxVal = peMax ? Number(peMax) : Infinity;
+    const dyMin = dividendYieldMin ? Number(dividendYieldMin) : 0;
+    const dyMax = dividendYieldMax ? Number(dividendYieldMax) : Infinity;
+
     const filtered = instruments.filter((instrument) => {
       const quote = quotesBySymbol[instrument.symbol];
+
+      // Must have valid quote with positive price
+      if (!quote || quote.value <= 0 || isNaN(quote.value)) return false;
 
       // Category filter
       if (selectedCategories.length > 0 && !selectedCategories.includes(instrument.category)) {
@@ -49,10 +65,8 @@ export function ScreenerView({ instruments, quotesBySymbol }: ScreenerViewProps)
         return false;
       }
 
-      if (!quote) return false;
-
       // Price range filter
-      if (quote.value < priceRange[0] || quote.value > priceRange[1]) {
+      if (quote.value < priceRangeMin || quote.value > priceRangeMax) {
         return false;
       }
 
@@ -63,21 +77,27 @@ export function ScreenerView({ instruments, quotesBySymbol }: ScreenerViewProps)
       }
 
       // Market cap range filter
-      if (marketCapRange && quote.stats?.marketCap) {
+      if (quote.stats?.marketCap) {
         const mcap = quote.stats.marketCap;
-        if (mcap < marketCapRange[0] || mcap > marketCapRange[1]) return false;
+        if (mcap < mcapMin || mcap > mcapMax) return false;
+      } else if (marketCapMin || marketCapMax) {
+        return false; // Exclude if market cap filter is set but data missing
       }
 
       // P/E range filter
-      if (peRange && quote.stats?.pe) {
+      if (quote.stats?.pe) {
         const pe = quote.stats.pe;
-        if (pe < peRange[0] || pe > peRange[1]) return false;
+        if (pe < peMinVal || pe > peMaxVal) return false;
+      } else if (peMin || peMax) {
+        return false; // Exclude if P/E filter is set but data missing
       }
 
       // Dividend yield range filter
-      if (dividendYieldRange && quote.stats?.dividendYield) {
+      if (quote.stats?.dividendYield) {
         const dy = quote.stats.dividendYield;
-        if (dy < dividendYieldRange[0] || dy > dividendYieldRange[1]) return false;
+        if (dy < dyMin || dy > dyMax) return false;
+      } else if (dividendYieldMin || dividendYieldMax) {
+        return false; // Exclude if dividend yield filter is set but data missing
       }
 
       return true;
@@ -125,11 +145,15 @@ export function ScreenerView({ instruments, quotesBySymbol }: ScreenerViewProps)
     quotesBySymbol,
     searchTerm,
     selectedCategories,
-    priceRange,
+    priceMin,
+    priceMax,
     changeFilter,
-    marketCapRange,
-    peRange,
-    dividendYieldRange,
+    marketCapMin,
+    marketCapMax,
+    peMin,
+    peMax,
+    dividendYieldMin,
+    dividendYieldMax,
     sortField,
     sortOrder,
   ]);
@@ -152,11 +176,15 @@ export function ScreenerView({ instruments, quotesBySymbol }: ScreenerViewProps)
   function resetFilters() {
     setSearchTerm("");
     setSelectedCategories([]);
-    setPriceRange([0, 100000]);
+    setPriceMin("");
+    setPriceMax("");
     setChangeFilter("all");
-    setMarketCapRange(null);
-    setPeRange(null);
-    setDividendYieldRange(null);
+    setMarketCapMin("");
+    setMarketCapMax("");
+    setPeMin("");
+    setPeMax("");
+    setDividendYieldMin("");
+    setDividendYieldMax("");
   }
 
   const getCategoryLabel = (cat: string) => {
@@ -193,9 +221,9 @@ export function ScreenerView({ instruments, quotesBySymbol }: ScreenerViewProps)
               </button>
             </div>
 
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-6">
               {/* Search */}
-              <div>
+              <div className="lg:col-span-2">
                 <label className="mb-1 block text-xs font-medium text-text-secondary">
                   Search
                 </label>
@@ -208,31 +236,36 @@ export function ScreenerView({ instruments, quotesBySymbol }: ScreenerViewProps)
                 />
               </div>
 
-              {/* Price Range */}
+              {/* Price Min */}
               <div>
                 <label className="mb-1 block text-xs font-medium text-text-secondary">
-                  Price
+                  Price Min
                 </label>
-                <div className="flex gap-2">
-                  <input
-                    type="number"
-                    placeholder="Min"
-                    value={priceRange[0]}
-                    onChange={(e) => setPriceRange([Number(e.target.value), priceRange[1]])}
-                    className="flex-1 rounded border border-border-base bg-bg-primary px-2.5 py-1.5 text-sm text-text-primary focus:border-cyan focus:outline-none"
-                  />
-                  <input
-                    type="number"
-                    placeholder="Max"
-                    value={priceRange[1]}
-                    onChange={(e) => setPriceRange([priceRange[0], Number(e.target.value)])}
-                    className="flex-1 rounded border border-border-base bg-bg-primary px-2.5 py-1.5 text-sm text-text-primary focus:border-cyan focus:outline-none"
-                  />
-                </div>
+                <input
+                  type="number"
+                  placeholder="0"
+                  value={priceMin}
+                  onChange={(e) => setPriceMin(e.target.value)}
+                  className="w-full rounded border border-border-base bg-bg-primary px-2.5 py-1.5 text-sm text-text-primary focus:border-cyan focus:outline-none"
+                />
+              </div>
+
+              {/* Price Max */}
+              <div>
+                <label className="mb-1 block text-xs font-medium text-text-secondary">
+                  Price Max
+                </label>
+                <input
+                  type="number"
+                  placeholder="Any"
+                  value={priceMax}
+                  onChange={(e) => setPriceMax(e.target.value)}
+                  className="w-full rounded border border-border-base bg-bg-primary px-2.5 py-1.5 text-sm text-text-primary focus:border-cyan focus:outline-none"
+                />
               </div>
 
               {/* Change Filter */}
-              <div>
+              <div className="sm:col-span-2 lg:col-span-1">
                 <label className="mb-1 block text-xs font-medium text-text-secondary">
                   Daily Change
                 </label>
@@ -247,85 +280,88 @@ export function ScreenerView({ instruments, quotesBySymbol }: ScreenerViewProps)
                 </select>
               </div>
 
-              {/* Market Cap Range */}
+              {/* Market Cap Min */}
               <div>
                 <label className="mb-1 block text-xs font-medium text-text-secondary">
-                  Market Cap (Billions)
+                  Market Cap Min (B)
                 </label>
-                <div className="flex gap-2">
-                  <input
-                    type="number"
-                    placeholder="Min"
-                    value={marketCapRange?.[0] ?? ""}
-                    onChange={(e) =>
-                      setMarketCapRange([Number(e.target.value) * 1e9, marketCapRange?.[1] ?? 10e12])
-                    }
-                    className="flex-1 rounded border border-border-base bg-bg-primary px-2.5 py-1.5 text-sm text-text-primary focus:border-cyan focus:outline-none"
-                  />
-                  <input
-                    type="number"
-                    placeholder="Max"
-                    value={marketCapRange?.[1] ? marketCapRange[1] / 1e9 : ""}
-                    onChange={(e) =>
-                      setMarketCapRange([marketCapRange?.[0] ?? 0, Number(e.target.value) * 1e9])
-                    }
-                    className="flex-1 rounded border border-border-base bg-bg-primary px-2.5 py-1.5 text-sm text-text-primary focus:border-cyan focus:outline-none"
-                  />
-                </div>
+                <input
+                  type="number"
+                  placeholder="Any"
+                  value={marketCapMin}
+                  onChange={(e) => setMarketCapMin(e.target.value)}
+                  className="w-full rounded border border-border-base bg-bg-primary px-2.5 py-1.5 text-sm text-text-primary focus:border-cyan focus:outline-none"
+                />
               </div>
 
-              {/* P/E Range */}
+              {/* Market Cap Max */}
               <div>
                 <label className="mb-1 block text-xs font-medium text-text-secondary">
-                  P/E Ratio
+                  Market Cap Max (B)
                 </label>
-                <div className="flex gap-2">
-                  <input
-                    type="number"
-                    placeholder="Min"
-                    value={peRange?.[0] ?? ""}
-                    onChange={(e) =>
-                      setPeRange([Number(e.target.value), peRange?.[1] ?? 100])
-                    }
-                    className="flex-1 rounded border border-border-base bg-bg-primary px-2.5 py-1.5 text-sm text-text-primary focus:border-cyan focus:outline-none"
-                  />
-                  <input
-                    type="number"
-                    placeholder="Max"
-                    value={peRange?.[1] ?? ""}
-                    onChange={(e) =>
-                      setPeRange([peRange?.[0] ?? 0, Number(e.target.value)])
-                    }
-                    className="flex-1 rounded border border-border-base bg-bg-primary px-2.5 py-1.5 text-sm text-text-primary focus:border-cyan focus:outline-none"
-                  />
-                </div>
+                <input
+                  type="number"
+                  placeholder="Any"
+                  value={marketCapMax}
+                  onChange={(e) => setMarketCapMax(e.target.value)}
+                  className="w-full rounded border border-border-base bg-bg-primary px-2.5 py-1.5 text-sm text-text-primary focus:border-cyan focus:outline-none"
+                />
               </div>
 
-              {/* Dividend Yield Range */}
+              {/* P/E Min */}
               <div>
                 <label className="mb-1 block text-xs font-medium text-text-secondary">
-                  Dividend Yield (%)
+                  P/E Min
                 </label>
-                <div className="flex gap-2">
-                  <input
-                    type="number"
-                    placeholder="Min"
-                    value={dividendYieldRange?.[0] ?? ""}
-                    onChange={(e) =>
-                      setDividendYieldRange([Number(e.target.value), dividendYieldRange?.[1] ?? 10])
-                    }
-                    className="flex-1 rounded border border-border-base bg-bg-primary px-2.5 py-1.5 text-sm text-text-primary focus:border-cyan focus:outline-none"
-                  />
-                  <input
-                    type="number"
-                    placeholder="Max"
-                    value={dividendYieldRange?.[1] ?? ""}
-                    onChange={(e) =>
-                      setDividendYieldRange([dividendYieldRange?.[0] ?? 0, Number(e.target.value)])
-                    }
-                    className="flex-1 rounded border border-border-base bg-bg-primary px-2.5 py-1.5 text-sm text-text-primary focus:border-cyan focus:outline-none"
-                  />
-                </div>
+                <input
+                  type="number"
+                  placeholder="Any"
+                  value={peMin}
+                  onChange={(e) => setPeMin(e.target.value)}
+                  className="w-full rounded border border-border-base bg-bg-primary px-2.5 py-1.5 text-sm text-text-primary focus:border-cyan focus:outline-none"
+                />
+              </div>
+
+              {/* P/E Max */}
+              <div>
+                <label className="mb-1 block text-xs font-medium text-text-secondary">
+                  P/E Max
+                </label>
+                <input
+                  type="number"
+                  placeholder="Any"
+                  value={peMax}
+                  onChange={(e) => setPeMax(e.target.value)}
+                  className="w-full rounded border border-border-base bg-bg-primary px-2.5 py-1.5 text-sm text-text-primary focus:border-cyan focus:outline-none"
+                />
+              </div>
+
+              {/* Dividend Yield Min */}
+              <div>
+                <label className="mb-1 block text-xs font-medium text-text-secondary">
+                  Div Yield Min (%)
+                </label>
+                <input
+                  type="number"
+                  placeholder="Any"
+                  value={dividendYieldMin}
+                  onChange={(e) => setDividendYieldMin(e.target.value)}
+                  className="w-full rounded border border-border-base bg-bg-primary px-2.5 py-1.5 text-sm text-text-primary focus:border-cyan focus:outline-none"
+                />
+              </div>
+
+              {/* Dividend Yield Max */}
+              <div>
+                <label className="mb-1 block text-xs font-medium text-text-secondary">
+                  Div Yield Max (%)
+                </label>
+                <input
+                  type="number"
+                  placeholder="Any"
+                  value={dividendYieldMax}
+                  onChange={(e) => setDividendYieldMax(e.target.value)}
+                  className="w-full rounded border border-border-base bg-bg-primary px-2.5 py-1.5 text-sm text-text-primary focus:border-cyan focus:outline-none"
+                />
               </div>
             </div>
 
@@ -361,7 +397,7 @@ export function ScreenerView({ instruments, quotesBySymbol }: ScreenerViewProps)
             {/* Results table */}
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
-                <thead className="border-b border-border-base bg-bg-primary">
+                <thead className="sticky top-0 border-b border-border-base bg-bg-primary z-10">
                   <tr>
                     <th className="px-4 py-2.5 text-left font-semibold text-text-secondary">
                       <SortButton
@@ -435,54 +471,54 @@ export function ScreenerView({ instruments, quotesBySymbol }: ScreenerViewProps)
                     return (
                       <tr
                         key={instrument.symbol}
-                        className="hover:bg-bg-hover cursor-pointer transition"
+                        className="border-t border-border-base hover:bg-bg-hover cursor-pointer transition"
                       >
-                        <td className="px-4 py-3">
+                        <td className="px-3 py-3">
                           <Link
                             href={`/asset/${instrument.symbol}`}
-                            className="font-mono font-semibold text-cyan hover:underline"
+                            className="font-mono text-sm font-semibold text-cyan hover:underline"
                           >
                             {instrument.symbol}
                           </Link>
                         </td>
-                        <td className="px-4 py-3 text-text-secondary">
+                        <td className="px-3 py-3 text-text-secondary">
                           <Link
                             href={`/asset/${instrument.symbol}`}
-                            className="hover:text-text-primary hover:underline"
+                            className="text-sm hover:text-text-primary hover:underline"
                           >
                             {instrument.name}
                           </Link>
                         </td>
-                        <td className="px-4 py-3 text-center text-xs">
-                          <span className="rounded bg-bg-primary px-2 py-1 text-text-muted">
+                        <td className="px-3 py-3 text-center">
+                          <span className="rounded bg-bg-primary px-2 py-1 text-xs text-text-muted">
                             {getCategoryLabel(instrument.category)}
                           </span>
                         </td>
-                        <td className="px-4 py-3 text-right font-mono">
-                          ${quote.value.toFixed(2)}
+                        <td className="px-3 py-3 text-right font-mono tabular-nums">
+                          ${quote.value.toFixed(quote.value > 100 ? 0 : 2)}
                         </td>
                         <td
-                          className={`px-4 py-3 text-right font-mono ${
+                          className={`px-3 py-3 text-right font-mono tabular-nums ${
                             quote.changePercent >= 0 ? "text-green-500" : "text-red-500"
                           }`}
                         >
                           {quote.changePercent >= 0 ? "+" : ""}
                           {quote.changePercent.toFixed(2)}%
                         </td>
-                        <td className="px-4 py-3 text-right text-text-secondary hidden lg:table-cell">
+                        <td className="px-3 py-3 text-right text-text-secondary font-mono tabular-nums hidden lg:table-cell">
                           {quote.stats?.marketCap
                             ? `$${(quote.stats.marketCap / 1e9).toFixed(1)}B`
                             : "—"}
                         </td>
-                        <td className="px-4 py-3 text-right text-text-secondary hidden lg:table-cell">
+                        <td className="px-3 py-3 text-right text-text-secondary font-mono tabular-nums hidden lg:table-cell">
                           {quote.stats?.pe ? quote.stats.pe.toFixed(1) : "—"}
                         </td>
-                        <td className="px-4 py-3 text-right text-text-secondary hidden md:table-cell">
+                        <td className="px-3 py-3 text-right text-text-secondary font-mono tabular-nums hidden md:table-cell">
                           {quote.stats?.dividendYield
                             ? quote.stats.dividendYield.toFixed(2) + "%"
                             : "—"}
                         </td>
-                        <td className="px-4 py-3 text-right text-text-secondary hidden xl:table-cell">
+                        <td className="px-3 py-3 text-right text-text-secondary font-mono tabular-nums hidden xl:table-cell">
                           {quote.stats?.volume
                             ? `${(quote.stats.volume / 1e6).toFixed(1)}M`
                             : "—"}

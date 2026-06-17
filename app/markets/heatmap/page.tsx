@@ -1,0 +1,20 @@
+import type { Metadata } from "next";
+import { getAllAssetQuotes } from "@/lib/providers";
+import { quoteFromProvider } from "@/lib/market/ticker";
+import { MARKET_INSTRUMENTS } from "@/lib/markets/catalog";
+import { HeatmapView } from "@/components/markets/HeatmapView";
+
+export const metadata: Metadata = {
+  title: "Market Heatmap — FinanceHub Markets",
+  description: "Real-time market heatmap visualization.",
+};
+
+export default async function HeatmapPage() {
+  const tickerQuotes = (await getAllAssetQuotes()).map(quoteFromProvider);
+
+  const quotesBySymbol: Record<string, ReturnType<typeof quoteFromProvider>> = Object.fromEntries(
+    tickerQuotes.map((quote) => [quote.id, quote])
+  );
+
+  return <HeatmapView instruments={MARKET_INSTRUMENTS} quotesBySymbol={quotesBySymbol} />;
+}

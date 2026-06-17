@@ -16,6 +16,7 @@ const MARKET_NAV = [
 ];
 
 const TOOLS_NAV = [
+  { id: "heatmap", label: "Heatmap", href: "/markets/heatmap" },
   { id: "screener", label: "Screener", href: "/markets/screener" },
 ];
 
@@ -63,12 +64,6 @@ export function MarketsSidebar() {
         {/* Tools */}
         <SidebarSection title="Tools">
           <nav className="flex flex-col gap-0.5">
-            <div className="flex items-center rounded-card px-3 py-1.5 text-sm text-text-secondary/60 cursor-default">
-              Heatmap
-            </div>
-            <div className="flex items-center gap-2 rounded-card px-3 py-1.5 text-sm text-text-secondary/50 cursor-default">
-              Calendar <SoonBadge />
-            </div>
             {TOOLS_NAV.map((item) => (
               <Link
                 key={item.id}
@@ -82,6 +77,9 @@ export function MarketsSidebar() {
                 {item.label}
               </Link>
             ))}
+            <div className="flex items-center gap-2 rounded-card px-3 py-1.5 text-sm text-text-secondary/50 cursor-default">
+              Calendar <SoonBadge />
+            </div>
           </nav>
         </SidebarSection>
 
