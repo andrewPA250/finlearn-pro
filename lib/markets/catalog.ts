@@ -443,8 +443,7 @@ export const MARKET_INSTRUMENTS: MarketInstrument[] = [
   createStock({ symbol: "GSK",   name: "GlaxoSmithKline PLC",               yahooSymbol: "GSK", finnhubSymbol: "GSK" }),
   createStock({ symbol: "AZN",   name: "AstraZeneca PLC",                   yahooSymbol: "AZN", finnhubSymbol: "AZN" }),
 
-  // ─── ASIA-PACIFIC STOCKS (11 total) ────────────────────────────────────────
-  createStock({ symbol: "TSM",   name: "Taiwan Semiconductor Mfg Co Ltd",  yahooSymbol: "TSM", finnhubSymbol: "TSM" }),
+  // ─── ASIA-PACIFIC STOCKS (10 total) ────────────────────────────────────────
   createStock({ symbol: "HDB",   name: "HDFC Bank Limited",                 yahooSymbol: "HDB", finnhubSymbol: "HDB" }),
   createStock({ symbol: "INFY",  name: "Infosys Limited",                   yahooSymbol: "INFY", finnhubSymbol: "INFY" }),
   createStock({ symbol: "IBN",   name: "ICICI Bank Limited",                yahooSymbol: "IBN", finnhubSymbol: "IBN" }),

@@ -15,6 +15,10 @@ const MARKET_NAV = [
   { id: "bond", label: "Bonds", href: "/markets/category/bond" },
 ];
 
+const TOOLS_NAV = [
+  { id: "screener", label: "Screener", href: "/markets/screener" },
+];
+
 function SidebarSection({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>
@@ -65,9 +69,19 @@ export function MarketsSidebar() {
             <div className="flex items-center gap-2 rounded-card px-3 py-1.5 text-sm text-text-secondary/50 cursor-default">
               Calendar <SoonBadge />
             </div>
-            <div className="flex items-center gap-2 rounded-card px-3 py-1.5 text-sm text-text-secondary/50 cursor-default">
-              Screener <SoonBadge />
-            </div>
+            {TOOLS_NAV.map((item) => (
+              <Link
+                key={item.id}
+                href={item.href}
+                className={`flex items-center rounded-card px-3 py-1.5 text-sm transition duration-150 ${
+                  isActive(item.href)
+                    ? "bg-cyan-bg/40 font-semibold text-cyan"
+                    : "text-text-secondary hover:bg-bg-hover hover:text-text-primary"
+                }`}
+              >
+                {item.label}
+              </Link>
+            ))}
           </nav>
         </SidebarSection>
 
