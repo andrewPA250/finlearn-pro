@@ -1,22 +1,18 @@
 "use client";
 
-import { useState } from "react";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 import { SoonBadge } from "@/components/layout/SoonBadge";
 
-interface MarketsSidebarProps {
-  activeCategory?: string;
-  onCategoryChange?: (id: string) => void;
-}
-
 const MARKET_NAV = [
-  { id: "all",       label: "Overview",    href: "#overview"    },
-  { id: "equity",    label: "Stocks",      href: "#equity"      },
-  { id: "crypto",    label: "Crypto",      href: "#crypto"      },
-  { id: "index",     label: "Indices",     href: "#index"       },
-  { id: "etf",       label: "ETFs",        href: "#etf"         },
-  { id: "commodity", label: "Commodities", href: "#commodity"   },
-  { id: "forex",     label: "Forex",       href: "#forex"       },
-  { id: "bond",      label: "Bonds",       href: "#bond"        },
+  { id: "overview", label: "Overview", href: "/markets" },
+  { id: "equity", label: "Stocks", href: "/markets/category/equity" },
+  { id: "crypto", label: "Crypto", href: "/markets/category/crypto" },
+  { id: "index", label: "Indices", href: "/markets/category/index" },
+  { id: "etf", label: "ETFs", href: "/markets/category/etf" },
+  { id: "commodity", label: "Commodities", href: "/markets/category/commodity" },
+  { id: "forex", label: "Forex", href: "/markets/category/forex" },
+  { id: "bond", label: "Bonds", href: "/markets/category/bond" },
 ];
 
 function SidebarSection({ title, children }: { title: string; children: React.ReactNode }) {
@@ -30,12 +26,12 @@ function SidebarSection({ title, children }: { title: string; children: React.Re
   );
 }
 
-export function MarketsSidebar({ activeCategory = "all", onCategoryChange }: MarketsSidebarProps) {
-  const [active, setActive] = useState(activeCategory);
+export function MarketsSidebar() {
+  const pathname = usePathname();
 
-  function handleClick(id: string) {
-    setActive(id);
-    onCategoryChange?.(id);
+  function isActive(href: string): boolean {
+    if (href === "/markets") return pathname === "/markets";
+    return pathname.startsWith(href);
   }
 
   return (
@@ -45,18 +41,17 @@ export function MarketsSidebar({ activeCategory = "all", onCategoryChange }: Mar
         <SidebarSection title="Markets">
           <nav className="flex flex-col gap-0.5">
             {MARKET_NAV.map((item) => (
-              <a
+              <Link
                 key={item.id}
                 href={item.href}
-                onClick={() => handleClick(item.id)}
                 className={`flex items-center rounded-card px-3 py-1.5 text-sm transition duration-150 ${
-                  active === item.id
+                  isActive(item.href)
                     ? "bg-cyan-bg/40 font-semibold text-cyan"
                     : "text-text-secondary hover:bg-bg-hover hover:text-text-primary"
                 }`}
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
           </nav>
         </SidebarSection>
@@ -64,32 +59,24 @@ export function MarketsSidebar({ activeCategory = "all", onCategoryChange }: Mar
         {/* Tools */}
         <SidebarSection title="Tools">
           <nav className="flex flex-col gap-0.5">
-            <a
-              href="#heatmap"
-              onClick={() => handleClick("heatmap")}
-              className={`flex items-center rounded-card px-3 py-1.5 text-sm transition duration-150 ${
-                active === "heatmap"
-                  ? "bg-cyan-bg/40 font-semibold text-cyan"
-                  : "text-text-secondary hover:bg-bg-hover hover:text-text-primary"
-              }`}
-            >
+            <div className="flex items-center rounded-card px-3 py-1.5 text-sm text-text-secondary/60 cursor-default">
               Heatmap
-            </a>
-            <span className="flex items-center gap-2 rounded-card px-3 py-1.5 text-sm text-text-secondary/50 cursor-default">
+            </div>
+            <div className="flex items-center gap-2 rounded-card px-3 py-1.5 text-sm text-text-secondary/50 cursor-default">
               Calendar <SoonBadge />
-            </span>
-            <span className="flex items-center gap-2 rounded-card px-3 py-1.5 text-sm text-text-secondary/50 cursor-default">
+            </div>
+            <div className="flex items-center gap-2 rounded-card px-3 py-1.5 text-sm text-text-secondary/50 cursor-default">
               Screener <SoonBadge />
-            </span>
+            </div>
           </nav>
         </SidebarSection>
 
         {/* Personal */}
         <SidebarSection title="Personal">
           <nav className="flex flex-col gap-0.5">
-            <span className="flex items-center gap-2 rounded-card px-3 py-1.5 text-sm text-text-secondary/50 cursor-default">
+            <div className="flex items-center gap-2 rounded-card px-3 py-1.5 text-sm text-text-secondary/50 cursor-default">
               Watchlist <SoonBadge />
-            </span>
+            </div>
           </nav>
         </SidebarSection>
       </div>
