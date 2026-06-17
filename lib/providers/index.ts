@@ -1,5 +1,6 @@
 import type { MarketDataPoint } from "@/types/market";
 import type { MarketInstrument } from "@/types/markets";
+import { MARKET_INSTRUMENTS } from "@/lib/markets/catalog";
 import { localStaticProvider } from "./localStaticProvider";
 import { finnhubProvider } from "./finnhubProvider";
 import { coinGeckoProvider } from "./coinGeckoProvider";
@@ -11,95 +12,36 @@ export * from "./types";
 export { localStaticProvider, finnhubProvider, coinGeckoProvider, frankfurterProvider, yahooProvider, getAssetFundamentals };
 
 /**
- * Registro provider per simbolo catalogo (Step 12 architettura,
- * Step 13 Finnhub, Step 13.x CoinGecko + Frankfurter,
- * Step 13.2.2 Yahoo Finance — provider primario per tutti gli asset).
+ * Provider routing — **CATALOG-DRIVEN** (Phase 7A refactor)
  *
- * Yahoo Finance è ora il provider primario per indici, azioni, ETF, crypto,
- * forex, commodities e bond. Finnhub/CoinGecko/Frankfurter restano nel
- * codebase ma non vengono più usati come provider primari.
+ * Instead of hardcoded provider maps, we build them dynamically from MARKET_INSTRUMENTS.
+ * Any asset with yahooSymbol automatically routes to Yahoo for quote/candles.
+ *
+ * This eliminates the need to manually add every new asset to QUOTE_PROVIDERS
+ * and CANDLE_PROVIDERS maps. Just add it to the catalog and it works.
+ *
+ * Yahoo Finance is the primary provider for indices, stocks, ETFs, crypto,
+ * forex, commodities, and bonds. Finnhub/CoinGecko/Frankfurter remain in
+ * the codebase but are not used as primary providers.
  */
-const QUOTE_PROVIDERS: Record<string, QuoteProvider> = {
-  // Yahoo Finance — provider primario per tutti gli asset
-  // Indici (7)
-  SPX: yahooProvider, NDX: yahooProvider, DJI: yahooProvider, RUT: yahooProvider,
-  VIX: yahooProvider, DAX: yahooProvider, FTSE: yahooProvider, N225: yahooProvider,
 
-  // Azioni (62)
-  AAPL: yahooProvider, MSFT: yahooProvider, NVDA: yahooProvider, AMZN: yahooProvider,
-  GOOGL: yahooProvider, GOOG: yahooProvider, META: yahooProvider, TSLA: yahooProvider,
-  AMD: yahooProvider, NFLX: yahooProvider, INTC: yahooProvider, AVGO: yahooProvider,
-  ORCL: yahooProvider, CRM: yahooProvider, ADBE: yahooProvider, CSCO: yahooProvider,
-  IBM: yahooProvider, QCOM: yahooProvider, TXN: yahooProvider, SHOP: yahooProvider,
-  UBER: yahooProvider, PLTR: yahooProvider, JPM: yahooProvider, BAC: yahooProvider,
-  WFC: yahooProvider, GS: yahooProvider, MS: yahooProvider, C: yahooProvider,
-  V: yahooProvider, MA: yahooProvider, PYPL: yahooProvider, "BRK.B": yahooProvider,
-  KO: yahooProvider, PEP: yahooProvider, MCD: yahooProvider, SBUX: yahooProvider,
-  NKE: yahooProvider, WMT: yahooProvider, COST: yahooProvider, PG: yahooProvider,
-  JNJ: yahooProvider, UNH: yahooProvider, HD: yahooProvider, LOW: yahooProvider,
-  DIS: yahooProvider, XOM: yahooProvider, CVX: yahooProvider, COP: yahooProvider,
-  BA: yahooProvider, CAT: yahooProvider, GE: yahooProvider, LMT: yahooProvider,
-  RTX: yahooProvider, DE: yahooProvider,
+// Build provider maps dynamically from catalog
+function buildProviderMaps() {
+  const quotes: Record<string, QuoteProvider> = {};
+  const candles: Partial<Record<string, CandleProvider>> = {};
 
-  // ETF (17)
-  SPY: yahooProvider, QQQ: yahooProvider, VOO: yahooProvider, VTI: yahooProvider,
-  SCHD: yahooProvider, AGG: yahooProvider, BND: yahooProvider, VXUS: yahooProvider,
-  VEA: yahooProvider, VWO: yahooProvider, IWM: yahooProvider, DIA: yahooProvider,
-  XLK: yahooProvider, XLF: yahooProvider, XLE: yahooProvider, XLV: yahooProvider,
-  XLY: yahooProvider,
+  for (const instrument of MARKET_INSTRUMENTS) {
+    // If instrument has yahooSymbol, route to Yahoo
+    if (instrument.yahooSymbol) {
+      quotes[instrument.symbol] = yahooProvider;
+      candles[instrument.symbol] = yahooProvider;
+    }
+  }
 
-  // Crypto (12)
-  BTCUSD: yahooProvider, ETHUSD: yahooProvider, XRPUSD: yahooProvider, ADAUSD: yahooProvider,
-  SOLUSD: yahooProvider, DOGEUSD: yahooProvider, AVAXUSD: yahooProvider, LINKUSD: yahooProvider,
-  DOTUSD: yahooProvider, LTCUSD: yahooProvider, BCHUSD: yahooProvider, UNIUSD: yahooProvider,
+  return { quotes, candles };
+}
 
-  // Forex (3)
-  EURUSD: yahooProvider, GBPUSD: yahooProvider, USDJPY: yahooProvider,
-
-  // Commodities (6)
-  XAUUSD: yahooProvider, XAGUSD: yahooProvider, WTI: yahooProvider, BRENT: yahooProvider,
-  NATGAS: yahooProvider, COPPER: yahooProvider,
-
-  // Bond yields (2)
-  US10Y: yahooProvider, US30Y: yahooProvider,
-};
-
-/** Registro candele: tutti i provider che supportano serie storiche daily. */
-const CANDLE_PROVIDERS: Partial<Record<string, CandleProvider>> = {
-  // Yahoo Finance — storico daily da 2010 per tutti gli asset supportati
-  // Indici
-  SPX: yahooProvider, NDX: yahooProvider, DJI: yahooProvider, RUT: yahooProvider,
-  VIX: yahooProvider, DAX: yahooProvider, FTSE: yahooProvider, N225: yahooProvider,
-
-  // Azioni (most)
-  AAPL: yahooProvider, MSFT: yahooProvider, NVDA: yahooProvider, AMZN: yahooProvider,
-  GOOGL: yahooProvider, GOOG: yahooProvider, META: yahooProvider, TSLA: yahooProvider,
-  AMD: yahooProvider, NFLX: yahooProvider, INTC: yahooProvider, AVGO: yahooProvider,
-  ORCL: yahooProvider, CRM: yahooProvider, ADBE: yahooProvider, CSCO: yahooProvider,
-  IBM: yahooProvider, QCOM: yahooProvider, TXN: yahooProvider, SHOP: yahooProvider,
-  UBER: yahooProvider, PLTR: yahooProvider, JPM: yahooProvider, BAC: yahooProvider,
-  WFC: yahooProvider, GS: yahooProvider, MS: yahooProvider, C: yahooProvider,
-  V: yahooProvider, MA: yahooProvider, PYPL: yahooProvider, "BRK.B": yahooProvider,
-
-  // ETF
-  SPY: yahooProvider, QQQ: yahooProvider, VOO: yahooProvider, VTI: yahooProvider,
-  SCHD: yahooProvider, AGG: yahooProvider, BND: yahooProvider, VXUS: yahooProvider,
-  VEA: yahooProvider, VWO: yahooProvider, IWM: yahooProvider, DIA: yahooProvider,
-
-  // Crypto
-  BTCUSD: yahooProvider, ETHUSD: yahooProvider, XRPUSD: yahooProvider, ADAUSD: yahooProvider,
-  SOLUSD: yahooProvider, DOGEUSD: yahooProvider, AVAXUSD: yahooProvider,
-
-  // Forex
-  EURUSD: yahooProvider, GBPUSD: yahooProvider, USDJPY: yahooProvider,
-
-  // Commodities
-  XAUUSD: yahooProvider, XAGUSD: yahooProvider, WTI: yahooProvider, BRENT: yahooProvider,
-  NATGAS: yahooProvider, COPPER: yahooProvider,
-
-  // Bonds
-  US10Y: yahooProvider, US30Y: yahooProvider,
-};
+const { quotes: QUOTE_PROVIDERS, candles: CANDLE_PROVIDERS } = buildProviderMaps();
 
 /**
  * Disponibilità dati per uno strumento: il registro `QUOTE_PROVIDERS` è
