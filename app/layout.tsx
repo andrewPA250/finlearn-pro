@@ -11,6 +11,7 @@ import { PortfolioProvider } from "@/lib/portfolio/PortfolioContext";
 import { AlertsProvider } from "@/lib/alerts/AlertsContext";
 import { MarketRibbon } from "@/components/market/MarketRibbon";
 import { getRibbonQuotes } from "@/lib/markets/getRibbonQuotes";
+import { Providers } from "@/app/Providers";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -40,25 +41,17 @@ export default async function RootLayout({
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}
       >
-        <SettingsProvider>
-          <WatchlistProvider>
-            <PortfolioProvider>
-            <AlertsProvider>
-            <ProgressProvider>
-            <Header />
-            <MarketRibbon quotes={ribbonQuotes} />
-            <div className="flex min-h-[calc(100vh-3.5rem)]">
-              <ContextSidebar />
-              <main className="min-h-[calc(100vh-3.5rem)] min-w-0 flex-1 pb-touch-target md:pb-0">
-                {children}
-              </main>
-            </div>
-            <BottomNav />
-          </ProgressProvider>
-            </AlertsProvider>
-            </PortfolioProvider>
-          </WatchlistProvider>
-        </SettingsProvider>
+        <Providers>
+          <Header />
+          <MarketRibbon quotes={ribbonQuotes} />
+          <div className="flex min-h-[calc(100vh-3.5rem)]">
+            <ContextSidebar />
+            <main className="min-h-[calc(100vh-3.5rem)] min-w-0 flex-1 pb-touch-target md:pb-0">
+              {children}
+            </main>
+          </div>
+          <BottomNav />
+        </Providers>
       </body>
     </html>
   );

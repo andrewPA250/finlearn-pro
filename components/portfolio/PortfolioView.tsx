@@ -8,6 +8,7 @@ import type { PortfolioHolding } from "@/lib/portfolio/types";
 import { usePortfolio } from "@/lib/portfolio/PortfolioContext";
 import { AddHoldingModal } from "./AddHoldingModal";
 import { AssetLogo } from "@/components/ui/AssetLogo";
+import { useCurrency } from "@/lib/currency/CurrencyContext";
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
@@ -17,13 +18,6 @@ function fmt(value: number | null | undefined, decimals = 2): string {
     minimumFractionDigits: decimals,
     maximumFractionDigits: decimals,
   });
-}
-
-function fmtMoney(value: number | null | undefined): string {
-  if (value == null || isNaN(value)) return "—";
-  const abs = Math.abs(value);
-  const prefix = value < 0 ? "-$" : "$";
-  return prefix + abs.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
 function fmtPct(value: number | null | undefined): string {
@@ -90,6 +84,7 @@ interface PortfolioViewProps {
 
 export function PortfolioView({ instruments, instrumentsBySymbol }: PortfolioViewProps) {
   const { holdings, isHydrated, addHolding, updateHolding, removeHolding } = usePortfolio();
+  const { formatMoney } = useCurrency();
 
   const [quotesBySymbol, setQuotesBySymbol] = useState<Record<string, TickerQuote>>({});
   const [quotesLoading, setQuotesLoading] = useState(false);
@@ -261,15 +256,15 @@ export function PortfolioView({ instruments, instrumentsBySymbol }: PortfolioVie
         <div className="mb-6 grid grid-cols-2 gap-3 md:grid-cols-4 animate-fade-in-up" style={{ animationDelay: "40ms" }}>
           <SummaryCard
             label="Market Value"
-            value={totalMarketValue > 0 ? fmtMoney(totalMarketValue) : "—"}
+            value={totalMarketValue > 0 ? formatMoney(totalMarketValue) : "—"}
           />
           <SummaryCard
             label="Cost Basis"
-            value={totalCostBasis > 0 ? fmtMoney(totalCostBasis) : "—"}
+            value={totalCostBasis > 0 ? formatMoney(totalCostBasis) : "—"}
           />
           <SummaryCard
             label="Unrealized P/L"
-            value={totalPL != null ? fmtMoney(totalPL) : "—"}
+            value={totalPL != null ? formatMoney(totalPL) : "—"}
             valueClass={plColor(totalPL)}
           />
           <SummaryCard
@@ -340,25 +335,25 @@ export function PortfolioView({ instruments, instrumentsBySymbol }: PortfolioVie
                       {fmt(holding.quantity, holding.quantity % 1 === 0 ? 0 : 4)}
                     </td>
                     <td className="px-4 py-3 text-right font-mono text-text-primary">
-                      ${fmt(holding.avgPrice)}
+                      {formatMoney(holding.avgPrice)}
                     </td>
                     <td className="px-4 py-3 text-right font-mono">
                       {quotesLoading && !quotesBySymbol[holding.symbol] ? (
                         <span className="inline-block h-3 w-16 animate-pulse rounded bg-bg-primary" />
                       ) : currentPrice != null ? (
-                        <span className="text-text-primary">${fmt(currentPrice)}</span>
+                        <span className="text-text-primary">{formatMoney(currentPrice)}</span>
                       ) : (
                         <span className="text-text-muted">—</span>
                       )}
                     </td>
                     <td className="px-4 py-3 text-right font-mono text-text-primary hidden sm:table-cell">
-                      {marketValue != null ? fmtMoney(marketValue) : "—"}
+                      {marketValue != null ? formatMoney(marketValue) : "—"}
                     </td>
                     <td className="px-4 py-3 text-right font-mono text-text-secondary hidden sm:table-cell">
-                      {fmtMoney(costBasis)}
+                      {formatMoney(costBasis)}
                     </td>
                     <td className={`px-4 py-3 text-right font-mono ${plColor(pl)}`}>
-                      {pl != null ? fmtMoney(pl) : "—"}
+                      {pl != null ? formatMoney(pl) : "—"}
                     </td>
                     <td className={`px-4 py-3 text-right font-mono ${plColor(plPct)}`}>
                       {plPct != null ? fmtPct(plPct) : "—"}

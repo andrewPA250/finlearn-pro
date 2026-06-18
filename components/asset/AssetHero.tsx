@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import type { MarketInstrument } from "@/types/markets";
 import type { DataFreshness } from "@/lib/providers/types";
@@ -8,6 +10,7 @@ import { InfoTooltip } from "@/components/ui/InfoTooltip";
 import { LocalTime } from "@/components/ui/LocalTime";
 import { WatchButton } from "@/components/asset/WatchButton";
 import { AssetLogo } from "@/components/ui/AssetLogo";
+import { useCurrency } from "@/lib/currency/CurrencyContext";
 
 interface AssetHeroProps {
   instrument: MarketInstrument;
@@ -51,6 +54,7 @@ export function AssetHero({ instrument, categoryLabel, quote }: AssetHeroProps) 
   const freshness = quote?.freshness;
   const tooltipText = freshness ? (FRESHNESS_TOOLTIPS[freshness] ?? "") : "";
   const isPositive = quote ? quote.change >= 0 : true;
+  const { formatMoneyCompact, fxLabel, currency } = useCurrency();
 
   return (
     <div className="animate-fade-in-up border-b border-bg-border py-5">
@@ -118,11 +122,16 @@ export function AssetHero({ instrument, categoryLabel, quote }: AssetHeroProps) 
         {quote ? (
           <div className="shrink-0 md:text-right">
             <p className="font-mono text-4xl font-bold leading-none tracking-tight text-text-primary">
-              {formatQuoteValue(quote)}
+              {quote.unit === "percent"
+                ? formatQuoteValue(quote)
+                : formatMoneyCompact(quote.value)}
             </p>
             <p className={`mt-2 font-mono text-base font-bold ${isPositive ? "text-positive" : "text-negative"}`}>
               {formatQuoteChangeDetail(quote)}
             </p>
+            {fxLabel && quote.unit !== "percent" && (
+              <p className="mt-1 text-[10px] text-text-muted">{fxLabel} · {currency}</p>
+            )}
           </div>
         ) : (
           <p className="max-w-reading text-sm text-text-secondary">

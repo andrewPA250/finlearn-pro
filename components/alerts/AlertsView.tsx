@@ -9,6 +9,7 @@ import { ALERT_TYPE_LABELS } from "@/lib/alerts/types";
 import { useAlerts } from "@/lib/alerts/AlertsContext";
 import { AddAlertModal } from "./AddAlertModal";
 import { AssetLogo } from "@/components/ui/AssetLogo";
+import { useCurrency } from "@/lib/currency/CurrencyContext";
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
@@ -18,11 +19,6 @@ function fmt(value: number | null | undefined, decimals = 2): string {
     minimumFractionDigits: decimals,
     maximumFractionDigits: decimals,
   });
-}
-
-function fmtPrice(value: number | null | undefined): string {
-  if (value == null || isNaN(value)) return "—";
-  return "$" + fmt(value);
 }
 
 function fmtChange(value: number | null | undefined): string {
@@ -76,6 +72,7 @@ interface AlertsViewProps {
 export function AlertsView({ instruments, instrumentsBySymbol }: AlertsViewProps) {
   const { alerts, isHydrated, addAlert, updateAlert, toggleAlert, markTriggered, removeAlert } =
     useAlerts();
+  const { formatMoney } = useCurrency();
 
   const [quotesBySymbol, setQuotesBySymbol] = useState<Record<string, TickerQuote>>({});
   const [quotesLoading, setQuotesLoading] = useState(false);
@@ -303,7 +300,7 @@ export function AlertsView({ instruments, instrumentsBySymbol }: AlertsViewProps
                         {quotesLoading && !quote ? (
                           <span className="inline-block h-3 w-16 animate-pulse rounded bg-bg-primary" />
                         ) : (
-                          <span className="text-text-primary">{quote ? fmtPrice(quote.value) : "—"}</span>
+                          <span className="text-text-primary">{quote ? formatMoney(quote.value) : "—"}</span>
                         )}
                       </td>
                       <td className="px-4 py-3 text-right font-mono hidden sm:table-cell">
@@ -317,7 +314,7 @@ export function AlertsView({ instruments, instrumentsBySymbol }: AlertsViewProps
                         {ALERT_TYPE_LABELS[alert.type]}
                       </td>
                       <td className="px-4 py-3 text-right font-mono text-text-primary whitespace-nowrap">
-                        {isChangeType ? `${alert.target >= 0 ? "+" : ""}${fmt(alert.target)}%` : fmtPrice(alert.target)}
+                        {isChangeType ? `${alert.target >= 0 ? "+" : ""}${fmt(alert.target)}%` : formatMoney(alert.target)}
                       </td>
                       <td className="px-4 py-3 text-center">
                         <span className={`rounded px-2 py-0.5 text-xs font-medium ${STATUS_STYLES[status]}`}>

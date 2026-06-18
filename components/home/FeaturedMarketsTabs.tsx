@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import type { TickerQuote } from "@/lib/market/ticker";
+import { useCurrency } from "@/lib/currency/CurrencyContext";
 
 interface FeaturedMarketsTabsProps {
   quotes: Record<string, TickerQuote | null>;
@@ -48,19 +49,13 @@ const TAB_SYMBOLS: Record<TabId, { symbol: string; name: string }[]> = {
   ],
 };
 
-function formatPrice(value: number): string {
-  if (value >= 10000) return value.toLocaleString("en-US", { maximumFractionDigits: 0 });
-  if (value >= 100)   return value.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-  if (value >= 1)     return value.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-  return value.toLocaleString("en-US", { minimumFractionDigits: 4, maximumFractionDigits: 4 });
-}
-
 function formatChange(pct: number): string {
   const sign = pct >= 0 ? "+" : "";
   return `${sign}${pct.toFixed(2)}%`;
 }
 
 function AssetCard({ symbol, name, quote }: { symbol: string; name: string; quote: TickerQuote | null }) {
+  const { formatMoneyCompact } = useCurrency();
   if (!quote) return null;
 
   const isPositive = quote.changePercent >= 0;
@@ -82,7 +77,7 @@ function AssetCard({ symbol, name, quote }: { symbol: string; name: string; quot
           </span>
         </div>
         <p className="text-base font-bold text-text-primary font-mono">
-          {quote.unit === "percent" ? `${quote.value.toFixed(2)}%` : formatPrice(quote.value)}
+          {quote.unit === "percent" ? `${quote.value.toFixed(2)}%` : formatMoneyCompact(quote.value)}
         </p>
       </div>
     </Link>

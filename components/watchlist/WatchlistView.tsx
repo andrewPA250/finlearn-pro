@@ -8,11 +8,7 @@ import { useWatchlist } from "@/lib/watchlist/WatchlistContext";
 import { useSettings } from "@/lib/settings/SettingsContext";
 import { t } from "@/lib/settings/i18n";
 import { AssetLogo } from "@/components/ui/AssetLogo";
-
-function fmtPrice(value: number, currency: string): string {
-  const sym = currency === "EUR" ? "€" : currency === "GBP" ? "£" : "$";
-  return `${sym}${value.toFixed(value > 100 ? 0 : 2)}`;
-}
+import { useCurrency } from "@/lib/currency/CurrencyContext";
 
 interface WatchlistViewProps {
   quotesBySymbol: Record<string, TickerQuote>;
@@ -24,7 +20,8 @@ type SortOrder = "asc" | "desc";
 
 export function WatchlistView({ quotesBySymbol, instrumentsBySymbol }: WatchlistViewProps) {
   const { symbols: watchedSymbols, removeFromWatchlist } = useWatchlist();
-  const { language, currency } = useSettings();
+  const { language } = useSettings();
+  const { formatMoneyCompact } = useCurrency();
   const [searchTerm, setSearchTerm] = useState("");
   const [sortField, setSortField] = useState<SortField>("symbol");
   const [sortOrder, setSortOrder] = useState<SortOrder>("asc");
@@ -247,7 +244,7 @@ export function WatchlistView({ quotesBySymbol, instrumentsBySymbol }: Watchlist
                       </Link>
                     </td>
                     <td className="px-4 py-3 text-right font-mono">
-                      {fmtPrice(item.quote.value, currency)}
+                      {formatMoneyCompact(item.quote.value)}
                     </td>
                     <td
                       className={`px-4 py-3 text-right font-mono ${
