@@ -7,6 +7,7 @@ import type { TickerQuote } from "@/lib/market/ticker";
 import type { PortfolioHolding } from "@/lib/portfolio/types";
 import { usePortfolio } from "@/lib/portfolio/PortfolioContext";
 import { AddHoldingModal } from "./AddHoldingModal";
+import { AssetLogo } from "@/components/ui/AssetLogo";
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
@@ -302,12 +303,22 @@ export function PortfolioView({ instruments, instrumentsBySymbol }: PortfolioVie
                 {rows.map(({ holding, instrument, currentPrice, marketValue, costBasis, pl, plPct, allocationPct }) => (
                   <tr key={holding.id} className="hover:bg-bg-hover transition">
                     <td className="px-4 py-3">
-                      <Link
-                        href={`/asset/${holding.symbol}`}
-                        className="font-mono font-semibold text-cyan hover:underline"
-                      >
-                        {holding.symbol}
-                      </Link>
+                      <div className="flex items-center gap-2">
+                        {instrument && (
+                          <AssetLogo
+                            symbol={instrument.finnhubSymbol ?? holding.symbol}
+                            name={instrument.name}
+                            category={instrument.category}
+                            size="sm"
+                          />
+                        )}
+                        <Link
+                          href={`/asset/${holding.symbol}`}
+                          className="font-mono font-semibold text-cyan hover:underline"
+                        >
+                          {holding.symbol}
+                        </Link>
+                      </div>
                     </td>
                     <td className="px-4 py-3 text-text-secondary hidden md:table-cell">
                       {instrument ? (

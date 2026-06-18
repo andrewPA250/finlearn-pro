@@ -7,6 +7,7 @@ import type { TickerQuote } from "@/lib/market/ticker";
 import { useWatchlist } from "@/lib/watchlist/WatchlistContext";
 import { useSettings } from "@/lib/settings/SettingsContext";
 import { t } from "@/lib/settings/i18n";
+import { AssetLogo } from "@/components/ui/AssetLogo";
 
 function fmtPrice(value: number, currency: string): string {
   const sym = currency === "EUR" ? "€" : currency === "GBP" ? "£" : "$";
@@ -222,12 +223,20 @@ export function WatchlistView({ quotesBySymbol, instrumentsBySymbol }: Watchlist
                 {results.map((item) => (
                   <tr key={item.symbol} className="hover:bg-bg-hover transition">
                     <td className="px-4 py-3">
-                      <Link
-                        href={`/asset/${item.symbol}`}
-                        className="font-mono font-semibold text-cyan hover:underline"
-                      >
-                        {item.symbol}
-                      </Link>
+                      <div className="flex items-center gap-2">
+                        <AssetLogo
+                          symbol={item.instrument.finnhubSymbol ?? item.symbol}
+                          name={item.instrument.name}
+                          category={item.instrument.category}
+                          size="sm"
+                        />
+                        <Link
+                          href={`/asset/${item.symbol}`}
+                          className="font-mono font-semibold text-cyan hover:underline"
+                        >
+                          {item.symbol}
+                        </Link>
+                      </div>
                     </td>
                     <td className="px-4 py-3 text-text-secondary">
                       <Link

@@ -8,6 +8,7 @@ import type { PriceAlert, AlertStatus } from "@/lib/alerts/types";
 import { ALERT_TYPE_LABELS } from "@/lib/alerts/types";
 import { useAlerts } from "@/lib/alerts/AlertsContext";
 import { AddAlertModal } from "./AddAlertModal";
+import { AssetLogo } from "@/components/ui/AssetLogo";
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
@@ -277,9 +278,19 @@ export function AlertsView({ instruments, instrumentsBySymbol }: AlertsViewProps
                   return (
                     <tr key={alert.id} className={`hover:bg-bg-hover transition ${status === "triggered" ? "bg-green-500/5" : ""}`}>
                       <td className="px-4 py-3">
-                        <Link href={`/asset/${alert.symbol}`} className="font-mono font-semibold text-cyan hover:underline">
-                          {alert.symbol}
-                        </Link>
+                        <div className="flex items-center gap-2">
+                          {instrument && (
+                            <AssetLogo
+                              symbol={instrument.finnhubSymbol ?? alert.symbol}
+                              name={instrument.name}
+                              category={instrument.category}
+                              size="sm"
+                            />
+                          )}
+                          <Link href={`/asset/${alert.symbol}`} className="font-mono font-semibold text-cyan hover:underline">
+                            {alert.symbol}
+                          </Link>
+                        </div>
                       </td>
                       <td className="px-4 py-3 text-text-secondary hidden md:table-cell">
                         {instrument ? (

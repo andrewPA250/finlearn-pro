@@ -7,6 +7,7 @@ import { AssetStatusBadge } from "@/components/asset/AssetStatusBadge";
 import { InfoTooltip } from "@/components/ui/InfoTooltip";
 import { LocalTime } from "@/components/ui/LocalTime";
 import { WatchButton } from "@/components/asset/WatchButton";
+import { AssetLogo } from "@/components/ui/AssetLogo";
 
 interface AssetHeroProps {
   instrument: MarketInstrument;
@@ -66,6 +67,12 @@ export function AssetHero({ instrument, categoryLabel, quote }: AssetHeroProps) 
         {/* Left: symbol + name + meta */}
         <div className="min-w-0">
           <div className="mb-2 flex flex-wrap items-center gap-2">
+            <AssetLogo
+              symbol={instrument.finnhubSymbol ?? instrument.symbol}
+              name={instrument.name}
+              category={instrument.category}
+              size="lg"
+            />
             <span className="rounded border border-bg-border bg-bg-card px-2 py-0.5 font-mono text-xs font-bold text-text-primary">
               {instrument.symbol}
             </span>
