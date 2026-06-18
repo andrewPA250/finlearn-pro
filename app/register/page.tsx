@@ -1,7 +1,13 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { RegisterForm } from "@/components/auth/RegisterForm";
 import { createClient } from "@/lib/supabase/server";
+
+export const metadata: Metadata = {
+  title: "Create Account",
+  description: "Create a free FinanceHub account to save your progress.",
+};
 
 export default async function RegisterPage() {
   const supabase = createClient();

@@ -1,8 +1,14 @@
+import type { Metadata } from "next";
 import type { AssetId, MarketDataPoint } from "@/types/market";
 import { getLessonMeta } from "@/lib/lessons";
 import { getAssetCandles } from "@/lib/providers";
 import { WorkbenchView } from "@/components/workbench/WorkbenchView";
 import { WorkbenchAccessGuard } from "@/components/progress/WorkbenchAccessGuard";
+
+export const metadata: Metadata = {
+  title: "Quant Lab",
+  description: "Interactive workbench to compare assets, analyze correlations, and overlay technical indicators on real market data.",
+};
 
 export default async function WorkbenchPage({
   searchParams,

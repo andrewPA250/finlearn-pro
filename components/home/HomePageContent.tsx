@@ -426,16 +426,21 @@ export function HomePageContent({
           FOOTER
           ================================================================ */}
       <footer className="border-t border-bg-border bg-bg-base">
-        <div className="mx-auto max-w-platform px-6 py-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-[11px] text-text-disabled">
-            © 2025 FinanceHub — {t("footerCopy", lang)}
-          </p>
-          <div className="flex gap-4 text-[11px] text-text-disabled">
-            <Link href="/markets" className="hover:text-text-secondary transition-colors">{lang === "it" ? "Mercati" : "Markets"}</Link>
-            <Link href="/workbench" className="hover:text-text-secondary transition-colors">{lang === "it" ? "Workbench" : "Workbench"}</Link>
-            <Link href="/lessons/1" className="hover:text-text-secondary transition-colors">{lang === "it" ? "Impara" : "Learn"}</Link>
-            <Link href="/settings" className="hover:text-text-secondary transition-colors">{lang === "it" ? "Impostazioni" : "Settings"}</Link>
+        <div className="mx-auto max-w-platform px-6 py-6 flex flex-col gap-3">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-[11px] text-text-disabled">
+              © 2026 FinanceHub — {t("footerCopy", lang)}
+            </p>
+            <div className="flex gap-4 text-[11px] text-text-disabled">
+              <Link href="/markets" className="hover:text-text-secondary transition-colors">{lang === "it" ? "Mercati" : "Markets"}</Link>
+              <Link href="/workbench" className="hover:text-text-secondary transition-colors">{lang === "it" ? "Workbench" : "Workbench"}</Link>
+              <Link href="/lessons/1" className="hover:text-text-secondary transition-colors">{lang === "it" ? "Impara" : "Learn"}</Link>
+              <Link href="/settings" className="hover:text-text-secondary transition-colors">{lang === "it" ? "Impostazioni" : "Settings"}</Link>
+            </div>
           </div>
+          <p className="text-[10px] text-text-disabled/60 leading-relaxed">
+            {t("footerDisclaimer", lang)}
+          </p>
         </div>
       </footer>
 

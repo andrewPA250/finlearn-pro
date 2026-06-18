@@ -19,9 +19,17 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "FinanceHub",
+  metadataBase: new URL("https://financehub.app"),
+  title: {
+    default: "FinanceHub",
+    template: "%s — FinanceHub",
+  },
   description:
-    "FinanceHub — impara le basi degli investimenti, dell'inflazione e del rischio con il modulo Learn: lezioni brevi e dati di mercato reali.",
+    "FinanceHub — real market data, professional analytics, and structured investing lessons. Track 600+ global assets across stocks, ETFs, crypto, forex, and more.",
+  openGraph: {
+    siteName: "FinanceHub",
+    type: "website",
+  },
 };
 
 export default async function RootLayout({
@@ -32,7 +40,7 @@ export default async function RootLayout({
   const ribbonQuotes = await getRibbonQuotes();
 
   return (
-    <html lang="it">
+    <html lang="en">
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}
       >

@@ -18,7 +18,7 @@ export default async function ScreenerPage() {
     tickerQuotes.map((quote) => [quote.id, quote])
   );
 
-  console.log(`[ScreenerPage] Loaded ${tickerQuotes.length}/${MARKET_INSTRUMENTS.length} quotes`);
+;
 
   return <ScreenerView instruments={MARKET_INSTRUMENTS} quotesBySymbol={quotesBySymbol} />;
 }

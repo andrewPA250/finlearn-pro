@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getInstrumentQuote, getAssetCandles, getAssetFundamentals } from "@/lib/providers";
 import { quoteFromProvider } from "@/lib/market/ticker";
@@ -5,6 +6,16 @@ import { MARKET_CATEGORIES, getInstrumentBySymbol } from "@/lib/markets/catalog"
 import { getAssetNews } from "@/lib/assetNews";
 import { AssetView } from "@/components/asset/AssetView";
 import { AssetUnavailable } from "@/components/asset/AssetUnavailable";
+
+export async function generateMetadata({ params }: { params: { symbol: string } }): Promise<Metadata> {
+  const { getInstrumentBySymbol } = await import("@/lib/markets/catalog");
+  const instrument = getInstrumentBySymbol(params.symbol);
+  if (!instrument) return { title: "Asset Not Found" };
+  return {
+    title: `${instrument.symbol} — ${instrument.name}`,
+    description: `Live price, chart, fundamentals, and news for ${instrument.name} (${instrument.symbol}).`,
+  };
+}
 
 export default async function AssetPage({ params }: { params: { symbol: string } }) {
   const instrument = getInstrumentBySymbol(params.symbol);

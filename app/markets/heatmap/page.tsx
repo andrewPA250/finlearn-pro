@@ -18,7 +18,7 @@ export default async function HeatmapPage() {
     tickerQuotes.map((quote) => [quote.id, quote])
   );
 
-  console.log(`[HeatmapPage] Loaded ${tickerQuotes.length}/${MARKET_INSTRUMENTS.length} quotes`);
+;
 
   return <HeatmapView instruments={MARKET_INSTRUMENTS} quotesBySymbol={quotesBySymbol} />;
 }

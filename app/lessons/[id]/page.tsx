@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CompleteLessonButton } from "@/components/lesson/CompleteLessonButton";
 import { KeyConceptCallout } from "@/components/lesson/KeyConceptCallout";
@@ -5,6 +6,16 @@ import { LessonContent } from "@/components/lesson/LessonContent";
 import { CourseProgressBar } from "@/components/progress/CourseProgressBar";
 import { LessonAccessGuard } from "@/components/progress/LessonAccessGuard";
 import { getLessonContent, getLessonMeta } from "@/lib/lessons";
+
+export function generateMetadata({ params }: { params: { id: string } }): Metadata {
+  const lessonId = Number(params.id);
+  const meta = getLessonMeta(lessonId);
+  if (!meta) return { title: "Lesson Not Found" };
+  return {
+    title: `Lesson ${meta.id}: ${meta.title}`,
+    description: meta.keyConcept,
+  };
+}
 
 export default function LessonPage({ params }: { params: { id: string } }) {
   const lessonId = Number(params.id);
