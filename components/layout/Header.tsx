@@ -74,7 +74,7 @@ export function Header() {
     { label: t("portfolio", lang), href: "/portfolio", isActive: (p) => p.startsWith("/portfolio") },
     { label: t("alerts", lang), href: "/alerts", isActive: (p) => p.startsWith("/alerts") },
     { label: t("calendar", lang), href: "/calendar", isActive: (p) => p.startsWith("/calendar") },
-    { label: t("ai", lang), soon: true },
+    { label: t("aiAnalyst", lang), href: "/ai", isActive: (p) => p.startsWith("/ai") },
     { label: t("quantLab", lang), soon: true },
   ];
 
