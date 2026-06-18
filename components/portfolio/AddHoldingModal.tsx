@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import type { MarketInstrument } from "@/types/markets";
 import type { PortfolioHolding } from "@/lib/portfolio/types";
+import { useSettings } from "@/lib/settings/SettingsContext";
+import { t } from "@/lib/settings/i18n";
 
 interface AddHoldingModalProps {
   instruments: MarketInstrument[];
@@ -19,6 +21,7 @@ export function AddHoldingModal({
   onUpdate,
   onClose,
 }: AddHoldingModalProps) {
+  const { language } = useSettings();
   const isEdit = !!editing;
 
   const [symbol, setSymbol] = useState(editing?.symbol ?? "");
@@ -77,21 +80,21 @@ export function AddHoldingModal({
   function validate(): boolean {
     const sym = symbol.trim().toUpperCase();
     if (!sym) {
-      setSymbolError("Symbol is required.");
+      setSymbolError(t("symbolRequired", language));
       return false;
     }
     if (!bySymbol[sym]) {
-      setSymbolError(`"${sym}" is not in the FinanceHub catalog.`);
+      setSymbolError(`"${sym}" ${t("notInCatalog", language)}`);
       return false;
     }
     const qty = parseFloat(quantity);
     if (!quantity || isNaN(qty) || qty <= 0) {
-      setSymbolError("Quantity must be a positive number.");
+      setSymbolError(t("quantityMustBePositive", language));
       return false;
     }
     const price = parseFloat(avgPrice);
     if (!avgPrice || isNaN(price) || price <= 0) {
-      setSymbolError("Average price must be a positive number.");
+      setSymbolError(t("avgPriceMustBePositive", language));
       return false;
     }
     return true;
@@ -122,12 +125,12 @@ export function AddHoldingModal({
       <div className="w-full max-w-md rounded-card border border-border-base bg-bg-secondary shadow-xl">
         <div className="flex items-center justify-between border-b border-border-base px-5 py-4">
           <h2 className="text-base font-semibold text-text-primary">
-            {isEdit ? "Edit Holding" : "Add Holding"}
+            {isEdit ? t("editHoldingModal", language) : t("addHoldingModal", language)}
           </h2>
           <button
             onClick={onClose}
             className="text-text-muted hover:text-text-primary transition"
-            aria-label="Close"
+            aria-label={t("close", language) ?? "Close"}
           >
             ✕
           </button>
@@ -137,7 +140,7 @@ export function AddHoldingModal({
           {/* Symbol */}
           <div className="relative">
             <label className="mb-1 block text-xs font-medium text-text-secondary">
-              Symbol *
+              {t("symbol", language)} *
             </label>
             <input
               ref={symbolRef}
@@ -145,7 +148,7 @@ export function AddHoldingModal({
               value={symbol}
               onChange={(e) => handleSymbolChange(e.target.value)}
               onBlur={() => setTimeout(() => setShowSuggestions(false), 150)}
-              placeholder="e.g. AAPL, BTCUSD, EURUSD"
+              placeholder={t("symbolPlaceholder", language)}
               disabled={isEdit}
               className="w-full rounded border border-border-base bg-bg-primary px-3 py-2 font-mono text-sm text-text-primary placeholder-text-muted focus:border-cyan focus:outline-none disabled:opacity-50"
             />
@@ -178,7 +181,7 @@ export function AddHoldingModal({
           {/* Quantity */}
           <div>
             <label className="mb-1 block text-xs font-medium text-text-secondary">
-              Quantity *
+              {t("quantity", language)} *
             </label>
             <input
               type="number"
@@ -186,7 +189,7 @@ export function AddHoldingModal({
               min="0"
               value={quantity}
               onChange={(e) => setQuantity(e.target.value)}
-              placeholder="e.g. 10"
+              placeholder={t("quantityPlaceholder", language)}
               className="w-full rounded border border-border-base bg-bg-primary px-3 py-2 text-sm text-text-primary placeholder-text-muted focus:border-cyan focus:outline-none"
             />
           </div>
@@ -194,7 +197,7 @@ export function AddHoldingModal({
           {/* Average Buy Price */}
           <div>
             <label className="mb-1 block text-xs font-medium text-text-secondary">
-              Average Buy Price (USD) *
+              {t("avgPrice", language)} (USD) *
             </label>
             <input
               type="number"
@@ -202,7 +205,7 @@ export function AddHoldingModal({
               min="0"
               value={avgPrice}
               onChange={(e) => setAvgPrice(e.target.value)}
-              placeholder="e.g. 150.00"
+              placeholder={t("avgPricePlaceholder", language)}
               className="w-full rounded border border-border-base bg-bg-primary px-3 py-2 text-sm text-text-primary placeholder-text-muted focus:border-cyan focus:outline-none"
             />
           </div>
@@ -210,13 +213,13 @@ export function AddHoldingModal({
           {/* Notes */}
           <div>
             <label className="mb-1 block text-xs font-medium text-text-secondary">
-              Notes (optional)
+              {t("notesOptional", language)}
             </label>
             <textarea
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               rows={2}
-              placeholder="e.g. Long-term hold, DCA position"
+              placeholder={t("notePlaceholder", language)}
               className="w-full resize-none rounded border border-border-base bg-bg-primary px-3 py-2 text-sm text-text-primary placeholder-text-muted focus:border-cyan focus:outline-none"
             />
           </div>
@@ -227,13 +230,13 @@ export function AddHoldingModal({
               onClick={onClose}
               className="flex-1 rounded border border-border-base px-4 py-2 text-sm text-text-secondary hover:text-text-primary transition"
             >
-              Cancel
+              {t("cancel", language)}
             </button>
             <button
               type="submit"
               className="flex-1 rounded bg-cyan px-4 py-2 text-sm font-semibold text-bg-primary hover:bg-cyan/90 transition"
             >
-              {isEdit ? "Save Changes" : "Add Holding"}
+              {isEdit ? t("saveChanges", language) : t("addHolding", language)}
             </button>
           </div>
         </form>

@@ -6,6 +6,8 @@ import type { MarketInstrument } from "@/types/markets";
 import type { TickerQuote } from "@/lib/market/ticker";
 import type { PortfolioHolding } from "@/lib/portfolio/types";
 import { usePortfolio } from "@/lib/portfolio/PortfolioContext";
+import { useSettings } from "@/lib/settings/SettingsContext";
+import { t } from "@/lib/settings/i18n";
 import { AddHoldingModal } from "./AddHoldingModal";
 import { AssetLogo } from "@/components/ui/AssetLogo";
 import { useCurrency } from "@/lib/currency/CurrencyContext";
@@ -84,6 +86,7 @@ interface PortfolioViewProps {
 
 export function PortfolioView({ instruments, instrumentsBySymbol }: PortfolioViewProps) {
   const { holdings, isHydrated, addHolding, updateHolding, removeHolding } = usePortfolio();
+  const { language } = useSettings();
   const { formatMoney } = useCurrency();
 
   const [quotesBySymbol, setQuotesBySymbol] = useState<Record<string, TickerQuote>>({});
@@ -162,9 +165,9 @@ export function PortfolioView({ instruments, instrumentsBySymbol }: PortfolioVie
       <>
         <div className="mx-auto max-w-platform px-4 py-12 md:px-6">
           <div className="mb-6 animate-fade-in-up">
-            <h1 className="text-2xl font-bold text-text-primary">Portfolio</h1>
+            <h1 className="text-2xl font-bold text-text-primary">{t("portfolio", language)}</h1>
             <p className="mt-0.5 text-sm text-text-secondary">
-              Track your investments and monitor performance in real time.
+              {t("trackInvestments", language)}
             </p>
           </div>
           <div className="flex flex-col items-center justify-center rounded-card border border-border-base bg-bg-secondary px-6 py-16 text-center animate-fade-in-up" style={{ animationDelay: "40ms" }}>
@@ -174,16 +177,15 @@ export function PortfolioView({ instruments, instrumentsBySymbol }: PortfolioVie
                 <path d="M7 12l4-4 3 3 5-5" />
               </svg>
             </div>
-            <h2 className="mb-2 text-xl font-bold text-text-primary">Your portfolio is empty</h2>
+            <h2 className="mb-2 text-xl font-bold text-text-primary">{t("yourPortfolioIsEmpty", language)}</h2>
             <p className="mb-6 max-w-sm text-sm text-text-secondary">
-              Add your first holding to start tracking your investments. Monitor P&amp;L, market
-              value, and allocation across 585+ global assets.
+              {t("addFirstHolding", language)}
             </p>
             <button
               onClick={openAdd}
               className="rounded-card bg-cyan px-5 py-2.5 text-sm font-semibold text-bg-primary hover:bg-cyan/90 transition"
             >
-              + Add First Holding
+              {t("addFirstHoldingBtn", language)}
             </button>
           </div>
         </div>
@@ -221,12 +223,12 @@ export function PortfolioView({ instruments, instrumentsBySymbol }: PortfolioVie
         {/* Header */}
         <div className="mb-6 flex flex-wrap items-end justify-between gap-3 animate-fade-in-up">
           <div>
-            <h1 className="text-2xl font-bold text-text-primary">Portfolio</h1>
+            <h1 className="text-2xl font-bold text-text-primary">{t("portfolio", language)}</h1>
             <p className="mt-0.5 text-sm text-text-secondary">
-              {holdings.length} holding{holdings.length !== 1 ? "s" : ""}
+              {holdings.length} {holdings.length !== 1 ? t("holdings", language) : t("holding", language)}
               {lastRefreshed && (
                 <span className="ml-2 text-text-muted">
-                  · Updated {lastRefreshed.toLocaleTimeString()}
+                  · {t("updated", language)} {lastRefreshed.toLocaleTimeString()}
                 </span>
               )}
             </p>
@@ -241,13 +243,13 @@ export function PortfolioView({ instruments, instrumentsBySymbol }: PortfolioVie
               disabled={quotesLoading}
               className="rounded border border-border-base px-3 py-1.5 text-xs text-text-secondary hover:text-text-primary transition disabled:opacity-50"
             >
-              {quotesLoading ? "Refreshing…" : "↻ Refresh"}
+              {quotesLoading ? t("refreshing", language) : t("refresh", language)}
             </button>
             <button
               onClick={openAdd}
               className="rounded bg-cyan px-4 py-1.5 text-sm font-semibold text-bg-primary hover:bg-cyan/90 transition"
             >
-              + Add Holding
+              {t("addHolding", language)}
             </button>
           </div>
         </div>
@@ -255,20 +257,20 @@ export function PortfolioView({ instruments, instrumentsBySymbol }: PortfolioVie
         {/* Summary cards */}
         <div className="mb-6 grid grid-cols-2 gap-3 md:grid-cols-4 animate-fade-in-up" style={{ animationDelay: "40ms" }}>
           <SummaryCard
-            label="Market Value"
+            label={t("marketValue", language)}
             value={totalMarketValue > 0 ? formatMoney(totalMarketValue) : "—"}
           />
           <SummaryCard
-            label="Cost Basis"
+            label={t("costBasis", language)}
             value={totalCostBasis > 0 ? formatMoney(totalCostBasis) : "—"}
           />
           <SummaryCard
-            label="Unrealized P/L"
+            label={t("unrealizedPL", language)}
             value={totalPL != null ? formatMoney(totalPL) : "—"}
             valueClass={plColor(totalPL)}
           />
           <SummaryCard
-            label="P/L %"
+            label={t("plPercent", language)}
             value={totalPLPct != null ? fmtPct(totalPLPct) : "—"}
             valueClass={plColor(totalPLPct)}
           />
@@ -280,18 +282,18 @@ export function PortfolioView({ instruments, instrumentsBySymbol }: PortfolioVie
             <table className="w-full text-sm">
               <thead className="border-b border-border-base bg-bg-primary">
                 <tr>
-                  <th className="px-4 py-3 text-left font-semibold text-text-secondary whitespace-nowrap">Symbol</th>
-                  <th className="px-4 py-3 text-left font-semibold text-text-secondary whitespace-nowrap hidden md:table-cell">Name</th>
-                  <th className="px-4 py-3 text-left font-semibold text-text-secondary whitespace-nowrap hidden lg:table-cell">Category</th>
-                  <th className="px-4 py-3 text-right font-semibold text-text-secondary whitespace-nowrap">Qty</th>
-                  <th className="px-4 py-3 text-right font-semibold text-text-secondary whitespace-nowrap">Avg Price</th>
-                  <th className="px-4 py-3 text-right font-semibold text-text-secondary whitespace-nowrap">Current</th>
-                  <th className="px-4 py-3 text-right font-semibold text-text-secondary whitespace-nowrap hidden sm:table-cell">Value</th>
-                  <th className="px-4 py-3 text-right font-semibold text-text-secondary whitespace-nowrap hidden sm:table-cell">Cost</th>
+                  <th className="px-4 py-3 text-left font-semibold text-text-secondary whitespace-nowrap">{t("symbol", language)}</th>
+                  <th className="px-4 py-3 text-left font-semibold text-text-secondary whitespace-nowrap hidden md:table-cell">{t("name", language)}</th>
+                  <th className="px-4 py-3 text-left font-semibold text-text-secondary whitespace-nowrap hidden lg:table-cell">{t("category", language)}</th>
+                  <th className="px-4 py-3 text-right font-semibold text-text-secondary whitespace-nowrap">{t("quantity", language)}</th>
+                  <th className="px-4 py-3 text-right font-semibold text-text-secondary whitespace-nowrap">{t("avgPrice", language)}</th>
+                  <th className="px-4 py-3 text-right font-semibold text-text-secondary whitespace-nowrap">{t("current", language)}</th>
+                  <th className="px-4 py-3 text-right font-semibold text-text-secondary whitespace-nowrap hidden sm:table-cell">{t("value", language)}</th>
+                  <th className="px-4 py-3 text-right font-semibold text-text-secondary whitespace-nowrap hidden sm:table-cell">{t("cost", language)}</th>
                   <th className="px-4 py-3 text-right font-semibold text-text-secondary whitespace-nowrap">P/L</th>
                   <th className="px-4 py-3 text-right font-semibold text-text-secondary whitespace-nowrap">P/L %</th>
-                  <th className="px-4 py-3 text-right font-semibold text-text-secondary whitespace-nowrap hidden md:table-cell">Alloc</th>
-                  <th className="px-4 py-3 text-center font-semibold text-text-secondary whitespace-nowrap">Actions</th>
+                  <th className="px-4 py-3 text-right font-semibold text-text-secondary whitespace-nowrap hidden md:table-cell">{t("allocation", language)}</th>
+                  <th className="px-4 py-3 text-center font-semibold text-text-secondary whitespace-nowrap">{t("actions", language)}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border-base">
@@ -366,16 +368,16 @@ export function PortfolioView({ instruments, instrumentsBySymbol }: PortfolioVie
                         <button
                           onClick={() => openEdit(holding)}
                           className="text-xs text-text-secondary hover:text-cyan transition"
-                          title="Edit holding"
+                          title={t("editHolding", language)}
                         >
-                          Edit
+                          {t("edit", language)}
                         </button>
                         <button
                           onClick={() => removeHolding(holding.id)}
                           className="text-xs text-text-muted hover:text-red-500 transition"
-                          title="Remove holding"
+                          title={t("removeHolding", language)}
                         >
-                          Remove
+                          {t("remove", language)}
                         </button>
                       </div>
                     </td>

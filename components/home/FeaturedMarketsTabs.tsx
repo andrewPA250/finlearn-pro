@@ -3,6 +3,9 @@
 import { useState } from "react";
 import Link from "next/link";
 import type { TickerQuote } from "@/lib/market/ticker";
+import type { Language } from "@/lib/settings/types";
+import { useSettings } from "@/lib/settings/SettingsContext";
+import { t } from "@/lib/settings/i18n";
 import { useCurrency } from "@/lib/currency/CurrencyContext";
 
 interface FeaturedMarketsTabsProps {
@@ -11,13 +14,15 @@ interface FeaturedMarketsTabsProps {
 
 type TabId = "trending" | "stocks" | "crypto" | "etfs" | "indices";
 
-const TABS: { id: TabId; label: string }[] = [
-  { id: "trending", label: "Trending" },
-  { id: "stocks",   label: "Stocks" },
-  { id: "crypto",   label: "Crypto" },
-  { id: "etfs",     label: "ETFs" },
-  { id: "indices",  label: "Indices" },
-];
+function getTabs(language: Language): { id: TabId; label: string }[] {
+  return [
+    { id: "trending", label: t("trending", language) },
+    { id: "stocks",   label: t("stocks", language) },
+    { id: "crypto",   label: t("crypto", language) },
+    { id: "etfs",     label: t("etfs", language) },
+    { id: "indices",  label: t("indices", language) },
+  ];
+}
 
 const TAB_SYMBOLS: Record<TabId, { symbol: string; name: string }[]> = {
   trending: [
@@ -85,16 +90,18 @@ function AssetCard({ symbol, name, quote }: { symbol: string; name: string; quot
 }
 
 export function FeaturedMarketsTabs({ quotes }: FeaturedMarketsTabsProps) {
+  const { language } = useSettings();
   const [activeTab, setActiveTab] = useState<TabId>("trending");
 
   const assets = TAB_SYMBOLS[activeTab];
   const visibleAssets = assets.filter(({ symbol }) => quotes[symbol] != null);
+  const tabs = getTabs(language);
 
   return (
     <div>
       {/* Tab bar */}
       <div className="flex gap-1 mb-5 border-b border-bg-border pb-0">
-        {TABS.map((tab) => (
+        {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
@@ -126,7 +133,7 @@ export function FeaturedMarketsTabs({ quotes }: FeaturedMarketsTabsProps) {
           })}
         </div>
       ) : (
-        <p className="text-sm text-text-muted py-4">No data available for this category.</p>
+        <p className="text-sm text-text-muted py-4">{t("noDataAvailable", language)}</p>
       )}
     </div>
   );

@@ -7,6 +7,9 @@ import type { TickerQuote } from "@/lib/market/ticker";
 import type { PriceAlert, AlertStatus } from "@/lib/alerts/types";
 import { ALERT_TYPE_LABELS } from "@/lib/alerts/types";
 import { useAlerts } from "@/lib/alerts/AlertsContext";
+import { useSettings } from "@/lib/settings/SettingsContext";
+import { t } from "@/lib/settings/i18n";
+import type { Language } from "@/lib/settings/types";
 import { AddAlertModal } from "./AddAlertModal";
 import { AssetLogo } from "@/components/ui/AssetLogo";
 import { useCurrency } from "@/lib/currency/CurrencyContext";
@@ -54,10 +57,10 @@ const STATUS_STYLES: Record<AlertStatus, string> = {
   disabled:  "bg-bg-primary text-text-muted",
 };
 
-const STATUS_LABELS: Record<AlertStatus, string> = {
-  active:    "Active",
-  triggered: "Triggered",
-  disabled:  "Disabled",
+const STATUS_LABELS: Record<AlertStatus, (lang: Language) => string> = {
+  active:    (lang) => t("alertActive", lang),
+  triggered: (lang) => t("alertTriggered", lang),
+  disabled:  (lang) => t("alertDisabled", lang),
 };
 
 // ─── Props ───────────────────────────────────────────────────────────────────
@@ -72,6 +75,7 @@ interface AlertsViewProps {
 export function AlertsView({ instruments, instrumentsBySymbol }: AlertsViewProps) {
   const { alerts, isHydrated, addAlert, updateAlert, toggleAlert, markTriggered, removeAlert } =
     useAlerts();
+  const { language } = useSettings();
   const { formatMoney } = useCurrency();
 
   const [quotesBySymbol, setQuotesBySymbol] = useState<Record<string, TickerQuote>>({});
@@ -159,9 +163,9 @@ export function AlertsView({ instruments, instrumentsBySymbol }: AlertsViewProps
       <>
         <div className="mx-auto max-w-platform px-4 py-12 md:px-6">
           <div className="mb-6 animate-fade-in-up">
-            <h1 className="text-2xl font-bold text-text-primary">Alerts</h1>
+            <h1 className="text-2xl font-bold text-text-primary">{t("alerts", language)}</h1>
             <p className="mt-0.5 text-sm text-text-secondary">
-              Get notified when assets hit your price targets.
+              {t("createPriceAlertsDesc", language)}
             </p>
           </div>
           <div className="flex flex-col items-center justify-center rounded-card border border-border-base bg-bg-secondary px-6 py-16 text-center animate-fade-in-up" style={{ animationDelay: "40ms" }}>
@@ -171,15 +175,15 @@ export function AlertsView({ instruments, instrumentsBySymbol }: AlertsViewProps
                 <path d="M13.73 21a2 2 0 0 1-3.46 0" />
               </svg>
             </div>
-            <h2 className="mb-2 text-xl font-bold text-text-primary">No alerts yet</h2>
+            <h2 className="mb-2 text-xl font-bold text-text-primary">{t("noAlertsYet", language)}</h2>
             <p className="mb-6 max-w-sm text-sm text-text-secondary">
-              Create price and change alerts for any of the 585+ assets in the catalog. You&apos;ll see when conditions are met right here.
+              {t("createPriceAlertsDesc", language)}
             </p>
             <button
               onClick={openCreate}
               className="rounded-card bg-cyan px-5 py-2.5 text-sm font-semibold text-bg-primary hover:bg-cyan/90 transition"
             >
-              + Create First Alert
+              {t("addFirstAlert", language)}
             </button>
           </div>
         </div>
@@ -203,12 +207,12 @@ export function AlertsView({ instruments, instrumentsBySymbol }: AlertsViewProps
         {/* Header */}
         <div className="mb-6 flex flex-wrap items-end justify-between gap-3 animate-fade-in-up">
           <div>
-            <h1 className="text-2xl font-bold text-text-primary">Alerts</h1>
+            <h1 className="text-2xl font-bold text-text-primary">{t("alerts", language)}</h1>
             <p className="mt-0.5 text-sm text-text-secondary">
-              {alerts.length} alert{alerts.length !== 1 ? "s" : ""}
+              {alerts.length} {alerts.length !== 1 ? t("alerts", language) : t("alert", language)}
               {lastRefreshed && (
                 <span className="ml-2 text-text-muted">
-                  · Checked {lastRefreshed.toLocaleTimeString()}
+                  · {t("checked", language)} {lastRefreshed.toLocaleTimeString()}
                 </span>
               )}
             </p>
@@ -225,13 +229,13 @@ export function AlertsView({ instruments, instrumentsBySymbol }: AlertsViewProps
               disabled={quotesLoading}
               className="rounded border border-border-base px-3 py-1.5 text-xs text-text-secondary hover:text-text-primary transition disabled:opacity-50"
             >
-              {quotesLoading ? "Checking…" : "↻ Check Now"}
+              {quotesLoading ? t("checking", language) : t("checkNow", language)}
             </button>
             <button
               onClick={openCreate}
               className="rounded bg-cyan px-4 py-1.5 text-sm font-semibold text-bg-primary hover:bg-cyan/90 transition"
             >
-              + Add Alert
+              {t("addAlert", language)}
             </button>
           </div>
         </div>
@@ -239,15 +243,15 @@ export function AlertsView({ instruments, instrumentsBySymbol }: AlertsViewProps
         {/* Summary cards */}
         <div className="mb-6 grid grid-cols-3 gap-3 animate-fade-in-up" style={{ animationDelay: "40ms" }}>
           <div className="rounded-card border border-border-base bg-bg-secondary p-4">
-            <p className="text-xs text-text-secondary">Active</p>
+            <p className="text-xs text-text-secondary">{t("active", language)}</p>
             <p className="mt-1 text-xl font-bold text-blue-400">{counts.active}</p>
           </div>
           <div className="rounded-card border border-border-base bg-bg-secondary p-4">
-            <p className="text-xs text-text-secondary">Triggered</p>
+            <p className="text-xs text-text-secondary">{t("triggered", language)}</p>
             <p className="mt-1 text-xl font-bold text-green-400">{counts.triggered}</p>
           </div>
           <div className="rounded-card border border-border-base bg-bg-secondary p-4">
-            <p className="text-xs text-text-secondary">Disabled</p>
+            <p className="text-xs text-text-secondary">{t("disabled", language)}</p>
             <p className="mt-1 text-xl font-bold text-text-muted">{counts.disabled}</p>
           </div>
         </div>
@@ -258,15 +262,15 @@ export function AlertsView({ instruments, instrumentsBySymbol }: AlertsViewProps
             <table className="w-full text-sm">
               <thead className="border-b border-border-base bg-bg-primary">
                 <tr>
-                  <th className="px-4 py-3 text-left font-semibold text-text-secondary whitespace-nowrap">Symbol</th>
-                  <th className="px-4 py-3 text-left font-semibold text-text-secondary whitespace-nowrap hidden md:table-cell">Name</th>
-                  <th className="px-4 py-3 text-right font-semibold text-text-secondary whitespace-nowrap">Price</th>
-                  <th className="px-4 py-3 text-right font-semibold text-text-secondary whitespace-nowrap hidden sm:table-cell">Change %</th>
-                  <th className="px-4 py-3 text-left font-semibold text-text-secondary whitespace-nowrap">Condition</th>
-                  <th className="px-4 py-3 text-right font-semibold text-text-secondary whitespace-nowrap">Target</th>
-                  <th className="px-4 py-3 text-center font-semibold text-text-secondary whitespace-nowrap">Status</th>
-                  <th className="px-4 py-3 text-left font-semibold text-text-secondary whitespace-nowrap hidden lg:table-cell">Note</th>
-                  <th className="px-4 py-3 text-center font-semibold text-text-secondary whitespace-nowrap">Actions</th>
+                  <th className="px-4 py-3 text-left font-semibold text-text-secondary whitespace-nowrap">{t("symbol", language)}</th>
+                  <th className="px-4 py-3 text-left font-semibold text-text-secondary whitespace-nowrap hidden md:table-cell">{t("name", language)}</th>
+                  <th className="px-4 py-3 text-right font-semibold text-text-secondary whitespace-nowrap">{t("price", language)}</th>
+                  <th className="px-4 py-3 text-right font-semibold text-text-secondary whitespace-nowrap hidden sm:table-cell">{t("changePercent", language)}</th>
+                  <th className="px-4 py-3 text-left font-semibold text-text-secondary whitespace-nowrap">{t("condition", language)}</th>
+                  <th className="px-4 py-3 text-right font-semibold text-text-secondary whitespace-nowrap">{t("target", language)}</th>
+                  <th className="px-4 py-3 text-center font-semibold text-text-secondary whitespace-nowrap">{t("status", language)}</th>
+                  <th className="px-4 py-3 text-left font-semibold text-text-secondary whitespace-nowrap hidden lg:table-cell">{t("note", language)}</th>
+                  <th className="px-4 py-3 text-center font-semibold text-text-secondary whitespace-nowrap">{t("actions", language)}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border-base">
@@ -318,7 +322,7 @@ export function AlertsView({ instruments, instrumentsBySymbol }: AlertsViewProps
                       </td>
                       <td className="px-4 py-3 text-center">
                         <span className={`rounded px-2 py-0.5 text-xs font-medium ${STATUS_STYLES[status]}`}>
-                          {STATUS_LABELS[status]}
+                          {STATUS_LABELS[status](language)}
                         </span>
                       </td>
                       <td className="px-4 py-3 text-text-muted text-xs hidden lg:table-cell max-w-[120px] truncate">
@@ -330,19 +334,19 @@ export function AlertsView({ instruments, instrumentsBySymbol }: AlertsViewProps
                             onClick={() => openEdit(alert)}
                             className="text-xs text-text-secondary hover:text-cyan transition"
                           >
-                            Edit
+                            {t("edit", language)}
                           </button>
                           <button
                             onClick={() => toggleAlert(alert.id)}
                             className={`text-xs transition ${alert.enabled ? "text-text-muted hover:text-yellow-400" : "text-text-muted hover:text-blue-400"}`}
                           >
-                            {alert.enabled ? "Disable" : "Enable"}
+                            {alert.enabled ? t("disable", language) : t("enable", language)}
                           </button>
                           <button
                             onClick={() => removeAlert(alert.id)}
                             className="text-xs text-text-muted hover:text-red-500 transition"
                           >
-                            Remove
+                            {t("remove", language)}
                           </button>
                         </div>
                       </td>
@@ -355,7 +359,7 @@ export function AlertsView({ instruments, instrumentsBySymbol }: AlertsViewProps
         </div>
 
         <p className="mt-4 text-xs text-text-muted animate-fade-in-up" style={{ animationDelay: "120ms" }}>
-          Alerts are evaluated against delayed prices. Visual only — no push or email notifications.
+          {t("visualOnly", language)}
         </p>
       </div>
 

@@ -7,6 +7,8 @@ import { SearchIcon } from "@/components/layout/icons";
 import { AssetLogo } from "@/components/ui/AssetLogo";
 import { useWatchlist } from "@/lib/watchlist/WatchlistContext";
 import { usePortfolio } from "@/lib/portfolio/PortfolioContext";
+import { useSettings } from "@/lib/settings/SettingsContext";
+import { t } from "@/lib/settings/i18n";
 import type { MarketCategoryId } from "@/types/markets";
 
 interface SearchOverlayProps {
@@ -44,6 +46,7 @@ interface QuickActionsProps {
 
 function QuickActions({ item, onClose }: QuickActionsProps) {
   const router = useRouter();
+  const { language } = useSettings();
   const { isInWatchlist, toggleWatchlist } = useWatchlist();
   const { addHolding } = usePortfolio();
 
@@ -81,7 +84,7 @@ function QuickActions({ item, onClose }: QuickActionsProps) {
       <button
         type="button"
         onClick={handleWatchlist}
-        title={inWatchlist ? "Remove from Watchlist" : "Add to Watchlist"}
+        title={inWatchlist ? t("removeFromWatchlist", language) : t("addToWatchlist", language)}
         className={`rounded px-1.5 py-0.5 text-[10px] font-medium transition hover:bg-bg-hover ${
           inWatchlist ? "text-cyan" : "text-text-muted hover:text-text-secondary"
         }`}
@@ -91,7 +94,7 @@ function QuickActions({ item, onClose }: QuickActionsProps) {
       <button
         type="button"
         onClick={handleAddPortfolio}
-        title="Add to Portfolio"
+        title={t("addHolding", language)}
         className="rounded px-1.5 py-0.5 text-[10px] font-medium text-text-muted transition hover:bg-bg-hover hover:text-text-secondary"
       >
         + Portfolio
@@ -99,7 +102,7 @@ function QuickActions({ item, onClose }: QuickActionsProps) {
       <button
         type="button"
         onClick={handleCreateAlert}
-        title="Create Alert"
+        title={t("addAlert", language)}
         className="rounded px-1.5 py-0.5 text-[10px] font-medium text-text-muted transition hover:bg-bg-hover hover:text-text-secondary"
       >
         🔔
@@ -107,7 +110,7 @@ function QuickActions({ item, onClose }: QuickActionsProps) {
       <button
         type="button"
         onClick={handleCompare}
-        title="Compare"
+        title={t("compare", language)}
         className="rounded px-1.5 py-0.5 text-[10px] font-medium text-text-muted transition hover:bg-bg-hover hover:text-text-secondary"
       >
         ≈ Compare
@@ -118,6 +121,7 @@ function QuickActions({ item, onClose }: QuickActionsProps) {
 
 export function SearchOverlay({ open, onClose, learnHref }: SearchOverlayProps) {
   const router = useRouter();
+  const { language } = useSettings();
   const inputRef = useRef<HTMLInputElement>(null);
   const [query, setQuery] = useState("");
   const [activeIndex, setActiveIndex] = useState(0);
@@ -198,7 +202,7 @@ export function SearchOverlay({ open, onClose, learnHref }: SearchOverlayProps) 
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search pages, lessons, assets..."
+            placeholder={t("searchPages", language)}
             className="flex-1 bg-transparent text-sm text-text-primary placeholder:text-text-secondary/60 focus:outline-none"
           />
           {query && (
@@ -286,15 +290,15 @@ export function SearchOverlay({ open, onClose, learnHref }: SearchOverlayProps) 
           ))}
 
           {flatItems.length === 0 && (
-            <p className="px-3 py-6 text-center text-sm text-text-secondary/60">No results</p>
+            <p className="px-3 py-6 text-center text-sm text-text-secondary/60">{t("noSearchResults", language)}</p>
           )}
         </div>
 
         {/* Footer hint */}
         <div className="border-t border-bg-card px-4 py-2 flex items-center gap-4 text-[10px] text-text-muted/60">
-          <span><kbd className="font-mono">↑↓</kbd> navigate</span>
-          <span><kbd className="font-mono">↵</kbd> open</span>
-          <span><kbd className="font-mono">Esc</kbd> close</span>
+          <span><kbd className="font-mono">↑↓</kbd> {t("navigate", language)}</span>
+          <span><kbd className="font-mono">↵</kbd> {t("open", language)}</span>
+          <span><kbd className="font-mono">Esc</kbd> {t("close", language)}</span>
         </div>
       </div>
     </div>

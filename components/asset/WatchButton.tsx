@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { useWatchlist } from "@/lib/watchlist/WatchlistContext";
 import { WATCHLIST_MAX_SIZE } from "@/lib/watchlist/types";
+import { useSettings } from "@/lib/settings/SettingsContext";
+import { t } from "@/lib/settings/i18n";
 
 interface WatchButtonProps {
   symbol: string;
@@ -10,6 +12,7 @@ interface WatchButtonProps {
 
 export function WatchButton({ symbol }: WatchButtonProps) {
   const { isInWatchlist, toggleWatchlist, symbols } = useWatchlist();
+  const { language } = useSettings();
   const [hydrated, setHydrated] = useState(false);
   const [isWatched, setIsWatched] = useState(false);
 
@@ -33,7 +36,7 @@ export function WatchButton({ symbol }: WatchButtonProps) {
         disabled
         className="inline-flex cursor-not-allowed items-center gap-1.5 rounded-card border border-bg-border px-3 py-1.5 text-xs font-semibold text-text-disabled opacity-40"
       >
-        ★ Watch
+        {t("watch", language)}
       </button>
     );
   }
@@ -44,10 +47,10 @@ export function WatchButton({ symbol }: WatchButtonProps) {
       disabled={canAdd}
       title={
         canAdd
-          ? `Watchlist full (max ${WATCHLIST_MAX_SIZE})`
+          ? `${t("watchlistFull", language)} (max ${WATCHLIST_MAX_SIZE})`
           : isWatched
-          ? "Remove from watchlist"
-          : "Add to watchlist"
+          ? t("removeFromWatchlist", language)
+          : t("addToWatchlist", language)
       }
       className={`inline-flex items-center gap-1.5 rounded-card border px-3 py-1.5 text-xs font-semibold transition duration-150 ${
         canAdd
@@ -57,7 +60,7 @@ export function WatchButton({ symbol }: WatchButtonProps) {
           : "border-bg-border text-text-secondary hover:border-cyan/30 hover:text-cyan"
       }`}
     >
-      {isWatched ? "✓ In Watchlist" : "★ Watch"}
+      {isWatched ? t("inWatchlist", language) : t("watch", language)}
     </button>
   );
 }

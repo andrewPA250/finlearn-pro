@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import type { MarketInstrument } from "@/types/markets";
 import type { PriceAlert, AlertType } from "@/lib/alerts/types";
 import { ALERT_TYPE_LABELS } from "@/lib/alerts/types";
+import { useSettings } from "@/lib/settings/SettingsContext";
+import { t } from "@/lib/settings/i18n";
 
 const ALERT_TYPES: AlertType[] = ["price_above", "price_below", "change_above", "change_below"];
 
@@ -22,6 +24,7 @@ export function AddAlertModal({
   onUpdate,
   onClose,
 }: AddAlertModalProps) {
+  const { language } = useSettings();
   const isEdit = !!editing;
 
   const [symbol, setSymbol] = useState(editing?.symbol ?? "");
@@ -80,16 +83,16 @@ export function AddAlertModal({
   function validate(): boolean {
     const sym = symbol.trim().toUpperCase();
     if (!sym) {
-      setFieldError("Symbol is required.");
+      setFieldError(t("symbolRequired", language));
       return false;
     }
     if (!bySymbol[sym]) {
-      setFieldError(`"${sym}" is not in the FinanceHub catalog.`);
+      setFieldError(`"${sym}" ${t("notInCatalog", language)}`);
       return false;
     }
-    const t = parseFloat(target);
-    if (!target || isNaN(t)) {
-      setFieldError("Target value is required.");
+    const targetVal = parseFloat(target);
+    if (!target || isNaN(targetVal)) {
+      setFieldError(t("targetValueRequired", language));
       return false;
     }
     return true;
@@ -119,7 +122,7 @@ export function AddAlertModal({
       <div className="w-full max-w-md rounded-card border border-border-base bg-bg-secondary shadow-xl">
         <div className="flex items-center justify-between border-b border-border-base px-5 py-4">
           <h2 className="text-base font-semibold text-text-primary">
-            {isEdit ? "Edit Alert" : "Create Alert"}
+            {isEdit ? t("editAlertModal", language) : t("createAlertModal", language)}
           </h2>
           <button onClick={onClose} className="text-text-muted hover:text-text-primary transition" aria-label="Close">
             ✕
@@ -129,14 +132,14 @@ export function AddAlertModal({
         <form onSubmit={handleSubmit} className="px-5 py-4 space-y-4">
           {/* Symbol */}
           <div className="relative">
-            <label className="mb-1 block text-xs font-medium text-text-secondary">Symbol *</label>
+            <label className="mb-1 block text-xs font-medium text-text-secondary">{t("symbol", language)} *</label>
             <input
               ref={symbolRef}
               type="text"
               value={symbol}
               onChange={(e) => handleSymbolChange(e.target.value)}
               onBlur={() => setTimeout(() => setShowSuggestions(false), 150)}
-              placeholder="e.g. AAPL, BTCUSD, EURUSD"
+              placeholder={t("symbolPlaceholder", language)}
               disabled={isEdit}
               className="w-full rounded border border-border-base bg-bg-primary px-3 py-2 font-mono text-sm text-text-primary placeholder-text-muted focus:border-cyan focus:outline-none disabled:opacity-50"
             />
@@ -163,14 +166,14 @@ export function AddAlertModal({
 
           {/* Alert type */}
           <div>
-            <label className="mb-1 block text-xs font-medium text-text-secondary">Alert Type *</label>
+            <label className="mb-1 block text-xs font-medium text-text-secondary">{t("alertType", language)} *</label>
             <select
               value={type}
               onChange={(e) => { setType(e.target.value as AlertType); setFieldError(""); }}
               className="w-full rounded border border-border-base bg-bg-primary px-3 py-2 text-sm text-text-primary focus:border-cyan focus:outline-none"
             >
-              {ALERT_TYPES.map((t) => (
-                <option key={t} value={t}>{ALERT_TYPE_LABELS[t]}</option>
+              {ALERT_TYPES.map((alertTypeVal) => (
+                <option key={alertTypeVal} value={alertTypeVal}>{ALERT_TYPE_LABELS[alertTypeVal]}</option>
               ))}
             </select>
           </div>
@@ -178,14 +181,14 @@ export function AddAlertModal({
           {/* Target value */}
           <div>
             <label className="mb-1 block text-xs font-medium text-text-secondary">
-              Target Value * {isChangeType ? "(% change)" : "(price in USD)"}
+              {t("target", language)} * {isChangeType ? "(% change)" : "(price in USD)"}
             </label>
             <input
               type="number"
               step="any"
               value={target}
               onChange={(e) => { setTarget(e.target.value); setFieldError(""); }}
-              placeholder={isChangeType ? "e.g. 5.0" : "e.g. 200.00"}
+              placeholder={t("targetPlaceholder", language)}
               className="w-full rounded border border-border-base bg-bg-primary px-3 py-2 text-sm text-text-primary placeholder-text-muted focus:border-cyan focus:outline-none"
             />
           </div>
@@ -195,12 +198,12 @@ export function AddAlertModal({
 
           {/* Note */}
           <div>
-            <label className="mb-1 block text-xs font-medium text-text-secondary">Note (optional)</label>
+            <label className="mb-1 block text-xs font-medium text-text-secondary">{t("notesOptional", language)}</label>
             <textarea
               value={note}
               onChange={(e) => setNote(e.target.value)}
               rows={2}
-              placeholder="e.g. Take profit level"
+              placeholder={t("notePlaceholder", language)}
               className="w-full resize-none rounded border border-border-base bg-bg-primary px-3 py-2 text-sm text-text-primary placeholder-text-muted focus:border-cyan focus:outline-none"
             />
           </div>
@@ -211,13 +214,13 @@ export function AddAlertModal({
               onClick={onClose}
               className="flex-1 rounded border border-border-base px-4 py-2 text-sm text-text-secondary hover:text-text-primary transition"
             >
-              Cancel
+              {t("cancel", language)}
             </button>
             <button
               type="submit"
               className="flex-1 rounded bg-cyan px-4 py-2 text-sm font-semibold text-bg-primary hover:bg-cyan/90 transition"
             >
-              {isEdit ? "Save Changes" : "Create Alert"}
+              {isEdit ? t("saveChanges", language) : t("createAlert", language)}
             </button>
           </div>
         </form>
