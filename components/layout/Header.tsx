@@ -72,8 +72,8 @@ export function Header() {
     { label: t("analytics", lang), href: "/analytics/compare", isActive: (p) => p.startsWith("/analytics") },
     { label: t("learn", lang), href: learnHref, isActive: (p) => p.startsWith("/lessons") },
     { label: t("portfolio", lang), href: "/portfolio", isActive: (p) => p.startsWith("/portfolio") },
-    { label: "Alerts", href: "/alerts", isActive: (p) => p.startsWith("/alerts") },
-    { label: "Calendar", href: "/calendar", isActive: (p) => p.startsWith("/calendar") },
+    { label: t("alerts", lang), href: "/alerts", isActive: (p) => p.startsWith("/alerts") },
+    { label: t("calendar", lang), href: "/calendar", isActive: (p) => p.startsWith("/calendar") },
     { label: t("ai", lang), soon: true },
     { label: t("quantLab", lang), soon: true },
   ];
@@ -125,7 +125,7 @@ export function Header() {
         className="hidden max-w-xs flex-1 items-center gap-2 rounded-card border border-bg-border bg-bg-sidebar px-3 py-1.5 text-sm text-text-secondary transition duration-150 ease-in-out hover:border-cyan/30 hover:bg-bg-hover lg:flex"
       >
         <SearchIcon className="h-4 w-4" />
-        <span className="flex-1 text-left text-text-muted">Search assets, stocks, ETFs…</span>
+        <span className="flex-1 text-left text-text-muted">{t("searchAssets", lang)}</span>
         <kbd className="rounded border border-text-disabled/30 px-1.5 py-0.5 font-mono text-[10px] text-text-disabled">
           Ctrl K
         </kbd>
@@ -189,7 +189,7 @@ export function Header() {
                   </Link>
                   <div className="flex items-center gap-2.5 rounded-card px-3 py-2 text-sm text-text-secondary cursor-default">
                     <span>★</span>
-                    <span>Watchlist ({watchlistSymbols.length})</span>
+                    <span>{t("watchlist", settings.language)} ({watchlistSymbols.length})</span>
                   </div>
                   <hr className="my-1 border-bg-border" />
                   <button
@@ -208,7 +208,7 @@ export function Header() {
             href="/login"
             className="rounded-card bg-cyan px-4 py-1.5 text-sm font-semibold text-bg-primary transition duration-150 ease-in-out hover:bg-cyan-dark"
           >
-            Sign In
+            {t("signIn", lang)}
           </Link>
         )}
       </div>

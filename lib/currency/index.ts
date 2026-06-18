@@ -25,10 +25,10 @@ export function formatMoney(
   if (usdValue == null || isNaN(usdValue)) return "—";
 
   if (currency === "USD" || !available) {
-    const prefix = !available && currency !== "USD" ? "$" : "$";
+    // USD base, or FX rate unavailable → honest USD fallback
     const abs = Math.abs(usdValue);
     const sign = usdValue < 0 ? "-" : "";
-    return `${sign}${prefix}${abs.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    return `${sign}$${abs.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
   }
 
   const converted = usdValue * rate;

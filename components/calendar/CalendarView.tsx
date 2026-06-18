@@ -41,16 +41,6 @@ function ipoStatusClass(status: string): string {
 
 // ─── Sub-components ──────────────────────────────────────────────────────────
 
-function UnavailableCard({ title }: { title: string }) {
-  return (
-    <div className="flex flex-col items-center justify-center rounded-card border border-dashed border-border-base bg-bg-secondary px-6 py-10 text-center">
-      <div className="mb-2 text-2xl">🔒</div>
-      <p className="text-sm font-medium text-text-secondary">{title}</p>
-      <p className="mt-1 text-xs text-text-muted">Not available on the current data plan.</p>
-    </div>
-  );
-}
-
 function EmptyCard({ label }: { label: string }) {
   return (
     <div className="flex flex-col items-center justify-center rounded-card border border-border-base bg-bg-secondary px-6 py-10 text-center">
@@ -165,8 +155,6 @@ const FILTERS: { id: CalendarFilter; label: string }[] = [
   { id: "all",      label: "All" },
   { id: "earnings", label: "Earnings" },
   { id: "ipo",      label: "IPOs" },
-  { id: "economic", label: "Economic" },
-  { id: "dividend", label: "Dividends" },
 ];
 
 export function CalendarView({ data }: CalendarViewProps) {
@@ -181,8 +169,6 @@ export function CalendarView({ data }: CalendarViewProps) {
 
   const showEarnings = filter === "all" || filter === "earnings";
   const showIpos     = filter === "all" || filter === "ipo";
-  const showEconomic = filter === "all" || filter === "economic";
-  const showDividend = filter === "all" || filter === "dividend";
 
   return (
     <div className="mx-auto max-w-platform px-4 py-6 md:px-6">
@@ -254,30 +240,10 @@ export function CalendarView({ data }: CalendarViewProps) {
             <IpoTable events={data.ipos} />
           </section>
         )}
-
-        {showEconomic && (
-          <section>
-            <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold text-text-secondary uppercase tracking-wider">
-              <span className="h-2 w-2 rounded-full bg-yellow-400 inline-block" />
-              Economic Calendar
-            </h2>
-            <UnavailableCard title="Economic Calendar" />
-          </section>
-        )}
-
-        {showDividend && (
-          <section>
-            <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold text-text-secondary uppercase tracking-wider">
-              <span className="h-2 w-2 rounded-full bg-green-400 inline-block" />
-              Dividends
-            </h2>
-            <UnavailableCard title="Dividend Calendar" />
-          </section>
-        )}
       </div>
 
       <p className="mt-6 text-xs text-text-muted">
-        Earnings and IPO data from Finnhub. Economic and dividend calendars require a premium plan.
+        Earnings and IPO data from Finnhub.
       </p>
     </div>
   );

@@ -2,7 +2,6 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { SoonBadge } from "@/components/layout/SoonBadge";
 import { useSettings } from "@/lib/settings/SettingsContext";
 import { t } from "@/lib/settings/i18n";
 import type { Language } from "@/lib/settings/types";
@@ -35,6 +34,7 @@ function toolsNav(lang: Language) {
   return [
     { id: "heatmap",  label: t("heatmap", lang),  href: "/markets/heatmap" },
     { id: "screener", label: t("screener", lang), href: "/markets/screener" },
+    { id: "calendar", label: t("calendar", lang), href: "/calendar" },
     { id: "news",     label: t("news", lang),     href: "/news" },
   ];
 }
@@ -81,9 +81,6 @@ export function MarketsSidebar() {
                 {item.label}
               </Link>
             ))}
-            <div className="flex items-center gap-2 rounded-card px-3 py-1.5 text-sm text-text-secondary/50 cursor-default">
-              Calendar <SoonBadge />
-            </div>
           </nav>
         </SidebarSection>
 

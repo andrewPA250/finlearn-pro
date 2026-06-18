@@ -113,7 +113,7 @@ function QuickActions({ item, onClose }: QuickActionsProps) {
         title={t("compare", language)}
         className="rounded px-1.5 py-0.5 text-[10px] font-medium text-text-muted transition hover:bg-bg-hover hover:text-text-secondary"
       >
-        ≈ Compare
+        ≈ {t("compare", language)}
       </button>
     </div>
   );
@@ -133,8 +133,8 @@ export function SearchOverlay({ open, onClose, learnHref }: SearchOverlayProps) 
         learn: learnHref,
         workbench: "/workbench",
         profile: "/profile",
-      }),
-    [query, learnHref]
+      }, language),
+    [query, learnHref, language]
   );
 
   const flatItems = useMemo(() => sections.flatMap((s) => s.items), [sections]);

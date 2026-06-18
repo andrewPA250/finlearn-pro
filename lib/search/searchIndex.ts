@@ -1,6 +1,8 @@
 import { LESSON_META } from "@/lib/lessonsMeta";
 import { MARKET_CATEGORIES, MARKET_INSTRUMENTS } from "@/lib/markets/catalog";
 import type { MarketCategoryId, MarketInstrumentStatus } from "@/types/markets";
+import { t } from "@/lib/settings/i18n";
+import type { Language } from "@/lib/settings/types";
 
 export type SearchResultType = "nav" | "lesson" | "asset";
 
@@ -47,18 +49,21 @@ export const CATEGORY_BADGE_LABELS: Record<MarketCategoryId, string> = {
   bond:      "Bond",
 };
 
-function getNavItems({ home, learn, workbench, profile }: NavDestinations): SearchResultItem[] {
+function getNavItems({ home, learn, workbench, profile }: NavDestinations, lang: Language): SearchResultItem[] {
   return [
-    { id: "nav-home",      type: "nav", title: "Home",       href: home },
-    { id: "nav-learn",     type: "nav", title: "Learn",      subtitle: "Continue learning path", href: learn },
-    { id: "nav-workbench", type: "nav", title: "Workbench",  subtitle: "Interactive chart",       href: workbench },
-    { id: "nav-profile",   type: "nav", title: "Profile",    href: profile },
-    { id: "nav-markets",   type: "nav", title: "Markets",    href: "/markets" },
-    { id: "nav-portfolio", type: "nav", title: "Portfolio",  href: "/portfolio" },
-    { id: "nav-alerts",    type: "nav", title: "Alerts",     href: "/alerts" },
-    { id: "nav-calendar",  type: "nav", title: "Calendar",   href: "/calendar" },
-    { id: "nav-news",      type: "nav", title: "News",       href: "/news" },
-    { id: "nav-watchlist", type: "nav", title: "Watchlist",  href: "/watchlist" },
+    { id: "nav-home",      type: "nav", title: t("home", lang),       href: home },
+    { id: "nav-learn",     type: "nav", title: t("learn", lang),      subtitle: t("continueLearning", lang), href: learn },
+    { id: "nav-workbench", type: "nav", title: t("workbench", lang),  subtitle: t("interactiveChart", lang), href: workbench },
+    { id: "nav-profile",   type: "nav", title: t("profile", lang),    href: profile },
+    { id: "nav-markets",   type: "nav", title: t("markets", lang),    href: "/markets" },
+    { id: "nav-heatmap",   type: "nav", title: t("heatmap", lang),    href: "/markets/heatmap" },
+    { id: "nav-screener",  type: "nav", title: t("screener", lang),   href: "/markets/screener" },
+    { id: "nav-portfolio", type: "nav", title: t("portfolio", lang),  href: "/portfolio" },
+    { id: "nav-alerts",    type: "nav", title: t("alerts", lang),     href: "/alerts" },
+    { id: "nav-calendar",  type: "nav", title: t("calendar", lang),   href: "/calendar" },
+    { id: "nav-news",      type: "nav", title: t("news", lang),       href: "/news" },
+    { id: "nav-watchlist", type: "nav", title: t("watchlist", lang),  href: "/watchlist" },
+    { id: "nav-settings",  type: "nav", title: t("settings", lang),   href: "/settings" },
   ];
 }
 
@@ -105,7 +110,7 @@ function matchesQuery(item: SearchResultItem, query: string): boolean {
   return haystack.includes(query);
 }
 
-export function buildSearchSections(query: string, destinations: NavDestinations): SearchSection[] {
+export function buildSearchSections(query: string, destinations: NavDestinations, lang: Language = "en"): SearchSection[] {
   const q = query.trim().toLowerCase();
 
   const filterItems = (items: SearchResultItem[]) =>
@@ -125,19 +130,19 @@ export function buildSearchSections(query: string, destinations: NavDestinations
   const sections: SearchSection[] = [
     {
       id: "go-to",
-      title: "Go to",
-      items: filterItems(getNavItems(destinations)),
+      title: t("goToSection", lang),
+      items: filterItems(getNavItems(destinations, lang)),
     },
     {
       id: "lessons",
-      title: "Lessons",
+      title: t("lessonsSection", lang),
       items: filterItems(getLessonItems()),
     },
     {
       id: "assets",
-      title: "Assets",
+      title: t("assets", lang),
       items: assetItems,
-      emptyMessage: "No assets found",
+      emptyMessage: t("noAssetsFound", lang),
     },
   ];
 
