@@ -16,32 +16,36 @@ import {
 
 const SettingsContext = createContext<SettingsContextType | null>(null);
 
-export function SettingsProvider({ children }: { children: React.ReactNode }) {
-  const [settings, setSettings] = useState<AppSettings | null>(null);
-  const [isHydrated, setIsHydrated] = useState(false);
+const DEFAULT_SETTINGS: AppSettings = {
+  language: "en",
+  theme: "system",
+  currency: "USD",
+  timezone: "local",
+};
 
-  // Hydrate settings from localStorage on mount
+export function SettingsProvider({ children }: { children: React.ReactNode }) {
+  // Initialize with defaults immediately — no null state
+  const [settings, setSettings] = useState<AppSettings>(DEFAULT_SETTINGS);
+
+  // Load from localStorage on mount and apply theme
   useEffect(() => {
     const loaded = loadSettings();
     setSettings(loaded);
-    // Apply theme immediately
     applyTheme(loaded.theme);
-    setIsHydrated(true);
   }, []);
 
   // Listen to system theme changes if theme is "system"
   useEffect(() => {
-    if (!settings || settings.theme !== "system") return;
+    if (settings.theme !== "system") return;
 
     const unsubscribe = observeSystemThemeChanges(() => {
-      // Re-apply theme based on system preference
       applyTheme("system");
     });
 
     return () => {
       if (unsubscribe) unsubscribe();
     };
-  }, [settings]);
+  }, [settings.theme]);
 
   const handleSetLanguage = (lang: Language) => {
     const updated = updateLanguage(lang);
@@ -68,11 +72,7 @@ export function SettingsProvider({ children }: { children: React.ReactNode }) {
     setSettings(defaults);
   };
 
-  // During SSR, return null to prevent hydration mismatch
-  if (!isHydrated || !settings) {
-    return <>{children}</>;
-  }
-
+  // ALWAYS provide the context — no early return
   const value: SettingsContextType = {
     ...settings,
     setLanguage: handleSetLanguage,
@@ -92,10 +92,8 @@ export function SettingsProvider({ children }: { children: React.ReactNode }) {
 export function useSettings(): SettingsContextType {
   const context = useContext(SettingsContext);
 
-  // During SSR/static generation, return default settings if context is not available
   if (!context) {
-    // Return a safe default object that won't throw
-    const defaultContext: SettingsContextType = {
+    return {
       language: "en",
       theme: "system",
       currency: "USD",
@@ -106,7 +104,6 @@ export function useSettings(): SettingsContextType {
       setTimezone: () => {},
       resetSettings: () => {},
     };
-    return defaultContext;
   }
 
   return context;
