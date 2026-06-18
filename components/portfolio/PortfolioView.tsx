@@ -146,6 +146,17 @@ export function PortfolioView({ instruments, instrumentsBySymbol }: PortfolioVie
     [holdings, instrumentsBySymbol, quotesBySymbol, totalMarketValue]
   );
 
+  // Insights: show if holdings exist, even if prices loading
+  const rowsWithPL = rows.filter((r) => r.plPct != null);
+  const bestRow = rowsWithPL.reduce<HoldingRow | null>((best, r) => !best || r.plPct! > best.plPct! ? r : best, null);
+  const worstRow = rowsWithPL.reduce<HoldingRow | null>((worst, r) => !worst || r.plPct! < worst.plPct! ? r : worst, null);
+  const rowsWithAlloc = rows.filter((r) => r.allocationPct != null);
+  const largestRow = rowsWithAlloc.reduce<HoldingRow | null>((big, r) => !big || r.allocationPct! > big.allocationPct! ? r : big, null);
+  const hasInsights = holdings.length > 0;
+
+  // Allocation: show if holdings with instruments exist
+  const hasAllocation = holdings.some((h) => instrumentsBySymbol[h.symbol] != null);
+
   function openAdd() {
     setEditingHolding(null);
     setModalOpen(true);
@@ -275,6 +286,65 @@ export function PortfolioView({ instruments, instrumentsBySymbol }: PortfolioVie
             valueClass={plColor(totalPLPct)}
           />
         </div>
+
+        {/* Insights row */}
+        {hasInsights && (
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 animate-fade-in-up" style={{ animationDelay: "60ms" }}>
+            <InsightCard label={t("bestPerformer", language)} symbol={bestRow?.holding.symbol ?? null} value={bestRow ? fmtPct(bestRow.plPct) : "—"} valueClass={bestRow ? plColor(bestRow.plPct) : "text-text-muted"} instrument={bestRow?.instrument ?? null} />
+            <InsightCard label={t("worstPerformer", language)} symbol={worstRow?.holding.symbol ?? null} value={worstRow ? fmtPct(worstRow.plPct) : "—"} valueClass={worstRow ? plColor(worstRow.plPct) : "text-text-muted"} instrument={worstRow?.instrument ?? null} />
+            <InsightCard label={t("largestPosition", language)} symbol={largestRow?.holding.symbol ?? null} value={largestRow?.allocationPct != null ? `${largestRow.allocationPct.toFixed(1)}%` : "—"} valueClass="text-text-primary" instrument={largestRow?.instrument ?? null} />
+          </div>
+        )}
+
+        {/* Allocation sections */}
+        {hasAllocation && (
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-2 animate-fade-in-up" style={{ animationDelay: "80ms" }}>
+            <div className="rounded-card border border-border-base bg-bg-secondary p-4">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-text-secondary">{t("allocation", language)}</p>
+              <div className="space-y-2.5">
+                {[...rows].filter((r) => r.allocationPct != null).sort((a, b) => (b.allocationPct ?? 0) - (a.allocationPct ?? 0)).slice(0, 10).map((row) => (
+                  <div key={row.holding.id} className="flex items-center gap-2">
+                    <span className="w-20 shrink-0 truncate text-right font-mono text-xs text-text-secondary">{row.holding.symbol}</span>
+                    <div className="flex-1 h-1.5 overflow-hidden rounded-full bg-bg-primary">
+                      <div className="h-full rounded-full bg-cyan/70 transition-all duration-500" style={{ width: `${Math.min(row.allocationPct ?? 0, 100)}%` }} />
+                    </div>
+                    <span className="w-10 shrink-0 text-right font-mono text-xs text-text-secondary">{row.allocationPct?.toFixed(1)}%</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="rounded-card border border-border-base bg-bg-secondary p-4">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-text-secondary">{t("allocationByCategory", language)}</p>
+              <div className="space-y-2.5">
+                {Object.entries(
+                  holdings.reduce<Record<string, number>>((acc, h) => {
+                    const inst = instrumentsBySymbol[h.symbol];
+                    if (inst) {
+                      const q = quotesBySymbol[h.symbol];
+                      if (q && q.value > 0) {
+                        const val = h.quantity * q.value;
+                        acc[inst.category] = (acc[inst.category] ?? 0) + val;
+                      }
+                    }
+                    return acc;
+                  }, {})
+                ).sort((a, b) => b[1] - a[1]).map(([cat, val]) => {
+                  const total = totalMarketValue > 0 ? totalMarketValue : 1;
+                  const pct = (val / total) * 100;
+                  return (
+                    <div key={cat} className="flex items-center gap-2">
+                      <span className="w-20 shrink-0 truncate text-right font-mono text-xs text-text-secondary">{cat}</span>
+                      <div className="flex-1 h-1.5 overflow-hidden rounded-full bg-bg-primary">
+                        <div className="h-full rounded-full transition-all duration-500 bg-cyan" style={{ width: `${Math.min(pct, 100)}%` }} />
+                      </div>
+                      <span className="w-10 shrink-0 text-right font-mono text-xs text-text-secondary">{pct.toFixed(1)}%</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Holdings table */}
         <div className="rounded-card border border-border-base bg-bg-secondary overflow-hidden animate-fade-in-up" style={{ animationDelay: "80ms" }}>
@@ -422,6 +492,25 @@ function SummaryCard({
     <div className="rounded-card border border-border-base bg-bg-secondary p-4">
       <p className="text-xs text-text-secondary">{label}</p>
       <p className={`mt-1 text-xl font-bold font-mono ${valueClass}`}>{value}</p>
+    </div>
+  );
+}
+
+function InsightCard({ label, symbol, value, valueClass, instrument }: { label: string; symbol: string | null; value: string; valueClass: string; instrument: MarketInstrument | null }) {
+  return (
+    <div className="rounded-card border border-border-base bg-bg-secondary p-4">
+      <p className="mb-2 text-xs text-text-secondary">{label}</p>
+      {symbol ? (
+        <div className="flex items-center gap-2">
+          {instrument && (<AssetLogo symbol={instrument.finnhubSymbol ?? symbol} name={instrument.name} category={instrument.category} size="sm" />)}
+          <div>
+            <p className="font-mono text-sm font-semibold text-text-primary">{symbol}</p>
+            <p className={`font-mono text-base font-bold ${valueClass}`}>{value}</p>
+          </div>
+        </div>
+      ) : (
+        <p className="text-text-muted">—</p>
+      )}
     </div>
   );
 }

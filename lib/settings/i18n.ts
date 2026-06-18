@@ -110,6 +110,18 @@ export const translations = {
     "of": "of",
     "allAssets": "assets",
 
+    // Portfolio v2
+    "bestPerformer": "Best Performer",
+    "worstPerformer": "Worst Performer",
+    "largestPosition": "Largest Position",
+    "allocationByCategory": "By Category",
+    "diversification": "Diversification",
+    "categoriesHeld": "Categories",
+    "concentration": "Top Holding",
+    "wellDiversified": "Well diversified",
+    "highConcentration": "Concentrated (>40%)",
+    "pricesDelayed": "Prices are delayed. P/L calculations are informational only and do not constitute financial advice.",
+
     // Portfolio
     "myPortfolio": "My Portfolio",
     "yourPortfolioIsEmpty": "Your portfolio is empty",
@@ -416,6 +428,18 @@ export const translations = {
     "showingTop": "Mostrando i top",
     "of": "di",
     "allAssets": "asset",
+
+    // Portfolio v2
+    "bestPerformer": "Miglior Performer",
+    "worstPerformer": "Peggior Performer",
+    "largestPosition": "Posizione Maggiore",
+    "allocationByCategory": "Per Categoria",
+    "diversification": "Diversificazione",
+    "categoriesHeld": "Categorie",
+    "concentration": "Posizione Top",
+    "wellDiversified": "Ben diversificato",
+    "highConcentration": "Concentrato (>40%)",
+    "pricesDelayed": "I prezzi sono ritardati. I calcoli P/L sono solo informativi e non costituiscono consulenza finanziaria.",
 
     // Portfolio
     "myPortfolio": "Il Mio Portfolio",
