@@ -13,7 +13,7 @@ interface AssetSectionPlaceholderProps {
  */
 export function AssetSectionPlaceholder({ title, description }: AssetSectionPlaceholderProps) {
   return (
-    <section className="rounded-card border border-bg-sidebar bg-bg-card p-4">
+    <section className="rounded-card border border-bg-border/15 bg-bg-card/60 p-4">
       <header className="flex items-center justify-between">
         <h2 className="text-xs font-bold uppercase tracking-wide text-text-secondary">{title}</h2>
         <SoonBadge />

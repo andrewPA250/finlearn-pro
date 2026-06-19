@@ -20,7 +20,7 @@ export function AssetMarketContext({ context, unit = "index" }: AssetMarketConte
   if (!hasSMA) return null;
 
   return (
-    <section className="rounded-card border border-bg-border bg-bg-card p-5">
+    <section className="rounded-card border border-bg-border/15 bg-bg-card/60 p-5">
       <h2 className="mb-4 text-[10px] font-semibold uppercase tracking-widest text-text-muted">
         Trend vs 200-Day Average
       </h2>

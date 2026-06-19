@@ -16,7 +16,7 @@ export function AssetUnavailable({ instrument, categoryLabel, reason }: AssetUna
   return (
     <div className="mx-auto flex max-w-platform flex-col gap-4 p-4 md:p-6">
       {/* Hero section with asset info but no quote */}
-      <div className="rounded-card border border-bg-border bg-bg-card p-6">
+      <div className="rounded-card border border-bg-border/15 bg-bg-card/60 p-6">
         <div className="mb-3 flex items-end gap-3">
           <div>
             <h1 className="text-2xl font-bold text-text-primary">{instrument.name}</h1>
@@ -29,7 +29,7 @@ export function AssetUnavailable({ instrument, categoryLabel, reason }: AssetUna
       </div>
 
       {/* Unavailable message */}
-      <div className="rounded-card border border-bg-border bg-bg-card p-6">
+      <div className="rounded-card border border-bg-border/15 bg-bg-card/60 p-6">
         <div className="mb-4 flex items-start gap-3">
           <div className="mt-0.5 rounded-full bg-text-secondary/10 p-2">
             <svg
@@ -66,7 +66,7 @@ export function AssetUnavailable({ instrument, categoryLabel, reason }: AssetUna
       </div>
 
       {/* Learn section still available */}
-      <div className="rounded-card border border-bg-border bg-bg-card p-5">
+      <div className="rounded-card border border-bg-border/15 bg-bg-card/60 p-5">
         <h2 className="mb-3 text-[10px] font-semibold uppercase tracking-widest text-text-muted">
           Learn More
         </h2>

@@ -31,7 +31,7 @@ function NewsCard({ item }: { item: NewsItem }) {
       href={item.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex items-start gap-3 rounded-md border border-transparent p-2 transition-colors duration-100 hover:border-bg-border hover:bg-white/[0.025]"
+      className="group flex items-start gap-3 rounded-md border border-transparent p-2 transition-colors duration-100 hover:border-bg-border/20 hover:bg-white/[0.025]"
     >
       <div className="min-w-0 flex-1">
         <div className="flex items-center gap-1.5 min-w-0">
@@ -71,7 +71,7 @@ export function AssetLatestNews({ newsResult, assetName }: AssetLatestNewsProps)
   const hasMore = hiddenCount > 0;
 
   return (
-    <section className="rounded-card border border-bg-border bg-bg-card p-5">
+    <section className="rounded-card border border-bg-border/15 bg-bg-card/60 p-5">
       {/* Header */}
       <div className="flex items-center justify-between">
         <h2 className="text-[10px] font-semibold uppercase tracking-widest text-text-muted">
@@ -95,7 +95,7 @@ export function AssetLatestNews({ newsResult, assetName }: AssetLatestNewsProps)
         </p>
       ) : (
         <>
-          <div className="mt-2 space-y-1 divide-y divide-bg-sidebar/40">
+          <div className="mt-2 space-y-1 divide-y divide-bg-border/10">
             {displayNews.map((item) => (
               <div key={item.id} className="pt-1 first:pt-0">
                 <NewsCard item={item} />
@@ -107,7 +107,7 @@ export function AssetLatestNews({ newsResult, assetName }: AssetLatestNewsProps)
           {hasMore && (
             <button
               onClick={() => setExpanded((v) => !v)}
-              className="mt-3 w-full rounded-md border border-bg-border py-1.5 text-[11px] font-semibold text-text-secondary transition-colors duration-100 hover:border-cyan/30 hover:text-text-primary"
+              className="mt-3 w-full rounded-md border border-bg-border/20 py-1.5 text-[11px] font-semibold text-text-secondary transition-colors duration-100 hover:border-cyan/30 hover:text-text-primary"
             >
               {expanded
                 ? "Show less"

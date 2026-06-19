@@ -289,16 +289,19 @@ export function PortfolioView({ instruments, instrumentsBySymbol }: PortfolioVie
 
         {/* Insights row */}
         {hasInsights && (
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 animate-fade-in-up" style={{ animationDelay: "60ms" }}>
-            <InsightCard label={t("bestPerformer", language)} symbol={bestRow?.holding.symbol ?? null} value={bestRow ? fmtPct(bestRow.plPct) : "—"} valueClass={bestRow ? plColor(bestRow.plPct) : "text-text-muted"} instrument={bestRow?.instrument ?? null} />
-            <InsightCard label={t("worstPerformer", language)} symbol={worstRow?.holding.symbol ?? null} value={worstRow ? fmtPct(worstRow.plPct) : "—"} valueClass={worstRow ? plColor(worstRow.plPct) : "text-text-muted"} instrument={worstRow?.instrument ?? null} />
-            <InsightCard label={t("largestPosition", language)} symbol={largestRow?.holding.symbol ?? null} value={largestRow?.allocationPct != null ? `${largestRow.allocationPct.toFixed(1)}%` : "—"} valueClass="text-text-primary" instrument={largestRow?.instrument ?? null} />
+          <div className="mb-6 animate-fade-in-up" style={{ animationDelay: "60ms" }}>
+            <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-text-secondary">{t("insights", language)}</p>
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+              <InsightCard label={t("bestPerformer", language)} symbol={bestRow?.holding.symbol ?? null} value={bestRow ? fmtPct(bestRow.plPct) : "—"} valueClass={bestRow ? plColor(bestRow.plPct) : "text-text-muted"} instrument={bestRow?.instrument ?? null} />
+              <InsightCard label={t("worstPerformer", language)} symbol={worstRow?.holding.symbol ?? null} value={worstRow ? fmtPct(worstRow.plPct) : "—"} valueClass={worstRow ? plColor(worstRow.plPct) : "text-text-muted"} instrument={worstRow?.instrument ?? null} />
+              <InsightCard label={t("largestPosition", language)} symbol={largestRow?.holding.symbol ?? null} value={largestRow?.allocationPct != null ? `${largestRow.allocationPct.toFixed(1)}%` : "—"} valueClass="text-text-primary" instrument={largestRow?.instrument ?? null} />
+            </div>
           </div>
         )}
 
         {/* Allocation sections */}
         {hasAllocation && (
-          <div className="grid grid-cols-1 gap-3 md:grid-cols-2 animate-fade-in-up" style={{ animationDelay: "80ms" }}>
+          <div className="mb-6 grid grid-cols-1 gap-3 md:grid-cols-2 animate-fade-in-up" style={{ animationDelay: "80ms" }}>
             <div className="rounded-card border border-bg-border/15 bg-bg-card/60 p-4">
               <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-text-secondary">{t("allocation", language)}</p>
               <div className="space-y-2.5">
@@ -347,6 +350,7 @@ export function PortfolioView({ instruments, instrumentsBySymbol }: PortfolioVie
         )}
 
         {/* Holdings table */}
+        <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-text-secondary animate-fade-in-up" style={{ animationDelay: "80ms" }}>{t("holdings", language)}</p>
         <div className="rounded-card border border-bg-border/15 bg-bg-card/60 overflow-hidden animate-fade-in-up" style={{ animationDelay: "80ms" }}>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
@@ -460,7 +464,7 @@ export function PortfolioView({ instruments, instrumentsBySymbol }: PortfolioVie
 
         {/* Notes footnote */}
         <p className="mt-4 text-xs text-text-muted animate-fade-in-up" style={{ animationDelay: "120ms" }}>
-          Prices are delayed. P/L calculations are for informational purposes only and do not constitute financial advice.
+          {t("pricesDelayed", language)}
         </p>
       </div>
 

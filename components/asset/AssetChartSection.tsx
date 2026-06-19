@@ -191,7 +191,7 @@ export function AssetChartSection({ symbol, candles, quote, unit, source, tvSymb
   // ---------------------------------------------------------------------------
 
   return (
-    <section id="chart" className="rounded-card border border-bg-border bg-bg-card p-5">
+    <section id="chart" className="rounded-card border border-bg-border/15 bg-bg-card/60 p-5">
 
       {/* ── Header ─────────────────────────────────────────────────────────── */}
       <header className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">

@@ -57,7 +57,7 @@ export function AssetHero({ instrument, categoryLabel, quote }: AssetHeroProps) 
   const { formatMoneyCompact, fxLabel, currency } = useCurrency();
 
   return (
-    <div className="animate-fade-in-up border-b border-bg-border py-5">
+    <div className="animate-fade-in-up border-b border-bg-border/15 py-5">
       {/* Breadcrumb */}
       <Link
         href="/markets"
@@ -77,7 +77,7 @@ export function AssetHero({ instrument, categoryLabel, quote }: AssetHeroProps) 
               category={instrument.category}
               size="lg"
             />
-            <span className="rounded border border-bg-border bg-bg-card px-2 py-0.5 font-mono text-xs font-bold text-text-primary">
+            <span className="rounded border border-bg-border/20 bg-bg-card/60 px-2 py-0.5 font-mono text-xs font-bold text-text-primary">
               {instrument.symbol}
             </span>
             <span className="rounded bg-cyan-bg/50 px-2 py-0.5 text-xs font-semibold text-cyan">
@@ -147,7 +147,7 @@ export function AssetHero({ instrument, categoryLabel, quote }: AssetHeroProps) 
         {instrument.assetId && (
           <Link
             href="/workbench"
-            className="inline-flex items-center gap-1.5 rounded-card border border-bg-border px-3 py-1.5 text-xs font-semibold text-text-secondary transition duration-150 hover:border-cyan/30 hover:text-cyan"
+            className="inline-flex items-center gap-1.5 rounded-card border border-bg-border/20 px-3 py-1.5 text-xs font-semibold text-text-secondary transition duration-150 hover:border-cyan/30 hover:text-cyan"
           >
             Open in Quant Lab →
           </Link>

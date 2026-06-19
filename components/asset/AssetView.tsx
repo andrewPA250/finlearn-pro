@@ -48,7 +48,7 @@ export function AssetView({ instrument, categoryLabel, quote, candles, newsResul
       </div>
 
       {/* ── Section nav ─────────────────────────────────────────────────────── */}
-      <nav className="sticky top-14 z-20 border-b border-bg-border bg-bg-primary/95 backdrop-blur-sm">
+      <nav className="sticky top-14 z-20 border-b border-bg-border/20 bg-bg-primary/95 backdrop-blur-sm">
         <div className="mx-auto flex max-w-platform items-center overflow-x-auto px-4 md:px-6">
           {NAV_LINKS.map((link) => (
             <a

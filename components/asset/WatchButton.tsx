@@ -34,7 +34,7 @@ export function WatchButton({ symbol }: WatchButtonProps) {
     return (
       <button
         disabled
-        className="inline-flex cursor-not-allowed items-center gap-1.5 rounded-card border border-bg-border px-3 py-1.5 text-xs font-semibold text-text-disabled opacity-40"
+        className="inline-flex cursor-not-allowed items-center gap-1.5 rounded-card border border-bg-border/20 px-3 py-1.5 text-xs font-semibold text-text-disabled opacity-40"
       >
         {t("watch", language)}
       </button>
@@ -54,10 +54,10 @@ export function WatchButton({ symbol }: WatchButtonProps) {
       }
       className={`inline-flex items-center gap-1.5 rounded-card border px-3 py-1.5 text-xs font-semibold transition duration-150 ${
         canAdd
-          ? "cursor-not-allowed border-bg-border text-text-disabled opacity-40"
+          ? "cursor-not-allowed border-bg-border/20 text-text-disabled opacity-40"
           : isWatched
           ? "border-positive bg-positive/10 text-positive hover:bg-positive/20"
-          : "border-bg-border text-text-secondary hover:border-cyan/30 hover:text-cyan"
+          : "border-bg-border/20 text-text-secondary hover:border-cyan/30 hover:text-cyan"
       }`}
     >
       {isWatched ? t("inWatchlist", language) : t("watch", language)}

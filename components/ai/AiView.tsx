@@ -43,8 +43,23 @@ export function AiView() {
   const [focusSymbol, setFocusSymbol] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [cooldownUntil, setCooldownUntil] = useState<number | null>(null);
+  const [cooldownLeft, setCooldownLeft] = useState(0);
 
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  // Rate-limit cooldown: tick down once a second, never auto-retries the request.
+  useEffect(() => {
+    if (cooldownUntil === null) return;
+    const tick = () => {
+      const remaining = Math.max(0, Math.ceil((cooldownUntil - Date.now()) / 1000));
+      setCooldownLeft(remaining);
+      if (remaining === 0) setCooldownUntil(null);
+    };
+    tick();
+    const interval = setInterval(tick, 1000);
+    return () => clearInterval(interval);
+  }, [cooldownUntil]);
 
   // Probe whether an AI provider is configured (env lives server-side).
   useEffect(() => {
@@ -78,7 +93,7 @@ export function AiView() {
 
   async function send(text: string) {
     const trimmed = text.trim();
-    if (!trimmed || loading || config === "not_configured") return;
+    if (!trimmed || loading || config === "not_configured" || cooldownLeft > 0) return;
 
     setError(null);
     const nextMessages: AiMessage[] = [...messages, { role: "user", content: trimmed }];
@@ -133,6 +148,9 @@ export function AiView() {
         setMessages((m) => [...m, { role: "assistant", content: data.reply }]);
       } else if (data.error === "not_configured") {
         setConfig("not_configured");
+      } else if (data.error === "rate_limited") {
+        setError(data.message || t("aiErrorGeneric", language));
+        setCooldownUntil(Date.now() + 30_000);
       } else {
         setError(data.message || t("aiErrorGeneric", language));
       }
@@ -223,6 +241,11 @@ export function AiView() {
           {error && (
             <div className="mt-2 shrink-0 rounded-card border border-negative/30 bg-negative/10 px-3 py-2 text-sm text-negative">
               {error}
+              {cooldownLeft > 0 && (
+                <span className="ml-1.5 font-mono text-negative/80">
+                  {t("aiRateLimitWait", language).replace("{s}", String(cooldownLeft))}
+                </span>
+              )}
             </div>
           )}
 
@@ -249,10 +272,14 @@ export function AiView() {
             />
             <button
               type="submit"
-              disabled={loading || !input.trim()}
+              disabled={loading || !input.trim() || cooldownLeft > 0}
               className="h-[44px] shrink-0 rounded-card bg-cyan px-4 text-sm font-semibold text-bg-primary transition hover:bg-cyan-dark disabled:cursor-not-allowed disabled:opacity-40"
             >
-              {loading ? t("aiThinking", language) : t("aiSend", language)}
+              {loading
+                ? t("aiThinking", language)
+                : cooldownLeft > 0
+                ? `${cooldownLeft}s`
+                : t("aiSend", language)}
             </button>
           </form>
 
