@@ -67,13 +67,10 @@ function AssetCard({ symbol, name, quote }: { symbol: string; name: string; quot
 
   return (
     <Link href={`/asset/${symbol}`}>
-      <div className="group rounded-card border border-bg-border/15 bg-bg-card/60 p-4 transition-all duration-150 hover:border-cyan/30 hover:bg-bg-hover cursor-pointer">
-        <div className="flex items-start justify-between mb-3">
-          <div>
-            <p className="text-xs font-bold text-text-primary font-mono">{symbol}</p>
-            <p className="text-[11px] text-text-muted mt-0.5">{name}</p>
-          </div>
-          <span className={`text-[10px] font-semibold px-2 py-0.5 rounded ${
+      <div className="group rounded-card border border-bg-border/10 bg-bg-card/60 p-5 transition-colors duration-150 hover:bg-bg-hover hover:border-bg-border/20 cursor-pointer">
+        <div className="flex items-center justify-between mb-2.5">
+          <p className="text-base font-bold text-text-primary font-mono">{symbol}</p>
+          <span className={`text-xs font-semibold px-2 py-0.5 rounded ${
             isPositive
               ? "bg-positive/10 text-positive"
               : "bg-negative/10 text-negative"
@@ -81,9 +78,10 @@ function AssetCard({ symbol, name, quote }: { symbol: string; name: string; quot
             {formatChange(quote.changePercent)}
           </span>
         </div>
-        <p className="text-base font-bold text-text-primary font-mono">
+        <p className="text-2xl font-bold text-text-primary font-mono leading-tight">
           {quote.unit === "percent" ? `${quote.value.toFixed(2)}%` : formatMoneyCompact(quote.value)}
         </p>
+        <p className="text-xs text-text-muted mt-1.5 truncate">{name}</p>
       </div>
     </Link>
   );
@@ -100,7 +98,7 @@ export function FeaturedMarketsTabs({ quotes }: FeaturedMarketsTabsProps) {
   return (
     <div>
       {/* Tab bar */}
-      <div className="flex gap-1 mb-5 border-b border-bg-border/15 pb-0">
+      <div className="flex gap-1 mb-5">
         {tabs.map((tab) => (
           <button
             key={tab.id}

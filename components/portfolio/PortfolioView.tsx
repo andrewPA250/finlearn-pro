@@ -181,7 +181,7 @@ export function PortfolioView({ instruments, instrumentsBySymbol }: PortfolioVie
               {t("trackInvestments", language)}
             </p>
           </div>
-          <div className="flex flex-col items-center justify-center rounded-card border border-bg-border/15 bg-bg-card/60 px-6 py-16 text-center animate-fade-in-up" style={{ animationDelay: "40ms" }}>
+          <div className="flex flex-col items-center justify-center rounded-card bg-bg-card/40 px-6 py-16 text-center animate-fade-in-up" style={{ animationDelay: "40ms" }}>
             <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-cyan/10">
               <svg viewBox="0 0 24 24" className="h-8 w-8 text-cyan" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M3 3v18h18" />
@@ -252,7 +252,7 @@ export function PortfolioView({ instruments, instrumentsBySymbol }: PortfolioVie
                 fetchQuotes(uniqueSymbols);
               }}
               disabled={quotesLoading}
-              className="rounded border border-bg-border/20 px-3 py-1.5 text-xs text-text-secondary hover:text-text-primary transition disabled:opacity-50"
+              className="rounded bg-bg-card/50 px-3 py-1.5 text-xs text-text-secondary hover:text-text-primary hover:bg-bg-hover transition disabled:opacity-50"
             >
               {quotesLoading ? t("refreshing", language) : t("refresh", language)}
             </button>
@@ -302,21 +302,21 @@ export function PortfolioView({ instruments, instrumentsBySymbol }: PortfolioVie
         {/* Allocation sections */}
         {hasAllocation && (
           <div className="mb-6 grid grid-cols-1 gap-3 md:grid-cols-2 animate-fade-in-up" style={{ animationDelay: "80ms" }}>
-            <div className="rounded-card border border-bg-border/15 bg-bg-card/60 p-4">
+            <div className="rounded-card bg-bg-card/40 p-4">
               <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-text-secondary">{t("allocation", language)}</p>
               <div className="space-y-2.5">
                 {[...rows].filter((r) => r.allocationPct != null).sort((a, b) => (b.allocationPct ?? 0) - (a.allocationPct ?? 0)).slice(0, 10).map((row) => (
                   <div key={row.holding.id} className="flex items-center gap-2">
-                    <span className="w-20 shrink-0 truncate text-right font-mono text-xs text-text-secondary">{row.holding.symbol}</span>
+                    <span className="w-20 shrink-0 truncate text-right font-mono text-sm text-text-secondary">{row.holding.symbol}</span>
                     <div className="flex-1 h-1.5 overflow-hidden rounded-full bg-bg-primary">
                       <div className="h-full rounded-full bg-cyan/70 transition-all duration-500" style={{ width: `${Math.min(row.allocationPct ?? 0, 100)}%` }} />
                     </div>
-                    <span className="w-10 shrink-0 text-right font-mono text-xs text-text-secondary">{row.allocationPct?.toFixed(1)}%</span>
+                    <span className="w-10 shrink-0 text-right font-mono text-sm text-text-secondary">{row.allocationPct?.toFixed(1)}%</span>
                   </div>
                 ))}
               </div>
             </div>
-            <div className="rounded-card border border-bg-border/15 bg-bg-card/60 p-4">
+            <div className="rounded-card bg-bg-card/40 p-4">
               <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-text-secondary">{t("allocationByCategory", language)}</p>
               <div className="space-y-2.5">
                 {Object.entries(
@@ -336,11 +336,11 @@ export function PortfolioView({ instruments, instrumentsBySymbol }: PortfolioVie
                   const pct = (val / total) * 100;
                   return (
                     <div key={cat} className="flex items-center gap-2">
-                      <span className="w-20 shrink-0 truncate text-right font-mono text-xs text-text-secondary">{cat}</span>
+                      <span className="w-20 shrink-0 truncate text-right font-mono text-sm text-text-secondary">{cat}</span>
                       <div className="flex-1 h-1.5 overflow-hidden rounded-full bg-bg-primary">
                         <div className="h-full rounded-full transition-all duration-500 bg-cyan" style={{ width: `${Math.min(pct, 100)}%` }} />
                       </div>
-                      <span className="w-10 shrink-0 text-right font-mono text-xs text-text-secondary">{pct.toFixed(1)}%</span>
+                      <span className="w-10 shrink-0 text-right font-mono text-sm text-text-secondary">{pct.toFixed(1)}%</span>
                     </div>
                   );
                 })}
@@ -351,10 +351,10 @@ export function PortfolioView({ instruments, instrumentsBySymbol }: PortfolioVie
 
         {/* Holdings table */}
         <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-text-secondary animate-fade-in-up" style={{ animationDelay: "80ms" }}>{t("holdings", language)}</p>
-        <div className="rounded-card border border-bg-border/15 bg-bg-card/60 overflow-hidden animate-fade-in-up" style={{ animationDelay: "80ms" }}>
+        <div className="rounded-card bg-bg-card/40 overflow-hidden animate-fade-in-up" style={{ animationDelay: "80ms" }}>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
-              <thead className="border-b border-bg-border/20 bg-bg-card/80">
+              <thead className="bg-bg-card/60">
                 <tr>
                   <th className="px-4 py-3 text-left font-semibold text-text-secondary whitespace-nowrap">{t("symbol", language)}</th>
                   <th className="px-4 py-3 text-left font-semibold text-text-secondary whitespace-nowrap hidden md:table-cell">{t("name", language)}</th>
@@ -370,7 +370,7 @@ export function PortfolioView({ instruments, instrumentsBySymbol }: PortfolioVie
                   <th className="px-4 py-3 text-center font-semibold text-text-secondary whitespace-nowrap">{t("actions", language)}</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-bg-border/10">
+              <tbody>
                 {rows.map(({ holding, instrument, currentPrice, marketValue, costBasis, pl, plPct, allocationPct }) => (
                   <tr key={holding.id} className="hover:bg-bg-hover transition">
                     <td className="px-4 py-3">
@@ -493,23 +493,23 @@ function SummaryCard({
   valueClass?: string;
 }) {
   return (
-    <div className="rounded-card border border-bg-border/15 bg-bg-card/60 p-4">
+    <div className="rounded-card bg-bg-card/40 p-4">
       <p className="text-xs text-text-secondary">{label}</p>
-      <p className={`mt-1 text-xl font-bold font-mono ${valueClass}`}>{value}</p>
+      <p className={`mt-1 text-2xl font-bold font-mono ${valueClass}`}>{value}</p>
     </div>
   );
 }
 
 function InsightCard({ label, symbol, value, valueClass, instrument }: { label: string; symbol: string | null; value: string; valueClass: string; instrument: MarketInstrument | null }) {
   return (
-    <div className="rounded-card border border-bg-border/15 bg-bg-card/60 p-4">
+    <div className="rounded-card bg-bg-card/40 p-4">
       <p className="mb-2 text-xs text-text-secondary">{label}</p>
       {symbol ? (
         <div className="flex items-center gap-2">
           {instrument && (<AssetLogo symbol={instrument.finnhubSymbol ?? symbol} name={instrument.name} category={instrument.category} size="sm" />)}
           <div>
-            <p className="font-mono text-sm font-semibold text-text-primary">{symbol}</p>
-            <p className={`font-mono text-base font-bold ${valueClass}`}>{value}</p>
+            <p className="font-mono text-base font-semibold text-text-primary">{symbol}</p>
+            <p className={`font-mono text-lg font-bold ${valueClass}`}>{value}</p>
           </div>
         </div>
       ) : (

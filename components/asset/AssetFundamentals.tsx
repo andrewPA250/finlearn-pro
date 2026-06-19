@@ -63,8 +63,8 @@ function Row({ label, value, highlight }: { label: string; value: string; highli
     : "text-text-primary";
   return (
     <div className="flex items-center justify-between gap-3 py-1">
-      <span className="text-xs text-text-secondary">{label}</span>
-      <span className={`font-mono text-xs font-medium tabular-nums ${valueClass}`}>{value}</span>
+      <span className="text-[13px] text-text-secondary">{label}</span>
+      <span className={`font-mono text-sm font-medium tabular-nums ${valueClass}`}>{value}</span>
     </div>
   );
 }
@@ -72,7 +72,7 @@ function Row({ label, value, highlight }: { label: string; value: string; highli
 function Group({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="rounded-md bg-bg-hover/30 px-3 py-3">
-      <p className="mb-1.5 text-[10px] font-bold uppercase tracking-widest text-text-secondary/40">
+      <p className="mb-1.5 text-[11px] font-bold uppercase tracking-widest text-text-secondary/40">
         {title}
       </p>
       <div className="space-y-0.5">{children}</div>
@@ -155,8 +155,8 @@ export function AssetFundamentals({ fundamentals: f, category }: AssetFundamenta
   if (groups.length === 0) return null;
 
   return (
-    <section className="rounded-card border border-bg-border/15 bg-bg-card/60 p-5">
-      <h2 className="mb-3 text-[10px] font-semibold uppercase tracking-widest text-text-muted">
+    <section className="rounded-card bg-bg-card/40 p-5">
+      <h2 className="mb-3 text-xs font-semibold uppercase tracking-widest text-text-muted">
         Fundamentals
       </h2>
 

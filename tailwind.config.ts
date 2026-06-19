@@ -1,5 +1,13 @@
 import type { Config } from "tailwindcss";
 
+/** Resolves a color from an "R G B" CSS variable, honoring Tailwind's opacity modifiers (e.g. bg-card/40). */
+function withOpacity(varName: string): string {
+  return (({ opacityValue }: { opacityValue?: string }) =>
+    opacityValue !== undefined
+      ? `rgb(var(${varName}) / ${opacityValue})`
+      : `rgb(var(${varName}))`) as unknown as string;
+}
+
 const config: Config = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -10,31 +18,31 @@ const config: Config = {
     extend: {
       colors: {
         /* Brand colors */
-        cyan: "var(--color-cyan)",
-        "cyan-dark": "var(--color-cyan-dark)",
-        "cyan-light": "var(--color-cyan-light)",
-        "cyan-bg": "var(--color-cyan-bg)",
+        cyan: withOpacity("--color-cyan-rgb"),
+        "cyan-dark": withOpacity("--color-cyan-dark-rgb"),
+        "cyan-light": withOpacity("--color-cyan-light-rgb"),
+        "cyan-bg": withOpacity("--color-cyan-bg-rgb"),
 
         /* Background scale */
-        "bg-base": "var(--bg-base)",
-        "bg-primary": "var(--bg-primary)",
-        "bg-card": "var(--bg-card)",
-        "bg-sidebar": "var(--bg-sidebar)",
-        "bg-hover": "var(--bg-hover)",
-        "bg-border": "var(--bg-border)",
+        "bg-base": withOpacity("--bg-base-rgb"),
+        "bg-primary": withOpacity("--bg-primary-rgb"),
+        "bg-card": withOpacity("--bg-card-rgb"),
+        "bg-sidebar": withOpacity("--bg-sidebar-rgb"),
+        "bg-hover": withOpacity("--bg-hover-rgb"),
+        "bg-border": withOpacity("--bg-border-rgb"),
 
         /* Text scale */
-        "text-primary": "var(--text-primary)",
-        "text-secondary": "var(--text-secondary)",
-        "text-muted": "var(--text-muted)",
-        "text-disabled": "var(--text-disabled)",
+        "text-primary": withOpacity("--text-primary-rgb"),
+        "text-secondary": withOpacity("--text-secondary-rgb"),
+        "text-muted": withOpacity("--text-muted-rgb"),
+        "text-disabled": withOpacity("--text-disabled-rgb"),
 
         /* Semantic */
-        positive: "var(--color-positive)",
-        negative: "var(--color-negative)",
-        caution: "var(--color-caution)",
-        "color-ai": "var(--color-ai)",
-        info: "var(--color-info)",
+        positive: withOpacity("--color-positive-rgb"),
+        negative: withOpacity("--color-negative-rgb"),
+        caution: withOpacity("--color-caution-rgb"),
+        "color-ai": withOpacity("--color-ai-rgb"),
+        info: withOpacity("--color-info-rgb"),
 
         /* Legacy (backward compat) */
         "accent-purple": "var(--accent-purple)",

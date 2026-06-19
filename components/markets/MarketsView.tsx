@@ -26,8 +26,8 @@ export function MarketsView({ tickerQuotes }: MarketsViewProps) {
       {/* Page header */}
       <div className="mb-4 flex items-baseline justify-between gap-4 animate-fade-in-up">
         <div>
-          <h1 className="text-xl font-bold text-text-primary">Markets</h1>
-          <p className="mt-0.5 text-xs text-text-secondary">
+          <h1 className="text-2xl font-bold text-text-primary">Markets</h1>
+          <p className="mt-0.5 text-sm text-text-secondary">
             {catalogStats.total}+ assets across indices, equities, crypto, forex, commodities and bonds.
           </p>
         </div>

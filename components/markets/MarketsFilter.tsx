@@ -69,19 +69,19 @@ export function MarketsFilter({
 
           return (
             <div key={category.id} id={category.id} className="flex flex-col">
-              <section className="flex-1 rounded-card border border-bg-border/15 bg-bg-card/60 flex flex-col">
+              <section className="flex-1 rounded-card border border-bg-border/10 bg-bg-card/60 flex flex-col">
                 {/* Header with category name and count */}
-                <header className="flex items-baseline justify-between border-b border-bg-border/15 px-3 py-2">
-                  <h2 className="text-[11px] font-bold uppercase tracking-wide text-text-secondary">
+                <header className="flex items-baseline justify-between px-3.5 pt-3.5 pb-2">
+                  <h2 className="text-sm font-bold uppercase tracking-wide text-text-secondary">
                     {category.label}
                   </h2>
-                  <p className="text-[10px] text-text-muted">
+                  <p className="text-xs text-text-muted">
                     {totalCount} {totalCount === 1 ? "asset" : "assets"}
                   </p>
                 </header>
 
                 {/* Preview list (first 10 items) */}
-                <div className="divide-y divide-bg-border/10 flex-1">
+                <div className="flex-1 px-1">
                   {preview.map((instrument) => (
                     <MarketListRow
                       key={instrument.symbol}
@@ -91,11 +91,11 @@ export function MarketsFilter({
                   ))}
                 </div>
 
-                {/* "View all" footer link — inside the card for a flush table edge */}
+                {/* "View all" footer link */}
                 {totalCount > 10 && (
                   <Link
                     href={`/markets/category/${category.id}`}
-                    className="border-t border-bg-border/15 px-3 py-1.5 text-[11px] font-semibold text-cyan hover:text-cyan-light transition hover:bg-bg-hover"
+                    className="mx-1 mb-1 mt-1 rounded-md px-3 py-1.5 text-[11px] font-semibold text-cyan hover:text-cyan-light transition hover:bg-bg-hover"
                   >
                     View all {totalCount} →
                   </Link>

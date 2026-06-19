@@ -20,19 +20,19 @@ export function AssetMarketContext({ context, unit = "index" }: AssetMarketConte
   if (!hasSMA) return null;
 
   return (
-    <section className="rounded-card border border-bg-border/15 bg-bg-card/60 p-5">
-      <h2 className="mb-4 text-[10px] font-semibold uppercase tracking-widest text-text-muted">
+    <section className="rounded-card bg-bg-card/40 p-5">
+      <h2 className="mb-4 text-xs font-semibold uppercase tracking-widest text-text-muted">
         Trend vs 200-Day Average
       </h2>
 
       <div className="flex items-center justify-between gap-4">
         <div>
           <p className="mb-0.5 text-xs text-text-muted">200-Day SMA</p>
-          <p className="font-mono text-xl font-bold text-text-primary">{fmt(sma200!, unit)}</p>
+          <p className="font-mono text-2xl font-bold text-text-primary">{fmt(sma200!, unit)}</p>
         </div>
         <div className="text-right">
           <span
-            className={`inline-block rounded px-3 py-1 text-xs font-bold ${
+            className={`inline-block rounded px-3 py-1 text-sm font-bold ${
               trendVs200 === "above"
                 ? "bg-positive/10 text-positive"
                 : "bg-negative/10 text-negative"

@@ -36,8 +36,8 @@ function fmtCompact(n: number): string {
 function StatCell({ label, value }: { label: string; value: string }) {
   return (
     <div className="rounded-md bg-bg-hover/40 px-3 py-2.5">
-      <p className="mb-1 text-[10px] font-semibold uppercase tracking-widest text-text-muted">{label}</p>
-      <p className="font-mono text-sm font-bold text-text-primary">{value}</p>
+      <p className="mb-1 text-[11px] font-semibold uppercase tracking-widest text-text-muted">{label}</p>
+      <p className="font-mono text-base font-bold text-text-primary">{value}</p>
     </div>
   );
 }
@@ -69,8 +69,8 @@ export function AssetStatsSection({ stats, unit = "index", currentPrice }: Asset
   }
 
   return (
-    <section id="stats" className="rounded-card border border-bg-border/15 bg-bg-card/60 p-5">
-      <h2 className="mb-3 text-[10px] font-semibold uppercase tracking-widest text-text-muted">
+    <section id="stats" className="rounded-card bg-bg-card/40 p-5">
+      <h2 className="mb-3 text-xs font-semibold uppercase tracking-widest text-text-muted">
         Market Statistics
       </h2>
 
@@ -83,11 +83,11 @@ export function AssetStatsSection({ stats, unit = "index", currentPrice }: Asset
       {/* 52W Range bar */}
       {has52W && (
         <div className="mt-4 pt-4">
-          <p className="mb-2 text-[10px] font-semibold uppercase tracking-widest text-text-muted">
+          <p className="mb-2 text-[11px] font-semibold uppercase tracking-widest text-text-muted">
             52-Week Range
           </p>
           <div className="flex items-center gap-3">
-            <span className="shrink-0 font-mono text-[11px] text-text-muted">
+            <span className="shrink-0 font-mono text-xs text-text-muted">
               {fmtPrice(low52!, unit)}
             </span>
             <div className="relative h-1.5 flex-1 overflow-hidden rounded-full bg-bg-border/30">
@@ -96,12 +96,12 @@ export function AssetStatsSection({ stats, unit = "index", currentPrice }: Asset
                 style={{ width: positionPct != null ? `${positionPct}%` : "50%" }}
               />
             </div>
-            <span className="shrink-0 font-mono text-[11px] text-text-muted">
+            <span className="shrink-0 font-mono text-xs text-text-muted">
               {fmtPrice(high52!, unit)}
             </span>
           </div>
           {positionPct != null && (
-            <p className="mt-1.5 text-[10px] text-text-muted/60">
+            <p className="mt-1.5 text-[11px] text-text-muted/60">
               At {positionPct}% of 52-week range ·{" "}
               {positionPct <= 25 ? "lower quartile" : positionPct <= 50 ? "lower half" : positionPct <= 75 ? "upper half" : "upper quartile"}
             </p>

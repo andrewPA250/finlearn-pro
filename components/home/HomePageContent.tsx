@@ -50,27 +50,27 @@ function formatAge(unixSeconds: number, lang: string): string {
 function MarketIndexCard({ symbol, label, quote }: { symbol: string; label: string; quote: TickerQuote | null }) {
   if (!quote) {
     return (
-      <div className="flex flex-col rounded-md border border-bg-border/15 bg-bg-card/60 px-3 py-3">
-        <span className="text-[10px] font-bold font-mono text-text-disabled">{symbol}</span>
-        <span className="text-sm font-bold font-mono text-text-disabled mt-1">—</span>
-        <span className="text-[10px] text-text-disabled/60 mt-0.5">{label}</span>
+      <div className="flex flex-col rounded-lg border border-bg-border/10 bg-bg-card/60 px-3.5 py-3.5">
+        <span className="text-sm font-bold font-mono text-text-disabled">{symbol}</span>
+        <span className="text-xl font-bold font-mono text-text-disabled mt-1.5">—</span>
+        <span className="text-xs text-text-disabled/60 mt-0.5">{label}</span>
       </div>
     );
   }
   const isPositive = quote.changePercent >= 0;
   return (
     <Link href={`/asset/${symbol}`}>
-      <div className="group flex flex-col rounded-md border border-bg-border/15 bg-bg-card/60 px-3 py-3 cursor-pointer transition-all hover:border-cyan/40 hover:bg-bg-hover">
+      <div className="group flex flex-col rounded-lg border border-bg-border/10 bg-bg-card/60 px-3.5 py-3.5 cursor-pointer transition-colors hover:bg-bg-hover hover:border-bg-border/20">
         <div className="flex items-center justify-between gap-1">
-          <span className="text-[10px] font-bold font-mono text-text-secondary truncate">{symbol}</span>
-          <span className={`shrink-0 text-[10px] font-semibold font-mono ${isPositive ? "text-positive" : "text-negative"}`}>
+          <span className="text-sm font-bold font-mono text-text-secondary truncate">{symbol}</span>
+          <span className={`shrink-0 text-xs font-semibold font-mono ${isPositive ? "text-positive" : "text-negative"}`}>
             {isPositive ? "▲" : "▼"}{Math.abs(quote.changePercent).toFixed(2)}%
           </span>
         </div>
-        <span className="text-sm font-bold font-mono text-text-primary mt-1.5">
+        <span className="text-xl font-bold font-mono text-text-primary mt-1.5">
           {formatPrice(quote.value, quote.unit)}
         </span>
-        <span className="text-[10px] text-text-muted mt-0.5 truncate">{label}</span>
+        <span className="text-xs text-text-muted mt-0.5 truncate">{label}</span>
       </div>
     </Link>
   );
@@ -83,14 +83,14 @@ function WatchRow({ symbol, label, quote }: { symbol: string; label: string; quo
     <Link href={`/asset/${symbol}`}>
       <div className="flex items-center justify-between px-4 py-2.5 transition-colors hover:bg-bg-hover">
         <div className="min-w-0">
-          <p className="text-xs font-bold font-mono text-text-primary">{symbol}</p>
-          <p className="text-[10px] text-text-muted truncate">{label}</p>
+          <p className="text-sm font-bold font-mono text-text-primary">{symbol}</p>
+          <p className="text-[11px] text-text-muted truncate">{label}</p>
         </div>
         <div className="text-right shrink-0 ml-3">
-          <p className="text-xs font-bold font-mono text-text-primary">
+          <p className="text-sm font-bold font-mono text-text-primary">
             {formatPrice(quote.value, quote.unit)}
           </p>
-          <p className={`text-[10px] font-mono font-semibold ${isPositive ? "text-positive" : "text-negative"}`}>
+          <p className={`text-xs font-mono font-semibold ${isPositive ? "text-positive" : "text-negative"}`}>
             {formatChange(quote.changePercent)}
           </p>
         </div>
@@ -107,16 +107,16 @@ function EditorialNewsItem({ item, lang }: { item: NewsItem; lang: string }) {
       href={item.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex items-start gap-3 px-4 py-3.5 border-b border-bg-border/10 last:border-0 transition-colors hover:bg-bg-hover"
+      className="group flex items-start gap-3 px-4 py-3.5 transition-colors hover:bg-bg-hover"
     >
       {/* Left: text content */}
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-1.5 min-w-0">
-          <span className="text-[10px] font-bold text-cyan uppercase tracking-wide shrink-0">{item.source}</span>
+          <span className="text-xs font-bold text-cyan uppercase tracking-wide shrink-0">{item.source}</span>
           <span className="h-0.5 w-0.5 rounded-full bg-text-disabled/60 shrink-0" />
-          <span className="text-[10px] text-text-disabled truncate">{formatAge(item.datetime, lang)}</span>
+          <span className="text-xs text-text-disabled truncate">{formatAge(item.datetime, lang)}</span>
         </div>
-        <p className="mt-1 text-xs font-medium text-text-primary leading-snug line-clamp-2 group-hover:text-cyan transition-colors">
+        <p className="mt-1 text-[15px] font-medium text-text-primary leading-snug line-clamp-2 group-hover:text-cyan transition-colors">
           {item.headline}
         </p>
       </div>
@@ -141,12 +141,12 @@ function EditorialNewsItem({ item, lang }: { item: NewsItem; lang: string }) {
 function LessonRow({ lesson }: { lesson: LessonMeta }) {
   return (
     <Link href={`/lessons/${lesson.id}`}>
-      <div className="flex items-center gap-3 rounded-md border border-bg-border/15 bg-bg-card/60 px-3 py-2.5 transition-all hover:border-cyan/30 hover:bg-bg-hover cursor-pointer">
-        <span className="shrink-0 flex h-6 w-6 items-center justify-center rounded bg-cyan-bg/40 text-[10px] font-bold text-cyan font-mono">
+      <div className="flex items-center gap-3 rounded-md bg-bg-card/50 px-3 py-2.5 transition-colors hover:bg-bg-hover cursor-pointer">
+        <span className="shrink-0 flex h-6 w-6 items-center justify-center rounded bg-cyan-bg/40 text-[11px] font-bold text-cyan font-mono">
           {lesson.id}
         </span>
-        <p className="min-w-0 text-xs font-medium text-text-primary truncate">{lesson.title}</p>
-        <span className="ml-auto shrink-0 text-[10px] text-text-disabled">→</span>
+        <p className="min-w-0 text-sm font-medium text-text-primary truncate">{lesson.title}</p>
+        <span className="ml-auto shrink-0 text-[11px] text-text-disabled">→</span>
       </div>
     </Link>
   );
@@ -214,7 +214,7 @@ export function HomePageContent({
 
               {/* Key indices — 3×2 grid */}
               <div>
-                <p className="mb-2 text-[10px] font-semibold uppercase tracking-widest text-text-muted">
+                <p className="mb-2 text-[11px] font-semibold uppercase tracking-widest text-text-muted">
                   {lang === "it" ? "Indici principali" : "Key Indices"}
                 </p>
                 <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
@@ -229,24 +229,24 @@ export function HomePageContent({
             {/* Right — live snapshot card (desktop only) */}
             <div className="hidden md:flex flex-col">
               <div className="flex flex-1 flex-col rounded-card border border-cyan/20 bg-bg-card overflow-hidden shadow-[0_0_0_1px_rgba(0,212,184,0.04)]">
-                <div className="flex items-center justify-between border-b border-bg-border/15 bg-gradient-to-r from-cyan/[0.07] to-transparent px-4 py-2.5">
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-text-secondary">
+                <div className="flex items-center justify-between bg-gradient-to-r from-cyan/[0.07] to-transparent px-4 py-3">
+                  <span className="text-[11px] font-bold uppercase tracking-widest text-text-secondary">
                     {t("marketSnapshot", lang)}
                   </span>
-                  <span className="flex items-center gap-1.5 text-[10px] font-semibold text-positive">
+                  <span className="flex items-center gap-1.5 text-[11px] font-semibold text-positive">
                     <span className="h-1.5 w-1.5 rounded-full bg-positive animate-pulse" />
                     {lang === "it" ? "Dal Vivo" : "Live"}
                   </span>
                 </div>
-                <div className="flex-1 divide-y divide-bg-border/10">
+                <div className="flex-1">
                   {watchSymbols.map(({ symbol, label }) => (
                     <WatchRow key={symbol} symbol={symbol} label={label} quote={quotes[symbol] ?? null} />
                   ))}
                 </div>
-                <div className="border-t border-bg-border/15 px-4 py-2.5">
+                <div className="px-4 py-3">
                   <Link
                     href="/markets"
-                    className="block w-full rounded-md bg-cyan py-2 text-center text-xs font-semibold text-bg-primary transition hover:bg-cyan-dark"
+                    className="block w-full rounded-md bg-cyan py-2 text-center text-sm font-semibold text-bg-primary transition hover:bg-cyan-dark"
                   >
                     {t("viewAllMarkets", lang)} →
                   </Link>
@@ -262,7 +262,7 @@ export function HomePageContent({
       <section className="pt-2">
         <div className="mx-auto max-w-platform px-4 md:px-6 py-5">
           <div className="mb-4 flex items-center justify-between">
-            <span className="pl-2.5 border-l-2 border-cyan text-[11px] font-semibold uppercase tracking-widest text-text-secondary">
+            <span className="pl-2.5 border-l-2 border-cyan text-xs font-semibold uppercase tracking-widest text-text-secondary">
               {t("featuredMarkets", lang)}
             </span>
             <Link href="/markets" className="text-[11px] text-cyan hover:text-cyan-light transition-colors">
@@ -277,7 +277,7 @@ export function HomePageContent({
       <section className="bg-bg-card/30">
         <div className="mx-auto max-w-platform px-4 md:px-6 py-5">
           <div className="mb-4 flex items-center justify-between">
-            <span className="pl-2.5 border-l-2 border-cyan text-[11px] font-semibold uppercase tracking-widest text-text-secondary">
+            <span className="pl-2.5 border-l-2 border-cyan text-xs font-semibold uppercase tracking-widest text-text-secondary">
               {lang === "it" ? "La Tua Attività" : "Your Activity"}
             </span>
           </div>
@@ -295,7 +295,7 @@ export function HomePageContent({
         <section>
           <div className="mx-auto max-w-platform px-4 md:px-6 py-5">
             <div className="mb-4 flex items-center justify-between">
-              <span className="pl-2.5 border-l-2 border-cyan text-[11px] font-semibold uppercase tracking-widest text-text-secondary">
+              <span className="pl-2.5 border-l-2 border-cyan text-xs font-semibold uppercase tracking-widest text-text-secondary">
                 {lang === "it" ? "Notizie" : "Market Intelligence"}
               </span>
               <Link href="/news" className="text-[11px] text-cyan hover:text-cyan-light transition-colors">
@@ -303,17 +303,17 @@ export function HomePageContent({
               </Link>
             </div>
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              <div className="rounded-card border border-bg-border/15 bg-bg-card/60 overflow-hidden">
+              <div className="rounded-card border border-bg-border/10 bg-bg-card/60 overflow-hidden">
                 {topNews.slice(0, 3).map((item) => (
                   <EditorialNewsItem key={item.id} item={item} lang={lang} />
                 ))}
               </div>
-              <div className="hidden sm:block rounded-card border border-bg-border/15 bg-bg-card/60 overflow-hidden">
+              <div className="hidden sm:block rounded-card border border-bg-border/10 bg-bg-card/60 overflow-hidden">
                 {topNews.slice(3, 6).map((item) => (
                   <EditorialNewsItem key={item.id} item={item} lang={lang} />
                 ))}
               </div>
-              <div className="hidden lg:block rounded-card border border-bg-border/15 bg-bg-card/60 overflow-hidden">
+              <div className="hidden lg:block rounded-card border border-bg-border/10 bg-bg-card/60 overflow-hidden">
                 {topNews.slice(6, 9).map((item) => (
                   <EditorialNewsItem key={item.id} item={item} lang={lang} />
                 ))}
@@ -330,12 +330,12 @@ export function HomePageContent({
 
             {/* Platform quick access */}
             <div>
-              <span className="mb-3 block text-[11px] font-semibold uppercase tracking-widest text-text-secondary">
+              <span className="mb-3 block text-xs font-semibold uppercase tracking-widest text-text-secondary">
                 {lang === "it" ? "Piattaforma" : "Platform"}
               </span>
               <div className="grid grid-cols-2 gap-2">
                 <Link href="/markets">
-                  <div className="flex items-center gap-2 rounded-md border border-bg-border bg-bg-card px-3 py-2.5 transition-all hover:border-cyan/30 hover:bg-bg-hover cursor-pointer">
+                  <div className="flex items-center gap-2 rounded-md bg-bg-card/50 px-3 py-2.5 transition-colors hover:bg-bg-hover cursor-pointer">
                     <span className="shrink-0 flex h-6 w-6 items-center justify-center rounded bg-cyan-bg/30 text-cyan">
                       <svg viewBox="0 0 20 20" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                         <rect x="2" y="10" width="3.5" height="8" rx="0.5" />
@@ -343,12 +343,12 @@ export function HomePageContent({
                         <rect x="14.5" y="2" width="3.5" height="16" rx="0.5" />
                       </svg>
                     </span>
-                    <span className="text-xs font-medium text-text-primary">{t("marketsModule", lang)}</span>
-                    <span className="ml-auto text-[10px] text-text-disabled shrink-0">→</span>
+                    <span className="text-sm font-medium text-text-primary">{t("marketsModule", lang)}</span>
+                    <span className="ml-auto text-[11px] text-text-disabled shrink-0">→</span>
                   </div>
                 </Link>
                 <Link href="/lessons/1">
-                  <div className="flex items-center gap-2 rounded-md border border-bg-border bg-bg-card px-3 py-2.5 transition-all hover:border-cyan/30 hover:bg-bg-hover cursor-pointer">
+                  <div className="flex items-center gap-2 rounded-md bg-bg-card/50 px-3 py-2.5 transition-colors hover:bg-bg-hover cursor-pointer">
                     <span className="shrink-0 flex h-6 w-6 items-center justify-center rounded bg-cyan-bg/30 text-cyan">
                       <svg viewBox="0 0 20 20" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                         <path d="M4 2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" />
@@ -357,12 +357,12 @@ export function HomePageContent({
                         <line x1="6" y1="14.5" x2="10" y2="14.5" />
                       </svg>
                     </span>
-                    <span className="text-xs font-medium text-text-primary">{lang === "it" ? "Impara" : "Learn"}</span>
-                    <span className="ml-auto text-[10px] text-text-disabled shrink-0">→</span>
+                    <span className="text-sm font-medium text-text-primary">{lang === "it" ? "Impara" : "Learn"}</span>
+                    <span className="ml-auto text-[11px] text-text-disabled shrink-0">→</span>
                   </div>
                 </Link>
                 <Link href="/workbench">
-                  <div className="flex items-center gap-2 rounded-md border border-bg-border bg-bg-card px-3 py-2.5 transition-all hover:border-cyan/30 hover:bg-bg-hover cursor-pointer">
+                  <div className="flex items-center gap-2 rounded-md bg-bg-card/50 px-3 py-2.5 transition-colors hover:bg-bg-hover cursor-pointer">
                     <span className="shrink-0 flex h-6 w-6 items-center justify-center rounded bg-cyan-bg/30 text-cyan">
                       <svg viewBox="0 0 20 20" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                         <path d="M7.5 2l-2 6h9l-2-6z" />
@@ -370,19 +370,19 @@ export function HomePageContent({
                         <line x1="10" y1="8" x2="10" y2="18" />
                       </svg>
                     </span>
-                    <span className="text-xs font-medium text-text-primary">Quant Lab</span>
-                    <span className="ml-auto text-[10px] text-text-disabled shrink-0">→</span>
+                    <span className="text-sm font-medium text-text-primary">Quant Lab</span>
+                    <span className="ml-auto text-[11px] text-text-disabled shrink-0">→</span>
                   </div>
                 </Link>
                 <Link href="/ai">
-                  <div className="flex items-center gap-2 rounded-md border border-bg-border bg-bg-card px-3 py-2.5 transition-all hover:border-cyan/30 hover:bg-bg-hover cursor-pointer">
+                  <div className="flex items-center gap-2 rounded-md bg-bg-card/50 px-3 py-2.5 transition-colors hover:bg-bg-hover cursor-pointer">
                     <span className="shrink-0 flex h-6 w-6 items-center justify-center rounded bg-cyan-bg/30 text-cyan">
                       <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                         <path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3z" />
                       </svg>
                     </span>
-                    <span className="text-xs font-medium text-text-primary">{t("aiAnalyst", lang)}</span>
-                    <span className="ml-auto text-[10px] text-text-disabled shrink-0">→</span>
+                    <span className="text-sm font-medium text-text-primary">{t("aiAnalyst", lang)}</span>
+                    <span className="ml-auto text-[11px] text-text-disabled shrink-0">→</span>
                   </div>
                 </Link>
               </div>
@@ -391,7 +391,7 @@ export function HomePageContent({
             {/* Lessons quick access */}
             <div>
               <div className="mb-3 flex items-center justify-between">
-                <span className="text-[11px] font-semibold uppercase tracking-widest text-text-secondary">
+                <span className="text-xs font-semibold uppercase tracking-widest text-text-secondary">
                   {t("startLearningSection", lang)}
                 </span>
                 <Link href="/lessons/1" className="text-[11px] text-cyan hover:text-cyan-light transition-colors">
@@ -410,7 +410,7 @@ export function HomePageContent({
       </section>
 
       {/* ═══ FOOTER ═══ */}
-      <footer className="border-t border-bg-border/15 bg-bg-base">
+      <footer className="bg-bg-base">
         <div className="mx-auto max-w-platform px-4 md:px-6 py-5 flex flex-col gap-3">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-[11px] text-text-disabled">

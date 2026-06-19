@@ -134,7 +134,7 @@ export function CategoryView({ categoryId, instruments, quotesBySymbol }: Catego
       </div>
 
       {/* Assets list */}
-      <section className="rounded-card border border-bg-border/15 bg-bg-card/60 divide-y divide-bg-border/10 animate-fade-in-up" style={{ animationDelay: "120ms" }}>
+      <section className="rounded-card bg-bg-card/40 px-1 py-1 animate-fade-in-up" style={{ animationDelay: "120ms" }}>
         {sorted.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-12">
             <p className="text-sm text-text-muted">No assets found matching your search.</p>

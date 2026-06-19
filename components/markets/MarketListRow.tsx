@@ -11,7 +11,7 @@ interface MarketListRowProps {
 }
 
 const rowClassName =
-  "grid grid-cols-[1fr_5.5rem_5rem_1.75rem] items-center gap-2 px-3 py-1.5 text-xs transition duration-150 ease-in-out";
+  "grid grid-cols-[1fr_5.5rem_5rem_1.75rem] items-center gap-2 rounded-md px-3 py-1.5 text-sm transition duration-150 ease-in-out";
 
 /**
  * Riga del "Market List Pattern": simbolo, nome, valore, variazione, stato.

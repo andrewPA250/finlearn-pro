@@ -37,6 +37,28 @@
   --accent-blue: #4DA3FF;
   --error: #FF6B6B;
   --accent-amber: #F59E0B;
+
+  /* ========== RGB TRIPLETS (enables Tailwind's bg-x/NN opacity modifiers) ========== */
+  --color-cyan-rgb: 0 212 184;
+  --color-cyan-dark-rgb: 0 184 160;
+  --color-cyan-light-rgb: 0 232 204;
+  --color-cyan-bg-rgb: 0 61 53;
+  --bg-base-rgb: 6 10 15;
+  --bg-primary-rgb: 10 14 19;
+  --bg-card-rgb: 13 21 32;
+  --bg-sidebar-rgb: 17 28 41;
+  --bg-hover-rgb: 22 32 48;
+  --bg-border-rgb: 30 45 61;
+  --bg-border-em-rgb: 45 63 82;
+  --text-primary-rgb: 226 232 240;
+  --text-secondary-rgb: 148 163 184;
+  --text-muted-rgb: 100 116 139;
+  --text-disabled-rgb: 71 85 105;
+  --color-positive-rgb: 74 222 128;
+  --color-negative-rgb: 248 113 113;
+  --color-caution-rgb: 251 191 36;
+  --color-ai-rgb: 167 139 250;
+  --color-info-rgb: 27 138 255;
 }
 
 /* Light theme */
@@ -68,6 +90,28 @@ html.light {
   --color-caution: #ea580c;
   --color-ai: #7c3aed;
   --color-info: #0284c7;
+
+  /* ========== RGB TRIPLETS (enables Tailwind's bg-x/NN opacity modifiers) ========== */
+  --color-cyan-rgb: 0 145 164;
+  --color-cyan-dark-rgb: 0 107 122;
+  --color-cyan-light-rgb: 0 199 212;
+  --color-cyan-bg-rgb: 206 244 248;
+  --bg-base-rgb: 255 255 255;
+  --bg-primary-rgb: 248 250 251;
+  --bg-card-rgb: 255 255 255;
+  --bg-sidebar-rgb: 241 245 249;
+  --bg-hover-rgb: 226 232 240;
+  --bg-border-rgb: 203 213 225;
+  --bg-border-em-rgb: 148 163 184;
+  --text-primary-rgb: 15 23 42;
+  --text-secondary-rgb: 51 65 85;
+  --text-muted-rgb: 100 116 139;
+  --text-disabled-rgb: 148 163 184;
+  --color-positive-rgb: 22 163 74;
+  --color-negative-rgb: 220 38 38;
+  --color-caution-rgb: 234 88 12;
+  --color-ai-rgb: 124 58 237;
+  --color-info-rgb: 2 132 199;
 }
 
 html,

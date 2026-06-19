@@ -19,11 +19,11 @@ interface ModuleShellProps {
 
 function ModuleShell({ title, action, children }: ModuleShellProps) {
   return (
-    <div className="flex flex-col rounded-card border border-bg-border/15 bg-bg-card/60 px-4 py-3.5">
-      <div className="mb-2.5 flex items-center justify-between">
-        <span className="text-[10px] font-semibold uppercase tracking-widest text-text-muted">{title}</span>
+    <div className="flex flex-col rounded-card border border-bg-border/10 bg-bg-card/60 px-4 py-4">
+      <div className="mb-3 flex items-center justify-between">
+        <span className="text-xs font-semibold uppercase tracking-widest text-text-muted">{title}</span>
         {action && (
-          <Link href={action.href} className="text-[10px] text-cyan hover:text-cyan-light transition-colors">
+          <Link href={action.href} className="text-xs text-cyan hover:text-cyan-light transition-colors">
             {action.label} →
           </Link>
         )}
@@ -87,8 +87,8 @@ export function WatchlistPreviewCard({ lang }: { lang: string }) {
           const isPos = quote ? quote.changePercent >= 0 : true;
           return (
             <Link key={symbol} href={`/asset/${symbol}`} className="flex items-center justify-between gap-2 rounded px-1 py-0.5 transition hover:bg-bg-hover">
-              <span className="font-mono text-xs font-bold text-text-primary truncate">{inst?.symbol ?? symbol}</span>
-              <span className={`font-mono text-[11px] font-semibold shrink-0 ${isPos ? "text-positive" : "text-negative"}`}>
+              <span className="font-mono text-base font-bold text-text-primary truncate">{inst?.symbol ?? symbol}</span>
+              <span className={`font-mono text-sm font-semibold shrink-0 ${isPos ? "text-positive" : "text-negative"}`}>
                 {quote ? formatQuoteChange(quote) : "—"}
               </span>
             </Link>
@@ -145,13 +145,13 @@ export function PortfolioPreviewCard({ lang }: { lang: string }) {
   return (
     <ModuleShell title={title} action={{ label: lang === "it" ? "Vedi tutto" : "View all", href: "/portfolio" }}>
       <div className="flex flex-col gap-1">
-        <span className="font-mono text-lg font-bold text-text-primary">
+        <span className="font-mono text-2xl font-bold text-text-primary">
           {totalValue.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 })}
         </span>
-        <span className={`text-xs font-semibold font-mono ${isPos ? "text-positive" : "text-negative"}`}>
+        <span className={`text-base font-semibold font-mono ${isPos ? "text-positive" : "text-negative"}`}>
           {isPos ? "+" : ""}{pnl.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 })} ({isPos ? "+" : ""}{pnlPct.toFixed(2)}%)
         </span>
-        <span className="mt-1 text-[10px] text-text-muted">
+        <span className="mt-1 text-xs text-text-muted">
           {holdings.length} {lang === "it" ? "posizioni" : holdings.length === 1 ? "holding" : "holdings"}
         </span>
       </div>
@@ -188,14 +188,14 @@ export function LearningProgressCard({ lang, lessons }: { lang: string; lessons:
     <ModuleShell title={title} action={{ label: lang === "it" ? "Continua" : "Continue", href: `/lessons/${next?.id ?? 1}` }}>
       <div className="flex flex-col gap-2">
         <div className="flex items-baseline justify-between">
-          <span className="font-mono text-lg font-bold text-text-primary">{completed}/{total}</span>
-          <span className="text-[10px] text-text-muted">{lang === "it" ? "lezioni completate" : "lessons completed"}</span>
+          <span className="font-mono text-2xl font-bold text-text-primary">{completed}/{total}</span>
+          <span className="text-xs text-text-muted">{lang === "it" ? "lezioni completate" : "lessons completed"}</span>
         </div>
         <div className="h-1.5 w-full overflow-hidden rounded-full bg-bg-hover">
           <div className="h-full rounded-full bg-cyan transition-all" style={{ width: `${pct}%` }} />
         </div>
         {next && (
-          <span className="text-[10px] text-text-muted truncate">
+          <span className="text-xs text-text-muted truncate">
             {lang === "it" ? "Prossima: " : "Next: "}{next.title}
           </span>
         )}
@@ -232,8 +232,8 @@ export function CalendarPreviewCard({ lang, earnings }: { lang: string; earnings
       <div className="flex flex-col gap-1.5">
         {earnings.map((e, i) => (
           <Link key={`${e.symbol}-${i}`} href={`/asset/${e.symbol}`} className="flex items-center justify-between gap-2 rounded px-1 py-0.5 transition hover:bg-bg-hover">
-            <span className="font-mono text-xs font-bold text-text-primary truncate">{e.symbol}</span>
-            <span className="text-[10px] text-text-muted shrink-0">{fmtEventDate(e.date, lang)}</span>
+            <span className="font-mono text-sm font-bold text-text-primary truncate">{e.symbol}</span>
+            <span className="text-xs text-text-muted shrink-0">{fmtEventDate(e.date, lang)}</span>
           </Link>
         ))}
       </div>
