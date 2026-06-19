@@ -99,7 +99,7 @@ export type AiChatResponse =
   | { ok: true; reply: string; provider: AiProviderId; model: string }
   | {
       ok: false;
-      error: "not_configured" | "provider_error" | "bad_request";
+      error: "not_configured" | "invalid_key" | "rate_limited" | "provider_error" | "bad_request";
       message: string;
     };
 

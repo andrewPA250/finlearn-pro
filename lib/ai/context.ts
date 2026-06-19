@@ -43,6 +43,22 @@ interface BuildContextArgs {
   focusSymbol?: string | null;
 }
 
+/**
+ * Best-effort extraction of a catalog symbol mentioned directly in free text
+ * (e.g. the user typing "Explain AAPL" without touching the Focus Asset
+ * field). Only matches all-caps tokens that resolve to a real catalog
+ * instrument — this never invents or guesses a symbol.
+ */
+export function extractSymbolFromText(text: string): string | null {
+  const tokens = text.match(/[A-Za-z0-9.]{2,10}/g) ?? [];
+  for (const token of tokens) {
+    if (token !== token.toUpperCase() || !/[A-Z]/.test(token)) continue;
+    const instrument = getInstrumentBySymbol(token);
+    if (instrument) return instrument.symbol;
+  }
+  return null;
+}
+
 /** Collect every symbol whose quote the AI context will need. */
 export function collectSymbols(args: {
   holdings: PortfolioHolding[];

@@ -1,13 +1,14 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import ReactMarkdown, { type Components } from "react-markdown";
 import { useSettings } from "@/lib/settings/SettingsContext";
 import { usePortfolio } from "@/lib/portfolio/PortfolioContext";
 import { useWatchlist } from "@/lib/watchlist/WatchlistContext";
 import { useAlerts } from "@/lib/alerts/AlertsContext";
 import { t } from "@/lib/settings/i18n";
 import { SparkleIcon } from "@/components/layout/icons";
-import { buildAiContext, collectSymbols } from "@/lib/ai/context";
+import { buildAiContext, collectSymbols, extractSymbolFromText } from "@/lib/ai/context";
 import type { AiMessage, AiChatResponse } from "@/lib/ai/types";
 import type { TickerQuote } from "@/lib/market/ticker";
 
@@ -77,11 +78,20 @@ export function AiView() {
     setLoading(true);
 
     try {
+      // 0) A symbol mentioned directly in the question (e.g. "Explain AAPL")
+      // always takes priority over a stale Focus Asset value from an earlier
+      // turn — otherwise asking about a second asset would silently keep
+      // using the first one. Falls back to the Focus Asset field when the
+      // message doesn't name a catalog symbol.
+      const detectedSymbol = extractSymbolFromText(trimmed);
+      const effectiveFocus = detectedSymbol || focusSymbol || null;
+      if (detectedSymbol && detectedSymbol !== focusSymbol) setFocusSymbol(detectedSymbol);
+
       // 1) Fetch fresh quotes for every symbol the context needs.
       const symbols = collectSymbols({
         holdings,
         watchlist,
-        focusSymbol: focusSymbol || null,
+        focusSymbol: effectiveFocus,
       });
       let quotes: Record<string, TickerQuote> = {};
       try {
@@ -99,7 +109,7 @@ export function AiView() {
         watchlist,
         alerts,
         quotes,
-        focusSymbol: focusSymbol || null,
+        focusSymbol: effectiveFocus,
       });
 
       // 3) Ask the AI.
@@ -246,6 +256,39 @@ export function AiView() {
   );
 }
 
+/** Dense, terminal-style Markdown rendering for AI replies — tight spacing, no prose bloat. */
+const aiMarkdownComponents: Components = {
+  p: ({ children }) => (
+    <p className="mt-2 text-sm leading-snug text-text-primary first:mt-0">{children}</p>
+  ),
+  h1: ({ children }) => (
+    <p className="mt-3 text-sm font-bold text-text-primary first:mt-0">{children}</p>
+  ),
+  h2: ({ children }) => (
+    <p className="mt-3 text-sm font-bold text-text-primary first:mt-0">{children}</p>
+  ),
+  h3: ({ children }) => (
+    <p className="mt-3 text-[11px] font-bold uppercase tracking-wide text-cyan first:mt-0">{children}</p>
+  ),
+  ul: ({ children }) => (
+    <ul className="mt-1.5 list-disc space-y-0.5 pl-4 text-sm leading-snug text-text-primary first:mt-0">
+      {children}
+    </ul>
+  ),
+  ol: ({ children }) => (
+    <ol className="mt-1.5 list-decimal space-y-0.5 pl-4 text-sm leading-snug text-text-primary first:mt-0">
+      {children}
+    </ol>
+  ),
+  li: ({ children }) => <li>{children}</li>,
+  strong: ({ children }) => <strong className="font-bold text-text-primary">{children}</strong>,
+  em: ({ children }) => <em className="italic text-text-secondary">{children}</em>,
+  code: ({ children }) => (
+    <code className="rounded bg-bg-sidebar px-1 py-0.5 font-mono text-[12px] text-cyan">{children}</code>
+  ),
+  hr: () => <hr className="my-2 border-bg-border" />,
+};
+
 function MessageBubble({ message, language }: { message: AiMessage; language: "en" | "it" }) {
   const isUser = message.role === "user";
   return (
@@ -255,13 +298,17 @@ function MessageBubble({ message, language }: { message: AiMessage; language: "e
           {isUser ? t("aiYou", language) : t("aiAnalyst", language)}
         </p>
         <div
-          className={`whitespace-pre-wrap rounded-card px-3.5 py-2.5 text-sm leading-relaxed ${
+          className={`rounded-card px-3.5 py-2.5 text-sm leading-relaxed ${
             isUser
-              ? "bg-cyan text-bg-primary"
+              ? "whitespace-pre-wrap bg-cyan text-bg-primary"
               : "border border-bg-border bg-bg-card text-text-primary"
           }`}
         >
-          {message.content}
+          {isUser ? (
+            message.content
+          ) : (
+            <ReactMarkdown components={aiMarkdownComponents}>{message.content}</ReactMarkdown>
+          )}
         </div>
       </div>
     </div>

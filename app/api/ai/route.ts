@@ -3,6 +3,7 @@ import {
   resolveAiProvider,
   buildSystemPrompt,
   getConfiguredProviderId,
+  AiProviderError,
 } from "@/lib/ai/provider";
 
 export const dynamic = "force-dynamic";
@@ -64,12 +65,23 @@ export async function POST(request: Request): Promise<Response> {
     return json({ ok: true, reply, provider: provider.id, model: provider.model });
   } catch (err) {
     console.error("[AI] provider error:", err);
-    return json({
-      ok: false,
-      error: "provider_error",
-      message: "The AI provider could not complete the request. Please try again.",
-    });
+    const lang = body.context?.language ?? "en";
+    if (err instanceof AiProviderError) {
+      return json({ ok: false, error: err.code, message: errorMessage(err.code, lang) });
+    }
+    return json({ ok: false, error: "provider_error", message: errorMessage("provider_error", lang) });
   }
+}
+
+function errorMessage(code: "invalid_key" | "rate_limited" | "provider_error", lang: "en" | "it"): string {
+  if (lang === "it") {
+    if (code === "invalid_key") return "La chiave API del provider AI non è valida. Controlla la configurazione del server.";
+    if (code === "rate_limited") return "Il provider AI ha raggiunto il limite di richieste. Riprova in qualche minuto.";
+    return "Il provider AI non è riuscito a completare la richiesta. Riprova.";
+  }
+  if (code === "invalid_key") return "The AI provider's API key is invalid. Check the server configuration.";
+  if (code === "rate_limited") return "The AI provider's rate limit was reached. Please try again in a few minutes.";
+  return "The AI provider could not complete the request. Please try again.";
 }
 
 function json(payload: AiChatResponse, status = 200): Response {
