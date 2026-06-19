@@ -71,13 +71,12 @@ export function Header() {
   const lang = settings.language;
   const navItems: NavItem[] = [
     { label: t("markets", lang), href: "/markets", isActive: (p) => p.startsWith("/markets") || p.startsWith("/asset") },
-    { label: t("analytics", lang), href: "/analytics/compare", isActive: (p) => p.startsWith("/analytics") },
+    { label: t("quantLab", lang), href: "/analytics/compare", isActive: (p) => p.startsWith("/analytics") },
     { label: t("learn", lang), href: learnHref, isActive: (p) => p.startsWith("/lessons") },
     { label: t("portfolio", lang), href: "/portfolio", isActive: (p) => p.startsWith("/portfolio") },
     { label: t("alerts", lang), href: "/alerts", isActive: (p) => p.startsWith("/alerts") },
     { label: t("calendar", lang), href: "/calendar", isActive: (p) => p.startsWith("/calendar") },
     { label: t("aiAnalyst", lang), href: "/ai", isActive: (p) => p.startsWith("/ai") },
-    { label: t("quantLab", lang), soon: true },
   ];
 
   return (

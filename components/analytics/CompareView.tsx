@@ -11,10 +11,15 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
+  ScatterChart,
+  Scatter,
+  Cell,
+  LabelList,
 } from "recharts";
 import { MARKET_INSTRUMENTS } from "@/lib/markets/catalog";
 import { normalizeBase100, sanitizeSeries } from "@/lib/market";
 import { synchronizeCandles } from "@/lib/market/synchronizeCandles";
+import { InfoTooltip } from "@/components/ui/InfoTooltip";
 import type { CompareAsset } from "@/app/analytics/compare/page";
 import type { MarketDataPoint } from "@/types/market";
 
@@ -128,6 +133,101 @@ function calcPerformance(candles: MarketDataPoint[]): number | null {
   return ((last - first) / first) * 100;
 }
 
+function dailyReturns(candles: MarketDataPoint[]): number[] {
+  const rets: number[] = [];
+  for (let i = 1; i < candles.length; i++) {
+    const prev = candles[i - 1].value;
+    if (prev === 0) continue;
+    rets.push((candles[i].value - prev) / prev);
+  }
+  return rets;
+}
+
+/** Sortino ratio: like Sharpe, but penalizes only downside (negative) returns. */
+function calcSortino(candles: MarketDataPoint[]): number | null {
+  if (candles.length < 20) return null;
+  const rets = dailyReturns(candles);
+  if (rets.length < 10) return null;
+  const mean = rets.reduce((a, b) => a + b, 0) / rets.length;
+  const downside = rets.filter((r) => r < 0);
+  if (downside.length === 0) return null;
+  const downsideVariance = downside.reduce((a, b) => a + b ** 2, 0) / rets.length;
+  const downsideDev = Math.sqrt(downsideVariance);
+  if (downsideDev === 0) return null;
+  return (mean * 252) / (downsideDev * Math.sqrt(252));
+}
+
+/** Aligns two return series by matching consecutive-day pairs present in both candle sets. */
+function alignReturns(
+  candlesA: MarketDataPoint[],
+  candlesB: MarketDataPoint[]
+): { a: number; b: number }[] {
+  const valueByDate = new Map(candlesB.map((p) => [p.date, p.value]));
+  const aligned: { a: number; b: number }[] = [];
+  for (let i = 1; i < candlesA.length; i++) {
+    const aPrev = candlesA[i - 1].value;
+    const aCur = candlesA[i].value;
+    if (aPrev === 0) continue;
+    const bCur = valueByDate.get(candlesA[i].date);
+    const bPrev = valueByDate.get(candlesA[i - 1].date);
+    if (bCur == null || bPrev == null || bPrev === 0) continue;
+    aligned.push({ a: (aCur - aPrev) / aPrev, b: (bCur - bPrev) / bPrev });
+  }
+  return aligned;
+}
+
+/** Pearson correlation of daily returns between two assets, in [-1, 1]. */
+function calcCorrelation(
+  candlesA: MarketDataPoint[],
+  candlesB: MarketDataPoint[]
+): number | null {
+  if (candlesA.length < 10 || candlesB.length < 10) return null;
+  const aligned = alignReturns(candlesA, candlesB);
+  if (aligned.length < 10) return null;
+  const meanA = aligned.reduce((s, p) => s + p.a, 0) / aligned.length;
+  const meanB = aligned.reduce((s, p) => s + p.b, 0) / aligned.length;
+  let cov = 0;
+  let varA = 0;
+  let varB = 0;
+  for (const p of aligned) {
+    cov += (p.a - meanA) * (p.b - meanB);
+    varA += (p.a - meanA) ** 2;
+    varB += (p.b - meanB) ** 2;
+  }
+  if (varA === 0 || varB === 0) return null;
+  const r = cov / Math.sqrt(varA * varB);
+  return Math.max(-1, Math.min(1, r));
+}
+
+/** Beta vs a benchmark series: covariance(asset, benchmark) / variance(benchmark). */
+function calcBeta(
+  assetCandles: MarketDataPoint[],
+  benchmarkCandles: MarketDataPoint[]
+): number | null {
+  if (assetCandles.length < 20 || benchmarkCandles.length < 20) return null;
+  const aligned = alignReturns(assetCandles, benchmarkCandles);
+  if (aligned.length < 10) return null;
+  const meanA = aligned.reduce((s, p) => s + p.a, 0) / aligned.length;
+  const meanB = aligned.reduce((s, p) => s + p.b, 0) / aligned.length;
+  let cov = 0;
+  let varB = 0;
+  for (const p of aligned) {
+    cov += (p.a - meanA) * (p.b - meanB);
+    varB += (p.b - meanB) ** 2;
+  }
+  if (varB === 0) return null;
+  return cov / varB;
+}
+
+/** Subtle color intensity for a correlation cell: cyan = positive, red = negative, muted = neutral. */
+function correlationColor(v: number | null): string {
+  if (v == null || Number.isNaN(v)) return "var(--bg-hover)";
+  const abs = Math.min(Math.abs(v), 1);
+  if (abs < 0.05) return "var(--bg-hover)";
+  const alpha = 0.12 + abs * 0.38;
+  return v > 0 ? `rgba(0, 212, 184, ${alpha})` : `rgba(248, 113, 113, ${alpha})`;
+}
+
 // ─── Tooltip ─────────────────────────────────────────────────────────────────
 
 function CompareTooltip({
@@ -161,7 +261,15 @@ function CompareTooltip({
 
 // ─── Main component ───────────────────────────────────────────────────────────
 
-export function CompareView({ assets }: { assets: CompareAsset[] }) {
+const BENCHMARK_SYMBOL = "SPY";
+
+export function CompareView({
+  assets,
+  benchmarkCandles = [],
+}: {
+  assets: CompareAsset[];
+  benchmarkCandles?: MarketDataPoint[];
+}) {
   const router = useRouter();
   const [period, setPeriod] = useState<Period>("1Y");
   const [searchQuery, setSearchQuery] = useState("");
@@ -221,9 +329,50 @@ export function CompareView({ assets }: { assets: CompareAsset[] }) {
         vol: calcAnnualizedVol(candles),
         drawdown: calcMaxDrawdown(candles),
         sharpe: calcSharpe(candles),
+        sortino: calcSortino(candles),
         perf: calcPerformance(candles),
       })),
     [filteredCandles]
+  );
+
+  // ── Benchmark (SPY) candles for Beta, filtered to the same period ────────
+  const filteredBenchmark = useMemo(
+    () => filterByPeriod(sanitizeSeries(benchmarkCandles), period),
+    [benchmarkCandles, period]
+  );
+
+  // ── Beta vs SPY per asset ──────────────────────────────────────────────────
+  const betas = useMemo(
+    () =>
+      assets.map((a, idx) => {
+        if (a.instrument.symbol === BENCHMARK_SYMBOL) return 1;
+        return calcBeta(filteredCandles[idx], filteredBenchmark);
+      }),
+    [assets, filteredCandles, filteredBenchmark]
+  );
+
+  // ── Correlation matrix (NxN, pairwise Pearson correlation of returns) ────
+  const correlationMatrix = useMemo(() => {
+    if (assets.length < 2) return null;
+    return assets.map((_, i) =>
+      assets.map((_, j) => (i === j ? 1 : calcCorrelation(filteredCandles[i], filteredCandles[j])))
+    );
+  }, [assets, filteredCandles]);
+
+  // ── Risk/Return scatter data (reuses vol + perf already computed above) ──
+  const scatterData = useMemo(
+    () =>
+      assets
+        .map((a, idx) => ({
+          symbol: a.instrument.symbol,
+          vol: riskMetrics[idx].vol,
+          perf: riskMetrics[idx].perf,
+          color: ASSET_COLORS[idx],
+        }))
+        .filter((p): p is { symbol: string; vol: number; perf: number; color: string } =>
+          p.vol != null && p.perf != null
+        ),
+    [assets, riskMetrics]
   );
 
   // ── Quick insights ────────────────────────────────────────────────────────
@@ -321,10 +470,10 @@ export function CompareView({ assets }: { assets: CompareAsset[] }) {
         <div className="mx-auto max-w-6xl">
           <div className="mb-1 flex items-center gap-2">
             <span className="rounded-card bg-cyan-bg/30 px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest text-cyan">
-              Analytics
+              Quant Lab
             </span>
           </div>
-          <h1 className="text-2xl font-bold text-text-primary">Asset Compare</h1>
+          <h1 className="text-2xl font-bold text-text-primary">Compare Assets</h1>
           <p className="mt-0.5 text-sm text-text-muted">
             Compare performance, fundamentals, and risk side-by-side.
           </p>
@@ -667,7 +816,7 @@ export function CompareView({ assets }: { assets: CompareAsset[] }) {
             Calculated from price history for the selected period.
           </p>
 
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5">
             {/* Volatility */}
             <div className="rounded-card border border-bg-border bg-bg-primary p-4">
               <div className="mb-3 text-xs font-semibold uppercase tracking-wide text-text-muted">
@@ -742,14 +891,177 @@ export function CompareView({ assets }: { assets: CompareAsset[] }) {
                 ))}
               </div>
             </div>
-          </div>
 
-          {/* Beta placeholder */}
-          <div className="mt-3 rounded-card border border-bg-border bg-bg-hover/30 px-4 py-3">
-            <span className="text-xs text-text-muted">
-              Beta vs S&P 500 — <span className="font-medium text-text-secondary">Coming Soon</span>
-            </span>
+            {/* Sortino Ratio */}
+            <div className="rounded-card border border-bg-border bg-bg-primary p-4">
+              <div className="mb-3 flex items-center gap-1 text-xs font-semibold uppercase tracking-wide text-text-muted">
+                <span>Sortino Ratio</span>
+                <InfoTooltip text="Like Sharpe, but only penalizes downside volatility (negative returns)." label="Sortino ratio info" />
+              </div>
+              <div className="space-y-2">
+                {assets.map((a, idx) => (
+                  <div key={a.instrument.symbol} className="flex items-center justify-between">
+                    <div className="flex items-center gap-1.5">
+                      <span
+                        className="h-2 w-2 shrink-0 rounded-full"
+                        style={{ backgroundColor: ASSET_COLORS[idx] }}
+                      />
+                      <span className="text-xs text-text-secondary">{a.instrument.symbol}</span>
+                    </div>
+                    <span className="text-xs font-mono text-text-primary">
+                      {riskMetrics[idx].sortino != null
+                        ? fmtNum(riskMetrics[idx].sortino)
+                        : "—"}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Beta vs SPY */}
+            <div className="rounded-card border border-bg-border bg-bg-primary p-4">
+              <div className="mb-3 flex items-center gap-1 text-xs font-semibold uppercase tracking-wide text-text-muted">
+                <span>Beta (vs SPY)</span>
+                <InfoTooltip text="Sensitivity to S&P 500 (SPY) daily moves. 1.00 = moves with the market." label="Beta info" />
+              </div>
+              <div className="space-y-2">
+                {assets.map((a, idx) => (
+                  <div key={a.instrument.symbol} className="flex items-center justify-between">
+                    <div className="flex items-center gap-1.5">
+                      <span
+                        className="h-2 w-2 shrink-0 rounded-full"
+                        style={{ backgroundColor: ASSET_COLORS[idx] }}
+                      />
+                      <span className="text-xs text-text-secondary">{a.instrument.symbol}</span>
+                    </div>
+                    <span className="text-xs font-mono text-text-primary">
+                      {betas[idx] != null ? fmtNum(betas[idx]) : "—"}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
+        </section>
+
+        {/* ── Section 4b: Correlation Matrix ── */}
+        <section className="rounded-card border border-bg-border bg-bg-card p-4 md:p-6">
+          <h2 className="mb-1 text-base font-semibold text-text-primary">Correlation Matrix</h2>
+          <p className="mb-4 text-xs text-text-muted">
+            Pearson correlation of daily returns for the selected period. +1.00 moves together, −1.00 moves opposite.
+          </p>
+
+          {!correlationMatrix ? (
+            <div className="flex h-32 items-center justify-center">
+              <p className="text-sm text-text-muted">Select at least 2 assets to view correlation.</p>
+            </div>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[400px] border-collapse text-sm">
+                <thead>
+                  <tr>
+                    <th className="px-2 py-2" />
+                    {assets.map((a, idx) => (
+                      <th
+                        key={a.instrument.symbol}
+                        className="px-2 py-2 text-center text-xs font-semibold"
+                        style={{ color: ASSET_COLORS[idx] }}
+                      >
+                        {a.instrument.symbol}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {assets.map((a, i) => (
+                    <tr key={a.instrument.symbol}>
+                      <td
+                        className="whitespace-nowrap px-2 py-2 text-xs font-semibold"
+                        style={{ color: ASSET_COLORS[i] }}
+                      >
+                        {a.instrument.symbol}
+                      </td>
+                      {assets.map((b, j) => {
+                        const v = correlationMatrix[i][j];
+                        return (
+                          <td key={b.instrument.symbol} className="px-2 py-2 text-center">
+                            <div
+                              className="mx-auto flex h-10 w-14 items-center justify-center rounded-card font-mono text-xs font-semibold text-text-primary"
+                              style={{ backgroundColor: correlationColor(v) }}
+                            >
+                              {v != null ? v.toFixed(2) : "—"}
+                            </div>
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </section>
+
+        {/* ── Section 4c: Risk/Return Scatter ── */}
+        <section className="rounded-card border border-bg-border bg-bg-card p-4 md:p-6">
+          <h2 className="mb-1 text-base font-semibold text-text-primary">Risk / Return Scatter</h2>
+          <p className="mb-4 text-xs text-text-muted">
+            Annualized volatility (X) vs period return (Y) for the selected period.
+          </p>
+
+          {scatterData.length === 0 ? (
+            <div className="flex h-48 items-center justify-center">
+              <p className="text-sm text-text-muted">Not enough data to plot risk/return.</p>
+            </div>
+          ) : (
+            <div className="h-72 w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <ScatterChart margin={{ top: 16, right: 24, left: 0, bottom: 8 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="var(--bg-hover)" />
+                  <XAxis
+                    type="number"
+                    dataKey="vol"
+                    name="Volatility"
+                    unit="%"
+                    stroke="var(--text-muted)"
+                    tick={{ fontSize: 11, fill: "var(--text-muted)" }}
+                  />
+                  <YAxis
+                    type="number"
+                    dataKey="perf"
+                    name="Return"
+                    unit="%"
+                    stroke="var(--text-muted)"
+                    tick={{ fontSize: 11, fill: "var(--text-muted)" }}
+                  />
+                  <Tooltip
+                    cursor={{ strokeDasharray: "3 3" }}
+                    content={({ active, payload }) => {
+                      if (!active || !payload?.length) return null;
+                      const p = payload[0].payload as { symbol: string; vol: number; perf: number };
+                      return (
+                        <div className="rounded-card border border-bg-border bg-bg-card p-3 shadow-lg">
+                          <p className="mb-1 text-xs font-semibold text-text-primary">{p.symbol}</p>
+                          <p className="text-xs text-text-secondary">Vol: {fmtNum(p.vol)}%</p>
+                          <p className="text-xs text-text-secondary">Return: {fmtPct(p.perf)}</p>
+                        </div>
+                      );
+                    }}
+                  />
+                  <Scatter data={scatterData} isAnimationActive={false}>
+                    {scatterData.map((p) => (
+                      <Cell key={p.symbol} fill={p.color} />
+                    ))}
+                    <LabelList
+                      dataKey="symbol"
+                      position="top"
+                      style={{ fontSize: 11, fill: "var(--text-secondary)" }}
+                    />
+                  </Scatter>
+                </ScatterChart>
+              </ResponsiveContainer>
+            </div>
+          )}
         </section>
 
         {/* ── Section 5: Quick Insights ── */}

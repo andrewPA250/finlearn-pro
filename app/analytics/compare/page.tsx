@@ -7,7 +7,7 @@ import type { ProviderQuote, ProviderFundamentals } from "@/lib/providers";
 import type { MarketInstrument } from "@/types/markets";
 
 export const metadata: Metadata = {
-  title: "Compare Assets",
+  title: "Quant Lab",
   description: "Compare multiple assets side-by-side: performance, fundamentals, and risk metrics.",
 };
 
@@ -52,5 +52,8 @@ export default async function ComparePage({
     })
   );
 
-  return <CompareView assets={assets} />;
+  // Benchmark for Beta (vs SPY). Best-effort: empty array if unavailable.
+  const benchmarkCandles = await getAssetCandles("SPY");
+
+  return <CompareView assets={assets} benchmarkCandles={benchmarkCandles} />;
 }

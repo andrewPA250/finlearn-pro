@@ -203,7 +203,7 @@ export function HomePageContent({
                   }
                 </h1>
                 <p className="mt-2 text-xs font-semibold uppercase tracking-widest text-text-muted">
-                  {lang === "it" ? "Impara · Analizza · Investi" : "Learn · Analyze · Invest"}
+                  {lang === "it" ? "Impara · Confronta · Investi" : "Learn · Compare · Invest"}
                 </p>
                 <p className="mt-2 max-w-sm text-xs leading-relaxed text-text-secondary">
                   {lang === "it"

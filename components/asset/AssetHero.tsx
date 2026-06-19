@@ -144,14 +144,12 @@ export function AssetHero({ instrument, categoryLabel, quote }: AssetHeroProps) 
 
       {/* Quick actions */}
       <div className="mt-4 flex flex-wrap items-center gap-2">
-        {instrument.assetId && (
-          <Link
-            href="/workbench"
-            className="inline-flex items-center gap-1.5 rounded-card bg-bg-card/50 px-3 py-1.5 text-xs font-semibold text-text-secondary transition duration-150 hover:bg-bg-hover hover:text-cyan"
-          >
-            Open in Quant Lab →
-          </Link>
-        )}
+        <Link
+          href={`/analytics/compare?symbols=${instrument.symbol}`}
+          className="inline-flex items-center gap-1.5 rounded-card bg-bg-card/50 px-3 py-1.5 text-xs font-semibold text-text-secondary transition duration-150 hover:bg-bg-hover hover:text-cyan"
+        >
+          Open in Quant Lab →
+        </Link>
         <WatchButton symbol={instrument.symbol} />
       </div>
     </div>
