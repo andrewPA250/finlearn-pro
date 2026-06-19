@@ -1,4 +1,4 @@
-import type { AiChatRequest, AiChatResponse, AiMessage } from "@/lib/ai/types";
+import type { AiChatRequest, AiChatResponse, AiMessage, AiContext } from "@/lib/ai/types";
 import {
   resolveAiProvider,
   buildSystemPrompt,
@@ -93,7 +93,7 @@ export async function POST(request: Request): Promise<Response> {
   try {
     // Sanitize context to ensure no NaN/Infinity/undefined values
     const sanitizedContext = sanitizeContext(body.context);
-    const system = buildSystemPrompt(sanitizedContext as any);
+    const system = buildSystemPrompt((sanitizedContext as unknown) as AiContext | undefined);
     const reply = await provider.generate(system, trimmed);
     return json({ ok: true, reply, provider: provider.id, model: provider.model });
   } catch (err) {
