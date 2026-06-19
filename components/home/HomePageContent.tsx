@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import type { TickerQuote } from "@/lib/market/ticker";
 import type { NewsItem } from "@/lib/assetNews";
 import type { LessonMeta } from "@/types";
@@ -99,21 +100,40 @@ function WatchRow({ symbol, label, quote }: { symbol: string; label: string; quo
 }
 
 function EditorialNewsItem({ item, lang }: { item: NewsItem; lang: string }) {
+  const hasImage = item.image && item.image.trim().length > 0;
+
   return (
     <a
       href={item.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex flex-col gap-1.5 px-4 py-3.5 border-b border-bg-border/40 last:border-0 transition-colors hover:bg-bg-hover"
+      className="group flex items-start gap-3 px-4 py-3.5 border-b border-bg-border/40 last:border-0 transition-colors hover:bg-bg-hover"
     >
-      <div className="flex items-center gap-1.5 min-w-0">
-        <span className="text-[10px] font-bold text-cyan uppercase tracking-wide shrink-0">{item.source}</span>
-        <span className="h-0.5 w-0.5 rounded-full bg-text-disabled/60 shrink-0" />
-        <span className="text-[10px] text-text-disabled truncate">{formatAge(item.datetime, lang)}</span>
+      {/* Left: text content */}
+      <div className="flex-1 min-w-0">
+        <div className="flex items-center gap-1.5 min-w-0">
+          <span className="text-[10px] font-bold text-cyan uppercase tracking-wide shrink-0">{item.source}</span>
+          <span className="h-0.5 w-0.5 rounded-full bg-text-disabled/60 shrink-0" />
+          <span className="text-[10px] text-text-disabled truncate">{formatAge(item.datetime, lang)}</span>
+        </div>
+        <p className="mt-1 text-xs font-medium text-text-primary leading-snug line-clamp-2 group-hover:text-cyan transition-colors">
+          {item.headline}
+        </p>
       </div>
-      <p className="text-xs font-medium text-text-primary leading-snug line-clamp-2 group-hover:text-cyan transition-colors">
-        {item.headline}
-      </p>
+
+      {/* Right: thumbnail if available */}
+      {hasImage && (
+        <div className="shrink-0 h-12 w-12 rounded overflow-hidden bg-bg-hover">
+          <Image
+            src={item.image}
+            alt=""
+            width={48}
+            height={48}
+            unoptimized
+            className="h-full w-full object-cover"
+          />
+        </div>
+      )}
     </a>
   );
 }
