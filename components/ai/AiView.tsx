@@ -170,7 +170,7 @@ export function AiView() {
       </div>
 
       {/* Disclaimer */}
-      <div className="mb-3 shrink-0 rounded-card border border-bg-border bg-bg-card/50 px-3 py-2">
+      <div className="mb-3 shrink-0 rounded-card border border-bg-border/15 bg-bg-card/50 px-3 py-2">
         <p className="text-[11px] leading-relaxed text-text-muted">⚠ {t("aiDisclaimer", language)}</p>
       </div>
 
@@ -186,7 +186,7 @@ export function AiView() {
                 value={focusSymbol}
                 onChange={(e) => setFocusSymbol(e.target.value.toUpperCase())}
                 placeholder={t("aiFocusAssetPlaceholder", language)}
-                className="w-28 rounded-card border border-bg-border bg-bg-sidebar px-2 py-1 font-mono text-xs text-text-primary placeholder:text-text-muted/60 focus:border-cyan/40 focus:outline-none"
+                className="w-28 rounded-card border border-bg-border/20 bg-bg-sidebar px-2 py-1 font-mono text-xs text-text-primary placeholder:text-text-muted/60 focus:border-cyan/40 focus:outline-none"
               />
             </label>
             {messages.length > 0 && (
@@ -206,7 +206,7 @@ export function AiView() {
           {/* Transcript */}
           <div
             ref={scrollRef}
-            className="flex-1 overflow-y-auto rounded-card border border-bg-border bg-bg-card/30 p-4"
+            className="flex-1 overflow-y-auto rounded-card border border-bg-border/15 bg-bg-card/30 p-4"
           >
             {showEmpty ? (
               <EmptyState language={language} onPrompt={handlePrompt} />
@@ -245,7 +245,7 @@ export function AiView() {
               }}
               rows={1}
               placeholder={t("aiInputPlaceholder", language)}
-              className="max-h-40 min-h-[44px] flex-1 resize-none rounded-card border border-bg-border bg-bg-sidebar px-3 py-2.5 text-sm text-text-primary placeholder:text-text-muted/60 focus:border-cyan/40 focus:outline-none"
+              className="max-h-40 min-h-[44px] flex-1 resize-none rounded-card border border-bg-border/20 bg-bg-sidebar px-3 py-2.5 text-sm text-text-primary placeholder:text-text-muted/60 focus:border-cyan/40 focus:outline-none"
             />
             <button
               type="submit"
@@ -295,7 +295,7 @@ const aiMarkdownComponents: Components = {
   code: ({ children }) => (
     <code className="rounded bg-bg-sidebar px-1 py-0.5 font-mono text-[12px] text-cyan">{children}</code>
   ),
-  hr: () => <hr className="my-2 border-bg-border" />,
+  hr: () => <hr className="my-2 border-bg-border/15" />,
 };
 
 function MessageBubble({ message, language }: { message: AiMessage; language: "en" | "it" }) {
@@ -310,7 +310,7 @@ function MessageBubble({ message, language }: { message: AiMessage; language: "e
           className={`rounded-card px-3.5 py-2.5 text-sm leading-relaxed ${
             isUser
               ? "whitespace-pre-wrap bg-cyan text-bg-primary"
-              : "border border-bg-border bg-bg-card text-text-primary"
+              : "border border-bg-border/15 bg-bg-card text-text-primary"
           }`}
         >
           {isUser ? (
@@ -327,7 +327,7 @@ function MessageBubble({ message, language }: { message: AiMessage; language: "e
 function ThinkingBubble({ language }: { language: "en" | "it" }) {
   return (
     <div className="flex justify-start">
-      <div className="flex items-center gap-2 rounded-card border border-bg-border bg-bg-card px-3.5 py-2.5">
+      <div className="flex items-center gap-2 rounded-card border border-bg-border/15 bg-bg-card px-3.5 py-2.5">
         <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-cyan" />
         <span className="text-sm text-text-muted">{t("aiThinking", language)}</span>
       </div>
@@ -359,7 +359,7 @@ function EmptyState({
             key={p.labelKey}
             type="button"
             onClick={() => onPrompt(p.labelKey)}
-            className="rounded-full border border-bg-border bg-bg-card px-3 py-1.5 text-xs text-text-secondary transition hover:border-cyan/40 hover:text-text-primary"
+            className="rounded-full border border-bg-border/20 bg-bg-card px-3 py-1.5 text-xs text-text-secondary transition hover:border-cyan/40 hover:text-text-primary"
           >
             {t(p.labelKey, language)}
           </button>
@@ -371,7 +371,7 @@ function EmptyState({
 
 function NotConfigured({ language }: { language: "en" | "it" }) {
   return (
-    <div className="flex flex-1 flex-col items-center justify-center rounded-card border border-bg-border bg-bg-card/30 px-6 py-16 text-center">
+    <div className="flex flex-1 flex-col items-center justify-center rounded-card border border-bg-border/15 bg-bg-card/30 px-6 py-16 text-center">
       <span className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-bg-hover text-text-muted">
         <SparkleIcon className="h-7 w-7" />
       </span>
@@ -383,7 +383,7 @@ function NotConfigured({ language }: { language: "en" | "it" }) {
         {["OpenAI", "Anthropic", "Gemini"].map((p) => (
           <span
             key={p}
-            className="rounded-full border border-bg-border bg-bg-sidebar px-3 py-1 text-xs font-medium text-text-secondary"
+            className="rounded-full border border-bg-border/20 bg-bg-sidebar px-3 py-1 text-xs font-medium text-text-secondary"
           >
             {p}
           </span>

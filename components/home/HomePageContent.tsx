@@ -50,7 +50,7 @@ function formatAge(unixSeconds: number, lang: string): string {
 function MarketIndexCard({ symbol, label, quote }: { symbol: string; label: string; quote: TickerQuote | null }) {
   if (!quote) {
     return (
-      <div className="flex flex-col rounded-md border border-bg-border bg-bg-card px-3 py-3">
+      <div className="flex flex-col rounded-md border border-bg-border/15 bg-bg-card/60 px-3 py-3">
         <span className="text-[10px] font-bold font-mono text-text-disabled">{symbol}</span>
         <span className="text-sm font-bold font-mono text-text-disabled mt-1">—</span>
         <span className="text-[10px] text-text-disabled/60 mt-0.5">{label}</span>
@@ -60,7 +60,7 @@ function MarketIndexCard({ symbol, label, quote }: { symbol: string; label: stri
   const isPositive = quote.changePercent >= 0;
   return (
     <Link href={`/asset/${symbol}`}>
-      <div className="group flex flex-col rounded-md border border-bg-border bg-bg-card px-3 py-3 cursor-pointer transition-all hover:border-cyan/40 hover:bg-bg-hover">
+      <div className="group flex flex-col rounded-md border border-bg-border/15 bg-bg-card/60 px-3 py-3 cursor-pointer transition-all hover:border-cyan/40 hover:bg-bg-hover">
         <div className="flex items-center justify-between gap-1">
           <span className="text-[10px] font-bold font-mono text-text-secondary truncate">{symbol}</span>
           <span className={`shrink-0 text-[10px] font-semibold font-mono ${isPositive ? "text-positive" : "text-negative"}`}>
@@ -107,7 +107,7 @@ function EditorialNewsItem({ item, lang }: { item: NewsItem; lang: string }) {
       href={item.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex items-start gap-3 px-4 py-3.5 border-b border-bg-border/40 last:border-0 transition-colors hover:bg-bg-hover"
+      className="group flex items-start gap-3 px-4 py-3.5 border-b border-bg-border/10 last:border-0 transition-colors hover:bg-bg-hover"
     >
       {/* Left: text content */}
       <div className="flex-1 min-w-0">
@@ -141,7 +141,7 @@ function EditorialNewsItem({ item, lang }: { item: NewsItem; lang: string }) {
 function LessonRow({ lesson }: { lesson: LessonMeta }) {
   return (
     <Link href={`/lessons/${lesson.id}`}>
-      <div className="flex items-center gap-3 rounded-md border border-bg-border bg-bg-card px-3 py-2.5 transition-all hover:border-cyan/30 hover:bg-bg-hover cursor-pointer">
+      <div className="flex items-center gap-3 rounded-md border border-bg-border/15 bg-bg-card/60 px-3 py-2.5 transition-all hover:border-cyan/30 hover:bg-bg-hover cursor-pointer">
         <span className="shrink-0 flex h-6 w-6 items-center justify-center rounded bg-cyan-bg/40 text-[10px] font-bold text-cyan font-mono">
           {lesson.id}
         </span>
@@ -229,7 +229,7 @@ export function HomePageContent({
             {/* Right — live snapshot card (desktop only) */}
             <div className="hidden md:flex flex-col">
               <div className="flex flex-1 flex-col rounded-card border border-cyan/20 bg-bg-card overflow-hidden shadow-[0_0_0_1px_rgba(0,212,184,0.04)]">
-                <div className="flex items-center justify-between border-b border-bg-border/40 bg-gradient-to-r from-cyan/[0.07] to-transparent px-4 py-2.5">
+                <div className="flex items-center justify-between border-b border-bg-border/15 bg-gradient-to-r from-cyan/[0.07] to-transparent px-4 py-2.5">
                   <span className="text-[10px] font-bold uppercase tracking-widest text-text-secondary">
                     {t("marketSnapshot", lang)}
                   </span>
@@ -238,12 +238,12 @@ export function HomePageContent({
                     {lang === "it" ? "Dal Vivo" : "Live"}
                   </span>
                 </div>
-                <div className="flex-1 divide-y divide-bg-border/40">
+                <div className="flex-1 divide-y divide-bg-border/10">
                   {watchSymbols.map(({ symbol, label }) => (
                     <WatchRow key={symbol} symbol={symbol} label={label} quote={quotes[symbol] ?? null} />
                   ))}
                 </div>
-                <div className="border-t border-bg-border/60 px-4 py-2.5">
+                <div className="border-t border-bg-border/15 px-4 py-2.5">
                   <Link
                     href="/markets"
                     className="block w-full rounded-md bg-cyan py-2 text-center text-xs font-semibold text-bg-primary transition hover:bg-cyan-dark"
@@ -303,17 +303,17 @@ export function HomePageContent({
               </Link>
             </div>
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              <div className="rounded-card border border-bg-border/60 bg-bg-card overflow-hidden">
+              <div className="rounded-card border border-bg-border/15 bg-bg-card/60 overflow-hidden">
                 {topNews.slice(0, 3).map((item) => (
                   <EditorialNewsItem key={item.id} item={item} lang={lang} />
                 ))}
               </div>
-              <div className="hidden sm:block rounded-card border border-bg-border/60 bg-bg-card overflow-hidden">
+              <div className="hidden sm:block rounded-card border border-bg-border/15 bg-bg-card/60 overflow-hidden">
                 {topNews.slice(3, 6).map((item) => (
                   <EditorialNewsItem key={item.id} item={item} lang={lang} />
                 ))}
               </div>
-              <div className="hidden lg:block rounded-card border border-bg-border/60 bg-bg-card overflow-hidden">
+              <div className="hidden lg:block rounded-card border border-bg-border/15 bg-bg-card/60 overflow-hidden">
                 {topNews.slice(6, 9).map((item) => (
                   <EditorialNewsItem key={item.id} item={item} lang={lang} />
                 ))}
@@ -410,7 +410,7 @@ export function HomePageContent({
       </section>
 
       {/* ═══ FOOTER ═══ */}
-      <footer className="border-t border-bg-border/50 bg-bg-base">
+      <footer className="border-t border-bg-border/15 bg-bg-base">
         <div className="mx-auto max-w-platform px-4 md:px-6 py-5 flex flex-col gap-3">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-[11px] text-text-disabled">

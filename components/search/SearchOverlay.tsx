@@ -193,9 +193,9 @@ export function SearchOverlay({ open, onClose, learnHref }: SearchOverlayProps) 
         onClick={onClose}
       />
 
-      <div className="relative z-10 h-fit w-full max-w-xl overflow-hidden rounded-card border border-bg-card bg-bg-sidebar shadow-2xl">
+      <div className="relative z-10 h-fit w-full max-w-xl overflow-hidden rounded-card border border-bg-border/20 bg-bg-sidebar shadow-2xl">
         {/* Input row */}
-        <div className="flex items-center gap-3 border-b border-bg-card px-4 py-3">
+        <div className="flex items-center gap-3 border-b border-bg-border/15 px-4 py-3">
           <SearchIcon className="h-4 w-4 shrink-0 text-text-secondary" />
           <input
             ref={inputRef}
@@ -214,7 +214,7 @@ export function SearchOverlay({ open, onClose, learnHref }: SearchOverlayProps) 
               ✕
             </button>
           )}
-          <kbd className="shrink-0 rounded border border-text-secondary/20 px-1.5 py-0.5 font-mono text-[10px] text-text-secondary">
+          <kbd className="shrink-0 rounded border border-text-secondary/15 px-1.5 py-0.5 font-mono text-[10px] text-text-secondary">
             Esc
           </kbd>
         </div>
@@ -295,7 +295,7 @@ export function SearchOverlay({ open, onClose, learnHref }: SearchOverlayProps) 
         </div>
 
         {/* Footer hint */}
-        <div className="border-t border-bg-card px-4 py-2 flex items-center gap-4 text-[10px] text-text-muted/60">
+        <div className="border-t border-bg-border/15 px-4 py-2 flex items-center gap-4 text-[10px] text-text-muted/60">
           <span><kbd className="font-mono">↑↓</kbd> {t("navigate", language)}</span>
           <span><kbd className="font-mono">↵</kbd> {t("open", language)}</span>
           <span><kbd className="font-mono">Esc</kbd> {t("close", language)}</span>

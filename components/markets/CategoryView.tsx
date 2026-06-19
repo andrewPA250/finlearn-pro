@@ -101,7 +101,7 @@ export function CategoryView({ categoryId, instruments, quotesBySymbol }: Catego
           placeholder="Search by symbol or name…"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="flex-1 rounded-card border border-bg-border bg-bg-card px-3 py-2 text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:border-cyan/50"
+          className="flex-1 rounded-card border border-bg-border/25 bg-bg-card/40 px-3 py-2 text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:border-cyan/40"
         />
 
         {/* Sort dropdown */}
@@ -113,7 +113,7 @@ export function CategoryView({ categoryId, instruments, quotesBySymbol }: Catego
             id="sortBy"
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as SortOption)}
-            className="rounded-card border border-bg-border bg-bg-card px-2.5 py-1.5 text-xs font-medium text-text-primary focus:outline-none focus:border-cyan/50"
+            className="rounded-card border border-bg-border/25 bg-bg-card/40 px-2.5 py-1.5 text-xs font-medium text-text-primary focus:outline-none focus:border-cyan/40"
           >
             <option value="symbol">Symbol</option>
             <option value="name">Name</option>
@@ -125,7 +125,7 @@ export function CategoryView({ categoryId, instruments, quotesBySymbol }: Catego
           {/* Sort direction toggle */}
           <button
             onClick={() => setSortAsc(!sortAsc)}
-            className="rounded-card border border-bg-border bg-bg-card px-2.5 py-1.5 text-xs font-medium text-text-secondary hover:text-text-primary transition"
+            className="rounded-card border border-bg-border/25 bg-bg-card/40 px-2.5 py-1.5 text-xs font-medium text-text-secondary hover:text-text-primary hover:bg-bg-hover transition"
             title={sortAsc ? "Ascending" : "Descending"}
           >
             {sortAsc ? "↑" : "↓"}
@@ -134,7 +134,7 @@ export function CategoryView({ categoryId, instruments, quotesBySymbol }: Catego
       </div>
 
       {/* Assets list */}
-      <section className="rounded-card border border-bg-border bg-bg-card divide-y divide-bg-border/60 animate-fade-in-up" style={{ animationDelay: "120ms" }}>
+      <section className="rounded-card border border-bg-border/15 bg-bg-card/60 divide-y divide-bg-border/10 animate-fade-in-up" style={{ animationDelay: "120ms" }}>
         {sorted.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-12">
             <p className="text-sm text-text-muted">No assets found matching your search.</p>

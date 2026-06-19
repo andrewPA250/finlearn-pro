@@ -69,9 +69,9 @@ export function MarketsFilter({
 
           return (
             <div key={category.id} id={category.id} className="flex flex-col">
-              <section className="flex-1 rounded-card border border-bg-border bg-bg-card flex flex-col">
+              <section className="flex-1 rounded-card border border-bg-border/15 bg-bg-card/60 flex flex-col">
                 {/* Header with category name and count */}
-                <header className="flex items-baseline justify-between border-b border-bg-border px-3 py-2">
+                <header className="flex items-baseline justify-between border-b border-bg-border/15 px-3 py-2">
                   <h2 className="text-[11px] font-bold uppercase tracking-wide text-text-secondary">
                     {category.label}
                   </h2>
@@ -81,7 +81,7 @@ export function MarketsFilter({
                 </header>
 
                 {/* Preview list (first 10 items) */}
-                <div className="divide-y divide-bg-border/60 flex-1">
+                <div className="divide-y divide-bg-border/10 flex-1">
                   {preview.map((instrument) => (
                     <MarketListRow
                       key={instrument.symbol}
@@ -95,7 +95,7 @@ export function MarketsFilter({
                 {totalCount > 10 && (
                   <Link
                     href={`/markets/category/${category.id}`}
-                    className="border-t border-bg-border px-3 py-1.5 text-[11px] font-semibold text-cyan hover:text-cyan-light transition"
+                    className="border-t border-bg-border/15 px-3 py-1.5 text-[11px] font-semibold text-cyan hover:text-cyan-light transition hover:bg-bg-hover"
                   >
                     View all {totalCount} →
                   </Link>

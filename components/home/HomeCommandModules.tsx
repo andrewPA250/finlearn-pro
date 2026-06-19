@@ -19,7 +19,7 @@ interface ModuleShellProps {
 
 function ModuleShell({ title, action, children }: ModuleShellProps) {
   return (
-    <div className="flex flex-col rounded-card border border-bg-border/70 bg-bg-card px-4 py-3.5">
+    <div className="flex flex-col rounded-card border border-bg-border/15 bg-bg-card/60 px-4 py-3.5">
       <div className="mb-2.5 flex items-center justify-between">
         <span className="text-[10px] font-semibold uppercase tracking-widest text-text-muted">{title}</span>
         {action && (

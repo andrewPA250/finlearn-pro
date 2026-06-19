@@ -25,7 +25,7 @@ export default async function ProfilePage() {
         <h1 className="text-2xl font-bold text-text-primary">Profilo</h1>
         <p className="mt-1 text-sm text-text-secondary">{data.user.email}</p>
 
-        <div className="mt-6 border-b border-bg-border/50 pb-6">
+        <div className="mt-6 border-b border-bg-border/15 pb-6">
           <AvatarUpload initials={data.user.email ? data.user.email[0]!.toUpperCase() : ""} />
         </div>
 

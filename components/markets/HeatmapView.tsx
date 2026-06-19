@@ -330,7 +330,7 @@ export function HeatmapView({ instruments, quotesBySymbol }: HeatmapViewProps) {
 
         <div className="min-w-0 flex-1">
           {/* ── Summary bar ── */}
-          <div className="mb-4 grid grid-cols-2 gap-3 rounded-card border border-bg-border bg-bg-card p-4 md:grid-cols-4">
+          <div className="mb-4 grid grid-cols-2 gap-3 rounded-card border border-bg-border/15 bg-bg-card/60 p-4 md:grid-cols-4">
             <div>
               <p className="text-xs text-text-secondary">{t("assets", lang)}</p>
               <p className="text-xl font-bold text-text-primary">{stats.total}</p>
@@ -352,7 +352,7 @@ export function HeatmapView({ instruments, quotesBySymbol }: HeatmapViewProps) {
           </div>
 
           {/* ── Controls ── */}
-          <div className="mb-4 rounded-card border border-bg-border bg-bg-card p-4 space-y-3">
+          <div className="mb-4 rounded-card border border-bg-border/15 bg-bg-card/60 p-4 space-y-3">
             {/* Search */}
             <div className="relative">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[11px] text-text-muted select-none">
@@ -363,8 +363,8 @@ export function HeatmapView({ instruments, quotesBySymbol }: HeatmapViewProps) {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={lang === "it" ? "Cerca simbolo o nome…" : "Search symbol or name…"}
-                className="w-full rounded border border-bg-border bg-bg-primary pl-7 pr-8 py-1.5 text-sm
-                  text-text-primary placeholder-text-muted focus:border-cyan focus:outline-none"
+                className="w-full rounded border border-bg-border/25 bg-bg-card/40 pl-7 pr-8 py-1.5 text-sm
+                  text-text-primary placeholder-text-muted focus:border-cyan/50 focus:outline-none"
               />
               {searchQuery && (
                 <button
@@ -414,7 +414,7 @@ export function HeatmapView({ instruments, quotesBySymbol }: HeatmapViewProps) {
                     className={`rounded border px-2.5 py-1 text-xs font-medium transition ${
                       sortBy === s
                         ? "border-cyan bg-cyan/10 text-cyan"
-                        : "border-bg-border bg-bg-primary text-text-secondary hover:bg-bg-hover"
+                        : "border-bg-border/20 bg-bg-card/40 text-text-secondary hover:bg-bg-hover"
                     }`}
                   >
                     {SORT_LABELS[s][lang]}
@@ -427,8 +427,8 @@ export function HeatmapView({ instruments, quotesBySymbol }: HeatmapViewProps) {
                 <select
                   value={sizingMode}
                   onChange={(e) => setSizingMode(e.target.value as SizingMode)}
-                  className="rounded border border-bg-border bg-bg-primary px-2 py-1 text-xs text-text-primary
-                    focus:border-cyan focus:outline-none"
+                  className="rounded border border-bg-border/20 bg-bg-card/40 px-2 py-1 text-xs text-text-primary
+                    focus:border-cyan/50 focus:outline-none"
                 >
                   <option value="equal">{lang === "it" ? "Uguale" : "Equal Size"}</option>
                   <option value="marketCap">{lang === "it" ? "Cap. Mercato" : "Market Cap"}</option>
@@ -436,7 +436,7 @@ export function HeatmapView({ instruments, quotesBySymbol }: HeatmapViewProps) {
                 </select>
                 <button
                   onClick={() => setShowAll((v) => !v)}
-                  className="rounded border border-bg-border bg-bg-primary px-3 py-1 text-xs
+                  className="rounded border border-bg-border/20 bg-bg-card/40 px-3 py-1 text-xs
                     text-text-secondary transition hover:bg-bg-hover hover:text-text-primary"
                 >
                   {showAll ? `▲ Top 100` : `${t("showAll", lang)} (${totalValid})`}
@@ -484,7 +484,7 @@ export function HeatmapView({ instruments, quotesBySymbol }: HeatmapViewProps) {
 
           {/* ── Category sections ── */}
           {catEntries.length === 0 ? (
-            <div className="rounded-card border border-bg-border bg-bg-card px-4 py-12 text-center text-text-secondary">
+            <div className="rounded-card border border-bg-border/15 bg-bg-card/60 px-4 py-12 text-center text-text-secondary">
               {searchQuery ? t("noResultsFilter", lang) : t("noResultsFilter", lang)}
             </div>
           ) : (
@@ -533,7 +533,7 @@ export function HeatmapView({ instruments, quotesBySymbol }: HeatmapViewProps) {
 
                     {/* Grid */}
                     <div
-                      className="rounded-card border border-bg-border"
+                      className="rounded-card border border-bg-border/15"
                       style={{ background: "var(--bg-secondary, #0d1520)", overflow: "visible", ...gridStyle }}
                     >
                       {tiles.map((instrument) => {

@@ -77,7 +77,7 @@ export function AvatarUpload({ initials }: AvatarUploadProps) {
             <button
               type="button"
               onClick={() => inputRef.current?.click()}
-              className="rounded-card border border-bg-border/50 bg-bg-card/40 px-3 py-1.5 text-sm font-medium text-text-secondary transition duration-150 ease-in-out hover:border-cyan/30 hover:bg-bg-hover hover:text-text-primary"
+              className="rounded-card border border-bg-border/20 bg-bg-card/40 px-3 py-1.5 text-sm font-medium text-text-secondary transition duration-150 ease-in-out hover:border-cyan/30 hover:bg-bg-hover hover:text-text-primary"
             >
               {t("avatarUpload", language)}
             </button>
@@ -85,7 +85,7 @@ export function AvatarUpload({ initials }: AvatarUploadProps) {
               <button
                 type="button"
                 onClick={handleRemove}
-                className="rounded-card border border-bg-border/50 px-3 py-1.5 text-sm font-medium text-negative transition duration-150 ease-in-out hover:bg-bg-hover"
+                className="rounded-card border border-bg-border/20 px-3 py-1.5 text-sm font-medium text-negative transition duration-150 ease-in-out hover:bg-bg-hover"
               >
                 {t("avatarRemove", language)}
               </button>

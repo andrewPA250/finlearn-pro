@@ -122,8 +122,8 @@ export function AddHoldingModal({
         if (e.target === backdropRef.current) onClose();
       }}
     >
-      <div className="w-full max-w-md rounded-card border border-bg-border bg-bg-card shadow-xl">
-        <div className="flex items-center justify-between border-b border-bg-border px-5 py-4">
+      <div className="w-full max-w-md rounded-card border border-bg-border/20 bg-bg-card shadow-xl">
+        <div className="flex items-center justify-between border-b border-bg-border/15 px-5 py-4">
           <h2 className="text-base font-semibold text-text-primary">
             {isEdit ? t("editHoldingModal", language) : t("addHoldingModal", language)}
           </h2>
@@ -150,10 +150,10 @@ export function AddHoldingModal({
               onBlur={() => setTimeout(() => setShowSuggestions(false), 150)}
               placeholder={t("symbolPlaceholder", language)}
               disabled={isEdit}
-              className="w-full rounded border border-bg-border bg-bg-primary px-3 py-2 font-mono text-sm text-text-primary placeholder-text-muted focus:border-cyan focus:outline-none disabled:opacity-50"
+              className="w-full rounded border border-bg-border/25 bg-bg-card/40 px-3 py-2 font-mono text-sm text-text-primary placeholder-text-muted focus:border-cyan/50 focus:outline-none disabled:opacity-50"
             />
             {showSuggestions && (
-              <ul className="absolute z-10 mt-1 w-full rounded border border-bg-border bg-bg-card shadow-lg">
+              <ul className="absolute z-10 mt-1 w-full rounded border border-bg-border/20 bg-bg-card shadow-lg">
                 {suggestions.map((inst) => (
                   <li key={inst.symbol}>
                     <button
@@ -190,7 +190,7 @@ export function AddHoldingModal({
               value={quantity}
               onChange={(e) => setQuantity(e.target.value)}
               placeholder={t("quantityPlaceholder", language)}
-              className="w-full rounded border border-bg-border bg-bg-primary px-3 py-2 text-sm text-text-primary placeholder-text-muted focus:border-cyan focus:outline-none"
+              className="w-full rounded border border-bg-border/25 bg-bg-card/40 px-3 py-2 text-sm text-text-primary placeholder-text-muted focus:border-cyan/50 focus:outline-none"
             />
           </div>
 
@@ -206,7 +206,7 @@ export function AddHoldingModal({
               value={avgPrice}
               onChange={(e) => setAvgPrice(e.target.value)}
               placeholder={t("avgPricePlaceholder", language)}
-              className="w-full rounded border border-bg-border bg-bg-primary px-3 py-2 text-sm text-text-primary placeholder-text-muted focus:border-cyan focus:outline-none"
+              className="w-full rounded border border-bg-border/25 bg-bg-card/40 px-3 py-2 text-sm text-text-primary placeholder-text-muted focus:border-cyan/50 focus:outline-none"
             />
           </div>
 
@@ -220,7 +220,7 @@ export function AddHoldingModal({
               onChange={(e) => setNotes(e.target.value)}
               rows={2}
               placeholder={t("notePlaceholder", language)}
-              className="w-full resize-none rounded border border-bg-border bg-bg-primary px-3 py-2 text-sm text-text-primary placeholder-text-muted focus:border-cyan focus:outline-none"
+              className="w-full resize-none rounded border border-bg-border/25 bg-bg-card/40 px-3 py-2 text-sm text-text-primary placeholder-text-muted focus:border-cyan/50 focus:outline-none"
             />
           </div>
 
@@ -228,7 +228,7 @@ export function AddHoldingModal({
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 rounded border border-bg-border px-4 py-2 text-sm text-text-secondary hover:text-text-primary transition"
+              className="flex-1 rounded border border-bg-border/20 px-4 py-2 text-sm text-text-secondary hover:text-text-primary transition"
             >
               {t("cancel", language)}
             </button>

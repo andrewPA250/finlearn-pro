@@ -93,7 +93,7 @@ export function WatchlistView({ quotesBySymbol, instrumentsBySymbol }: Watchlist
   if (results.length === 0 && watchedSymbols.length === 0) {
     return (
       <div className="mx-auto max-w-platform px-4 py-12 md:px-6">
-        <div className="flex flex-col items-center justify-center rounded-card border border-bg-border bg-bg-card px-6 py-16 text-center">
+        <div className="flex flex-col items-center justify-center rounded-card border border-bg-border/15 bg-bg-card/60 px-6 py-16 text-center">
           <div className="mb-4 text-5xl">📋</div>
           <h1 className="mb-2 text-2xl font-bold text-text-primary">
             {t("emptyWatchlist", language)}
@@ -123,7 +123,7 @@ export function WatchlistView({ quotesBySymbol, instrumentsBySymbol }: Watchlist
       </div>
 
       {/* Summary bar */}
-      <div className="mb-4 grid grid-cols-2 gap-3 rounded-card border border-bg-border bg-bg-card p-3.5 md:grid-cols-3 animate-fade-in-up" style={{ animationDelay: "40ms" }}>
+      <div className="mb-4 grid grid-cols-2 gap-3 rounded-card border border-bg-border/15 bg-bg-card/60 p-3.5 md:grid-cols-3 animate-fade-in-up" style={{ animationDelay: "40ms" }}>
         <div>
           <p className="text-xs text-text-secondary">{t("total", language)} {t("assets", language)}</p>
           <p className="text-xl font-bold text-text-primary">{stats.total}</p>
@@ -139,7 +139,7 @@ export function WatchlistView({ quotesBySymbol, instrumentsBySymbol }: Watchlist
       </div>
 
       {/* Controls */}
-      <div className="mb-4 rounded-card border border-bg-border bg-bg-card p-3.5 animate-fade-in-up" style={{ animationDelay: "80ms" }}>
+      <div className="mb-4 rounded-card border border-bg-border/15 bg-bg-card/60 p-3.5 animate-fade-in-up" style={{ animationDelay: "80ms" }}>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div className="flex-1">
             <label className="mb-1 block text-xs font-medium text-text-secondary">
@@ -150,7 +150,7 @@ export function WatchlistView({ quotesBySymbol, instrumentsBySymbol }: Watchlist
               placeholder="Symbol or name..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full rounded border border-bg-border bg-bg-primary px-3 py-2 text-sm text-text-primary placeholder-text-muted focus:border-cyan focus:outline-none"
+              className="w-full rounded border border-bg-border/25 bg-bg-card/40 px-3 py-2 text-sm text-text-primary placeholder-text-muted focus:border-cyan/50 focus:outline-none"
             />
           </div>
           <div>
@@ -160,7 +160,7 @@ export function WatchlistView({ quotesBySymbol, instrumentsBySymbol }: Watchlist
             <select
               value={sortField}
               onChange={(e) => setSortField(e.target.value as SortField)}
-              className="rounded border border-bg-border bg-bg-primary px-3 py-2 text-sm text-text-primary focus:border-cyan focus:outline-none"
+              className="rounded border border-bg-border/25 bg-bg-card/40 px-3 py-2 text-sm text-text-primary focus:border-cyan/50 focus:outline-none"
             >
               <option value="symbol">Symbol</option>
               <option value="price">{t("price", language)}</option>
@@ -171,7 +171,7 @@ export function WatchlistView({ quotesBySymbol, instrumentsBySymbol }: Watchlist
       </div>
 
       {/* Results table */}
-      <div className="rounded-card border border-bg-border bg-bg-card overflow-hidden animate-fade-in-up" style={{ animationDelay: "120ms" }}>
+      <div className="rounded-card border border-bg-border/15 bg-bg-card/60 overflow-hidden animate-fade-in-up" style={{ animationDelay: "120ms" }}>
         {results.length === 0 ? (
           <div className="px-4 py-8 text-center text-text-secondary">
             {t("noAssetsSearch", language)}
@@ -179,7 +179,7 @@ export function WatchlistView({ quotesBySymbol, instrumentsBySymbol }: Watchlist
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
-              <thead className="sticky top-0 border-b border-bg-border bg-bg-primary z-10">
+              <thead className="sticky top-0 border-b border-bg-border/20 bg-bg-card/80 z-10">
                 <tr>
                   <th className="px-4 py-3 text-left font-semibold text-text-secondary">
                     <SortButton
@@ -216,7 +216,7 @@ export function WatchlistView({ quotesBySymbol, instrumentsBySymbol }: Watchlist
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-border-base">
+              <tbody className="divide-y divide-bg-border/10">
                 {results.map((item) => (
                   <tr key={item.symbol} className="hover:bg-bg-hover transition">
                     <td className="px-4 py-3">

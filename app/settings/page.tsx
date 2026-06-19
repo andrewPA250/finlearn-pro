@@ -11,7 +11,7 @@ export default function SettingsPage() {
   return (
     <div className="min-h-screen bg-bg-primary">
       {/* Back link */}
-      <div className="border-b border-bg-border bg-bg-sidebar px-6 py-4">
+      <div className="border-b border-bg-border/20 bg-bg-sidebar px-6 py-4">
         <Link
           href="/markets"
           className="flex items-center gap-2 text-sm text-cyan hover:text-cyan-light"
@@ -75,7 +75,7 @@ export default function SettingsPage() {
             {/* Appearance Section */}
             <section
               id="appearance"
-              className="rounded-card border border-bg-border bg-bg-card p-6"
+              className="rounded-card border border-bg-border/15 bg-bg-card/60 p-6"
             >
               <h2 className="text-lg font-semibold text-text-primary mb-4">
                 {t("appearance", settings.language)}
@@ -106,7 +106,7 @@ export default function SettingsPage() {
                   </p>
                 </div>
 
-                <div className="border-t border-bg-border pt-4">
+                <div className="border-t border-bg-border/15 pt-4">
                   <label className="flex items-center justify-between py-2">
                     <span className="text-sm font-medium text-text-secondary">
                       {t("compactMode", settings.language)}
@@ -127,7 +127,7 @@ export default function SettingsPage() {
             {/* Language Section */}
             <section
               id="language"
-              className="rounded-card border border-bg-border bg-bg-card p-6"
+              className="rounded-card border border-bg-border/15 bg-bg-card/60 p-6"
             >
               <h2 className="text-lg font-semibold text-text-primary mb-4">
                 {t("languageRegion", settings.language)}
@@ -163,7 +163,7 @@ export default function SettingsPage() {
             {/* Currency Section */}
             <section
               id="currency"
-              className="rounded-card border border-bg-border bg-bg-card p-6"
+              className="rounded-card border border-bg-border/15 bg-bg-card/60 p-6"
             >
               <h2 className="text-lg font-semibold text-text-primary mb-4">
                 {t("currency", settings.language)}
@@ -199,7 +199,7 @@ export default function SettingsPage() {
             {/* Timezone Section */}
             <section
               id="timezone"
-              className="rounded-card border border-bg-border bg-bg-card p-6"
+              className="rounded-card border border-bg-border/15 bg-bg-card/60 p-6"
             >
               <h2 className="text-lg font-semibold text-text-primary mb-4">
                 {t("timezone", settings.language)}
@@ -233,7 +233,7 @@ export default function SettingsPage() {
             </section>
 
             {/* Info box */}
-            <div className="rounded-card border border-bg-border bg-cyan-bg/10 p-4">
+            <div className="rounded-card border border-cyan/15 bg-cyan-bg/10 p-4">
               <p className="text-xs text-text-muted">
                 {t("settingsStored", settings.language)}
               </p>

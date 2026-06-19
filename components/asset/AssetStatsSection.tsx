@@ -69,7 +69,7 @@ export function AssetStatsSection({ stats, unit = "index", currentPrice }: Asset
   }
 
   return (
-    <section id="stats" className="rounded-card border border-bg-border/70 bg-bg-card p-5">
+    <section id="stats" className="rounded-card border border-bg-border/15 bg-bg-card/60 p-5">
       <h2 className="mb-3 text-[10px] font-semibold uppercase tracking-widest text-text-muted">
         Market Statistics
       </h2>
@@ -90,7 +90,7 @@ export function AssetStatsSection({ stats, unit = "index", currentPrice }: Asset
             <span className="shrink-0 font-mono text-[11px] text-text-muted">
               {fmtPrice(low52!, unit)}
             </span>
-            <div className="relative h-1.5 flex-1 overflow-hidden rounded-full bg-bg-border">
+            <div className="relative h-1.5 flex-1 overflow-hidden rounded-full bg-bg-border/30">
               <div
                 className="absolute h-full rounded-full bg-cyan transition-all"
                 style={{ width: positionPct != null ? `${positionPct}%` : "50%" }}

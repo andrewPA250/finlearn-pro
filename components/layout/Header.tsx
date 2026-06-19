@@ -124,11 +124,11 @@ export function Header() {
       <button
         type="button"
         onClick={() => setSearchOpen(true)}
-        className="hidden max-w-xs flex-1 items-center gap-2 rounded-card border border-bg-border/50 bg-bg-card/40 px-3 py-2 text-sm text-text-secondary transition duration-150 ease-in-out hover:border-cyan/30 hover:bg-bg-hover focus-visible:border-cyan/40 focus-visible:outline-none lg:flex"
+        className="hidden max-w-xs flex-1 items-center gap-2 rounded-card border border-bg-border/20 bg-bg-card/40 px-3 py-2 text-sm text-text-secondary transition duration-150 ease-in-out hover:border-cyan/30 hover:bg-bg-hover focus-visible:border-cyan/40 focus-visible:outline-none lg:flex"
       >
         <SearchIcon className="h-4 w-4" />
         <span className="flex-1 text-left text-text-muted">{t("searchAssets", lang)}</span>
-        <kbd className="rounded border border-text-disabled/30 px-1.5 py-0.5 font-mono text-[10px] text-text-disabled">
+        <kbd className="rounded border border-text-disabled/15 px-1.5 py-0.5 font-mono text-[10px] text-text-disabled">
           Ctrl K
         </kbd>
       </button>
@@ -172,14 +172,14 @@ export function Header() {
                   className="fixed inset-0 z-30 cursor-default"
                   onClick={() => setMenuOpen(false)}
                 />
-                <div className="absolute right-0 top-full z-40 mt-2 w-56 animate-fade-in-up rounded-card border border-bg-border/50 bg-bg-card p-2 shadow-lg shadow-black/30">
+                <div className="absolute right-0 top-full z-40 mt-2 w-56 animate-fade-in-up rounded-card border border-bg-border/20 bg-bg-card p-2 shadow-lg shadow-black/30">
                   <p className="truncate px-3 py-1.5 text-xs text-text-muted">{user.email}</p>
                   <div className="flex gap-2 px-3 py-1.5 text-[10px] text-text-muted/70">
                     <span>{t(settings.language === "en" ? "english" : "italiano", settings.language)}</span>
                     <span>•</span>
                     <span>{settings.currency}</span>
                   </div>
-                  <hr className="my-1 border-bg-border/50" />
+                  <hr className="my-1 border-bg-border/15" />
                   <Link
                     href="/profile"
                     onClick={() => setMenuOpen(false)}
@@ -200,7 +200,7 @@ export function Header() {
                     <span className="text-cyan/70">★</span>
                     <span>{t("watchlist", settings.language)} ({watchlistSymbols.length})</span>
                   </div>
-                  <hr className="my-1 border-bg-border/50" />
+                  <hr className="my-1 border-bg-border/15" />
                   <button
                     type="button"
                     onClick={handleLogout}

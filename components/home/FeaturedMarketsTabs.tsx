@@ -67,7 +67,7 @@ function AssetCard({ symbol, name, quote }: { symbol: string; name: string; quot
 
   return (
     <Link href={`/asset/${symbol}`}>
-      <div className="group rounded-card border border-bg-border bg-bg-card p-4 transition-all duration-150 hover:border-cyan/30 hover:bg-bg-hover cursor-pointer">
+      <div className="group rounded-card border border-bg-border/15 bg-bg-card/60 p-4 transition-all duration-150 hover:border-cyan/30 hover:bg-bg-hover cursor-pointer">
         <div className="flex items-start justify-between mb-3">
           <div>
             <p className="text-xs font-bold text-text-primary font-mono">{symbol}</p>
@@ -100,7 +100,7 @@ export function FeaturedMarketsTabs({ quotes }: FeaturedMarketsTabsProps) {
   return (
     <div>
       {/* Tab bar */}
-      <div className="flex gap-1 mb-5 border-b border-bg-border pb-0">
+      <div className="flex gap-1 mb-5 border-b border-bg-border/15 pb-0">
         {tabs.map((tab) => (
           <button
             key={tab.id}
