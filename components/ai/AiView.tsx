@@ -62,9 +62,18 @@ export function AiView() {
     };
   }, []);
 
-  // Keep the transcript scrolled to the latest message.
+  // Auto-scroll to latest message: when user sends, when AI responds, when AI finishes.
   useEffect(() => {
-    scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
+    // Small delay ensures DOM has fully updated before scrolling
+    const timer = setTimeout(() => {
+      if (scrollRef.current) {
+        scrollRef.current.scrollTo({
+          top: scrollRef.current.scrollHeight,
+          behavior: "smooth",
+        });
+      }
+    }, 0);
+    return () => clearTimeout(timer);
   }, [messages, loading]);
 
   async function send(text: string) {
@@ -141,9 +150,9 @@ export function AiView() {
   const showEmpty = messages.length === 0 && !loading;
 
   return (
-    <div className="mx-auto flex min-h-[calc(100vh-7rem)] max-w-3xl flex-col px-4 py-6 sm:px-6">
+    <div className="mx-auto flex h-[calc(100vh-10rem)] max-w-3xl flex-col px-4 py-4 sm:px-6 sm:py-6">
       {/* Header */}
-      <div className="mb-4">
+      <div className="mb-3 shrink-0">
         <div className="flex items-center gap-2.5">
           <span className="flex h-9 w-9 items-center justify-center rounded-card bg-cyan-bg/40 text-cyan">
             <SparkleIcon className="h-5 w-5" />
@@ -161,7 +170,7 @@ export function AiView() {
       </div>
 
       {/* Disclaimer */}
-      <div className="mb-4 rounded-card border border-bg-border bg-bg-card/50 px-3 py-2">
+      <div className="mb-3 shrink-0 rounded-card border border-bg-border bg-bg-card/50 px-3 py-2">
         <p className="text-[11px] leading-relaxed text-text-muted">⚠ {t("aiDisclaimer", language)}</p>
       </div>
 
@@ -170,7 +179,7 @@ export function AiView() {
       ) : (
         <>
           {/* Focus asset + context note */}
-          <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+          <div className="mb-2 shrink-0 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
             <label className="flex items-center gap-2 text-xs text-text-secondary">
               <span className="font-medium">{t("aiFocusAsset", language)}:</span>
               <input
@@ -212,7 +221,7 @@ export function AiView() {
           </div>
 
           {error && (
-            <div className="mt-3 rounded-card border border-negative/30 bg-negative/10 px-3 py-2 text-sm text-negative">
+            <div className="mt-2 shrink-0 rounded-card border border-negative/30 bg-negative/10 px-3 py-2 text-sm text-negative">
               {error}
             </div>
           )}
@@ -223,7 +232,7 @@ export function AiView() {
               e.preventDefault();
               send(input);
             }}
-            className="mt-3 flex items-end gap-2"
+            className="mt-2 shrink-0 flex items-end gap-2"
           >
             <textarea
               value={input}
@@ -247,7 +256,7 @@ export function AiView() {
             </button>
           </form>
 
-          <p className="mt-2 text-[10px] leading-relaxed text-text-disabled/70">
+          <p className="mt-1.5 shrink-0 text-[10px] leading-relaxed text-text-disabled/70">
             {t("aiContextNote", language)}
           </p>
         </>

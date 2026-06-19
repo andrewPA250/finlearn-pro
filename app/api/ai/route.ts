@@ -27,6 +27,37 @@ function isValidMessage(m: unknown): m is AiMessage {
   );
 }
 
+/**
+ * Sanitize context to ensure all numeric values are finite and JSON-safe.
+ * Removes NaN, Infinity, and undefined values that would break serialization.
+ */
+function sanitizeContext(context: unknown): Record<string, unknown> | null {
+  if (!context || typeof context !== "object") return null;
+
+  // Create a JSON round-trip to catch any non-serializable values
+  try {
+    const serialized = JSON.stringify(context, (key, value) => {
+      // Replace NaN and Infinity with null (which the model will render as "unavailable")
+      if (typeof value === "number" && !isFinite(value)) {
+        console.warn(`[AI] Sanitized non-finite number at key '${key}':`, value);
+        return null;
+      }
+      // Remove undefined values
+      if (value === undefined) {
+        return undefined;
+      }
+      return value;
+    });
+    const sanitized = JSON.parse(serialized);
+    console.log("[AI] Context sanitized successfully, size:", serialized.length, "bytes");
+    return sanitized;
+  } catch (err) {
+    // If serialization fails, return null and let the model work without context
+    console.error("[AI] context sanitization failed:", err, "context:", JSON.stringify(context).substring(0, 500));
+    return null;
+  }
+}
+
 export async function POST(request: Request): Promise<Response> {
   let body: AiChatRequest;
   try {
@@ -60,7 +91,9 @@ export async function POST(request: Request): Promise<Response> {
   }
 
   try {
-    const system = buildSystemPrompt(body.context);
+    // Sanitize context to ensure no NaN/Infinity/undefined values
+    const sanitizedContext = sanitizeContext(body.context);
+    const system = buildSystemPrompt(sanitizedContext as any);
     const reply = await provider.generate(system, trimmed);
     return json({ ok: true, reply, provider: provider.id, model: provider.model });
   } catch (err) {

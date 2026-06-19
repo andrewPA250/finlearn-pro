@@ -78,30 +78,54 @@ function buildPortfolio(
   quotes: Record<string, TickerQuote>,
   currency: string
 ): AiPortfolioContext | null {
-  if (holdings.length === 0) return null;
+  // Always return a portfolio object, even if empty - the model needs explicit empty state
+  const isEmpty = holdings.length === 0;
+
+  if (isEmpty) {
+    // Return empty portfolio structure so the model knows portfolio was checked
+    return {
+      currency,
+      holdingsCount: 0,
+      totalCostBasis: 0,
+      totalMarketValue: null,
+      holdings: [],
+    };
+  }
+
+  // Limit to max 20 holdings for AI context
+  const limitedHoldings = holdings.slice(0, 20);
 
   let totalCostBasis = 0;
   let totalMarketValue: number | null = 0;
   let anyValueMissing = false;
 
-  const mapped = holdings.map((h) => {
+  const mapped = limitedHoldings.map((h) => {
     const sym = h.symbol.toUpperCase();
     const q = quotes[sym];
     const price = q ? q.value : null;
-    const marketValue = price != null ? price * h.quantity : null;
-    const cost = h.avgPrice * h.quantity;
+
+    // Defensive: ensure avgPrice and quantity are valid numbers
+    const avgPrice = typeof h.avgPrice === 'number' && isFinite(h.avgPrice) ? h.avgPrice : 0;
+    const quantity = typeof h.quantity === 'number' && isFinite(h.quantity) ? h.quantity : 0;
+
+    const marketValue = price != null && isFinite(price) ? price * quantity : null;
+    const cost = avgPrice * quantity;
     const plPct =
-      price != null && h.avgPrice > 0 ? ((price - h.avgPrice) / h.avgPrice) * 100 : null;
+      price != null && isFinite(price) && avgPrice > 0 ? ((price - avgPrice) / avgPrice) * 100 : null;
 
     totalCostBasis += cost;
     if (marketValue == null) anyValueMissing = true;
     else if (totalMarketValue != null) totalMarketValue += marketValue;
 
-    return { symbol: sym, quantity: h.quantity, avgPrice: h.avgPrice, price, marketValue, plPct };
+    return { symbol: sym, quantity, avgPrice, price, marketValue, plPct };
   });
 
   // If we couldn't price every holding, total market value is not trustworthy.
   if (anyValueMissing) totalMarketValue = null;
+
+  // Ensure totals are finite
+  if (!isFinite(totalCostBasis)) totalCostBasis = 0;
+  if (totalMarketValue != null && !isFinite(totalMarketValue)) totalMarketValue = null;
 
   return {
     currency,
@@ -153,6 +177,9 @@ function buildSnapshot(quotes: Record<string, TickerQuote>): AiMarketSnapshotIte
 export function buildAiContext(args: BuildContextArgs): AiContext {
   const { language, currency, holdings, watchlist, alerts, quotes, focusSymbol } = args;
 
+  // Limit watchlist to max 30 symbols for AI context
+  const limitedWatchlist = watchlist.slice(0, 30).map((w) => w.toUpperCase());
+
   const activeAlerts = alerts.filter((a) => a.enabled && !a.triggeredAt).length;
   const triggeredAlerts = alerts.filter((a) => a.triggeredAt).length;
 
@@ -160,7 +187,7 @@ export function buildAiContext(args: BuildContextArgs): AiContext {
     language,
     selectedAsset: buildSelectedAsset(focusSymbol, quotes, currency),
     portfolio: buildPortfolio(holdings, quotes, currency),
-    watchlist: watchlist.map((w) => w.toUpperCase()),
+    watchlist: limitedWatchlist,
     alerts:
       alerts.length > 0
         ? {
@@ -170,7 +197,7 @@ export function buildAiContext(args: BuildContextArgs): AiContext {
             items: alerts.slice(0, 20).map((a) => ({
               symbol: a.symbol.toUpperCase(),
               type: ALERT_TYPE_LABELS[a.type] ?? a.type,
-              target: a.target,
+              target: typeof a.target === 'number' && isFinite(a.target) ? a.target : 0,
               status: a.triggeredAt ? "triggered" : a.enabled ? "active" : "disabled",
             })),
           }

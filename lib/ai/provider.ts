@@ -139,8 +139,10 @@ function fmtNum(n: number | null, opts?: Intl.NumberFormatOptions): string {
 /**
  * Compact financial notation for large counts (no currency prefix) — e.g.
  * 76700000 -> "76.7M". Monetary amounts wrap this with "$" via fmtCompactUSD.
+ * Defensive: returns "unavailable" for NaN/Infinity.
  */
 function fmtCompactNumber(n: number): string {
+  if (!isFinite(n)) return "unavailable";
   const abs = Math.abs(n);
   const sign = n < 0 ? "-" : "";
   if (abs >= 1e12) return `${sign}${(abs / 1e12).toFixed(2)}T`;
@@ -187,30 +189,38 @@ export function formatContext(context: AiContext | undefined): string {
     );
   }
 
-  if (context.portfolio && context.portfolio.holdingsCount > 0) {
+  if (context.portfolio) {
     const p = context.portfolio;
-    const lines = p.holdings
-      .map(
-        (h) =>
-          `  • ${h.symbol}: qty ${h.quantity}, avg ${fmtNum(h.avgPrice, { maximumFractionDigits: 2 })}, ` +
-          `price ${h.price == null ? "unavailable" : fmtNum(h.price, { maximumFractionDigits: 2 })}, ` +
-          `value ${fmtCompactUSD(h.marketValue)}, ` +
-          `P/L ${fmtPct(h.plPct)}`
-      )
-      .join("\n");
-    parts.push(
-      [
-        `PORTFOLIO (${p.holdingsCount} holdings, values in ${p.currency}):`,
-        `- Total cost basis: ${fmtCompactUSD(p.totalCostBasis)}`,
-        `- Total market value: ${fmtCompactUSD(p.totalMarketValue)}`,
-        `- Holdings:`,
-        lines,
-      ].join("\n")
-    );
+    if (p.holdingsCount > 0) {
+      const lines = p.holdings
+        .map(
+          (h) =>
+            `  • ${h.symbol}: qty ${h.quantity}, avg ${fmtNum(h.avgPrice, { maximumFractionDigits: 2 })}, ` +
+            `price ${h.price == null ? "unavailable" : fmtNum(h.price, { maximumFractionDigits: 2 })}, ` +
+            `value ${fmtCompactUSD(h.marketValue)}, ` +
+            `P/L ${fmtPct(h.plPct)}`
+        )
+        .join("\n");
+      parts.push(
+        [
+          `PORTFOLIO (${p.holdingsCount} holdings, values in ${p.currency}):`,
+          `- Total cost basis: ${fmtCompactUSD(p.totalCostBasis)}`,
+          `- Total market value: ${fmtCompactUSD(p.totalMarketValue)}`,
+          `- Holdings:`,
+          lines,
+        ].join("\n")
+      );
+    } else {
+      parts.push("PORTFOLIO: Empty (no holdings).");
+    }
   }
 
-  if (context.watchlist && context.watchlist.length > 0) {
-    parts.push(`WATCHLIST (${context.watchlist.length}): ${context.watchlist.join(", ")}`);
+  if (context.watchlist && Array.isArray(context.watchlist)) {
+    if (context.watchlist.length > 0) {
+      parts.push(`WATCHLIST (${context.watchlist.length}): ${context.watchlist.join(", ")}`);
+    } else {
+      parts.push("WATCHLIST: Empty (no symbols).");
+    }
   }
 
   if (context.alerts && context.alerts.total > 0) {
@@ -357,12 +367,15 @@ function createGeminiProvider(): AiProvider {
         }),
       });
       if (!res.ok) {
+        const errorText = await safeText(res);
+        console.error("[Gemini] API error", res.status, ":", errorText);
         throw new AiProviderError(
           errorCodeForStatus(res.status),
-          `Gemini API error ${res.status}: ${await safeText(res)}`
+          `Gemini API error ${res.status}: ${errorText}`
         );
       }
       const data = await res.json();
+      console.log("[Gemini] Response received successfully");
       const text =
         data?.candidates?.[0]?.content?.parts
           ?.map((p: { text?: string }) => p?.text ?? "")
