@@ -3,7 +3,7 @@ import { fetchCalendarData } from "@/lib/calendar/calendarProvider";
 import { CalendarView } from "@/components/calendar/CalendarView";
 
 export const metadata: Metadata = {
-  title: "Calendar — FinanceHub",
+  title: "Calendar",
   description: "Earnings, IPO, and economic calendar powered by real market data.",
 };
 

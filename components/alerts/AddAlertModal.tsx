@@ -119,8 +119,8 @@ export function AddAlertModal({
         if (e.target === backdropRef.current) onClose();
       }}
     >
-      <div className="w-full max-w-md rounded-card border border-border-base bg-bg-secondary shadow-xl">
-        <div className="flex items-center justify-between border-b border-border-base px-5 py-4">
+      <div className="w-full max-w-md rounded-card border border-bg-border bg-bg-card shadow-xl">
+        <div className="flex items-center justify-between border-b border-bg-border px-5 py-4">
           <h2 className="text-base font-semibold text-text-primary">
             {isEdit ? t("editAlertModal", language) : t("createAlertModal", language)}
           </h2>
@@ -141,10 +141,10 @@ export function AddAlertModal({
               onBlur={() => setTimeout(() => setShowSuggestions(false), 150)}
               placeholder={t("symbolPlaceholder", language)}
               disabled={isEdit}
-              className="w-full rounded border border-border-base bg-bg-primary px-3 py-2 font-mono text-sm text-text-primary placeholder-text-muted focus:border-cyan focus:outline-none disabled:opacity-50"
+              className="w-full rounded border border-bg-border bg-bg-primary px-3 py-2 font-mono text-sm text-text-primary placeholder-text-muted focus:border-cyan focus:outline-none disabled:opacity-50"
             />
             {showSuggestions && (
-              <ul className="absolute z-10 mt-1 w-full rounded border border-border-base bg-bg-secondary shadow-lg">
+              <ul className="absolute z-10 mt-1 w-full rounded border border-bg-border bg-bg-card shadow-lg">
                 {suggestions.map((inst) => (
                   <li key={inst.symbol}>
                     <button
@@ -170,7 +170,7 @@ export function AddAlertModal({
             <select
               value={type}
               onChange={(e) => { setType(e.target.value as AlertType); setFieldError(""); }}
-              className="w-full rounded border border-border-base bg-bg-primary px-3 py-2 text-sm text-text-primary focus:border-cyan focus:outline-none"
+              className="w-full rounded border border-bg-border bg-bg-primary px-3 py-2 text-sm text-text-primary focus:border-cyan focus:outline-none"
             >
               {ALERT_TYPES.map((alertTypeVal) => (
                 <option key={alertTypeVal} value={alertTypeVal}>{ALERT_TYPE_LABELS[alertTypeVal]}</option>
@@ -189,7 +189,7 @@ export function AddAlertModal({
               value={target}
               onChange={(e) => { setTarget(e.target.value); setFieldError(""); }}
               placeholder={t("targetPlaceholder", language)}
-              className="w-full rounded border border-border-base bg-bg-primary px-3 py-2 text-sm text-text-primary placeholder-text-muted focus:border-cyan focus:outline-none"
+              className="w-full rounded border border-bg-border bg-bg-primary px-3 py-2 text-sm text-text-primary placeholder-text-muted focus:border-cyan focus:outline-none"
             />
           </div>
 
@@ -204,7 +204,7 @@ export function AddAlertModal({
               onChange={(e) => setNote(e.target.value)}
               rows={2}
               placeholder={t("notePlaceholder", language)}
-              className="w-full resize-none rounded border border-border-base bg-bg-primary px-3 py-2 text-sm text-text-primary placeholder-text-muted focus:border-cyan focus:outline-none"
+              className="w-full resize-none rounded border border-bg-border bg-bg-primary px-3 py-2 text-sm text-text-primary placeholder-text-muted focus:border-cyan focus:outline-none"
             />
           </div>
 
@@ -212,7 +212,7 @@ export function AddAlertModal({
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 rounded border border-border-base px-4 py-2 text-sm text-text-secondary hover:text-text-primary transition"
+              className="flex-1 rounded border border-bg-border px-4 py-2 text-sm text-text-secondary hover:text-text-primary transition"
             >
               {t("cancel", language)}
             </button>

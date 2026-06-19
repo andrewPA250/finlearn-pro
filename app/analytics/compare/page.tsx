@@ -7,7 +7,7 @@ import type { ProviderQuote, ProviderFundamentals } from "@/lib/providers";
 import type { MarketInstrument } from "@/types/markets";
 
 export const metadata: Metadata = {
-  title: "Compare Assets — FinanceHub",
+  title: "Compare Assets",
   description: "Compare multiple assets side-by-side: performance, fundamentals, and risk metrics.",
 };
 

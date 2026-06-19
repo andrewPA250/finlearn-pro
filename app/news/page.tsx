@@ -2,7 +2,7 @@ import { NewsView } from "@/components/news/NewsView";
 import { getGlobalNews } from "@/lib/globalNews";
 
 export const metadata = {
-  title: "Market News — FinanceHub",
+  title: "Market News",
   description: "Latest market headlines across stocks, crypto, macro and commodities.",
 };
 

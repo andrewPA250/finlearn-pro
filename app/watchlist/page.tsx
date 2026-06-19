@@ -4,7 +4,7 @@ import { MARKET_INSTRUMENTS } from "@/lib/markets/catalog";
 import { WatchlistView } from "@/components/watchlist/WatchlistView";
 
 export const metadata: Metadata = {
-  title: "My Watchlist — FinanceHub",
+  title: "Watchlist",
   description: "Track your favorite assets with custom watchlists.",
 };
 

@@ -1,5 +1,5 @@
 import type { TickerQuote } from "@/lib/market/ticker";
-import { MARKET_CATEGORIES, getInstrumentsByCategory } from "@/lib/markets/catalog";
+import { MARKET_CATEGORIES, getInstrumentsByCategory, getCatalogStats } from "@/lib/markets/catalog";
 import { MarketsSidebar } from "@/components/markets/MarketsSidebar";
 import { MarketsTopMovers } from "@/components/markets/MarketsTopMovers";
 import { MarketsFilter } from "@/components/markets/MarketsFilter";
@@ -13,6 +13,8 @@ export function MarketsView({ tickerQuotes }: MarketsViewProps) {
     tickerQuotes.map((quote) => [quote.id, quote])
   );
 
+  const catalogStats = getCatalogStats();
+
   // Build instruments map per category once (passed to client filter component)
   const instrumentsByCategory: Record<string, ReturnType<typeof getInstrumentsByCategory>> = {};
   for (const cat of MARKET_CATEGORIES) {
@@ -25,7 +27,7 @@ export function MarketsView({ tickerQuotes }: MarketsViewProps) {
       <div className="mb-6 animate-fade-in-up">
         <h1 className="text-2xl font-bold text-text-primary">Markets</h1>
         <p className="mt-0.5 text-sm text-text-secondary">
-          120+ assets across indices, equities, crypto, forex, commodities and bonds.
+          {catalogStats.total}+ assets across indices, equities, crypto, forex, commodities and bonds.
         </p>
       </div>
 

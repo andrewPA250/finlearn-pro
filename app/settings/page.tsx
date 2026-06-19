@@ -22,7 +22,7 @@ export default function SettingsPage() {
 
       {/* Settings container */}
       <div className="mx-auto max-w-2xl px-6 py-8">
-        <h1 className="text-3xl font-bold text-text-primary mb-8">
+        <h1 className="text-2xl font-bold text-text-primary mb-6">
           {t("settings", settings.language)}
         </h1>
 

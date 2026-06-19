@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
 
   const label = getCategoryLabel(params.category as MarketCategoryId);
   return {
-    title: `${label} — FinanceHub Markets`,
+    title: label,
     description: getCategoryDescription(params.category as MarketCategoryId),
   };
 }

@@ -5,7 +5,7 @@ import { MARKET_INSTRUMENTS } from "@/lib/markets/catalog";
 import { ScreenerView } from "@/components/markets/ScreenerView";
 
 export const metadata: Metadata = {
-  title: "Market Screener — FinanceHub Markets",
+  title: "Market Screener",
   description: "Discover and screen 600+ global assets by category, price, performance, and fundamentals.",
 };
 

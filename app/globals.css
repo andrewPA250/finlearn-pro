@@ -88,6 +88,17 @@ html.light body {
   background-image: none;
 }
 
+/* Tabular (monospaced) numbers for aligned financial data */
+.font-mono,
+code, kbd, samp {
+  font-feature-settings: "tnum" 1, "kern" 1;
+}
+
+/* Slightly tighter tracking on display headings */
+h1, h2, h3 {
+  letter-spacing: -0.01em;
+}
+
 ::selection {
   background: var(--accent-purple);
   color: var(--text-primary);

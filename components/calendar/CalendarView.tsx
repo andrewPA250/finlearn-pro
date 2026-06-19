@@ -34,8 +34,8 @@ function hourLabel(h: string): string {
 }
 
 function ipoStatusClass(status: string): string {
-  if (status === "priced") return "bg-green-500/10 text-green-400";
-  if (status === "expected") return "bg-blue-500/10 text-blue-400";
+  if (status === "priced") return "bg-positive/10 text-positive";
+  if (status === "expected") return "bg-info/10 text-info";
   return "bg-bg-primary text-text-muted";
 }
 
@@ -43,7 +43,7 @@ function ipoStatusClass(status: string): string {
 
 function EmptyCard({ label }: { label: string }) {
   return (
-    <div className="flex flex-col items-center justify-center rounded-card border border-border-base bg-bg-secondary px-6 py-10 text-center">
+    <div className="flex flex-col items-center justify-center rounded-card border border-bg-border bg-bg-card px-6 py-10 text-center">
       <p className="text-sm text-text-muted">No {label} events in this date range.</p>
     </div>
   );
@@ -55,10 +55,10 @@ function EarningsTable({ events }: { events: EarningsEvent[] }) {
   if (events.length === 0) return <EmptyCard label="earnings" />;
 
   return (
-    <div className="rounded-card border border-border-base bg-bg-secondary overflow-hidden">
+    <div className="rounded-card border border-bg-border bg-bg-card overflow-hidden">
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
-          <thead className="border-b border-border-base bg-bg-primary">
+          <thead className="border-b border-bg-border bg-bg-primary">
             <tr>
               <th className="px-4 py-3 text-left font-semibold text-text-secondary">Date</th>
               <th className="px-4 py-3 text-left font-semibold text-text-secondary">Symbol</th>
@@ -84,7 +84,7 @@ function EarningsTable({ events }: { events: EarningsEvent[] }) {
                   Q{e.quarter} {e.year}
                 </td>
                 <td className="px-4 py-2.5 text-right font-mono text-text-secondary">{fmtEps(e.epsEstimate)}</td>
-                <td className={`px-4 py-2.5 text-right font-mono ${e.epsActual != null ? (e.epsActual >= (e.epsEstimate ?? 0) ? "text-green-500" : "text-red-500") : "text-text-muted"}`}>
+                <td className={`px-4 py-2.5 text-right font-mono ${e.epsActual != null ? (e.epsActual >= (e.epsEstimate ?? 0) ? "text-positive" : "text-negative") : "text-text-muted"}`}>
                   {fmtEps(e.epsActual)}
                 </td>
                 <td className="px-4 py-2.5 text-right font-mono text-text-secondary hidden lg:table-cell">{fmtMoney(e.revenueEstimate, true)}</td>
@@ -104,10 +104,10 @@ function IpoTable({ events }: { events: IpoEvent[] }) {
   if (events.length === 0) return <EmptyCard label="IPO" />;
 
   return (
-    <div className="rounded-card border border-border-base bg-bg-secondary overflow-hidden">
+    <div className="rounded-card border border-bg-border bg-bg-card overflow-hidden">
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
-          <thead className="border-b border-border-base bg-bg-primary">
+          <thead className="border-b border-bg-border bg-bg-primary">
             <tr>
               <th className="px-4 py-3 text-left font-semibold text-text-secondary">Date</th>
               <th className="px-4 py-3 text-left font-semibold text-text-secondary">Symbol</th>
@@ -182,19 +182,19 @@ export function CalendarView({ data }: CalendarViewProps) {
 
       {/* Summary cards */}
       <div className="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-4 animate-fade-in-up" style={{ animationDelay: "40ms" }}>
-        <div className="rounded-card border border-border-base bg-bg-secondary p-4">
+        <div className="rounded-card border border-bg-border bg-bg-card p-4">
           <p className="text-xs text-text-secondary">Total Events</p>
           <p className="mt-1 text-xl font-bold text-text-primary">{totalEvents}</p>
         </div>
-        <div className="rounded-card border border-border-base bg-bg-secondary p-4">
+        <div className="rounded-card border border-bg-border bg-bg-card p-4">
           <p className="text-xs text-text-secondary">Earnings</p>
           <p className="mt-1 text-xl font-bold text-cyan">{summary.earnings}</p>
         </div>
-        <div className="rounded-card border border-border-base bg-bg-secondary p-4">
+        <div className="rounded-card border border-bg-border bg-bg-card p-4">
           <p className="text-xs text-text-secondary">IPOs</p>
-          <p className="mt-1 text-xl font-bold text-purple-400">{summary.ipos}</p>
+          <p className="mt-1 text-xl font-bold text-color-ai">{summary.ipos}</p>
         </div>
-        <div className="rounded-card border border-border-base bg-bg-secondary p-4">
+        <div className="rounded-card border border-bg-border bg-bg-card p-4">
           <p className="text-xs text-text-secondary">Date Range</p>
           <p className="mt-1 text-sm font-semibold text-text-primary truncate">
             {data.fromDate} – {data.toDate}
@@ -203,7 +203,7 @@ export function CalendarView({ data }: CalendarViewProps) {
       </div>
 
       {/* Filter tabs */}
-      <div className="mb-6 flex gap-1 overflow-x-auto rounded-card border border-border-base bg-bg-secondary p-1 animate-fade-in-up" style={{ animationDelay: "60ms" }}>
+      <div className="mb-6 flex gap-1 overflow-x-auto rounded-card border border-bg-border bg-bg-card p-1 animate-fade-in-up" style={{ animationDelay: "60ms" }}>
         {FILTERS.map(({ id, label }) => (
           <button
             key={id}

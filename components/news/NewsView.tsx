@@ -4,7 +4,6 @@ import { useMemo, useState } from "react";
 import Image from "next/image";
 import type { NewsItem } from "@/lib/assetNews";
 import { useSettings } from "@/lib/settings/SettingsContext";
-import { t } from "@/lib/settings/i18n";
 
 type NewsCategory = "all" | "stocks" | "crypto" | "economy" | "commodities" | "etf";
 
@@ -14,6 +13,15 @@ const CATEGORY_KEYWORDS: Record<Exclude<NewsCategory, "all">, string[]> = {
   economy: ["fed", "federal reserve", "inflation", "interest rate", "economic", "gdp", "employment", "unemployment"],
   commodities: ["gold", "oil", "crude", "natural gas", "commodity", "futures"],
   etf: ["etf", "fund", "index fund", "passive"],
+};
+
+const CATEGORY_LABELS: Record<NewsCategory, string> = {
+  all: "All",
+  stocks: "Stocks",
+  crypto: "Crypto",
+  economy: "Macro",
+  commodities: "Commodities",
+  etf: "ETF",
 };
 
 interface NewsViewProps {
@@ -28,7 +36,6 @@ export function NewsView({ news }: NewsViewProps) {
   const filtered = useMemo(() => {
     let result = news;
 
-    // Category filter
     if (selectedCategory !== "all") {
       const keywords = CATEGORY_KEYWORDS[selectedCategory];
       result = result.filter((item) => {
@@ -37,7 +44,6 @@ export function NewsView({ news }: NewsViewProps) {
       });
     }
 
-    // Search filter
     if (searchTerm) {
       const search = searchTerm.toLowerCase();
       result = result.filter((item) =>
@@ -67,104 +73,100 @@ export function NewsView({ news }: NewsViewProps) {
   }
 
   return (
-    <div className="mx-auto max-w-platform px-4 py-6 md:px-6">
-      {/* Page header */}
-      <div className="mb-8 animate-fade-in-up">
-        <h1 className="text-3xl font-bold text-text-primary">Market News</h1>
-        <p className="mt-2 text-text-secondary">
-          Latest market headlines across stocks, crypto, macro and commodities.
-        </p>
+    <div className="mx-auto max-w-platform px-4 py-5 md:px-6">
+
+      {/* Page header — terminal-style */}
+      <div className="mb-5 animate-fade-in-up">
+        <span className="text-[11px] font-semibold uppercase tracking-widest text-text-secondary">
+          {language === "it" ? "Intelligence" : "Market Intelligence"}
+        </span>
+        <h1 className="mt-0.5 text-xl font-bold text-text-primary">
+          {language === "it" ? "Notizie di mercato" : "Market News"}
+        </h1>
       </div>
 
-      {/* Filters + Search */}
-      <div className="mb-6 rounded-card border border-border-base bg-bg-secondary p-4 animate-fade-in-up" style={{ animationDelay: "40ms" }}>
-        <div className="flex flex-col gap-4">
-          {/* Search */}
-          <div>
-            <label className="mb-2 block text-xs font-medium text-text-secondary">
-              {t("search", language)}
-            </label>
-            <input
-              type="text"
-              placeholder="Search headline, source..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full rounded border border-border-base bg-bg-primary px-3 py-2 text-sm text-text-primary placeholder-text-muted focus:border-cyan focus:outline-none"
-            />
-          </div>
-
-          {/* Category filter chips */}
-          <div>
-            <p className="mb-2 text-xs font-medium text-text-secondary">Category</p>
-            <div className="flex flex-wrap gap-2">
-              {(["all", "stocks", "crypto", "economy", "commodities", "etf"] as const).map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setSelectedCategory(cat)}
-                  className={`rounded-full px-3 py-1 text-xs font-medium transition ${
-                    selectedCategory === cat
-                      ? "bg-cyan text-bg-primary"
-                      : "bg-bg-primary text-text-secondary hover:bg-bg-hover"
-                  }`}
-                >
-                  {cat === "all" ? "All" : cat.charAt(0).toUpperCase() + cat.slice(1)}
-                </button>
-              ))}
-            </div>
+      {/* Filters — compact horizontal layout */}
+      <div
+        className="mb-5 rounded-card border border-bg-border bg-bg-card px-4 py-3 animate-fade-in-up"
+        style={{ animationDelay: "40ms" }}
+      >
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+          <input
+            type="text"
+            placeholder={language === "it" ? "Cerca titolo, fonte…" : "Search headline, source…"}
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="flex-1 rounded border border-bg-border bg-bg-primary px-3 py-1.5 text-sm text-text-primary placeholder-text-muted focus:border-cyan focus:outline-none"
+          />
+          <div className="flex flex-wrap gap-1.5 shrink-0">
+            {(["all", "stocks", "crypto", "economy", "commodities", "etf"] as const).map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setSelectedCategory(cat)}
+                className={`rounded-full px-2.5 py-0.5 text-[11px] font-medium transition ${
+                  selectedCategory === cat
+                    ? "bg-cyan text-bg-primary"
+                    : "bg-bg-primary text-text-secondary hover:bg-bg-hover"
+                }`}
+              >
+                {CATEGORY_LABELS[cat]}
+              </button>
+            ))}
           </div>
         </div>
       </div>
 
-      {/* News cards */}
+      {/* News feed */}
       {filtered.length === 0 ? (
-        <div className="rounded-card border border-border-base bg-bg-secondary p-8 text-center">
-          <p className="text-text-secondary">No news available right now.</p>
+        <div className="rounded-card border border-bg-border bg-bg-card p-8 text-center">
+          <p className="text-text-secondary">
+            {language === "it" ? "Nessuna notizia disponibile." : "No news available right now."}
+          </p>
         </div>
       ) : (
-        <div className="space-y-4 animate-fade-in-up" style={{ animationDelay: "80ms" }}>
-          {filtered.map((item) => (
+        <div className="rounded-card border border-bg-border bg-bg-card overflow-hidden animate-fade-in-up" style={{ animationDelay: "80ms" }}>
+          {filtered.map((item, idx) => (
             <a
               key={item.id}
               href={item.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="block group rounded-card border border-bg-border bg-bg-card p-4 transition hover:border-cyan/50 hover:bg-bg-hover"
+              className={`group flex gap-4 p-4 transition-colors hover:bg-bg-hover ${idx < filtered.length - 1 ? "border-b border-bg-border/50" : ""}`}
             >
-              <div className="flex gap-4">
-                {/* Image */}
-                {item.image && (
-                  <Image
-                    src={item.image}
-                    alt={item.headline}
-                    width={160}
-                    height={96}
-                    unoptimized
-                    className="h-24 w-40 flex-shrink-0 rounded-lg object-cover"
-                    onError={(e) => {
-                      (e.currentTarget as HTMLImageElement).style.display = "none";
-                    }}
-                  />
-                )}
-
-                {/* Content */}
-                <div className="flex-1 min-w-0">
-                  <h3 className="mb-2 text-sm font-semibold text-text-primary group-hover:text-cyan transition line-clamp-2">
-                    {item.headline}
-                  </h3>
-
-                  {item.summary && (
-                    <p className="mb-3 text-xs text-text-secondary line-clamp-2">
-                      {item.summary}
-                    </p>
-                  )}
-
-                  <div className="flex flex-wrap items-center gap-2 text-xs text-text-muted">
-                    <span className="font-medium">{item.source}</span>
-                    <span>•</span>
-                    <span>{formatDate(item.datetime)}</span>
-                  </div>
+              {/* Content */}
+              <div className="flex-1 min-w-0">
+                {/* Source + time row */}
+                <div className="flex items-center gap-2 mb-1.5">
+                  <span className="text-[10px] font-bold text-cyan uppercase tracking-wide">{item.source}</span>
+                  <span className="h-0.5 w-0.5 rounded-full bg-text-disabled/60 shrink-0" />
+                  <span className="text-[10px] text-text-disabled">{formatDate(item.datetime)}</span>
                 </div>
+                {/* Headline */}
+                <h3 className="mb-1 text-sm font-semibold text-text-primary group-hover:text-cyan transition-colors line-clamp-2 leading-snug">
+                  {item.headline}
+                </h3>
+                {/* Summary */}
+                {item.summary && (
+                  <p className="text-xs text-text-secondary line-clamp-1 leading-relaxed">
+                    {item.summary}
+                  </p>
+                )}
               </div>
+
+              {/* Thumbnail — right side, smaller */}
+              {item.image && (
+                <Image
+                  src={item.image}
+                  alt={item.headline}
+                  width={96}
+                  height={64}
+                  unoptimized
+                  className="h-16 w-24 flex-shrink-0 rounded-md object-cover opacity-70 self-start"
+                  onError={(e) => {
+                    (e.currentTarget as HTMLImageElement).style.display = "none";
+                  }}
+                />
+              )}
             </a>
           ))}
         </div>

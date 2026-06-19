@@ -3,7 +3,7 @@ import { MARKET_INSTRUMENTS } from "@/lib/markets/catalog";
 import { PortfolioView } from "@/components/portfolio/PortfolioView";
 
 export const metadata: Metadata = {
-  title: "Portfolio — FinanceHub",
+  title: "Portfolio",
   description: "Track your investments and monitor P/L, market value, and allocation in real time.",
 };
 

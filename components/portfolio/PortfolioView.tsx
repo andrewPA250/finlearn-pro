@@ -30,7 +30,7 @@ function fmtPct(value: number | null | undefined): string {
 
 function plColor(value: number | null | undefined): string {
   if (value == null || isNaN(value)) return "text-text-secondary";
-  return value >= 0 ? "text-green-500" : "text-red-500";
+  return value >= 0 ? "text-positive" : "text-negative";
 }
 
 const CATEGORY_COLORS: Record<string, string> = {
@@ -181,7 +181,7 @@ export function PortfolioView({ instruments, instrumentsBySymbol }: PortfolioVie
               {t("trackInvestments", language)}
             </p>
           </div>
-          <div className="flex flex-col items-center justify-center rounded-card border border-border-base bg-bg-secondary px-6 py-16 text-center animate-fade-in-up" style={{ animationDelay: "40ms" }}>
+          <div className="flex flex-col items-center justify-center rounded-card border border-bg-border bg-bg-card px-6 py-16 text-center animate-fade-in-up" style={{ animationDelay: "40ms" }}>
             <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-cyan/10">
               <svg viewBox="0 0 24 24" className="h-8 w-8 text-cyan" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M3 3v18h18" />
@@ -217,10 +217,10 @@ export function PortfolioView({ instruments, instrumentsBySymbol }: PortfolioVie
   if (!isHydrated) {
     return (
       <div className="mx-auto max-w-platform px-4 py-12 md:px-6">
-        <div className="h-8 w-40 animate-pulse rounded bg-bg-secondary" />
+        <div className="h-8 w-40 animate-pulse rounded bg-bg-card" />
         <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-4">
           {[...Array(4)].map((_, i) => (
-            <div key={i} className="h-20 animate-pulse rounded-card bg-bg-secondary" />
+            <div key={i} className="h-20 animate-pulse rounded-card bg-bg-card" />
           ))}
         </div>
       </div>
@@ -252,7 +252,7 @@ export function PortfolioView({ instruments, instrumentsBySymbol }: PortfolioVie
                 fetchQuotes(uniqueSymbols);
               }}
               disabled={quotesLoading}
-              className="rounded border border-border-base px-3 py-1.5 text-xs text-text-secondary hover:text-text-primary transition disabled:opacity-50"
+              className="rounded border border-bg-border px-3 py-1.5 text-xs text-text-secondary hover:text-text-primary transition disabled:opacity-50"
             >
               {quotesLoading ? t("refreshing", language) : t("refresh", language)}
             </button>
@@ -299,7 +299,7 @@ export function PortfolioView({ instruments, instrumentsBySymbol }: PortfolioVie
         {/* Allocation sections */}
         {hasAllocation && (
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2 animate-fade-in-up" style={{ animationDelay: "80ms" }}>
-            <div className="rounded-card border border-border-base bg-bg-secondary p-4">
+            <div className="rounded-card border border-bg-border bg-bg-card p-4">
               <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-text-secondary">{t("allocation", language)}</p>
               <div className="space-y-2.5">
                 {[...rows].filter((r) => r.allocationPct != null).sort((a, b) => (b.allocationPct ?? 0) - (a.allocationPct ?? 0)).slice(0, 10).map((row) => (
@@ -313,7 +313,7 @@ export function PortfolioView({ instruments, instrumentsBySymbol }: PortfolioVie
                 ))}
               </div>
             </div>
-            <div className="rounded-card border border-border-base bg-bg-secondary p-4">
+            <div className="rounded-card border border-bg-border bg-bg-card p-4">
               <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-text-secondary">{t("allocationByCategory", language)}</p>
               <div className="space-y-2.5">
                 {Object.entries(
@@ -347,10 +347,10 @@ export function PortfolioView({ instruments, instrumentsBySymbol }: PortfolioVie
         )}
 
         {/* Holdings table */}
-        <div className="rounded-card border border-border-base bg-bg-secondary overflow-hidden animate-fade-in-up" style={{ animationDelay: "80ms" }}>
+        <div className="rounded-card border border-bg-border bg-bg-card overflow-hidden animate-fade-in-up" style={{ animationDelay: "80ms" }}>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
-              <thead className="border-b border-border-base bg-bg-primary">
+              <thead className="border-b border-bg-border bg-bg-primary">
                 <tr>
                   <th className="px-4 py-3 text-left font-semibold text-text-secondary whitespace-nowrap">{t("symbol", language)}</th>
                   <th className="px-4 py-3 text-left font-semibold text-text-secondary whitespace-nowrap hidden md:table-cell">{t("name", language)}</th>
@@ -444,7 +444,7 @@ export function PortfolioView({ instruments, instrumentsBySymbol }: PortfolioVie
                         </button>
                         <button
                           onClick={() => removeHolding(holding.id)}
-                          className="text-xs text-text-muted hover:text-red-500 transition"
+                          className="text-xs text-text-muted hover:text-negative transition"
                           title={t("removeHolding", language)}
                         >
                           {t("remove", language)}
@@ -489,7 +489,7 @@ function SummaryCard({
   valueClass?: string;
 }) {
   return (
-    <div className="rounded-card border border-border-base bg-bg-secondary p-4">
+    <div className="rounded-card border border-bg-border bg-bg-card p-4">
       <p className="text-xs text-text-secondary">{label}</p>
       <p className={`mt-1 text-xl font-bold font-mono ${valueClass}`}>{value}</p>
     </div>
@@ -498,7 +498,7 @@ function SummaryCard({
 
 function InsightCard({ label, symbol, value, valueClass, instrument }: { label: string; symbol: string | null; value: string; valueClass: string; instrument: MarketInstrument | null }) {
   return (
-    <div className="rounded-card border border-border-base bg-bg-secondary p-4">
+    <div className="rounded-card border border-bg-border bg-bg-card p-4">
       <p className="mb-2 text-xs text-text-secondary">{label}</p>
       {symbol ? (
         <div className="flex items-center gap-2">

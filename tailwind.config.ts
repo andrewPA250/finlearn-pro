@@ -44,7 +44,7 @@ const config: Config = {
         error: "var(--error)",
       },
       fontFamily: {
-        sans: ["var(--font-inter)", "sans-serif"],
+        sans: ["var(--font-sans)", "sans-serif"],
         mono: ["var(--font-jetbrains-mono)", "monospace"],
       },
       fontSize: {

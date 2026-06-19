@@ -232,7 +232,7 @@ export function ScreenerView({ instruments, quotesBySymbol }: ScreenerViewProps)
         {/* Main content */}
         <div className="min-w-0 flex-1">
           {/* Filters panel */}
-          <div className="mb-6 rounded-card border border-border-base bg-bg-secondary p-4">
+          <div className="mb-6 rounded-card border border-bg-border bg-bg-card p-4">
             <div className="mb-4 flex items-center justify-between">
               <h2 className="font-semibold text-text-primary">{t("filters", lang)}</h2>
               <button
@@ -254,7 +254,7 @@ export function ScreenerView({ instruments, quotesBySymbol }: ScreenerViewProps)
                   placeholder="Symbol or name..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full rounded border border-border-base bg-bg-primary px-2.5 py-1.5 text-sm text-text-primary placeholder-text-muted focus:border-cyan focus:outline-none"
+                  className="w-full rounded border border-bg-border bg-bg-primary px-2.5 py-1.5 text-sm text-text-primary placeholder-text-muted focus:border-cyan focus:outline-none"
                 />
               </div>
 
@@ -268,7 +268,7 @@ export function ScreenerView({ instruments, quotesBySymbol }: ScreenerViewProps)
                   placeholder="0"
                   value={priceMin}
                   onChange={(e) => setPriceMin(e.target.value)}
-                  className="w-full rounded border border-border-base bg-bg-primary px-2.5 py-1.5 text-sm text-text-primary focus:border-cyan focus:outline-none"
+                  className="w-full rounded border border-bg-border bg-bg-primary px-2.5 py-1.5 text-sm text-text-primary focus:border-cyan focus:outline-none"
                 />
               </div>
 
@@ -282,7 +282,7 @@ export function ScreenerView({ instruments, quotesBySymbol }: ScreenerViewProps)
                   placeholder="Any"
                   value={priceMax}
                   onChange={(e) => setPriceMax(e.target.value)}
-                  className="w-full rounded border border-border-base bg-bg-primary px-2.5 py-1.5 text-sm text-text-primary focus:border-cyan focus:outline-none"
+                  className="w-full rounded border border-bg-border bg-bg-primary px-2.5 py-1.5 text-sm text-text-primary focus:border-cyan focus:outline-none"
                 />
               </div>
 
@@ -294,7 +294,7 @@ export function ScreenerView({ instruments, quotesBySymbol }: ScreenerViewProps)
                 <select
                   value={changeFilter}
                   onChange={(e) => setChangeFilter(e.target.value as typeof changeFilter)}
-                  className="w-full rounded border border-border-base bg-bg-primary px-2.5 py-1.5 text-sm text-text-primary focus:border-cyan focus:outline-none"
+                  className="w-full rounded border border-bg-border bg-bg-primary px-2.5 py-1.5 text-sm text-text-primary focus:border-cyan focus:outline-none"
                 >
                   <option value="all">All</option>
                   <option value="positive">↑ Gainers</option>
@@ -312,7 +312,7 @@ export function ScreenerView({ instruments, quotesBySymbol }: ScreenerViewProps)
                   placeholder="Any"
                   value={marketCapMin}
                   onChange={(e) => setMarketCapMin(e.target.value)}
-                  className="w-full rounded border border-border-base bg-bg-primary px-2.5 py-1.5 text-sm text-text-primary focus:border-cyan focus:outline-none"
+                  className="w-full rounded border border-bg-border bg-bg-primary px-2.5 py-1.5 text-sm text-text-primary focus:border-cyan focus:outline-none"
                 />
               </div>
 
@@ -326,7 +326,7 @@ export function ScreenerView({ instruments, quotesBySymbol }: ScreenerViewProps)
                   placeholder="Any"
                   value={marketCapMax}
                   onChange={(e) => setMarketCapMax(e.target.value)}
-                  className="w-full rounded border border-border-base bg-bg-primary px-2.5 py-1.5 text-sm text-text-primary focus:border-cyan focus:outline-none"
+                  className="w-full rounded border border-bg-border bg-bg-primary px-2.5 py-1.5 text-sm text-text-primary focus:border-cyan focus:outline-none"
                 />
               </div>
 
@@ -340,7 +340,7 @@ export function ScreenerView({ instruments, quotesBySymbol }: ScreenerViewProps)
                   placeholder="Any"
                   value={peMin}
                   onChange={(e) => setPeMin(e.target.value)}
-                  className="w-full rounded border border-border-base bg-bg-primary px-2.5 py-1.5 text-sm text-text-primary focus:border-cyan focus:outline-none"
+                  className="w-full rounded border border-bg-border bg-bg-primary px-2.5 py-1.5 text-sm text-text-primary focus:border-cyan focus:outline-none"
                 />
               </div>
 
@@ -354,7 +354,7 @@ export function ScreenerView({ instruments, quotesBySymbol }: ScreenerViewProps)
                   placeholder="Any"
                   value={peMax}
                   onChange={(e) => setPeMax(e.target.value)}
-                  className="w-full rounded border border-border-base bg-bg-primary px-2.5 py-1.5 text-sm text-text-primary focus:border-cyan focus:outline-none"
+                  className="w-full rounded border border-bg-border bg-bg-primary px-2.5 py-1.5 text-sm text-text-primary focus:border-cyan focus:outline-none"
                 />
               </div>
 
@@ -368,7 +368,7 @@ export function ScreenerView({ instruments, quotesBySymbol }: ScreenerViewProps)
                   placeholder="Any"
                   value={dividendYieldMin}
                   onChange={(e) => setDividendYieldMin(e.target.value)}
-                  className="w-full rounded border border-border-base bg-bg-primary px-2.5 py-1.5 text-sm text-text-primary focus:border-cyan focus:outline-none"
+                  className="w-full rounded border border-bg-border bg-bg-primary px-2.5 py-1.5 text-sm text-text-primary focus:border-cyan focus:outline-none"
                 />
               </div>
 
@@ -382,13 +382,13 @@ export function ScreenerView({ instruments, quotesBySymbol }: ScreenerViewProps)
                   placeholder="Any"
                   value={dividendYieldMax}
                   onChange={(e) => setDividendYieldMax(e.target.value)}
-                  className="w-full rounded border border-border-base bg-bg-primary px-2.5 py-1.5 text-sm text-text-primary focus:border-cyan focus:outline-none"
+                  className="w-full rounded border border-bg-border bg-bg-primary px-2.5 py-1.5 text-sm text-text-primary focus:border-cyan focus:outline-none"
                 />
               </div>
             </div>
 
             {/* Category filter */}
-            <div className="mt-4 pt-4 border-t border-border-base">
+            <div className="mt-4 pt-4 border-t border-bg-border">
               <p className="mb-2 text-xs font-medium text-text-secondary">{t("categories", lang)}</p>
               <div className="flex flex-wrap gap-2">
                 {MARKET_CATEGORIES.map((cat) => (
@@ -409,8 +409,8 @@ export function ScreenerView({ instruments, quotesBySymbol }: ScreenerViewProps)
           </div>
 
           {/* Results */}
-          <div className="rounded-card border border-border-base bg-bg-secondary overflow-hidden">
-            <div className="flex items-center justify-between border-b border-border-base px-4 py-3">
+          <div className="rounded-card border border-bg-border bg-bg-card overflow-hidden">
+            <div className="flex items-center justify-between border-b border-bg-border px-4 py-3">
               <p className="text-sm text-text-secondary">
                 <span className="font-semibold text-text-primary">{results.length}</span> {t("results", lang)}
               </p>
@@ -419,7 +419,7 @@ export function ScreenerView({ instruments, quotesBySymbol }: ScreenerViewProps)
             {/* Results table */}
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
-                <thead className="sticky top-0 border-b border-border-base bg-bg-primary z-10">
+                <thead className="sticky top-0 border-b border-bg-border bg-bg-primary z-10">
                   <tr>
                     <th className="px-4 py-2.5 text-left font-semibold text-text-secondary">
                       <SortButton
@@ -493,7 +493,7 @@ export function ScreenerView({ instruments, quotesBySymbol }: ScreenerViewProps)
                     return (
                       <tr
                         key={instrument.symbol}
-                        className="border-t border-border-base hover:bg-bg-hover cursor-pointer transition"
+                        className="border-t border-bg-border hover:bg-bg-hover cursor-pointer transition"
                       >
                         <td className="px-3 py-3">
                           <Link
@@ -521,7 +521,7 @@ export function ScreenerView({ instruments, quotesBySymbol }: ScreenerViewProps)
                         </td>
                         <td
                           className={`px-3 py-3 text-right font-mono tabular-nums ${
-                            quote.changePercent >= 0 ? "text-green-500" : "text-red-500"
+                            quote.changePercent >= 0 ? "text-positive" : "text-negative"
                           }`}
                         >
                           {quote.changePercent >= 0 ? "+" : ""}

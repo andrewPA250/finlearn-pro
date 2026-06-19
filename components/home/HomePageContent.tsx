@@ -38,19 +38,47 @@ function formatAge(unixSeconds: number, lang: string): string {
   return lang === "it" ? `${Math.floor(diffH / 24)}g fa` : `${Math.floor(diffH / 24)}d ago`;
 }
 
-function QuoteRow({ symbol, label, quote }: { symbol: string; label: string; quote: TickerQuote | null }) {
-  if (!quote) return null;
+function MarketIndexCard({ symbol, label, quote }: { symbol: string; label: string; quote: TickerQuote | null }) {
+  if (!quote) {
+    return (
+      <div className="flex flex-col rounded-md border border-bg-border bg-bg-card px-3 py-3">
+        <span className="text-[10px] font-bold font-mono text-text-disabled">{symbol}</span>
+        <span className="text-sm font-bold font-mono text-text-disabled mt-1">—</span>
+        <span className="text-[10px] text-text-disabled/60 mt-0.5">{label}</span>
+      </div>
+    );
+  }
   const isPositive = quote.changePercent >= 0;
-
   return (
     <Link href={`/asset/${symbol}`}>
-      <div className="flex items-center justify-between rounded-md px-3 py-2.5 transition-colors duration-150 hover:bg-bg-hover group">
-        <div>
-          <p className="text-xs font-bold text-text-primary font-mono">{symbol}</p>
-          <p className="text-[10px] text-text-muted">{label}</p>
+      <div className="group flex flex-col rounded-md border border-bg-border bg-bg-card px-3 py-3 cursor-pointer transition-all hover:border-cyan/40 hover:bg-bg-hover">
+        <div className="flex items-center justify-between gap-1">
+          <span className="text-[10px] font-bold font-mono text-text-secondary truncate">{symbol}</span>
+          <span className={`shrink-0 text-[10px] font-semibold font-mono ${isPositive ? "text-positive" : "text-negative"}`}>
+            {isPositive ? "▲" : "▼"}{Math.abs(quote.changePercent).toFixed(2)}%
+          </span>
         </div>
-        <div className="text-right">
-          <p className="text-sm font-bold text-text-primary font-mono">
+        <span className="text-sm font-bold font-mono text-text-primary mt-1.5">
+          {formatPrice(quote.value, quote.unit)}
+        </span>
+        <span className="text-[10px] text-text-muted mt-0.5 truncate">{label}</span>
+      </div>
+    </Link>
+  );
+}
+
+function WatchRow({ symbol, label, quote }: { symbol: string; label: string; quote: TickerQuote | null }) {
+  if (!quote) return null;
+  const isPositive = quote.changePercent >= 0;
+  return (
+    <Link href={`/asset/${symbol}`}>
+      <div className="flex items-center justify-between px-4 py-2.5 transition-colors hover:bg-bg-hover">
+        <div className="min-w-0">
+          <p className="text-xs font-bold font-mono text-text-primary">{symbol}</p>
+          <p className="text-[10px] text-text-muted truncate">{label}</p>
+        </div>
+        <div className="text-right shrink-0 ml-3">
+          <p className="text-xs font-bold font-mono text-text-primary">
             {formatPrice(quote.value, quote.unit)}
           </p>
           <p className={`text-[10px] font-mono font-semibold ${isPositive ? "text-positive" : "text-negative"}`}>
@@ -62,37 +90,35 @@ function QuoteRow({ symbol, label, quote }: { symbol: string; label: string; quo
   );
 }
 
-function KeyMarketCard({ symbol, label, quote }: { symbol: string; label: string; quote: TickerQuote | null }) {
-  if (!quote) {
-    return (
-      <div className="rounded-card border border-bg-border bg-bg-card p-4">
-        <p className="text-xs font-bold text-text-muted font-mono">{symbol}</p>
-        <p className="text-[10px] text-text-disabled mt-0.5">{label}</p>
-        <p className="text-base font-bold text-text-disabled font-mono mt-2">—</p>
-      </div>
-    );
-  }
-
-  const isPositive = quote.changePercent >= 0;
-
+function EditorialNewsItem({ item, lang }: { item: NewsItem; lang: string }) {
   return (
-    <Link href={`/asset/${symbol}`}>
-      <div className="rounded-card border border-bg-border bg-bg-card p-4 transition-all duration-150 hover:border-cyan/30 hover:bg-bg-hover cursor-pointer">
-        <div className="flex items-start justify-between mb-2">
-          <div>
-            <p className="text-xs font-bold text-text-muted font-mono">{symbol}</p>
-            <p className="text-[10px] text-text-disabled mt-0.5">{label}</p>
-          </div>
-          <span className={`text-[10px] font-semibold ${isPositive ? "text-positive" : "text-negative"}`}>
-            {isPositive ? "▲" : "▼"}
-          </span>
-        </div>
-        <p className="text-lg font-bold text-text-primary font-mono">
-          {formatPrice(quote.value, quote.unit)}
-        </p>
-        <p className={`text-xs font-mono font-semibold mt-0.5 ${isPositive ? "text-positive" : "text-negative"}`}>
-          {formatChange(quote.changePercent)}
-        </p>
+    <a
+      href={item.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group flex flex-col gap-1.5 px-4 py-3.5 border-b border-bg-border/40 last:border-0 transition-colors hover:bg-bg-hover"
+    >
+      <div className="flex items-center gap-1.5 min-w-0">
+        <span className="text-[10px] font-bold text-cyan uppercase tracking-wide shrink-0">{item.source}</span>
+        <span className="h-0.5 w-0.5 rounded-full bg-text-disabled/60 shrink-0" />
+        <span className="text-[10px] text-text-disabled truncate">{formatAge(item.datetime, lang)}</span>
+      </div>
+      <p className="text-xs font-medium text-text-primary leading-snug line-clamp-2 group-hover:text-cyan transition-colors">
+        {item.headline}
+      </p>
+    </a>
+  );
+}
+
+function LessonRow({ lesson }: { lesson: LessonMeta }) {
+  return (
+    <Link href={`/lessons/${lesson.id}`}>
+      <div className="flex items-center gap-3 rounded-md border border-bg-border bg-bg-card px-3 py-2.5 transition-all hover:border-cyan/30 hover:bg-bg-hover cursor-pointer">
+        <span className="shrink-0 flex h-6 w-6 items-center justify-center rounded bg-cyan-bg/40 text-[10px] font-bold text-cyan font-mono">
+          {lesson.id}
+        </span>
+        <p className="min-w-0 text-xs font-medium text-text-primary truncate">{lesson.title}</p>
+        <span className="ml-auto shrink-0 text-[10px] text-text-disabled">→</span>
       </div>
     </Link>
   );
@@ -100,119 +126,99 @@ function KeyMarketCard({ symbol, label, quote }: { symbol: string; label: string
 
 export function HomePageContent({
   quotes,
-  catalogStats,
   lessons,
   topNews,
 }: HomePageContentProps) {
-  const { language } = useSettings();
-  const lang = language;
-
-  const heroQuotes: { symbol: string; label: string }[] = [
-    { symbol: "AAPL",   label: "Apple" },
-    { symbol: "NVDA",   label: "NVIDIA" },
-    { symbol: "BTCUSD", label: "Bitcoin" },
-    { symbol: "XAUUSD", label: "Gold" },
-    { symbol: "US10Y",  label: lang === "it" ? "Tesoreria 10Y" : "10Y Treasury" },
-  ];
+  const { language: lang } = useSettings();
 
   const keyMarkets: { symbol: string; label: string }[] = [
     { symbol: "SPX",    label: "S&P 500" },
     { symbol: "NDX",    label: "Nasdaq 100" },
     { symbol: "BTCUSD", label: "Bitcoin" },
     { symbol: "XAUUSD", label: "Gold" },
-    { symbol: "EURUSD", label: "EUR / USD" },
+    { symbol: "EURUSD", label: "EUR/USD" },
+    { symbol: "US10Y",  label: lang === "it" ? "Tesoreria 10Y" : "10Y Treasury" },
+    { symbol: "QQQ",    label: "Nasdaq 100 ETF" },
+    { symbol: "VIX",    label: "Volatility Index" },
+    { symbol: "WTI",    label: "Crude Oil" },
+  ];
+
+  const watchSymbols: { symbol: string; label: string }[] = [
+    { symbol: "AAPL",   label: "Apple" },
+    { symbol: "NVDA",   label: "NVIDIA" },
+    { symbol: "MSFT",   label: "Microsoft" },
+    { symbol: "BTCUSD", label: "Bitcoin" },
+    { symbol: "XAUUSD", label: "Gold" },
+    { symbol: "EURUSD", label: "EUR/USD" },
     { symbol: "US10Y",  label: lang === "it" ? "Tesoreria 10Y" : "10Y Treasury" },
   ];
 
   return (
     <div className="min-h-screen bg-bg-primary">
 
-      {/* ================================================================
-          HERO SECTION
-          ================================================================ */}
-      <section className="border-b border-bg-border">
-        <div className="mx-auto max-w-platform px-6 py-14 md:py-20">
-          <div className="grid grid-cols-1 gap-12 md:grid-cols-2 md:items-center">
+      {/* ═══ OPENING — editorial identity + live market snapshot ═══ */}
+      <section className="border-b border-bg-border bg-gradient-to-b from-cyan/[0.03] to-transparent">
+        <div className="mx-auto max-w-platform px-4 md:px-6 py-6 md:py-8">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-[1fr_272px] md:gap-8 lg:grid-cols-[1fr_300px]">
 
-            {/* Left — headline + CTAs */}
-            <div>
-              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-cyan/20 bg-cyan-bg/30 px-3 py-1.5 text-[11px] font-semibold text-cyan">
-                <span className="h-1.5 w-1.5 rounded-full bg-cyan" />
-                {t("realMarketData", lang)} · {catalogStats.total}+ {lang === "it" ? "Asset" : "Assets"}
+            {/* Left — product identity + key indices */}
+            <div className="flex flex-col gap-5">
+
+              {/* Identity */}
+              <div>
+                <div className="mb-3 h-0.5 w-10 rounded-full bg-cyan" />
+                <h1 className="text-xl font-bold leading-tight text-text-primary md:text-2xl">
+                  {lang === "it"
+                    ? <>Capire i <span className="text-cyan">mercati</span>. Capire il <span className="text-cyan">rischio</span>.</>
+                    : <>Understand <span className="text-cyan">Markets</span>. Understand <span className="text-cyan">Risk</span>.</>
+                  }
+                </h1>
+                <p className="mt-2 max-w-sm text-xs leading-relaxed text-text-secondary">
+                  {lang === "it"
+                    ? "Intelligence di mercato professionale per investitori e studenti."
+                    : "Professional market intelligence for investors and students."}
+                </p>
               </div>
 
-              <h1 className="mb-4 text-4xl font-extrabold leading-tight tracking-tight text-text-primary md:text-5xl">
-                {t("exploreMarketsHero", lang)}<br />
-                <span className="text-cyan">{t("analyzeSmarter", lang)}</span><br />
-                {t("investWithConfidence", lang)}
-              </h1>
-
-              <p className="mb-8 max-w-md text-base leading-relaxed text-text-secondary">
-                {t("heroCopy", lang)}
-              </p>
-
-              <div className="flex flex-wrap gap-3">
-                <Link
-                  href="/markets"
-                  className="inline-flex items-center gap-2 rounded-card bg-cyan px-5 py-2.5 text-sm font-semibold text-bg-primary transition duration-150 hover:bg-cyan-dark"
-                >
-                  {t("marketHeatmap", lang)} →
-                </Link>
-                <Link
-                  href="/workbench"
-                  className="inline-flex items-center gap-2 rounded-card border border-bg-border bg-bg-card px-5 py-2.5 text-sm font-medium text-text-secondary transition duration-150 hover:border-cyan/30 hover:text-text-primary"
-                >
-                  {lang === "it" ? "Apri Workbench" : "Open Workbench"}
-                </Link>
-              </div>
-
-              {/* Quick stats */}
-              <div className="mt-10 flex gap-8">
-                <div>
-                  <p className="text-2xl font-extrabold font-mono text-text-primary">{catalogStats.total}+</p>
-                  <p className="text-[11px] text-text-muted mt-0.5">{t("assetsTracked", lang)}</p>
-                </div>
-                <div>
-                  <p className="text-2xl font-extrabold font-mono text-text-primary">{Object.keys(catalogStats.byCategory).length}</p>
-                  <p className="text-[11px] text-text-muted mt-0.5">{t("assetClassesCount", lang)}</p>
-                </div>
-                <div>
-                  <p className="text-2xl font-extrabold font-mono text-cyan">{lang === "it" ? "Dal Vivo" : "Live"}</p>
-                  <p className="text-[11px] text-text-muted mt-0.5">{t("marketDataLive", lang)}</p>
-                </div>
-                <div>
-                  <p className="text-2xl font-extrabold font-mono text-text-primary">{lang === "it" ? "Gratuito" : "Free"}</p>
-                  <p className="text-[11px] text-text-muted mt-0.5">{t("noSignupNeeded", lang)}</p>
+              {/* Key indices — 3×2 grid */}
+              <div>
+                <p className="mb-2 text-[10px] font-semibold uppercase tracking-widest text-text-muted">
+                  {lang === "it" ? "Indici principali" : "Key Indices"}
+                </p>
+                <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+                  {keyMarkets.map(({ symbol, label }) => (
+                    <MarketIndexCard key={symbol} symbol={symbol} label={label} quote={quotes[symbol] ?? null} />
+                  ))}
                 </div>
               </div>
+
             </div>
 
-            {/* Right — live market snapshot */}
-            <div className="rounded-card border border-bg-border bg-bg-card">
-              <div className="flex items-center justify-between border-b border-bg-border px-4 py-3">
-                <p className="text-xs font-semibold text-text-secondary uppercase tracking-wide">{t("marketSnapshot", lang)}</p>
-                <span className="flex items-center gap-1.5 text-[10px] font-semibold text-positive">
-                  <span className="h-1.5 w-1.5 rounded-full bg-positive" />
-                  {lang === "it" ? "Dal Vivo" : "Live"}
-                </span>
-              </div>
-              <div className="divide-y divide-bg-border/50">
-                {heroQuotes.map(({ symbol, label }) => (
-                  <QuoteRow
-                    key={symbol}
-                    symbol={symbol}
-                    label={label}
-                    quote={quotes[symbol] ?? null}
-                  />
-                ))}
-              </div>
-              <div className="border-t border-bg-border px-4 py-3">
-                <Link
-                  href="/markets"
-                  className="block w-full rounded-card bg-cyan py-2 text-center text-sm font-semibold text-bg-primary transition duration-150 hover:bg-cyan-dark"
-                >
-                  {t("viewAllMarkets", lang)} →
-                </Link>
+            {/* Right — live snapshot card (desktop only) */}
+            <div className="hidden md:flex flex-col">
+              <div className="flex flex-1 flex-col rounded-card border border-cyan/20 bg-bg-card overflow-hidden shadow-[0_0_0_1px_rgba(0,212,184,0.04)]">
+                <div className="flex items-center justify-between border-b border-bg-border/40 bg-gradient-to-r from-cyan/[0.07] to-transparent px-4 py-2.5">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-text-secondary">
+                    {t("marketSnapshot", lang)}
+                  </span>
+                  <span className="flex items-center gap-1.5 text-[10px] font-semibold text-positive">
+                    <span className="h-1.5 w-1.5 rounded-full bg-positive animate-pulse" />
+                    {lang === "it" ? "Dal Vivo" : "Live"}
+                  </span>
+                </div>
+                <div className="flex-1 divide-y divide-bg-border/40">
+                  {watchSymbols.map(({ symbol, label }) => (
+                    <WatchRow key={symbol} symbol={symbol} label={label} quote={quotes[symbol] ?? null} />
+                  ))}
+                </div>
+                <div className="border-t border-bg-border/60 px-4 py-2.5">
+                  <Link
+                    href="/markets"
+                    className="block w-full rounded-md bg-cyan py-2 text-center text-xs font-semibold text-bg-primary transition hover:bg-cyan-dark"
+                  >
+                    {t("viewAllMarkets", lang)} →
+                  </Link>
+                </div>
               </div>
             </div>
 
@@ -220,106 +226,14 @@ export function HomePageContent({
         </div>
       </section>
 
-      {/* ================================================================
-          KEY MARKETS TODAY
-          ================================================================ */}
+      {/* ═══ FEATURED MARKETS ═══ */}
       <section className="border-b border-bg-border">
-        <div className="mx-auto max-w-platform px-6 py-10">
-          <div className="mb-5 flex items-center justify-between">
-            <h2 className="text-sm font-semibold text-text-primary uppercase tracking-wide">{t("keyMarketsToday", lang)}</h2>
-            <Link href="/markets" className="text-xs text-cyan hover:text-cyan-light transition-colors">
-              {t("viewAll", lang)} →
-            </Link>
-          </div>
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-6">
-            {keyMarkets.map(({ symbol, label }) => (
-              <KeyMarketCard
-                key={symbol}
-                symbol={symbol}
-                label={label}
-                quote={quotes[symbol] ?? null}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ================================================================
-          PLATFORM MODULES
-          ================================================================ */}
-      <section className="border-b border-bg-border bg-bg-card/30">
-        <div className="mx-auto max-w-platform px-6 py-10">
-          <div className="mb-6">
-            <h2 className="text-lg font-bold text-text-primary mb-1">{t("powerfulTools", lang)}</h2>
-            <p className="text-sm text-text-muted">{t("toolsDesc", lang)}</p>
-          </div>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4">
-
-            <Link href="/markets">
-              <div className="group rounded-card border border-bg-border bg-bg-card p-5 transition-all duration-150 hover:border-cyan/30 hover:bg-bg-hover cursor-pointer h-full">
-                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-card bg-cyan-bg/40 text-xl">
-                  📊
-                </div>
-                <p className="mb-2 text-sm font-semibold text-text-primary">{t("marketsModule", lang)}</p>
-                <p className="text-xs leading-relaxed text-text-muted">
-                  {t("marketsDesc2", lang).replace("{count}", String(catalogStats.total))}
-                </p>
-                <p className="mt-3 text-xs text-cyan">{lang === "it" ? "Esplora" : "Explore"} →</p>
-              </div>
-            </Link>
-
-            <Link href="/lessons/1">
-              <div className="group rounded-card border border-bg-border bg-bg-card p-5 transition-all duration-150 hover:border-cyan/30 hover:bg-bg-hover cursor-pointer h-full">
-                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-card bg-cyan-bg/40 text-xl">
-                  📚
-                </div>
-                <p className="mb-2 text-sm font-semibold text-text-primary">{lang === "it" ? "Impara" : "Learn"}</p>
-                <p className="text-xs leading-relaxed text-text-muted">
-                  {t("learnDesc", lang)}
-                </p>
-                <p className="mt-3 text-xs text-cyan">{t("startLearning", lang)} →</p>
-              </div>
-            </Link>
-
-            <Link href="/workbench">
-              <div className="group rounded-card border border-bg-border bg-bg-card p-5 transition-all duration-150 hover:border-cyan/30 hover:bg-bg-hover cursor-pointer h-full">
-                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-card bg-cyan-bg/40 text-xl">
-                  🧪
-                </div>
-                <p className="mb-2 text-sm font-semibold text-text-primary">{lang === "it" ? "Quant Lab" : "Quant Lab"}</p>
-                <p className="text-xs leading-relaxed text-text-muted">
-                  {t("quantLabDesc", lang)}
-                </p>
-                <p className="mt-3 text-xs text-cyan">{t("openWorkbench2", lang)} →</p>
-              </div>
-            </Link>
-
-            <div className="rounded-card border border-bg-border bg-bg-card p-5 opacity-60 h-full">
-              <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-card bg-bg-hover text-xl">
-                ✦
-              </div>
-              <div className="flex items-center gap-2 mb-2">
-                <p className="text-sm font-semibold text-text-primary">{t("aiAnalyst", lang)}</p>
-                <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-caution/20 text-caution border border-caution/30">{t("soon", lang)}</span>
-              </div>
-              <p className="text-xs leading-relaxed text-text-muted">
-                {t("aiAnalystDesc", lang)}
-              </p>
-              <p className="mt-3 text-xs text-text-disabled">{t("comingSoon", lang)}</p>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* ================================================================
-          FEATURED MARKETS (client component — tab state)
-          ================================================================ */}
-      <section className="border-b border-bg-border">
-        <div className="mx-auto max-w-platform px-6 py-10">
-          <div className="mb-5 flex items-center justify-between">
-            <h2 className="text-sm font-semibold text-text-primary uppercase tracking-wide">{t("featuredMarkets", lang)}</h2>
-            <Link href="/markets" className="text-xs text-cyan hover:text-cyan-light transition-colors">
+        <div className="mx-auto max-w-platform px-4 md:px-6 py-5">
+          <div className="mb-4 flex items-center justify-between">
+            <span className="pl-2.5 border-l-2 border-cyan text-[11px] font-semibold uppercase tracking-widest text-text-secondary">
+              {t("featuredMarkets", lang)}
+            </span>
+            <Link href="/markets" className="text-[11px] text-cyan hover:text-cyan-light transition-colors">
               {t("viewAll", lang)} →
             </Link>
           </div>
@@ -327,113 +241,130 @@ export function HomePageContent({
         </div>
       </section>
 
-      {/* ================================================================
-          LATEST MARKET NEWS
-          ================================================================ */}
+      {/* ═══ MARKET INTELLIGENCE — editorial news feed ═══ */}
       {topNews.length > 0 && (
-        <section className="border-b border-bg-border bg-bg-card/20">
-          <div className="mx-auto max-w-platform px-6 py-10">
-            <div className="mb-5 flex items-center justify-between">
-              <h2 className="text-sm font-semibold text-text-primary uppercase tracking-wide">{t("latestMarketNews", lang)}</h2>
-              <Link href="/news" className="text-xs text-cyan hover:text-cyan-light transition-colors">
+        <section className="border-b border-bg-border bg-bg-card/30">
+          <div className="mx-auto max-w-platform px-4 md:px-6 py-5">
+            <div className="mb-4 flex items-center justify-between">
+              <span className="pl-2.5 border-l-2 border-cyan text-[11px] font-semibold uppercase tracking-widest text-text-secondary">
+                {lang === "it" ? "Notizie" : "Market Intelligence"}
+              </span>
+              <Link href="/news" className="text-[11px] text-cyan hover:text-cyan-light transition-colors">
                 {t("viewAllNews", lang)} →
               </Link>
             </div>
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4">
-              {topNews.map((item) => (
-                <a
-                  key={item.id}
-                  href={item.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group rounded-card border border-bg-border bg-bg-card p-4 transition-all duration-150 hover:border-cyan/30 hover:bg-bg-hover"
-                >
-                  {item.image ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src={item.image}
-                      alt=""
-                      className="mb-3 h-28 w-full rounded-md object-cover opacity-80"
-                      loading="lazy"
-                    />
-                  ) : (
-                    <div className="mb-3 h-28 w-full rounded-md bg-bg-hover flex items-center justify-center text-3xl">
-                      📰
-                    </div>
-                  )}
-                  <p className="text-[10px] font-bold text-cyan uppercase tracking-wide mb-1.5">
-                    {item.source}
-                  </p>
-                  <p className="text-xs font-medium text-text-primary leading-snug line-clamp-3 group-hover:text-cyan transition-colors">
-                    {item.headline}
-                  </p>
-                  <p className="mt-2 text-[10px] text-text-disabled">
-                    {formatAge(item.datetime, lang)}
-                  </p>
-                </a>
-              ))}
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              <div className="rounded-card border border-bg-border bg-bg-card overflow-hidden">
+                {topNews.slice(0, 3).map((item) => (
+                  <EditorialNewsItem key={item.id} item={item} lang={lang} />
+                ))}
+              </div>
+              <div className="hidden sm:block rounded-card border border-bg-border bg-bg-card overflow-hidden">
+                {topNews.slice(3, 6).map((item) => (
+                  <EditorialNewsItem key={item.id} item={item} lang={lang} />
+                ))}
+              </div>
             </div>
           </div>
         </section>
       )}
 
-      {/* ================================================================
-          LEARN SECTION
-          ================================================================ */}
-      <section className="border-b border-bg-border">
-        <div className="mx-auto max-w-platform px-6 py-10">
-          <div className="mb-6 flex items-center justify-between">
-            <h2 className="text-sm font-semibold text-text-primary uppercase tracking-wide">{t("startLearningSection", lang)}</h2>
-            <Link href="/lessons/1" className="text-xs text-cyan hover:text-cyan-light transition-colors">
-              {t("goToLearn", lang)} →
-            </Link>
-          </div>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
+      {/* ═══ PLATFORM + LEARN ═══ */}
+      <section className="border-b border-bg-border bg-bg-card/30">
+        <div className="mx-auto max-w-platform px-4 md:px-6 py-5">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:gap-6">
 
-            {/* Featured lesson card — larger */}
-            <div className="md:col-span-2 rounded-card border border-cyan/20 bg-cyan-bg/10 p-6">
-              <p className="text-xs font-bold text-cyan uppercase tracking-wide mb-2">{t("structuredLearning", lang)}</p>
-              <h3 className="text-lg font-bold text-text-primary mb-2">{t("buildFinancialFoundation", lang)}</h3>
-              <p className="text-sm text-text-muted leading-relaxed mb-5">
-                {t("buildFoundationDesc", lang)}
-              </p>
-              <Link
-                href="/lessons/1"
-                className="inline-flex items-center gap-2 rounded-card bg-cyan px-4 py-2 text-sm font-semibold text-bg-primary transition duration-150 hover:bg-cyan-dark"
-              >
-                {t("startLesson1", lang)} →
-              </Link>
+            {/* Platform quick access */}
+            <div>
+              <span className="mb-3 block text-[11px] font-semibold uppercase tracking-widest text-text-secondary">
+                {lang === "it" ? "Piattaforma" : "Platform"}
+              </span>
+              <div className="grid grid-cols-2 gap-2">
+                <Link href="/markets">
+                  <div className="flex items-center gap-2 rounded-md border border-bg-border bg-bg-card px-3 py-2.5 transition-all hover:border-cyan/30 hover:bg-bg-hover cursor-pointer">
+                    <span className="shrink-0 flex h-6 w-6 items-center justify-center rounded bg-cyan-bg/30 text-cyan">
+                      <svg viewBox="0 0 20 20" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <rect x="2" y="10" width="3.5" height="8" rx="0.5" />
+                        <rect x="8.25" y="6" width="3.5" height="12" rx="0.5" />
+                        <rect x="14.5" y="2" width="3.5" height="16" rx="0.5" />
+                      </svg>
+                    </span>
+                    <span className="text-xs font-medium text-text-primary">{t("marketsModule", lang)}</span>
+                    <span className="ml-auto text-[10px] text-text-disabled shrink-0">→</span>
+                  </div>
+                </Link>
+                <Link href="/lessons/1">
+                  <div className="flex items-center gap-2 rounded-md border border-bg-border bg-bg-card px-3 py-2.5 transition-all hover:border-cyan/30 hover:bg-bg-hover cursor-pointer">
+                    <span className="shrink-0 flex h-6 w-6 items-center justify-center rounded bg-cyan-bg/30 text-cyan">
+                      <svg viewBox="0 0 20 20" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <path d="M4 2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" />
+                        <line x1="6" y1="7.5" x2="14" y2="7.5" />
+                        <line x1="6" y1="11" x2="14" y2="11" />
+                        <line x1="6" y1="14.5" x2="10" y2="14.5" />
+                      </svg>
+                    </span>
+                    <span className="text-xs font-medium text-text-primary">{lang === "it" ? "Impara" : "Learn"}</span>
+                    <span className="ml-auto text-[10px] text-text-disabled shrink-0">→</span>
+                  </div>
+                </Link>
+                <Link href="/workbench">
+                  <div className="flex items-center gap-2 rounded-md border border-bg-border bg-bg-card px-3 py-2.5 transition-all hover:border-cyan/30 hover:bg-bg-hover cursor-pointer">
+                    <span className="shrink-0 flex h-6 w-6 items-center justify-center rounded bg-cyan-bg/30 text-cyan">
+                      <svg viewBox="0 0 20 20" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <path d="M7.5 2l-2 6h9l-2-6z" />
+                        <path d="M5.5 8l-2 10h13l-2-10" />
+                        <line x1="10" y1="8" x2="10" y2="18" />
+                      </svg>
+                    </span>
+                    <span className="text-xs font-medium text-text-primary">Quant Lab</span>
+                    <span className="ml-auto text-[10px] text-text-disabled shrink-0">→</span>
+                  </div>
+                </Link>
+                <Link href="/ai">
+                  <div className="flex items-center gap-2 rounded-md border border-bg-border bg-bg-card px-3 py-2.5 transition-all hover:border-cyan/30 hover:bg-bg-hover cursor-pointer">
+                    <span className="shrink-0 flex h-6 w-6 items-center justify-center rounded bg-cyan-bg/30 text-cyan">
+                      <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3z" />
+                      </svg>
+                    </span>
+                    <span className="text-xs font-medium text-text-primary">{t("aiAnalyst", lang)}</span>
+                    <span className="ml-auto text-[10px] text-text-disabled shrink-0">→</span>
+                  </div>
+                </Link>
+              </div>
             </div>
 
-            {/* Individual lesson cards */}
-            {lessons.slice(0, 3).map((lesson) => (
-              <Link key={lesson.id} href={`/lessons/${lesson.id}`}>
-                <div className="rounded-card border border-bg-border bg-bg-card p-4 transition-all duration-150 hover:border-cyan/30 hover:bg-bg-hover h-full cursor-pointer">
-                  <div className="mb-3 flex h-8 w-8 items-center justify-center rounded-md bg-cyan-bg/40 text-sm font-bold text-cyan font-mono">
-                    {lesson.id}
-                  </div>
-                  <p className="text-xs font-semibold text-text-primary mb-1 leading-snug">{lesson.title}</p>
-                  <p className="text-[10px] text-text-muted leading-relaxed">{lesson.keyConcept}</p>
-                </div>
-              </Link>
-            ))}
+            {/* Lessons quick access */}
+            <div>
+              <div className="mb-3 flex items-center justify-between">
+                <span className="text-[11px] font-semibold uppercase tracking-widest text-text-secondary">
+                  {t("startLearningSection", lang)}
+                </span>
+                <Link href="/lessons/1" className="text-[11px] text-cyan hover:text-cyan-light transition-colors">
+                  {t("goToLearn", lang)} →
+                </Link>
+              </div>
+              <div className="flex flex-col gap-2">
+                {lessons.slice(0, 3).map((lesson) => (
+                  <LessonRow key={lesson.id} lesson={lesson} />
+                ))}
+              </div>
+            </div>
 
           </div>
         </div>
       </section>
 
-      {/* ================================================================
-          FOOTER
-          ================================================================ */}
+      {/* ═══ FOOTER ═══ */}
       <footer className="border-t border-bg-border bg-bg-base">
-        <div className="mx-auto max-w-platform px-6 py-6 flex flex-col gap-3">
+        <div className="mx-auto max-w-platform px-4 md:px-6 py-5 flex flex-col gap-3">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-[11px] text-text-disabled">
               © 2026 FinanceHub — {t("footerCopy", lang)}
             </p>
             <div className="flex gap-4 text-[11px] text-text-disabled">
               <Link href="/markets" className="hover:text-text-secondary transition-colors">{lang === "it" ? "Mercati" : "Markets"}</Link>
-              <Link href="/workbench" className="hover:text-text-secondary transition-colors">{lang === "it" ? "Workbench" : "Workbench"}</Link>
+              <Link href="/workbench" className="hover:text-text-secondary transition-colors">Workbench</Link>
               <Link href="/lessons/1" className="hover:text-text-secondary transition-colors">{lang === "it" ? "Impara" : "Learn"}</Link>
               <Link href="/settings" className="hover:text-text-secondary transition-colors">{lang === "it" ? "Impostazioni" : "Settings"}</Link>
             </div>

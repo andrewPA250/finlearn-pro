@@ -52,8 +52,8 @@ function evaluateTrigger(
 }
 
 const STATUS_STYLES: Record<AlertStatus, string> = {
-  active:    "bg-blue-500/10 text-blue-400",
-  triggered: "bg-green-500/10 text-green-400",
+  active:    "bg-info/10 text-info",
+  triggered: "bg-positive/10 text-positive",
   disabled:  "bg-bg-primary text-text-muted",
 };
 
@@ -147,10 +147,10 @@ export function AlertsView({ instruments, instrumentsBySymbol }: AlertsViewProps
   if (!isHydrated) {
     return (
       <div className="mx-auto max-w-platform px-4 py-12 md:px-6">
-        <div className="h-8 w-32 animate-pulse rounded bg-bg-secondary" />
+        <div className="h-8 w-32 animate-pulse rounded bg-bg-card" />
         <div className="mt-6 grid grid-cols-3 gap-3">
           {[0, 1, 2].map((i) => (
-            <div key={i} className="h-16 animate-pulse rounded-card bg-bg-secondary" />
+            <div key={i} className="h-16 animate-pulse rounded-card bg-bg-card" />
           ))}
         </div>
       </div>
@@ -168,7 +168,7 @@ export function AlertsView({ instruments, instrumentsBySymbol }: AlertsViewProps
               {t("createPriceAlertsDesc", language)}
             </p>
           </div>
-          <div className="flex flex-col items-center justify-center rounded-card border border-border-base bg-bg-secondary px-6 py-16 text-center animate-fade-in-up" style={{ animationDelay: "40ms" }}>
+          <div className="flex flex-col items-center justify-center rounded-card border border-bg-border bg-bg-card px-6 py-16 text-center animate-fade-in-up" style={{ animationDelay: "40ms" }}>
             <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-cyan/10">
               <svg viewBox="0 0 24 24" className="h-8 w-8 text-cyan" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
@@ -227,7 +227,7 @@ export function AlertsView({ instruments, instrumentsBySymbol }: AlertsViewProps
                 fetchQuotes(unique);
               }}
               disabled={quotesLoading}
-              className="rounded border border-border-base px-3 py-1.5 text-xs text-text-secondary hover:text-text-primary transition disabled:opacity-50"
+              className="rounded border border-bg-border px-3 py-1.5 text-xs text-text-secondary hover:text-text-primary transition disabled:opacity-50"
             >
               {quotesLoading ? t("checking", language) : t("checkNow", language)}
             </button>
@@ -242,25 +242,25 @@ export function AlertsView({ instruments, instrumentsBySymbol }: AlertsViewProps
 
         {/* Summary cards */}
         <div className="mb-6 grid grid-cols-3 gap-3 animate-fade-in-up" style={{ animationDelay: "40ms" }}>
-          <div className="rounded-card border border-border-base bg-bg-secondary p-4">
+          <div className="rounded-card border border-bg-border bg-bg-card p-4">
             <p className="text-xs text-text-secondary">{t("active", language)}</p>
-            <p className="mt-1 text-xl font-bold text-blue-400">{counts.active}</p>
+            <p className="mt-1 text-xl font-bold text-info">{counts.active}</p>
           </div>
-          <div className="rounded-card border border-border-base bg-bg-secondary p-4">
+          <div className="rounded-card border border-bg-border bg-bg-card p-4">
             <p className="text-xs text-text-secondary">{t("triggered", language)}</p>
-            <p className="mt-1 text-xl font-bold text-green-400">{counts.triggered}</p>
+            <p className="mt-1 text-xl font-bold text-positive">{counts.triggered}</p>
           </div>
-          <div className="rounded-card border border-border-base bg-bg-secondary p-4">
+          <div className="rounded-card border border-bg-border bg-bg-card p-4">
             <p className="text-xs text-text-secondary">{t("disabled", language)}</p>
             <p className="mt-1 text-xl font-bold text-text-muted">{counts.disabled}</p>
           </div>
         </div>
 
         {/* Alerts table */}
-        <div className="rounded-card border border-border-base bg-bg-secondary overflow-hidden animate-fade-in-up" style={{ animationDelay: "80ms" }}>
+        <div className="rounded-card border border-bg-border bg-bg-card overflow-hidden animate-fade-in-up" style={{ animationDelay: "80ms" }}>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
-              <thead className="border-b border-border-base bg-bg-primary">
+              <thead className="border-b border-bg-border bg-bg-primary">
                 <tr>
                   <th className="px-4 py-3 text-left font-semibold text-text-secondary whitespace-nowrap">{t("symbol", language)}</th>
                   <th className="px-4 py-3 text-left font-semibold text-text-secondary whitespace-nowrap hidden md:table-cell">{t("name", language)}</th>
@@ -309,7 +309,7 @@ export function AlertsView({ instruments, instrumentsBySymbol }: AlertsViewProps
                       </td>
                       <td className="px-4 py-3 text-right font-mono hidden sm:table-cell">
                         {quote ? (
-                          <span className={quote.changePercent >= 0 ? "text-green-500" : "text-red-500"}>
+                          <span className={quote.changePercent >= 0 ? "text-positive" : "text-negative"}>
                             {fmtChange(quote.changePercent)}
                           </span>
                         ) : "—"}
@@ -338,13 +338,13 @@ export function AlertsView({ instruments, instrumentsBySymbol }: AlertsViewProps
                           </button>
                           <button
                             onClick={() => toggleAlert(alert.id)}
-                            className={`text-xs transition ${alert.enabled ? "text-text-muted hover:text-yellow-400" : "text-text-muted hover:text-blue-400"}`}
+                            className={`text-xs transition ${alert.enabled ? "text-text-muted hover:text-caution" : "text-text-muted hover:text-info"}`}
                           >
                             {alert.enabled ? t("disable", language) : t("enable", language)}
                           </button>
                           <button
                             onClick={() => removeAlert(alert.id)}
-                            className="text-xs text-text-muted hover:text-red-500 transition"
+                            className="text-xs text-text-muted hover:text-negative transition"
                           >
                             {t("remove", language)}
                           </button>

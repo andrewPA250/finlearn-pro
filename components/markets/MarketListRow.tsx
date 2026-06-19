@@ -33,7 +33,7 @@ export function MarketListRow({ instrument, quote }: MarketListRowProps) {
       </span>
       <span
         className={`text-right font-mono font-bold ${
-          hasData ? (quote.change >= 0 ? "text-accent-green" : "text-error") : "text-text-secondary/40"
+          hasData ? (quote.change >= 0 ? "text-positive" : "text-negative") : "text-text-secondary/40"
         }`}
       >
         {hasData ? formatQuoteChange(quote) : "—"}

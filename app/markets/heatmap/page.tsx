@@ -5,7 +5,7 @@ import { MARKET_INSTRUMENTS } from "@/lib/markets/catalog";
 import { HeatmapView } from "@/components/markets/HeatmapView";
 
 export const metadata: Metadata = {
-  title: "Market Heatmap — FinanceHub Markets",
+  title: "Market Heatmap",
   description: "Real-time market heatmap visualization.",
 };
 

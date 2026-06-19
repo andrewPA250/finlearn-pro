@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { IBM_Plex_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { ContextSidebar } from "@/components/sidebar/ContextSidebar";
@@ -8,9 +8,10 @@ import { MarketRibbon } from "@/components/market/MarketRibbon";
 import { getRibbonQuotes } from "@/lib/markets/getRibbonQuotes";
 import { Providers } from "@/app/Providers";
 
-const inter = Inter({
+const ibmPlexSans = IBM_Plex_Sans({
+  weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-sans",
 });
 
 const jetbrainsMono = JetBrains_Mono({
@@ -42,7 +43,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}
+        className={`${ibmPlexSans.variable} ${jetbrainsMono.variable} font-sans antialiased`}
       >
         <Providers>
           <Header />

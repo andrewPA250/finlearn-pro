@@ -3,7 +3,7 @@ import { MARKET_INSTRUMENTS } from "@/lib/markets/catalog";
 import { AlertsView } from "@/components/alerts/AlertsView";
 
 export const metadata: Metadata = {
-  title: "Alerts — FinanceHub",
+  title: "Alerts",
   description: "Set price and change alerts for any asset in the FinanceHub catalog.",
 };
 
