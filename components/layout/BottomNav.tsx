@@ -18,7 +18,7 @@ export function BottomNav() {
   const { language } = useSettings();
 
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-10 flex h-touch-target items-center justify-around border-t border-bg-card bg-bg-sidebar md:hidden">
+    <nav className="fixed inset-x-0 bottom-0 z-10 flex h-touch-target items-center justify-around border-t border-bg-border/40 bg-bg-sidebar md:hidden">
       {ITEMS.map(({ href, labelKey, Icon, isActive }) => {
         const active = isActive(pathname);
 
@@ -27,7 +27,7 @@ export function BottomNav() {
             key={href}
             href={href}
             className={`flex h-full flex-1 flex-col items-center justify-center gap-0.5 text-xs transition duration-150 ease-in-out ${
-              active ? "text-accent-purple" : "text-text-secondary hover:text-text-primary"
+              active ? "text-cyan" : "text-text-secondary hover:text-text-primary"
             }`}
           >
             <Icon className="h-4 w-4" />
