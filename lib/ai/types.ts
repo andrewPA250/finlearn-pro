@@ -54,6 +54,14 @@ export interface AiPortfolioContext {
   holdings: AiPortfolioHolding[];
 }
 
+export interface AiWatchlistItem {
+  symbol: string;
+  name: string | null;
+  category: string | null;
+  price: number | null;
+  changePercent: number | null;
+}
+
 export interface AiAlertContext {
   total: number;
   active: number;
@@ -82,7 +90,7 @@ export interface AiContext {
   language: "en" | "it";
   selectedAsset?: AiAssetContext | null;
   portfolio?: AiPortfolioContext | null;
-  watchlist?: string[];
+  watchlist?: AiWatchlistItem[];
   alerts?: AiAlertContext | null;
   marketSnapshot?: AiMarketSnapshotItem[];
   calendarEvent?: AiCalendarEventContext | null;

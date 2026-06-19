@@ -217,7 +217,15 @@ export function formatContext(context: AiContext | undefined): string {
 
   if (context.watchlist && Array.isArray(context.watchlist)) {
     if (context.watchlist.length > 0) {
-      parts.push(`WATCHLIST (${context.watchlist.length}): ${context.watchlist.join(", ")}`);
+      const lines = context.watchlist
+        .map(
+          (w) =>
+            `  • ${w.symbol}${w.name ? ` (${w.name})` : ""}${w.category ? ` [${w.category}]` : ""}: ` +
+            `price ${w.price == null ? "unavailable" : fmtNum(w.price, { maximumFractionDigits: 2 })}, ` +
+            `change ${fmtPct(w.changePercent)}`
+        )
+        .join("\n");
+      parts.push([`WATCHLIST (${context.watchlist.length} symbols):`, lines].join("\n"));
     } else {
       parts.push("WATCHLIST: Empty (no symbols).");
     }

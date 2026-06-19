@@ -21,6 +21,7 @@ import type {
   AiMarketSnapshotItem,
   AiPortfolioContext,
   AiAssetContext,
+  AiWatchlistItem,
 } from "./types";
 
 /** Key symbols summarised for "what changed in markets today?". */
@@ -136,6 +137,25 @@ function buildPortfolio(
   };
 }
 
+function buildWatchlist(
+  watchlist: string[],
+  quotes: Record<string, TickerQuote>
+): AiWatchlistItem[] {
+  // Limit to max 30 symbols for AI context
+  return watchlist.slice(0, 30).map((w) => {
+    const sym = w.toUpperCase();
+    const instrument = getInstrumentBySymbol(sym);
+    const q = quotes[sym];
+    return {
+      symbol: sym,
+      name: instrument?.name ?? null,
+      category: instrument?.category ?? null,
+      price: q ? q.value : null,
+      changePercent: q ? q.changePercent : null,
+    };
+  });
+}
+
 function buildSelectedAsset(
   focusSymbol: string | null | undefined,
   quotes: Record<string, TickerQuote>,
@@ -177,9 +197,6 @@ function buildSnapshot(quotes: Record<string, TickerQuote>): AiMarketSnapshotIte
 export function buildAiContext(args: BuildContextArgs): AiContext {
   const { language, currency, holdings, watchlist, alerts, quotes, focusSymbol } = args;
 
-  // Limit watchlist to max 30 symbols for AI context
-  const limitedWatchlist = watchlist.slice(0, 30).map((w) => w.toUpperCase());
-
   const activeAlerts = alerts.filter((a) => a.enabled && !a.triggeredAt).length;
   const triggeredAlerts = alerts.filter((a) => a.triggeredAt).length;
 
@@ -187,7 +204,7 @@ export function buildAiContext(args: BuildContextArgs): AiContext {
     language,
     selectedAsset: buildSelectedAsset(focusSymbol, quotes, currency),
     portfolio: buildPortfolio(holdings, quotes, currency),
-    watchlist: limitedWatchlist,
+    watchlist: buildWatchlist(watchlist, quotes),
     alerts:
       alerts.length > 0
         ? {
