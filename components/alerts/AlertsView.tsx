@@ -205,7 +205,7 @@ export function AlertsView({ instruments, instrumentsBySymbol }: AlertsViewProps
     <>
       <div className="mx-auto max-w-platform px-4 py-6 md:px-6">
         {/* Header */}
-        <div className="mb-6 flex flex-wrap items-end justify-between gap-3 animate-fade-in-up">
+        <div className="mb-4 flex flex-wrap items-end justify-between gap-3 animate-fade-in-up">
           <div>
             <h1 className="text-2xl font-bold text-text-primary">{t("alerts", language)}</h1>
             <p className="mt-0.5 text-sm text-text-secondary">
@@ -241,16 +241,16 @@ export function AlertsView({ instruments, instrumentsBySymbol }: AlertsViewProps
         </div>
 
         {/* Summary cards */}
-        <div className="mb-6 grid grid-cols-3 gap-3 animate-fade-in-up" style={{ animationDelay: "40ms" }}>
-          <div className="rounded-card border border-bg-border bg-bg-card p-4">
+        <div className="mb-4 grid grid-cols-3 gap-3 animate-fade-in-up" style={{ animationDelay: "40ms" }}>
+          <div className="rounded-card border border-bg-border bg-bg-card p-3.5">
             <p className="text-xs text-text-secondary">{t("active", language)}</p>
             <p className="mt-1 text-xl font-bold text-info">{counts.active}</p>
           </div>
-          <div className="rounded-card border border-bg-border bg-bg-card p-4">
+          <div className="rounded-card border border-bg-border bg-bg-card p-3.5">
             <p className="text-xs text-text-secondary">{t("triggered", language)}</p>
             <p className="mt-1 text-xl font-bold text-positive">{counts.triggered}</p>
           </div>
-          <div className="rounded-card border border-bg-border bg-bg-card p-4">
+          <div className="rounded-card border border-bg-border bg-bg-card p-3.5">
             <p className="text-xs text-text-secondary">{t("disabled", language)}</p>
             <p className="mt-1 text-xl font-bold text-text-muted">{counts.disabled}</p>
           </div>

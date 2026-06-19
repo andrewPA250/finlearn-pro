@@ -35,7 +35,7 @@ function fmtCompact(n: number): string {
 
 function StatCell({ label, value }: { label: string; value: string }) {
   return (
-    <div className="py-3">
+    <div className="rounded-md bg-bg-hover/40 px-3 py-2.5">
       <p className="mb-1 text-[10px] font-semibold uppercase tracking-widest text-text-muted">{label}</p>
       <p className="font-mono text-sm font-bold text-text-primary">{value}</p>
     </div>
@@ -69,12 +69,12 @@ export function AssetStatsSection({ stats, unit = "index", currentPrice }: Asset
   }
 
   return (
-    <section id="stats" className="rounded-card border border-bg-border bg-bg-card p-5">
-      <h2 className="mb-0 text-[10px] font-semibold uppercase tracking-widest text-text-muted">
+    <section id="stats" className="rounded-card border border-bg-border/70 bg-bg-card p-5">
+      <h2 className="mb-3 text-[10px] font-semibold uppercase tracking-widest text-text-muted">
         Market Statistics
       </h2>
 
-      <div className="grid grid-cols-2 gap-x-6 sm:grid-cols-3 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
         {cells.map((cell) => (
           <StatCell key={cell.label} label={cell.label} value={cell.value} />
         ))}
@@ -82,7 +82,7 @@ export function AssetStatsSection({ stats, unit = "index", currentPrice }: Asset
 
       {/* 52W Range bar */}
       {has52W && (
-        <div className="mt-1 border-t border-bg-border/60 pt-4">
+        <div className="mt-4 pt-4">
           <p className="mb-2 text-[10px] font-semibold uppercase tracking-widest text-text-muted">
             52-Week Range
           </p>

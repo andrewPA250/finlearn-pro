@@ -34,14 +34,16 @@ function NewsCard({ item }: { item: NewsItem }) {
       className="group flex items-start gap-3 rounded-md border border-transparent p-2 transition-colors duration-100 hover:border-bg-border hover:bg-white/[0.025]"
     >
       <div className="min-w-0 flex-1">
-        <p className="line-clamp-2 text-xs font-medium leading-snug text-text-primary group-hover:text-cyan">
+        <div className="flex items-center gap-1.5 min-w-0">
+          {item.source && (
+            <span className="text-[10px] font-bold text-cyan uppercase tracking-wide shrink-0">{item.source}</span>
+          )}
+          {item.source && item.datetime > 0 && <span className="h-0.5 w-0.5 rounded-full bg-text-disabled/60 shrink-0" />}
+          {item.datetime > 0 && <span className="text-[10px] text-text-disabled truncate">{formatAge(item.datetime)}</span>}
+        </div>
+        <p className="mt-1 line-clamp-2 text-xs font-medium leading-snug text-text-primary group-hover:text-cyan">
           {item.headline}
         </p>
-        <div className="mt-1 flex items-center gap-1.5 text-[10px] text-text-secondary/60">
-          {item.source && <span className="font-medium">{item.source}</span>}
-          {item.source && item.datetime > 0 && <span>·</span>}
-          {item.datetime > 0 && <span>{formatAge(item.datetime)}</span>}
-        </div>
       </div>
       {item.image ? (
         // eslint-disable-next-line @next/next/no-img-element

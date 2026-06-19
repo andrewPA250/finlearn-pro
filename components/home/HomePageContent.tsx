@@ -8,12 +8,20 @@ import { FeaturedMarketsTabs } from "@/components/home/FeaturedMarketsTabs";
 import { useSettings } from "@/lib/settings/SettingsContext";
 import { t } from "@/lib/settings/i18n";
 import { getCatalogStats } from "@/lib/markets/catalog";
+import type { EarningsEvent } from "@/lib/calendar/types";
+import {
+  WatchlistPreviewCard,
+  PortfolioPreviewCard,
+  LearningProgressCard,
+  CalendarPreviewCard,
+} from "@/components/home/HomeCommandModules";
 
 interface HomePageContentProps {
   quotes: Record<string, TickerQuote | null>;
   catalogStats: ReturnType<typeof getCatalogStats>;
   lessons: LessonMeta[];
   topNews: NewsItem[];
+  upcomingEarnings: EarningsEvent[];
 }
 
 function formatPrice(value: number, unit?: string): string {
@@ -128,6 +136,7 @@ export function HomePageContent({
   quotes,
   lessons,
   topNews,
+  upcomingEarnings,
 }: HomePageContentProps) {
   const { language: lang } = useSettings();
 
@@ -157,8 +166,8 @@ export function HomePageContent({
     <div className="min-h-screen bg-bg-primary">
 
       {/* ═══ OPENING — editorial identity + live market snapshot ═══ */}
-      <section className="border-b border-bg-border bg-gradient-to-b from-cyan/[0.03] to-transparent">
-        <div className="mx-auto max-w-platform px-4 md:px-6 py-6 md:py-8">
+      <section className="bg-gradient-to-b from-cyan/[0.04] to-transparent">
+        <div className="mx-auto max-w-platform px-4 md:px-6 py-7 md:py-9">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-[1fr_272px] md:gap-8 lg:grid-cols-[1fr_300px]">
 
             {/* Left — product identity + key indices */}
@@ -167,12 +176,15 @@ export function HomePageContent({
               {/* Identity */}
               <div>
                 <div className="mb-3 h-0.5 w-10 rounded-full bg-cyan" />
-                <h1 className="text-xl font-bold leading-tight text-text-primary md:text-2xl">
+                <h1 className="text-2xl font-bold leading-tight tracking-tight text-text-primary md:text-3xl">
                   {lang === "it"
                     ? <>Capire i <span className="text-cyan">mercati</span>. Capire il <span className="text-cyan">rischio</span>.</>
                     : <>Understand <span className="text-cyan">Markets</span>. Understand <span className="text-cyan">Risk</span>.</>
                   }
                 </h1>
+                <p className="mt-2 text-xs font-semibold uppercase tracking-widest text-text-muted">
+                  {lang === "it" ? "Impara · Analizza · Investi" : "Learn · Analyze · Invest"}
+                </p>
                 <p className="mt-2 max-w-sm text-xs leading-relaxed text-text-secondary">
                   {lang === "it"
                     ? "Intelligence di mercato professionale per investitori e studenti."
@@ -227,7 +239,7 @@ export function HomePageContent({
       </section>
 
       {/* ═══ FEATURED MARKETS ═══ */}
-      <section className="border-b border-bg-border">
+      <section className="pt-2">
         <div className="mx-auto max-w-platform px-4 md:px-6 py-5">
           <div className="mb-4 flex items-center justify-between">
             <span className="pl-2.5 border-l-2 border-cyan text-[11px] font-semibold uppercase tracking-widest text-text-secondary">
@@ -241,9 +253,26 @@ export function HomePageContent({
         </div>
       </section>
 
+      {/* ═══ YOUR ACTIVITY — command center modules ═══ */}
+      <section className="bg-bg-card/30">
+        <div className="mx-auto max-w-platform px-4 md:px-6 py-5">
+          <div className="mb-4 flex items-center justify-between">
+            <span className="pl-2.5 border-l-2 border-cyan text-[11px] font-semibold uppercase tracking-widest text-text-secondary">
+              {lang === "it" ? "La Tua Attività" : "Your Activity"}
+            </span>
+          </div>
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <WatchlistPreviewCard lang={lang} />
+            <PortfolioPreviewCard lang={lang} />
+            <LearningProgressCard lang={lang} lessons={lessons} />
+            <CalendarPreviewCard lang={lang} earnings={upcomingEarnings} />
+          </div>
+        </div>
+      </section>
+
       {/* ═══ MARKET INTELLIGENCE — editorial news feed ═══ */}
       {topNews.length > 0 && (
-        <section className="border-b border-bg-border bg-bg-card/30">
+        <section>
           <div className="mx-auto max-w-platform px-4 md:px-6 py-5">
             <div className="mb-4 flex items-center justify-between">
               <span className="pl-2.5 border-l-2 border-cyan text-[11px] font-semibold uppercase tracking-widest text-text-secondary">
@@ -253,14 +282,19 @@ export function HomePageContent({
                 {t("viewAllNews", lang)} →
               </Link>
             </div>
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-              <div className="rounded-card border border-bg-border bg-bg-card overflow-hidden">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="rounded-card border border-bg-border/60 bg-bg-card overflow-hidden">
                 {topNews.slice(0, 3).map((item) => (
                   <EditorialNewsItem key={item.id} item={item} lang={lang} />
                 ))}
               </div>
-              <div className="hidden sm:block rounded-card border border-bg-border bg-bg-card overflow-hidden">
+              <div className="hidden sm:block rounded-card border border-bg-border/60 bg-bg-card overflow-hidden">
                 {topNews.slice(3, 6).map((item) => (
+                  <EditorialNewsItem key={item.id} item={item} lang={lang} />
+                ))}
+              </div>
+              <div className="hidden lg:block rounded-card border border-bg-border/60 bg-bg-card overflow-hidden">
+                {topNews.slice(6, 9).map((item) => (
                   <EditorialNewsItem key={item.id} item={item} lang={lang} />
                 ))}
               </div>
@@ -270,7 +304,7 @@ export function HomePageContent({
       )}
 
       {/* ═══ PLATFORM + LEARN ═══ */}
-      <section className="border-b border-bg-border bg-bg-card/30">
+      <section className="bg-bg-card/30">
         <div className="mx-auto max-w-platform px-4 md:px-6 py-5">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:gap-6">
 
@@ -356,7 +390,7 @@ export function HomePageContent({
       </section>
 
       {/* ═══ FOOTER ═══ */}
-      <footer className="border-t border-bg-border bg-bg-base">
+      <footer className="border-t border-bg-border/50 bg-bg-base">
         <div className="mx-auto max-w-platform px-4 md:px-6 py-5 flex flex-col gap-3">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-[11px] text-text-disabled">

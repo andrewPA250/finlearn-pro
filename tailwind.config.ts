@@ -63,7 +63,7 @@ const config: Config = {
       },
       maxWidth: {
         reading: "680px",
-        platform: "1440px",
+        platform: "1680px",
       },
       screens: {
         mobile: { max: "767px" },

@@ -198,7 +198,7 @@ export function AssetChartSection({ symbol, candles, quote, unit, source, tvSymb
 
         {/* Left: "Chart" label + mode toggle */}
         <div className="flex items-center gap-2">
-          <h2 className="text-xs font-bold uppercase tracking-wide text-text-secondary">
+          <h2 className="text-[10px] font-semibold uppercase tracking-widest text-text-muted">
             Chart
           </h2>
 

@@ -115,7 +115,7 @@ export function WatchlistView({ quotesBySymbol, instrumentsBySymbol }: Watchlist
   return (
     <div className="mx-auto max-w-platform px-4 py-6 md:px-6">
       {/* Page header */}
-      <div className="mb-6 animate-fade-in-up">
+      <div className="mb-4 animate-fade-in-up">
         <h1 className="text-2xl font-bold text-text-primary">{t("myWatchlist", language)}</h1>
         <p className="mt-0.5 text-sm text-text-secondary">
           {t("trackFavorites", language)}
@@ -123,7 +123,7 @@ export function WatchlistView({ quotesBySymbol, instrumentsBySymbol }: Watchlist
       </div>
 
       {/* Summary bar */}
-      <div className="mb-6 grid grid-cols-2 gap-3 rounded-card border border-bg-border bg-bg-card p-4 md:grid-cols-3 animate-fade-in-up" style={{ animationDelay: "40ms" }}>
+      <div className="mb-4 grid grid-cols-2 gap-3 rounded-card border border-bg-border bg-bg-card p-3.5 md:grid-cols-3 animate-fade-in-up" style={{ animationDelay: "40ms" }}>
         <div>
           <p className="text-xs text-text-secondary">{t("total", language)} {t("assets", language)}</p>
           <p className="text-xl font-bold text-text-primary">{stats.total}</p>
@@ -139,7 +139,7 @@ export function WatchlistView({ quotesBySymbol, instrumentsBySymbol }: Watchlist
       </div>
 
       {/* Controls */}
-      <div className="mb-6 rounded-card border border-bg-border bg-bg-card p-4 animate-fade-in-up" style={{ animationDelay: "80ms" }}>
+      <div className="mb-4 rounded-card border border-bg-border bg-bg-card p-3.5 animate-fade-in-up" style={{ animationDelay: "80ms" }}>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div className="flex-1">
             <label className="mb-1 block text-xs font-medium text-text-secondary">

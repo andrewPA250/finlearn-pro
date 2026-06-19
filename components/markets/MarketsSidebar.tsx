@@ -9,7 +9,7 @@ import type { Language } from "@/lib/settings/types";
 function SidebarSection({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>
-      <p className="mb-1 px-3 text-[10px] font-semibold uppercase tracking-widest text-text-muted/60">
+      <p className="mb-0.5 px-2.5 text-[10px] font-semibold uppercase tracking-widest text-text-muted/60">
         {title}
       </p>
       {children}
@@ -55,17 +55,17 @@ export function MarketsSidebar() {
   }
 
   const linkClass = (href: string) =>
-    `flex items-center rounded-card px-3 py-1.5 text-sm transition duration-150 ${
+    `flex items-center rounded-card px-2.5 py-1 text-[13px] transition duration-150 ${
       isActive(href)
         ? "bg-cyan-bg/40 font-semibold text-cyan"
         : "text-text-secondary hover:bg-bg-hover hover:text-text-primary"
     }`;
 
   return (
-    <aside className="hidden w-48 shrink-0 flex-col gap-5 lg:flex">
-      <div className="sticky top-28 flex flex-col gap-5">
+    <aside className="hidden w-40 shrink-0 flex-col gap-4 lg:flex">
+      <div className="sticky top-28 flex flex-col gap-4">
         <SidebarSection title={t("markets", language)}>
-          <nav className="flex flex-col gap-0.5">
+          <nav className="flex flex-col gap-px">
             {navLink(language).map((item) => (
               <Link key={item.id} href={item.href} className={linkClass(item.href)}>
                 {item.label}
@@ -75,7 +75,7 @@ export function MarketsSidebar() {
         </SidebarSection>
 
         <SidebarSection title={t("tools", language)}>
-          <nav className="flex flex-col gap-0.5">
+          <nav className="flex flex-col gap-px">
             {toolsNav(language).map((item) => (
               <Link key={item.id} href={item.href} className={linkClass(item.href)}>
                 {item.label}
@@ -85,7 +85,7 @@ export function MarketsSidebar() {
         </SidebarSection>
 
         <SidebarSection title={t("personal", language)}>
-          <nav className="flex flex-col gap-0.5">
+          <nav className="flex flex-col gap-px">
             {personalNav(language).map((item) => (
               <Link key={item.id} href={item.href} className={linkClass(item.href)}>
                 {item.label}

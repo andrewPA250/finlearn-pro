@@ -152,12 +152,6 @@ export function AssetHero({ instrument, categoryLabel, quote }: AssetHeroProps) 
             Open in Quant Lab →
           </Link>
         )}
-        <button
-          disabled
-          className="inline-flex cursor-not-allowed items-center gap-1.5 rounded-card border border-bg-border px-3 py-1.5 text-xs font-semibold text-text-disabled opacity-40"
-        >
-          Compare
-        </button>
         <WatchButton symbol={instrument.symbol} />
       </div>
     </div>

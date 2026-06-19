@@ -22,22 +22,24 @@ export function MarketsView({ tickerQuotes }: MarketsViewProps) {
   }
 
   return (
-    <div className="mx-auto max-w-platform px-4 py-6 md:px-6">
+    <div className="mx-auto max-w-platform px-4 py-5 lg:px-6">
       {/* Page header */}
-      <div className="mb-6 animate-fade-in-up">
-        <h1 className="text-2xl font-bold text-text-primary">Markets</h1>
-        <p className="mt-0.5 text-sm text-text-secondary">
-          {catalogStats.total}+ assets across indices, equities, crypto, forex, commodities and bonds.
-        </p>
+      <div className="mb-4 flex items-baseline justify-between gap-4 animate-fade-in-up">
+        <div>
+          <h1 className="text-xl font-bold text-text-primary">Markets</h1>
+          <p className="mt-0.5 text-xs text-text-secondary">
+            {catalogStats.total}+ assets across indices, equities, crypto, forex, commodities and bonds.
+          </p>
+        </div>
       </div>
 
       {/* Layout: sidebar + main */}
-      <div className="flex gap-8 animate-fade-in-up" style={{ animationDelay: "40ms" }}>
+      <div className="flex gap-5 animate-fade-in-up" style={{ animationDelay: "40ms" }}>
         {/* Context sidebar — desktop only */}
         <MarketsSidebar />
 
         {/* Main content */}
-        <div className="min-w-0 flex-1 flex flex-col gap-5">
+        <div className="min-w-0 flex-1 flex flex-col gap-4">
           {/* Top Movers snapshot */}
           <MarketsTopMovers quotes={tickerQuotes} />
 

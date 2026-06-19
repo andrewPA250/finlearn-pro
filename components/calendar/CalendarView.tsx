@@ -55,10 +55,10 @@ function EarningsTable({ events }: { events: EarningsEvent[] }) {
   if (events.length === 0) return <EmptyCard label="earnings" />;
 
   return (
-    <div className="rounded-card border border-bg-border bg-bg-card overflow-hidden">
+    <div className="rounded-card border border-bg-border/70 bg-bg-card overflow-hidden">
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
-          <thead className="border-b border-bg-border bg-bg-primary">
+          <thead className="border-b border-bg-border/50 bg-bg-primary/60">
             <tr>
               <th className="px-4 py-3 text-left font-semibold text-text-secondary">Date</th>
               <th className="px-4 py-3 text-left font-semibold text-text-secondary">Symbol</th>
@@ -70,7 +70,7 @@ function EarningsTable({ events }: { events: EarningsEvent[] }) {
               <th className="px-4 py-3 text-right font-semibold text-text-secondary hidden lg:table-cell">Rev Act.</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-border-base">
+          <tbody className="divide-y divide-bg-border/40">
             {events.map((e, i) => (
               <tr key={`${e.symbol}-${e.date}-${i}`} className="hover:bg-bg-hover transition">
                 <td className="px-4 py-2.5 text-text-secondary whitespace-nowrap">{fmtDate(e.date)}</td>
@@ -104,10 +104,10 @@ function IpoTable({ events }: { events: IpoEvent[] }) {
   if (events.length === 0) return <EmptyCard label="IPO" />;
 
   return (
-    <div className="rounded-card border border-bg-border bg-bg-card overflow-hidden">
+    <div className="rounded-card border border-bg-border/70 bg-bg-card overflow-hidden">
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
-          <thead className="border-b border-bg-border bg-bg-primary">
+          <thead className="border-b border-bg-border/50 bg-bg-primary/60">
             <tr>
               <th className="px-4 py-3 text-left font-semibold text-text-secondary">Date</th>
               <th className="px-4 py-3 text-left font-semibold text-text-secondary">Symbol</th>
@@ -118,7 +118,7 @@ function IpoTable({ events }: { events: IpoEvent[] }) {
               <th className="px-4 py-3 text-center font-semibold text-text-secondary">Status</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-border-base">
+          <tbody className="divide-y divide-bg-border/40">
             {events.map((e, i) => (
               <tr key={`${e.symbol}-${e.date}-${i}`} className="hover:bg-bg-hover transition">
                 <td className="px-4 py-2.5 text-text-secondary whitespace-nowrap">{fmtDate(e.date)}</td>
@@ -173,7 +173,7 @@ export function CalendarView({ data }: CalendarViewProps) {
   return (
     <div className="mx-auto max-w-platform px-4 py-6 md:px-6">
       {/* Header */}
-      <div className="mb-6 animate-fade-in-up">
+      <div className="mb-4 animate-fade-in-up">
         <h1 className="text-2xl font-bold text-text-primary">Calendar</h1>
         <p className="mt-0.5 text-sm text-text-secondary">
           Earnings, IPOs, and market events — real data from Finnhub.
@@ -181,20 +181,20 @@ export function CalendarView({ data }: CalendarViewProps) {
       </div>
 
       {/* Summary cards */}
-      <div className="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-4 animate-fade-in-up" style={{ animationDelay: "40ms" }}>
-        <div className="rounded-card border border-bg-border bg-bg-card p-4">
+      <div className="mb-4 grid grid-cols-2 gap-3 sm:grid-cols-4 animate-fade-in-up" style={{ animationDelay: "40ms" }}>
+        <div className="rounded-card border border-bg-border bg-bg-card p-3.5">
           <p className="text-xs text-text-secondary">Total Events</p>
           <p className="mt-1 text-xl font-bold text-text-primary">{totalEvents}</p>
         </div>
-        <div className="rounded-card border border-bg-border bg-bg-card p-4">
+        <div className="rounded-card border border-bg-border bg-bg-card p-3.5">
           <p className="text-xs text-text-secondary">Earnings</p>
           <p className="mt-1 text-xl font-bold text-cyan">{summary.earnings}</p>
         </div>
-        <div className="rounded-card border border-bg-border bg-bg-card p-4">
+        <div className="rounded-card border border-bg-border bg-bg-card p-3.5">
           <p className="text-xs text-text-secondary">IPOs</p>
           <p className="mt-1 text-xl font-bold text-color-ai">{summary.ipos}</p>
         </div>
-        <div className="rounded-card border border-bg-border bg-bg-card p-4">
+        <div className="rounded-card border border-bg-border bg-bg-card p-3.5">
           <p className="text-xs text-text-secondary">Date Range</p>
           <p className="mt-1 text-sm font-semibold text-text-primary truncate">
             {data.fromDate} – {data.toDate}
@@ -203,7 +203,7 @@ export function CalendarView({ data }: CalendarViewProps) {
       </div>
 
       {/* Filter tabs */}
-      <div className="mb-6 flex gap-1 overflow-x-auto rounded-card border border-bg-border bg-bg-card p-1 animate-fade-in-up" style={{ animationDelay: "60ms" }}>
+      <div className="mb-4 flex gap-1 overflow-x-auto rounded-card border border-bg-border bg-bg-card p-1 animate-fade-in-up" style={{ animationDelay: "60ms" }}>
         {FILTERS.map(({ id, label }) => (
           <button
             key={id}

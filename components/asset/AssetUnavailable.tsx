@@ -14,22 +14,22 @@ export function AssetUnavailable({ instrument, categoryLabel, reason }: AssetUna
   }[reason || "no_quote"];
 
   return (
-    <div className="mx-auto flex max-w-platform flex-col gap-4 p-6">
+    <div className="mx-auto flex max-w-platform flex-col gap-4 p-4 md:p-6">
       {/* Hero section with asset info but no quote */}
-      <div className="rounded-card border border-bg-sidebar bg-bg-card p-6">
+      <div className="rounded-card border border-bg-border bg-bg-card p-6">
         <div className="mb-3 flex items-end gap-3">
           <div>
             <h1 className="text-2xl font-bold text-text-primary">{instrument.name}</h1>
             <p className="text-xs text-text-secondary/60">{instrument.symbol}</p>
           </div>
-          <span className="mb-1 rounded-full bg-accent-blue/15 px-2 py-1 text-xs font-bold uppercase text-accent-blue">
+          <span className="mb-1 rounded-full bg-cyan-bg/50 px-2 py-1 text-xs font-bold uppercase text-cyan">
             {categoryLabel}
           </span>
         </div>
       </div>
 
       {/* Unavailable message */}
-      <div className="rounded-card border border-bg-sidebar/50 bg-bg-card/50 p-6">
+      <div className="rounded-card border border-bg-border bg-bg-card p-6">
         <div className="mb-4 flex items-start gap-3">
           <div className="mt-0.5 rounded-full bg-text-secondary/10 p-2">
             <svg
@@ -55,7 +55,7 @@ export function AssetUnavailable({ instrument, categoryLabel, reason }: AssetUna
                 href="https://finance.yahoo.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-medium text-accent-purple hover:underline"
+                className="font-medium text-cyan hover:underline"
               >
                 Yahoo Finance
               </a>
@@ -66,8 +66,8 @@ export function AssetUnavailable({ instrument, categoryLabel, reason }: AssetUna
       </div>
 
       {/* Learn section still available */}
-      <div className="rounded-card border border-bg-sidebar bg-bg-card p-4">
-        <h2 className="mb-3 text-xs font-bold uppercase tracking-wide text-text-secondary">
+      <div className="rounded-card border border-bg-border bg-bg-card p-5">
+        <h2 className="mb-3 text-[10px] font-semibold uppercase tracking-widest text-text-muted">
           Learn More
         </h2>
         <p className="text-sm text-text-secondary">
@@ -81,7 +81,7 @@ export function AssetUnavailable({ instrument, categoryLabel, reason }: AssetUna
         </p>
         <a
           href="/lessons/1"
-          className="mt-3 inline-block rounded-card border border-accent-purple/30 px-3 py-1.5 text-xs font-semibold text-accent-purple transition-colors hover:border-accent-purple/60 hover:bg-accent-purple/5"
+          className="mt-3 inline-block rounded-card border border-cyan/30 px-3 py-1.5 text-xs font-semibold text-cyan transition-colors hover:border-cyan/60 hover:bg-cyan-bg/20"
         >
           Go to Learn →
         </a>

@@ -20,12 +20,12 @@ export function MarketListSection({ category, instruments, quotesBySymbol }: Mar
   const hasProvider = instruments.some((i) => i.status !== "soon");
 
   return (
-    <section className="rounded-card border border-bg-sidebar bg-bg-card">
-      <header className="flex items-center justify-between border-b border-bg-sidebar px-4 py-2.5">
-        <h2 className="text-xs font-bold uppercase tracking-wide text-text-secondary">{category.label}</h2>
+    <section className="rounded-card border border-bg-border bg-bg-card">
+      <header className="flex items-center justify-between border-b border-bg-border px-3 py-2">
+        <h2 className="text-[11px] font-bold uppercase tracking-wide text-text-secondary">{category.label}</h2>
         {!hasProvider && <SoonBadge />}
       </header>
-      <div className="divide-y divide-bg-sidebar/60">
+      <div className="divide-y divide-bg-border/60">
         {instruments.map((instrument) => (
           <MarketListRow
             key={instrument.symbol}

@@ -38,7 +38,7 @@ export function MarketsFilter({
   return (
     <div>
       {/* Quick filter tabs */}
-      <div className="flex items-center gap-1 overflow-x-auto pb-1 mb-5">
+      <div className="flex items-center gap-1 overflow-x-auto pb-1 mb-4">
         {TABS.map((tab) => (
           <button
             key={tab.id}
@@ -57,7 +57,7 @@ export function MarketsFilter({
       {/* Category sections grid — show previews with "View all" links */}
       <div
         id="overview"
-        className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+        className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3"
       >
         {visibleCategories.map((category) => {
           const allInstruments = instrumentsByCategory[category.id] ?? [];
@@ -69,19 +69,19 @@ export function MarketsFilter({
 
           return (
             <div key={category.id} id={category.id} className="flex flex-col">
-              <section className="flex-1 rounded-card border border-bg-sidebar bg-bg-card flex flex-col">
+              <section className="flex-1 rounded-card border border-bg-border bg-bg-card flex flex-col">
                 {/* Header with category name and count */}
-                <header className="border-b border-bg-sidebar px-4 py-2.5">
-                  <h2 className="text-xs font-bold uppercase tracking-wide text-text-secondary">
+                <header className="flex items-baseline justify-between border-b border-bg-border px-3 py-2">
+                  <h2 className="text-[11px] font-bold uppercase tracking-wide text-text-secondary">
                     {category.label}
                   </h2>
-                  <p className="mt-0.5 text-[10px] text-text-muted">
+                  <p className="text-[10px] text-text-muted">
                     {totalCount} {totalCount === 1 ? "asset" : "assets"}
                   </p>
                 </header>
 
                 {/* Preview list (first 10 items) */}
-                <div className="divide-y divide-bg-sidebar/60 flex-1">
+                <div className="divide-y divide-bg-border/60 flex-1">
                   {preview.map((instrument) => (
                     <MarketListRow
                       key={instrument.symbol}
@@ -90,17 +90,17 @@ export function MarketsFilter({
                     />
                   ))}
                 </div>
-              </section>
 
-              {/* "View all" footer link */}
-              {totalCount > 10 && (
-                <Link
-                  href={`/markets/category/${category.id}`}
-                  className="mt-2 inline-flex items-center gap-1 rounded-card px-3 py-1.5 text-xs font-semibold text-cyan hover:text-cyan-light transition"
-                >
-                  View all {totalCount} →
-                </Link>
-              )}
+                {/* "View all" footer link — inside the card for a flush table edge */}
+                {totalCount > 10 && (
+                  <Link
+                    href={`/markets/category/${category.id}`}
+                    className="border-t border-bg-border px-3 py-1.5 text-[11px] font-semibold text-cyan hover:text-cyan-light transition"
+                  >
+                    View all {totalCount} →
+                  </Link>
+                )}
+              </section>
             </div>
           );
         })}

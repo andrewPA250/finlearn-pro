@@ -62,7 +62,7 @@ function Row({ label, value, highlight }: { label: string; value: string; highli
     ? "text-error"
     : "text-text-primary";
   return (
-    <div className="flex items-center justify-between gap-3 py-1.5">
+    <div className="flex items-center justify-between gap-3 py-1">
       <span className="text-xs text-text-secondary">{label}</span>
       <span className={`font-mono text-xs font-medium tabular-nums ${valueClass}`}>{value}</span>
     </div>
@@ -71,11 +71,11 @@ function Row({ label, value, highlight }: { label: string; value: string; highli
 
 function Group({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div>
-      <p className="mb-1 text-[10px] font-bold uppercase tracking-widest text-text-secondary/40">
+    <div className="rounded-md bg-bg-hover/30 px-3 py-3">
+      <p className="mb-1.5 text-[10px] font-bold uppercase tracking-widest text-text-secondary/40">
         {title}
       </p>
-      <div className="divide-y divide-bg-sidebar/50">{children}</div>
+      <div className="space-y-0.5">{children}</div>
     </div>
   );
 }
@@ -155,14 +155,16 @@ export function AssetFundamentals({ fundamentals: f, category }: AssetFundamenta
   if (groups.length === 0) return null;
 
   return (
-    <section className="rounded-card border border-bg-border bg-bg-card p-5">
+    <section className="rounded-card border border-bg-border/70 bg-bg-card p-5">
       <h2 className="mb-3 text-[10px] font-semibold uppercase tracking-widest text-text-muted">
         Fundamentals
       </h2>
 
       {/* Responsive grid: 1 col mobile, 2 col desktop when 2+ groups, avoid cramped narrow */}
-      <div className={`${groups.length >= 2 ? "grid gap-6 md:grid-cols-2" : "space-y-4"}`}>
-        {groups}
+      <div className={`grid gap-3 ${groups.length >= 2 ? "md:grid-cols-2" : ""}`}>
+        {groups.map((group, i) => (
+          <div key={i}>{group}</div>
+        ))}
       </div>
 
       <p className="mt-4 text-[10px] text-text-secondary/40">
