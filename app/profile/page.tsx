@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { LogoutButton } from "@/components/profile/LogoutButton";
 import { ProfileForm } from "@/components/profile/ProfileForm";
 import { ResetProgressButton } from "@/components/profile/ResetProgressButton";
+import { AvatarUpload } from "@/components/profile/AvatarUpload";
 import { createClient } from "@/lib/supabase/server";
 
 export default async function ProfilePage() {
@@ -23,6 +24,10 @@ export default async function ProfilePage() {
       <div className="animate-fade-in-up rounded-card bg-bg-card p-6">
         <h1 className="text-2xl font-bold text-text-primary">Profilo</h1>
         <p className="mt-1 text-sm text-text-secondary">{data.user.email}</p>
+
+        <div className="mt-6 border-b border-bg-border/50 pb-6">
+          <AvatarUpload initials={data.user.email ? data.user.email[0]!.toUpperCase() : ""} />
+        </div>
 
         <div className="mt-6">
           <ProfileForm userId={data.user.id} initialDisplayName={profile?.display_name ?? ""} />

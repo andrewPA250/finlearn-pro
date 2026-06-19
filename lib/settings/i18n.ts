@@ -344,6 +344,15 @@ export const translations = {
     "promptMarketsToday": "What changed in markets today?",
     "promptCompare": "Compare AAPL vs NVDA",
     "promptCalendarEvent": "Explain this calendar event",
+
+    // Avatar upload
+    "avatarUpload": "Upload photo",
+    "avatarRemove": "Remove photo",
+    "avatarSave": "Save photo",
+    "avatarHint": "PNG, JPG or WEBP. Max 2MB.",
+    "avatarErrorType": "Unsupported file type. Use PNG, JPG, or WEBP.",
+    "avatarErrorSize": "File is too large. Max size is 2MB.",
+    "avatarErrorGeneric": "Could not read the image. Please try another file.",
   },
   it: {
     // Header
@@ -688,6 +697,15 @@ export const translations = {
     "promptMarketsToday": "Cosa è cambiato oggi nei mercati?",
     "promptCompare": "Confronta AAPL e NVDA",
     "promptCalendarEvent": "Spiega questo evento del calendario",
+
+    // Avatar upload
+    "avatarUpload": "Carica foto",
+    "avatarRemove": "Rimuovi foto",
+    "avatarSave": "Salva foto",
+    "avatarHint": "PNG, JPG o WEBP. Max 2MB.",
+    "avatarErrorType": "Tipo di file non supportato. Usa PNG, JPG o WEBP.",
+    "avatarErrorSize": "File troppo grande. La dimensione massima è 2MB.",
+    "avatarErrorGeneric": "Impossibile leggere l'immagine. Prova con un altro file.",
   },
 } as const;
 

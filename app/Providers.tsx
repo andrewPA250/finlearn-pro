@@ -6,6 +6,7 @@ import { WatchlistProvider } from "@/lib/watchlist/WatchlistContext";
 import { PortfolioProvider } from "@/lib/portfolio/PortfolioContext";
 import { AlertsProvider } from "@/lib/alerts/AlertsContext";
 import { CurrencyProvider } from "@/lib/currency/CurrencyContext";
+import { AvatarProvider } from "@/lib/avatar/AvatarContext";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -15,7 +16,9 @@ export function Providers({ children }: { children: React.ReactNode }) {
           <PortfolioProvider>
             <AlertsProvider>
               <ProgressProvider>
-                {children}
+                <AvatarProvider>
+                  {children}
+                </AvatarProvider>
               </ProgressProvider>
             </AlertsProvider>
           </PortfolioProvider>

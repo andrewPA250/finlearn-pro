@@ -8,6 +8,7 @@ import { createClient } from "@/lib/supabase/client";
 import { useProgress } from "@/lib/progress/ProgressContext";
 import { useSettings } from "@/lib/settings/SettingsContext";
 import { useWatchlist } from "@/lib/watchlist/WatchlistContext";
+import { useAvatar } from "@/lib/avatar/AvatarContext";
 import { t } from "@/lib/settings/i18n";
 import { getNextAccessibleLessonId } from "@/lib/access";
 import { ChevronDownIcon, LogoMark, SearchIcon, UserIcon } from "@/components/layout/icons";
@@ -28,6 +29,7 @@ export function Header() {
   const { state } = useProgress();
   const settings = useSettings();
   const { symbols: watchlistSymbols } = useWatchlist();
+  const { avatarUrl } = useAvatar();
   const [user, setUser] = useState<User | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -149,8 +151,15 @@ export function Header() {
               className="flex items-center gap-2 rounded-card px-2 py-1.5 transition duration-150 ease-in-out hover:bg-bg-hover"
               aria-label="Menu account"
             >
-              <span className="flex h-8 w-8 items-center justify-center rounded-full border border-cyan/20 bg-cyan/10 text-xs font-bold text-cyan">
-                {user.email ? user.email[0]?.toUpperCase() : <UserIcon className="h-4 w-4" />}
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-full border border-cyan/20 bg-cyan/10 text-xs font-bold text-cyan">
+                {avatarUrl ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={avatarUrl} alt="" className="h-full w-full object-cover" />
+                ) : user.email ? (
+                  user.email[0]?.toUpperCase()
+                ) : (
+                  <UserIcon className="h-4 w-4" />
+                )}
               </span>
               <ChevronDownIcon className="h-3.5 w-3.5 text-text-secondary" />
             </button>
