@@ -170,8 +170,8 @@ function createBond(opts: BondOptions): MarketInstrument {
 export const MARKET_INSTRUMENTS: MarketInstrument[] = [
   // ─── INDICES (7 total) ───────────────────────────────────────────────────
   createIndex({ symbol: "SPX",  name: "S&P 500",                          yahooSymbol: "^GSPC", tradingViewSymbol: "TVC:SPX", assetId: "sp500" }),
-  createIndex({ symbol: "NDX",  name: "Nasdaq 100",                       yahooSymbol: "^NDX", tradingViewSymbol: "NASDAQ:NDX" }),
-  createIndex({ symbol: "DJI",  name: "Dow Jones Industrial Average",     yahooSymbol: "^DJI", tradingViewSymbol: "DJ:DJI" }),
+  createIndex({ symbol: "NDX",  name: "Nasdaq 100",                       yahooSymbol: "^NDX", tradingViewSymbol: "TVC:NDX" }),
+  createIndex({ symbol: "DJI",  name: "Dow Jones Industrial Average",     yahooSymbol: "^DJI", tradingViewSymbol: "TVC:DJI" }),
   createIndex({ symbol: "RUT",  name: "Russell 2000",                     yahooSymbol: "^RUT", tradingViewSymbol: "TVC:RUT" }),
   createIndex({ symbol: "VIX",  name: "CBOE Volatility Index",            yahooSymbol: "^VIX", tradingViewSymbol: "TVC:VIX" }),
   createIndex({ symbol: "DAX",  name: "DAX Performance Index",            yahooSymbol: "^GDAXI", tradingViewSymbol: "XETR:DAX" }),

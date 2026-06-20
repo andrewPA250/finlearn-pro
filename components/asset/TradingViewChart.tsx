@@ -30,7 +30,7 @@ const VALIDATED_TV_SYMBOLS = new Set([
   // Commodities
   "TVC:GOLD", "TVC:SILVER", "TVC:USOIL", "TVC:NATURALGAS",
   // Bonds / Rates
-  "TVC:US10Y", "TVC:US02Y", "TVC:US30Y",
+  "TVC:US10Y", "TVC:US2Y", "TVC:US30Y",
 ]);
 
 export function validateTradingViewSymbol(symbol: string): boolean {
