@@ -73,7 +73,7 @@ const YAHOO_LABELS: Record<string, string> = {
 };
 
 /** Simboli la cui unità è "percent" (rendimenti obbligazionari). */
-const PERCENT_SYMBOLS = new Set(["US10Y", "US30Y"]);
+const PERCENT_SYMBOLS = new Set(["US02Y", "US10Y", "US30Y"]);
 
 /** Simboli che tradano 24/7 → freshness "near-live" indipendente da marketState. */
 const ALWAYS_OPEN_SYMBOLS = new Set([

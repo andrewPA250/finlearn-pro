@@ -3,7 +3,6 @@ import { IBM_Plex_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { ContextSidebar } from "@/components/sidebar/ContextSidebar";
-import { BottomNav } from "@/components/layout/BottomNav";
 import { MarketRibbon } from "@/components/market/MarketRibbon";
 import { getRibbonQuotes } from "@/lib/markets/getRibbonQuotes";
 import { Providers } from "@/app/Providers";
@@ -50,11 +49,10 @@ export default async function RootLayout({
           <MarketRibbon quotes={ribbonQuotes} />
           <div className="flex min-h-[calc(100vh-3.5rem)]">
             <ContextSidebar />
-            <main className="min-h-[calc(100vh-3.5rem)] min-w-0 flex-1 pb-touch-target md:pb-0">
+            <main className="min-h-[calc(100vh-3.5rem)] min-w-0 flex-1">
               {children}
             </main>
           </div>
-          <BottomNav />
         </Providers>
       </body>
     </html>
