@@ -11,9 +11,10 @@ import { useWatchlist } from "@/lib/watchlist/WatchlistContext";
 import { useAvatar } from "@/lib/avatar/AvatarContext";
 import { t } from "@/lib/settings/i18n";
 import { getNextAccessibleLessonId } from "@/lib/access";
-import { ChevronDownIcon, LogoMark, SearchIcon, UserIcon } from "@/components/layout/icons";
+import { ChevronDownIcon, LogoMark, MenuIcon, SearchIcon, UserIcon } from "@/components/layout/icons";
 import { SoonBadge } from "@/components/layout/SoonBadge";
 import { SearchOverlay } from "@/components/search/SearchOverlay";
+import { MobileNavDrawer } from "@/components/layout/MobileNavDrawer";
 
 interface NavItem {
   label: string;
@@ -33,6 +34,7 @@ export function Header() {
   const [user, setUser] = useState<User | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   useEffect(() => {
     const supabase = createClient();
@@ -81,6 +83,15 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-30 flex h-14 items-center gap-3 border-b border-bg-border/40 bg-bg-sidebar px-4 md:gap-3 md:px-6">
+      <button
+        type="button"
+        onClick={() => setDrawerOpen(true)}
+        aria-label="Apri menu"
+        className="flex items-center justify-center rounded-card p-2 text-text-secondary transition duration-150 ease-in-out hover:bg-bg-hover hover:text-text-primary md:hidden"
+      >
+        <MenuIcon className="h-5 w-5" />
+      </button>
+
       <Link href="/" className="flex shrink-0 items-center gap-2.5">
         <LogoMark className="h-8 w-8" />
         <span className="hidden text-[15px] font-semibold tracking-tight text-text-primary sm:inline">
@@ -222,6 +233,7 @@ export function Header() {
       </div>
 
       <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} learnHref={learnHref} />
+      <MobileNavDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} learnHref={learnHref} />
     </header>
   );
 }
