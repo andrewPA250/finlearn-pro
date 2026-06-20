@@ -777,7 +777,13 @@ export const MARKET_INSTRUMENTS: MarketInstrument[] = [
   createIndex({ symbol: "MOVE",  name: "ICE BofA Move Index",             yahooSymbol: "^MOVE", tradingViewSymbol: "TVC:MOVE" }),
 
   // ─── BONDS / ADDITIONAL RATES (3 total) ───────────────────────────────────
-  createBond({ symbol: "US02Y", name: "US Treasury 2Y", yahooSymbol: "^IRX", tradingViewSymbol: "TVC:US2Y" }),
+  // No yahooSymbol: ^IRX is the 13-week (3-month) T-bill yield, already used
+  // correctly by US03M below — it was mislabeled here as the 2-year yield.
+  // No genuine Yahoo Finance spot-yield symbol exists for the 2-year note
+  // (only expiring futures contracts like 2YY=F/ZT=F, wrong unit/lifetime
+  // for a permanent catalog entry), so this stays "soon" rather than show
+  // wrong data under a real label.
+  createBond({ symbol: "US02Y", name: "US Treasury 2Y", tradingViewSymbol: "TVC:US2Y" }),
   createBond({ symbol: "US05Y", name: "US Treasury 5Y", yahooSymbol: "^FVX", tradingViewSymbol: "TVC:US5Y" }),
   createBond({ symbol: "US03M", name: "US Treasury 3M Bill", yahooSymbol: "^IRX", tradingViewSymbol: "TVC:US03M" }),
 
