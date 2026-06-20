@@ -1,0 +1,183 @@
+ADSK Autodesk Inc.
+ADM Archer-Daniels-Midland Co.
+AIG American International Group Inc.
+ALGN Align Technology Inc.
+AMP Ameriprise Financial Inc.
+ANSS ANSYS Inc.
+AVY Avery Dennison Corp.
+BAX Baxter International Inc.
+BEN Franklin Resources Inc.
+BIO Bio-Rad Laboratories Inc.
+BRO Brown & Brown Inc.
+CAG Conagra Brands Inc.
+CARR Carrier Global Corp.
+CBOE Cboe Global Markets Inc.
+CBRE CBRE Group Inc.
+CDNS Cadence Design Systems Inc.
+CDW CDW Corp.
+CHD Church & Dwight Co. Inc.
+CHRW C.H. Robinson Worldwide Inc.
+CINF Cincinnati Financial Corp.
+CL Colgate-Palmolive Co.
+CLX Clorox Co.
+CMA Comerica Inc.
+CMS CMS Energy Corp.
+CNP CenterPoint Energy Inc.
+COF Capital One Financial Corp.
+CPB Campbell's Co.
+CPT Camden Property Trust
+CSGP CoStar Group Inc.
+CTRA Coterra Energy Inc.
+CTSH Cognizant Technology Solutions Corp.
+CTVA Corteva Inc.
+D Dominion Energy Inc.
+DAY Dayforce Inc.
+DECK Deckers Brands
+DFS Discover Financial Services
+DGX Quest Diagnostics Inc.
+DOV Dover Corp.
+DRI Darden Restaurants Inc.
+DTE DTE Energy Co.
+DVA DaVita Inc.
+EBAY eBay Inc.
+ED Consolidated Edison Inc.
+EFX Equifax Inc.
+EIX Edison International
+ENPH Enphase Energy Inc.
+EPAM EPAM Systems Inc.
+ETR Entergy Corp.
+ETSY Etsy Inc.
+EXPD Expeditors International of Washington Inc.
+EXR Extra Space Storage Inc.
+FE FirstEnergy Corp.
+FFIV F5 Inc.
+FITB Fifth Third Bancorp
+FRT Federal Realty Investment Trust
+FSLR First Solar Inc.
+GL Globe Life Inc.
+GLW Corning Inc.
+GPC Genuine Parts Co.
+HAS Hasbro Inc.
+HBAN Huntington Bancshares Inc.
+HES Hess Corp.
+HIG Hartford Financial Services Group Inc.
+HOLX Hologic Inc.
+HPE Hewlett Packard Enterprise Co.
+HRL Hormel Foods Corp.
+HSIC Henry Schein Inc.
+HST Host Hotels & Resorts Inc.
+HWM Howmet Aerospace Inc.
+INCY Incyte Corp.
+INVH Invitation Homes Inc.
+IPG Interpublic Group of Companies Inc.
+IRM Iron Mountain Inc.
+IT Gartner Inc.
+IVZ Invesco Ltd.
+J Jacobs Solutions Inc.
+JBHT J.B. Hunt Transport Services Inc.
+JBL Jabil Inc.
+JKHY Jack Henry & Associates Inc.
+K Kellanova
+KEY KeyCorp
+KEYS Keysight Technologies Inc.
+KHC Kraft Heinz Co.
+KIM Kimco Realty Corp.
+KMX CarMax Inc.
+KVUE Kenvue Inc.
+L Loews Corp.
+LH Labcorp Holdings Inc.
+LKQ LKQ Corp.
+LNT Alliant Energy Corp.
+LVS Las Vegas Sands Corp.
+LW Lamb Weston Holdings Inc.
+LYB LyondellBasell Industries NV
+MAA Mid-America Apartment Communities Inc.
+MAS Masco Corp.
+MGM MGM Resorts International
+MKTX MarketAxess Holdings Inc.
+MNST Monster Beverage Corp.
+MOS Mosaic Co.
+MPWR Monolithic Power Systems Inc.
+MRO Marathon Oil Corp.
+MSI Motorola Solutions Inc.
+MTB M&T Bank Corp.
+MTCH Match Group Inc.
+NDSN Nordson Corp.
+NEM Newmont Corp.
+NI NiSource Inc.
+NTRS Northern Trust Corp.
+NVR NVR Inc.
+NWS News Corp Class B
+NWSA News Corp Class A
+ODFL Old Dominion Freight Line Inc.
+OMC Omnicom Group Inc.
+ORLY O'Reilly Automotive Inc.
+OTIS Otis Worldwide Corp.
+PAYC Paycom Software Inc.
+PCG PG&E Corp.
+PFG Principal Financial Group Inc.
+PHM PulteGroup Inc.
+PNC PNC Financial Services Group Inc.
+PNR Pentair plc
+PNW Pinnacle West Capital Corp.
+PTC PTC Inc.
+PWR Quanta Services Inc.
+QGEN Qiagen NV
+RCM R1 RCM Inc.
+REG Regency Centers Corp.
+RF Regions Financial Corp.
+RHI Robert Half Inc.
+RJF Raymond James Financial Inc.
+RL Ralph Lauren Corp.
+ROL Rollins Inc.
+ROP Roper Technologies Inc.
+RVTY Revvity Inc.
+SBAC SBA Communications Corp.
+SCHW Charles Schwab Corp.
+SJM J.M. Smucker Co.
+SLG SL Green Realty Corp.
+SMR NuScale Power Corp.
+SNA Snap-on Inc.
+SNPS Synopsys Inc.
+SRE Sempra
+STE Steris plc
+STX Seagate Technology Holdings plc
+SWK Stanley Black & Decker Inc.
+SWKS Skyworks Solutions Inc.
+SYF Synchrony Financial
+T AT&T Inc.
+TDY Teledyne Technologies Inc.
+TECH Bio-Techne Corp.
+TER Teradyne Inc.
+TFC Truist Financial Corp.
+TFX Teleflex Inc.
+TPR Tapestry Inc.
+TRGP Targa Resources Corp.
+TRMB Trimble Inc.
+TROW T. Rowe Price Group Inc.
+TRV Travelers Companies Inc.
+TXT Textron Inc.
+TYL Tyler Technologies Inc.
+UDR UDR Inc.
+UHS Universal Health Services Inc.
+USB U.S. Bancorp
+VFC V.F. Corp.
+VICI VICI Properties Inc.
+VRSN VeriSign Inc.
+VTR Ventas Inc.
+VTRS Viatris Inc.
+VZ Verizon Communications Inc.
+WAB Wabtec Corp.
+WAT Waters Corp.
+WBA Walgreens Boots Alliance Inc.
+WDC Western Digital Corp.
+WEC WEC Energy Group Inc.
+WHR Whirlpool Corp.
+WRB W.R. Berkley Corp.
+WST West Pharmaceutical Services Inc.
+WTW Willis Towers Watson plc
+WY Weyerhaeuser Co.
+WYNN Wynn Resorts Ltd.
+XYL Xylem Inc.
+ZBRA Zebra Technologies Corp.
+ZION Zions Bancorporation

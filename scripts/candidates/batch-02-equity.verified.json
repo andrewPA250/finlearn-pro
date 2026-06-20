@@ -1,0 +1,548 @@
+[
+  {
+    "symbol": "ADSK",
+    "name": "Autodesk Inc.",
+    "category": "equity",
+    "yahooSymbol": "ADSK"
+  },
+  {
+    "symbol": "ADM",
+    "name": "Archer-Daniels-Midland Co.",
+    "category": "equity",
+    "yahooSymbol": "ADM"
+  },
+  {
+    "symbol": "AIG",
+    "name": "American International Group Inc.",
+    "category": "equity",
+    "yahooSymbol": "AIG"
+  },
+  {
+    "symbol": "ALGN",
+    "name": "Align Technology Inc.",
+    "category": "equity",
+    "yahooSymbol": "ALGN"
+  },
+  {
+    "symbol": "AMP",
+    "name": "Ameriprise Financial Inc.",
+    "category": "equity",
+    "yahooSymbol": "AMP"
+  },
+  {
+    "symbol": "AVY",
+    "name": "Avery Dennison Corp.",
+    "category": "equity",
+    "yahooSymbol": "AVY"
+  },
+  {
+    "symbol": "BAX",
+    "name": "Baxter International Inc.",
+    "category": "equity",
+    "yahooSymbol": "BAX"
+  },
+  {
+    "symbol": "BEN",
+    "name": "Franklin Resources Inc.",
+    "category": "equity",
+    "yahooSymbol": "BEN"
+  },
+  {
+    "symbol": "BIO",
+    "name": "Bio-Rad Laboratories Inc.",
+    "category": "equity",
+    "yahooSymbol": "BIO"
+  },
+  {
+    "symbol": "BRO",
+    "name": "Brown & Brown Inc.",
+    "category": "equity",
+    "yahooSymbol": "BRO"
+  },
+  {
+    "symbol": "CAG",
+    "name": "Conagra Brands Inc.",
+    "category": "equity",
+    "yahooSymbol": "CAG"
+  },
+  {
+    "symbol": "CARR",
+    "name": "Carrier Global Corp.",
+    "category": "equity",
+    "yahooSymbol": "CARR"
+  },
+  {
+    "symbol": "CBOE",
+    "name": "Cboe Global Markets Inc.",
+    "category": "equity",
+    "yahooSymbol": "CBOE"
+  },
+  {
+    "symbol": "CBRE",
+    "name": "CBRE Group Inc.",
+    "category": "equity",
+    "yahooSymbol": "CBRE"
+  },
+  {
+    "symbol": "CDNS",
+    "name": "Cadence Design Systems Inc.",
+    "category": "equity",
+    "yahooSymbol": "CDNS"
+  },
+  {
+    "symbol": "CDW",
+    "name": "CDW Corp.",
+    "category": "equity",
+    "yahooSymbol": "CDW"
+  },
+  {
+    "symbol": "CHD",
+    "name": "Church & Dwight Co. Inc.",
+    "category": "equity",
+    "yahooSymbol": "CHD"
+  },
+  {
+    "symbol": "CHRW",
+    "name": "C.H. Robinson Worldwide Inc.",
+    "category": "equity",
+    "yahooSymbol": "CHRW"
+  },
+  {
+    "symbol": "CINF",
+    "name": "Cincinnati Financial Corp.",
+    "category": "equity",
+    "yahooSymbol": "CINF"
+  },
+  {
+    "symbol": "CL",
+    "name": "Colgate-Palmolive Co.",
+    "category": "equity",
+    "yahooSymbol": "CL"
+  },
+  {
+    "symbol": "CLX",
+    "name": "Clorox Co.",
+    "category": "equity",
+    "yahooSymbol": "CLX"
+  },
+  {
+    "symbol": "CMS",
+    "name": "CMS Energy Corp.",
+    "category": "equity",
+    "yahooSymbol": "CMS"
+  },
+  {
+    "symbol": "CNP",
+    "name": "CenterPoint Energy Inc.",
+    "category": "equity",
+    "yahooSymbol": "CNP"
+  },
+  {
+    "symbol": "COF",
+    "name": "Capital One Financial Corp.",
+    "category": "equity",
+    "yahooSymbol": "COF"
+  },
+  {
+    "symbol": "CPB",
+    "name": "Campbell's Co.",
+    "category": "equity",
+    "yahooSymbol": "CPB"
+  },
+  {
+    "symbol": "CPT",
+    "name": "Camden Property Trust",
+    "category": "equity",
+    "yahooSymbol": "CPT"
+  },
+  {
+    "symbol": "CSGP",
+    "name": "CoStar Group Inc.",
+    "category": "equity",
+    "yahooSymbol": "CSGP"
+  },
+  {
+    "symbol": "CTSH",
+    "name": "Cognizant Technology Solutions Corp.",
+    "category": "equity",
+    "yahooSymbol": "CTSH"
+  },
+  {
+    "symbol": "CTVA",
+    "name": "Corteva Inc.",
+    "category": "equity",
+    "yahooSymbol": "CTVA"
+  },
+  {
+    "symbol": "D",
+    "name": "Dominion Energy Inc.",
+    "category": "equity",
+    "yahooSymbol": "D"
+  },
+  {
+    "symbol": "DECK",
+    "name": "Deckers Brands",
+    "category": "equity",
+    "yahooSymbol": "DECK"
+  },
+  {
+    "symbol": "DGX",
+    "name": "Quest Diagnostics Inc.",
+    "category": "equity",
+    "yahooSymbol": "DGX"
+  },
+  {
+    "symbol": "DOV",
+    "name": "Dover Corp.",
+    "category": "equity",
+    "yahooSymbol": "DOV"
+  },
+  {
+    "symbol": "DRI",
+    "name": "Darden Restaurants Inc.",
+    "category": "equity",
+    "yahooSymbol": "DRI"
+  },
+  {
+    "symbol": "DTE",
+    "name": "DTE Energy Co.",
+    "category": "equity",
+    "yahooSymbol": "DTE"
+  },
+  {
+    "symbol": "DVA",
+    "name": "DaVita Inc.",
+    "category": "equity",
+    "yahooSymbol": "DVA"
+  },
+  {
+    "symbol": "EBAY",
+    "name": "eBay Inc.",
+    "category": "equity",
+    "yahooSymbol": "EBAY"
+  },
+  {
+    "symbol": "ED",
+    "name": "Consolidated Edison Inc.",
+    "category": "equity",
+    "yahooSymbol": "ED"
+  },
+  {
+    "symbol": "EFX",
+    "name": "Equifax Inc.",
+    "category": "equity",
+    "yahooSymbol": "EFX"
+  },
+  {
+    "symbol": "EIX",
+    "name": "Edison International",
+    "category": "equity",
+    "yahooSymbol": "EIX"
+  },
+  {
+    "symbol": "ENPH",
+    "name": "Enphase Energy Inc.",
+    "category": "equity",
+    "yahooSymbol": "ENPH"
+  },
+  {
+    "symbol": "EPAM",
+    "name": "EPAM Systems Inc.",
+    "category": "equity",
+    "yahooSymbol": "EPAM"
+  },
+  {
+    "symbol": "ETR",
+    "name": "Entergy Corp.",
+    "category": "equity",
+    "yahooSymbol": "ETR"
+  },
+  {
+    "symbol": "ETSY",
+    "name": "Etsy Inc.",
+    "category": "equity",
+    "yahooSymbol": "ETSY"
+  },
+  {
+    "symbol": "EXPD",
+    "name": "Expeditors International of Washington Inc.",
+    "category": "equity",
+    "yahooSymbol": "EXPD"
+  },
+  {
+    "symbol": "EXR",
+    "name": "Extra Space Storage Inc.",
+    "category": "equity",
+    "yahooSymbol": "EXR"
+  },
+  {
+    "symbol": "FE",
+    "name": "FirstEnergy Corp.",
+    "category": "equity",
+    "yahooSymbol": "FE"
+  },
+  {
+    "symbol": "FFIV",
+    "name": "F5 Inc.",
+    "category": "equity",
+    "yahooSymbol": "FFIV"
+  },
+  {
+    "symbol": "FITB",
+    "name": "Fifth Third Bancorp",
+    "category": "equity",
+    "yahooSymbol": "FITB"
+  },
+  {
+    "symbol": "FRT",
+    "name": "Federal Realty Investment Trust",
+    "category": "equity",
+    "yahooSymbol": "FRT"
+  },
+  {
+    "symbol": "FSLR",
+    "name": "First Solar Inc.",
+    "category": "equity",
+    "yahooSymbol": "FSLR"
+  },
+  {
+    "symbol": "GL",
+    "name": "Globe Life Inc.",
+    "category": "equity",
+    "yahooSymbol": "GL"
+  },
+  {
+    "symbol": "GLW",
+    "name": "Corning Inc.",
+    "category": "equity",
+    "yahooSymbol": "GLW"
+  },
+  {
+    "symbol": "GPC",
+    "name": "Genuine Parts Co.",
+    "category": "equity",
+    "yahooSymbol": "GPC"
+  },
+  {
+    "symbol": "HAS",
+    "name": "Hasbro Inc.",
+    "category": "equity",
+    "yahooSymbol": "HAS"
+  },
+  {
+    "symbol": "HBAN",
+    "name": "Huntington Bancshares Inc.",
+    "category": "equity",
+    "yahooSymbol": "HBAN"
+  },
+  {
+    "symbol": "HIG",
+    "name": "Hartford Financial Services Group Inc.",
+    "category": "equity",
+    "yahooSymbol": "HIG"
+  },
+  {
+    "symbol": "HPE",
+    "name": "Hewlett Packard Enterprise Co.",
+    "category": "equity",
+    "yahooSymbol": "HPE"
+  },
+  {
+    "symbol": "HRL",
+    "name": "Hormel Foods Corp.",
+    "category": "equity",
+    "yahooSymbol": "HRL"
+  },
+  {
+    "symbol": "HSIC",
+    "name": "Henry Schein Inc.",
+    "category": "equity",
+    "yahooSymbol": "HSIC"
+  },
+  {
+    "symbol": "HST",
+    "name": "Host Hotels & Resorts Inc.",
+    "category": "equity",
+    "yahooSymbol": "HST"
+  },
+  {
+    "symbol": "HWM",
+    "name": "Howmet Aerospace Inc.",
+    "category": "equity",
+    "yahooSymbol": "HWM"
+  },
+  {
+    "symbol": "INCY",
+    "name": "Incyte Corp.",
+    "category": "equity",
+    "yahooSymbol": "INCY"
+  },
+  {
+    "symbol": "INVH",
+    "name": "Invitation Homes Inc.",
+    "category": "equity",
+    "yahooSymbol": "INVH"
+  },
+  {
+    "symbol": "IRM",
+    "name": "Iron Mountain Inc.",
+    "category": "equity",
+    "yahooSymbol": "IRM"
+  },
+  {
+    "symbol": "IT",
+    "name": "Gartner Inc.",
+    "category": "equity",
+    "yahooSymbol": "IT"
+  },
+  {
+    "symbol": "IVZ",
+    "name": "Invesco Ltd.",
+    "category": "equity",
+    "yahooSymbol": "IVZ"
+  },
+  {
+    "symbol": "J",
+    "name": "Jacobs Solutions Inc.",
+    "category": "equity",
+    "yahooSymbol": "J"
+  },
+  {
+    "symbol": "JBHT",
+    "name": "J.B. Hunt Transport Services Inc.",
+    "category": "equity",
+    "yahooSymbol": "JBHT"
+  },
+  {
+    "symbol": "JBL",
+    "name": "Jabil Inc.",
+    "category": "equity",
+    "yahooSymbol": "JBL"
+  },
+  {
+    "symbol": "JKHY",
+    "name": "Jack Henry & Associates Inc.",
+    "category": "equity",
+    "yahooSymbol": "JKHY"
+  },
+  {
+    "symbol": "KEY",
+    "name": "KeyCorp",
+    "category": "equity",
+    "yahooSymbol": "KEY"
+  },
+  {
+    "symbol": "KEYS",
+    "name": "Keysight Technologies Inc.",
+    "category": "equity",
+    "yahooSymbol": "KEYS"
+  },
+  {
+    "symbol": "KHC",
+    "name": "Kraft Heinz Co.",
+    "category": "equity",
+    "yahooSymbol": "KHC"
+  },
+  {
+    "symbol": "KIM",
+    "name": "Kimco Realty Corp.",
+    "category": "equity",
+    "yahooSymbol": "KIM"
+  },
+  {
+    "symbol": "KMX",
+    "name": "CarMax Inc.",
+    "category": "equity",
+    "yahooSymbol": "KMX"
+  },
+  {
+    "symbol": "KVUE",
+    "name": "Kenvue Inc.",
+    "category": "equity",
+    "yahooSymbol": "KVUE"
+  },
+  {
+    "symbol": "L",
+    "name": "Loews Corp.",
+    "category": "equity",
+    "yahooSymbol": "L"
+  },
+  {
+    "symbol": "LH",
+    "name": "Labcorp Holdings Inc.",
+    "category": "equity",
+    "yahooSymbol": "LH"
+  },
+  {
+    "symbol": "LKQ",
+    "name": "LKQ Corp.",
+    "category": "equity",
+    "yahooSymbol": "LKQ"
+  },
+  {
+    "symbol": "LNT",
+    "name": "Alliant Energy Corp.",
+    "category": "equity",
+    "yahooSymbol": "LNT"
+  },
+  {
+    "symbol": "LVS",
+    "name": "Las Vegas Sands Corp.",
+    "category": "equity",
+    "yahooSymbol": "LVS"
+  },
+  {
+    "symbol": "LW",
+    "name": "Lamb Weston Holdings Inc.",
+    "category": "equity",
+    "yahooSymbol": "LW"
+  },
+  {
+    "symbol": "LYB",
+    "name": "LyondellBasell Industries NV",
+    "category": "equity",
+    "yahooSymbol": "LYB"
+  },
+  {
+    "symbol": "MAA",
+    "name": "Mid-America Apartment Communities Inc.",
+    "category": "equity",
+    "yahooSymbol": "MAA"
+  },
+  {
+    "symbol": "MAS",
+    "name": "Masco Corp.",
+    "category": "equity",
+    "yahooSymbol": "MAS"
+  },
+  {
+    "symbol": "MGM",
+    "name": "MGM Resorts International",
+    "category": "equity",
+    "yahooSymbol": "MGM"
+  },
+  {
+    "symbol": "MKTX",
+    "name": "MarketAxess Holdings Inc.",
+    "category": "equity",
+    "yahooSymbol": "MKTX"
+  },
+  {
+    "symbol": "MNST",
+    "name": "Monster Beverage Corp.",
+    "category": "equity",
+    "yahooSymbol": "MNST"
+  },
+  {
+    "symbol": "MOS",
+    "name": "Mosaic Co.",
+    "category": "equity",
+    "yahooSymbol": "MOS"
+  },
+  {
+    "symbol": "MPWR",
+    "name": "Monolithic Power Systems Inc.",
+    "category": "equity",
+    "yahooSymbol": "MPWR"
+  }
+]

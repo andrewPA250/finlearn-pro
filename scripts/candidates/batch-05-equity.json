@@ -1,0 +1,428 @@
+[
+  {
+    "symbol": "DXC",
+    "name": "DXC Technology Co.",
+    "category": "equity",
+    "yahooSymbol": "DXC"
+  },
+  {
+    "symbol": "JNPR",
+    "name": "Juniper Networks Inc.",
+    "category": "equity",
+    "yahooSymbol": "JNPR"
+  },
+  {
+    "symbol": "WDAY",
+    "name": "Workday Inc.",
+    "category": "equity",
+    "yahooSymbol": "WDAY"
+  },
+  {
+    "symbol": "VEEV",
+    "name": "Veeva Systems Inc.",
+    "category": "equity",
+    "yahooSymbol": "VEEV"
+  },
+  {
+    "symbol": "DOCN",
+    "name": "DigitalOcean Holdings Inc.",
+    "category": "equity",
+    "yahooSymbol": "DOCN"
+  },
+  {
+    "symbol": "PCTY",
+    "name": "Paylocity Holding Corp.",
+    "category": "equity",
+    "yahooSymbol": "PCTY"
+  },
+  {
+    "symbol": "BILL",
+    "name": "Bill.com Holdings Inc.",
+    "category": "equity",
+    "yahooSymbol": "BILL"
+  },
+  {
+    "symbol": "APPF",
+    "name": "AppFolio Inc.",
+    "category": "equity",
+    "yahooSymbol": "APPF"
+  },
+  {
+    "symbol": "PEGA",
+    "name": "Pegasystems Inc.",
+    "category": "equity",
+    "yahooSymbol": "PEGA"
+  },
+  {
+    "symbol": "MANH",
+    "name": "Manhattan Associates Inc.",
+    "category": "equity",
+    "yahooSymbol": "MANH"
+  },
+  {
+    "symbol": "ALRM",
+    "name": "Alarm.com Holdings Inc.",
+    "category": "equity",
+    "yahooSymbol": "ALRM"
+  },
+  {
+    "symbol": "SPSC",
+    "name": "SPS Commerce Inc.",
+    "category": "equity",
+    "yahooSymbol": "SPSC"
+  },
+  {
+    "symbol": "SSNC",
+    "name": "SS&C Technologies Holdings Inc.",
+    "category": "equity",
+    "yahooSymbol": "SSNC"
+  },
+  {
+    "symbol": "BLKB",
+    "name": "Blackbaud Inc.",
+    "category": "equity",
+    "yahooSymbol": "BLKB"
+  },
+  {
+    "symbol": "QLYS",
+    "name": "Qualys Inc.",
+    "category": "equity",
+    "yahooSymbol": "QLYS"
+  },
+  {
+    "symbol": "RPD",
+    "name": "Rapid7 Inc.",
+    "category": "equity",
+    "yahooSymbol": "RPD"
+  },
+  {
+    "symbol": "TENB",
+    "name": "Tenable Holdings Inc.",
+    "category": "equity",
+    "yahooSymbol": "TENB"
+  },
+  {
+    "symbol": "VRNS",
+    "name": "Varonis Systems Inc.",
+    "category": "equity",
+    "yahooSymbol": "VRNS"
+  },
+  {
+    "symbol": "CYBR",
+    "name": "CyberArk Software Ltd.",
+    "category": "equity",
+    "yahooSymbol": "CYBR"
+  },
+  {
+    "symbol": "CFLT",
+    "name": "Confluent Inc.",
+    "category": "equity",
+    "yahooSymbol": "CFLT"
+  },
+  {
+    "symbol": "FROG",
+    "name": "JFrog Ltd.",
+    "category": "equity",
+    "yahooSymbol": "FROG"
+  },
+  {
+    "symbol": "PD",
+    "name": "PagerDuty Inc.",
+    "category": "equity",
+    "yahooSymbol": "PD"
+  },
+  {
+    "symbol": "SMAR",
+    "name": "Smartsheet Inc.",
+    "category": "equity",
+    "yahooSymbol": "SMAR"
+  },
+  {
+    "symbol": "ASAN",
+    "name": "Asana Inc.",
+    "category": "equity",
+    "yahooSymbol": "ASAN"
+  },
+  {
+    "symbol": "BOX",
+    "name": "Box Inc.",
+    "category": "equity",
+    "yahooSymbol": "BOX"
+  },
+  {
+    "symbol": "DBX",
+    "name": "Dropbox Inc.",
+    "category": "equity",
+    "yahooSymbol": "DBX"
+  },
+  {
+    "symbol": "DOMO",
+    "name": "Domo Inc.",
+    "category": "equity",
+    "yahooSymbol": "DOMO"
+  },
+  {
+    "symbol": "YEXT",
+    "name": "Yext Inc.",
+    "category": "equity",
+    "yahooSymbol": "YEXT"
+  },
+  {
+    "symbol": "BIGC",
+    "name": "BigCommerce Holdings Inc.",
+    "category": "equity",
+    "yahooSymbol": "BIGC"
+  },
+  {
+    "symbol": "WIX",
+    "name": "Wix.com Ltd.",
+    "category": "equity",
+    "yahooSymbol": "WIX"
+  },
+  {
+    "symbol": "SQSP",
+    "name": "Squarespace Inc.",
+    "category": "equity",
+    "yahooSymbol": "SQSP"
+  },
+  {
+    "symbol": "APPN",
+    "name": "Appian Corp.",
+    "category": "equity",
+    "yahooSymbol": "APPN"
+  },
+  {
+    "symbol": "NCNO",
+    "name": "nCino Inc.",
+    "category": "equity",
+    "yahooSymbol": "NCNO"
+  },
+  {
+    "symbol": "EVBG",
+    "name": "Everbridge Inc.",
+    "category": "equity",
+    "yahooSymbol": "EVBG"
+  },
+  {
+    "symbol": "FSLY",
+    "name": "Fastly Inc.",
+    "category": "equity",
+    "yahooSymbol": "FSLY"
+  },
+  {
+    "symbol": "GTLS",
+    "name": "Chart Industries Inc.",
+    "category": "equity",
+    "yahooSymbol": "GTLS"
+  },
+  {
+    "symbol": "FIX",
+    "name": "Comfort Systems USA Inc.",
+    "category": "equity",
+    "yahooSymbol": "FIX"
+  },
+  {
+    "symbol": "ACM",
+    "name": "AECOM",
+    "category": "equity",
+    "yahooSymbol": "ACM"
+  },
+  {
+    "symbol": "MTZ",
+    "name": "MasTec Inc.",
+    "category": "equity",
+    "yahooSymbol": "MTZ"
+  },
+  {
+    "symbol": "EME",
+    "name": "EMCOR Group Inc.",
+    "category": "equity",
+    "yahooSymbol": "EME"
+  },
+  {
+    "symbol": "DY",
+    "name": "Dycom Industries Inc.",
+    "category": "equity",
+    "yahooSymbol": "DY"
+  },
+  {
+    "symbol": "PRIM",
+    "name": "Primoris Services Corp.",
+    "category": "equity",
+    "yahooSymbol": "PRIM"
+  },
+  {
+    "symbol": "AOS",
+    "name": "A. O. Smith Corp.",
+    "category": "equity",
+    "yahooSymbol": "AOS"
+  },
+  {
+    "symbol": "LII",
+    "name": "Lennox International Inc.",
+    "category": "equity",
+    "yahooSymbol": "LII"
+  },
+  {
+    "symbol": "ALLE",
+    "name": "Allegion plc",
+    "category": "equity",
+    "yahooSymbol": "ALLE"
+  },
+  {
+    "symbol": "CSL",
+    "name": "Carlisle Companies Inc.",
+    "category": "equity",
+    "yahooSymbol": "CSL"
+  },
+  {
+    "symbol": "IEX",
+    "name": "IDEX Corp.",
+    "category": "equity",
+    "yahooSymbol": "IEX"
+  },
+  {
+    "symbol": "WTS",
+    "name": "Watts Water Technologies Inc.",
+    "category": "equity",
+    "yahooSymbol": "WTS"
+  },
+  {
+    "symbol": "ITT",
+    "name": "ITT Inc.",
+    "category": "equity",
+    "yahooSymbol": "ITT"
+  },
+  {
+    "symbol": "XPEL",
+    "name": "XPEL Inc.",
+    "category": "equity",
+    "yahooSymbol": "XPEL"
+  },
+  {
+    "symbol": "THO",
+    "name": "Thor Industries Inc.",
+    "category": "equity",
+    "yahooSymbol": "THO"
+  },
+  {
+    "symbol": "WGO",
+    "name": "Winnebago Industries Inc.",
+    "category": "equity",
+    "yahooSymbol": "WGO"
+  },
+  {
+    "symbol": "PII",
+    "name": "Polaris Inc.",
+    "category": "equity",
+    "yahooSymbol": "PII"
+  },
+  {
+    "symbol": "HOG",
+    "name": "Harley-Davidson Inc.",
+    "category": "equity",
+    "yahooSymbol": "HOG"
+  },
+  {
+    "symbol": "BC",
+    "name": "Brunswick Corp.",
+    "category": "equity",
+    "yahooSymbol": "BC"
+  },
+  {
+    "symbol": "SNBR",
+    "name": "Sleep Number Corp.",
+    "category": "equity",
+    "yahooSymbol": "SNBR"
+  },
+  {
+    "symbol": "TPX",
+    "name": "Tempur Sealy International Inc.",
+    "category": "equity",
+    "yahooSymbol": "TPX"
+  },
+  {
+    "symbol": "LEG",
+    "name": "Leggett & Platt Inc.",
+    "category": "equity",
+    "yahooSymbol": "LEG"
+  },
+  {
+    "symbol": "PLAY",
+    "name": "Dave & Buster's Entertainment Inc.",
+    "category": "equity",
+    "yahooSymbol": "PLAY"
+  },
+  {
+    "symbol": "SIX",
+    "name": "Six Flags Entertainment Corp.",
+    "category": "equity",
+    "yahooSymbol": "SIX"
+  },
+  {
+    "symbol": "SEAS",
+    "name": "United Parks & Resorts Inc.",
+    "category": "equity",
+    "yahooSymbol": "SEAS"
+  },
+  {
+    "symbol": "BYD",
+    "name": "Boyd Gaming Corp.",
+    "category": "equity",
+    "yahooSymbol": "BYD"
+  },
+  {
+    "symbol": "CHDN",
+    "name": "Churchill Downs Inc.",
+    "category": "equity",
+    "yahooSymbol": "CHDN"
+  },
+  {
+    "symbol": "RSI",
+    "name": "Rush Street Interactive Inc.",
+    "category": "equity",
+    "yahooSymbol": "RSI"
+  },
+  {
+    "symbol": "GENI",
+    "name": "Genius Sports Ltd.",
+    "category": "equity",
+    "yahooSymbol": "GENI"
+  },
+  {
+    "symbol": "IGT",
+    "name": "International Game Technology PLC",
+    "category": "equity",
+    "yahooSymbol": "IGT"
+  },
+  {
+    "symbol": "EVRI",
+    "name": "Everi Holdings Inc.",
+    "category": "equity",
+    "yahooSymbol": "EVRI"
+  },
+  {
+    "symbol": "CZR",
+    "name": "Caesars Entertainment Inc.",
+    "category": "equity",
+    "yahooSymbol": "CZR"
+  },
+  {
+    "symbol": "RRR",
+    "name": "Red Rock Resorts Inc.",
+    "category": "equity",
+    "yahooSymbol": "RRR"
+  },
+  {
+    "symbol": "GDEN",
+    "name": "Golden Entertainment Inc.",
+    "category": "equity",
+    "yahooSymbol": "GDEN"
+  },
+  {
+    "symbol": "MCRI",
+    "name": "Monarch Casino & Resort Inc.",
+    "category": "equity",
+    "yahooSymbol": "MCRI"
+  }
+]

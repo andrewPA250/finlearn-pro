@@ -1,0 +1,500 @@
+[
+  {
+    "symbol": "MRO",
+    "name": "Marathon Oil Corp.",
+    "category": "equity",
+    "yahooSymbol": "MRO"
+  },
+  {
+    "symbol": "MSI",
+    "name": "Motorola Solutions Inc.",
+    "category": "equity",
+    "yahooSymbol": "MSI"
+  },
+  {
+    "symbol": "MTB",
+    "name": "M&T Bank Corp.",
+    "category": "equity",
+    "yahooSymbol": "MTB"
+  },
+  {
+    "symbol": "MTCH",
+    "name": "Match Group Inc.",
+    "category": "equity",
+    "yahooSymbol": "MTCH"
+  },
+  {
+    "symbol": "NDSN",
+    "name": "Nordson Corp.",
+    "category": "equity",
+    "yahooSymbol": "NDSN"
+  },
+  {
+    "symbol": "NEM",
+    "name": "Newmont Corp.",
+    "category": "equity",
+    "yahooSymbol": "NEM"
+  },
+  {
+    "symbol": "NI",
+    "name": "NiSource Inc.",
+    "category": "equity",
+    "yahooSymbol": "NI"
+  },
+  {
+    "symbol": "NTRS",
+    "name": "Northern Trust Corp.",
+    "category": "equity",
+    "yahooSymbol": "NTRS"
+  },
+  {
+    "symbol": "NVR",
+    "name": "NVR Inc.",
+    "category": "equity",
+    "yahooSymbol": "NVR"
+  },
+  {
+    "symbol": "NWS",
+    "name": "News Corp Class B",
+    "category": "equity",
+    "yahooSymbol": "NWS"
+  },
+  {
+    "symbol": "NWSA",
+    "name": "News Corp Class A",
+    "category": "equity",
+    "yahooSymbol": "NWSA"
+  },
+  {
+    "symbol": "ODFL",
+    "name": "Old Dominion Freight Line Inc.",
+    "category": "equity",
+    "yahooSymbol": "ODFL"
+  },
+  {
+    "symbol": "OMC",
+    "name": "Omnicom Group Inc.",
+    "category": "equity",
+    "yahooSymbol": "OMC"
+  },
+  {
+    "symbol": "ORLY",
+    "name": "O'Reilly Automotive Inc.",
+    "category": "equity",
+    "yahooSymbol": "ORLY"
+  },
+  {
+    "symbol": "OTIS",
+    "name": "Otis Worldwide Corp.",
+    "category": "equity",
+    "yahooSymbol": "OTIS"
+  },
+  {
+    "symbol": "PAYC",
+    "name": "Paycom Software Inc.",
+    "category": "equity",
+    "yahooSymbol": "PAYC"
+  },
+  {
+    "symbol": "PCG",
+    "name": "PG&E Corp.",
+    "category": "equity",
+    "yahooSymbol": "PCG"
+  },
+  {
+    "symbol": "PFG",
+    "name": "Principal Financial Group Inc.",
+    "category": "equity",
+    "yahooSymbol": "PFG"
+  },
+  {
+    "symbol": "PHM",
+    "name": "PulteGroup Inc.",
+    "category": "equity",
+    "yahooSymbol": "PHM"
+  },
+  {
+    "symbol": "PNC",
+    "name": "PNC Financial Services Group Inc.",
+    "category": "equity",
+    "yahooSymbol": "PNC"
+  },
+  {
+    "symbol": "PNR",
+    "name": "Pentair plc",
+    "category": "equity",
+    "yahooSymbol": "PNR"
+  },
+  {
+    "symbol": "PNW",
+    "name": "Pinnacle West Capital Corp.",
+    "category": "equity",
+    "yahooSymbol": "PNW"
+  },
+  {
+    "symbol": "PTC",
+    "name": "PTC Inc.",
+    "category": "equity",
+    "yahooSymbol": "PTC"
+  },
+  {
+    "symbol": "PWR",
+    "name": "Quanta Services Inc.",
+    "category": "equity",
+    "yahooSymbol": "PWR"
+  },
+  {
+    "symbol": "QGEN",
+    "name": "Qiagen NV",
+    "category": "equity",
+    "yahooSymbol": "QGEN"
+  },
+  {
+    "symbol": "RCM",
+    "name": "R1 RCM Inc.",
+    "category": "equity",
+    "yahooSymbol": "RCM"
+  },
+  {
+    "symbol": "REG",
+    "name": "Regency Centers Corp.",
+    "category": "equity",
+    "yahooSymbol": "REG"
+  },
+  {
+    "symbol": "RF",
+    "name": "Regions Financial Corp.",
+    "category": "equity",
+    "yahooSymbol": "RF"
+  },
+  {
+    "symbol": "RHI",
+    "name": "Robert Half Inc.",
+    "category": "equity",
+    "yahooSymbol": "RHI"
+  },
+  {
+    "symbol": "RJF",
+    "name": "Raymond James Financial Inc.",
+    "category": "equity",
+    "yahooSymbol": "RJF"
+  },
+  {
+    "symbol": "RL",
+    "name": "Ralph Lauren Corp.",
+    "category": "equity",
+    "yahooSymbol": "RL"
+  },
+  {
+    "symbol": "ROL",
+    "name": "Rollins Inc.",
+    "category": "equity",
+    "yahooSymbol": "ROL"
+  },
+  {
+    "symbol": "ROP",
+    "name": "Roper Technologies Inc.",
+    "category": "equity",
+    "yahooSymbol": "ROP"
+  },
+  {
+    "symbol": "RVTY",
+    "name": "Revvity Inc.",
+    "category": "equity",
+    "yahooSymbol": "RVTY"
+  },
+  {
+    "symbol": "SBAC",
+    "name": "SBA Communications Corp.",
+    "category": "equity",
+    "yahooSymbol": "SBAC"
+  },
+  {
+    "symbol": "SCHW",
+    "name": "Charles Schwab Corp.",
+    "category": "equity",
+    "yahooSymbol": "SCHW"
+  },
+  {
+    "symbol": "SJM",
+    "name": "J.M. Smucker Co.",
+    "category": "equity",
+    "yahooSymbol": "SJM"
+  },
+  {
+    "symbol": "SLG",
+    "name": "SL Green Realty Corp.",
+    "category": "equity",
+    "yahooSymbol": "SLG"
+  },
+  {
+    "symbol": "SMR",
+    "name": "NuScale Power Corp.",
+    "category": "equity",
+    "yahooSymbol": "SMR"
+  },
+  {
+    "symbol": "SNA",
+    "name": "Snap-on Inc.",
+    "category": "equity",
+    "yahooSymbol": "SNA"
+  },
+  {
+    "symbol": "SNPS",
+    "name": "Synopsys Inc.",
+    "category": "equity",
+    "yahooSymbol": "SNPS"
+  },
+  {
+    "symbol": "SRE",
+    "name": "Sempra",
+    "category": "equity",
+    "yahooSymbol": "SRE"
+  },
+  {
+    "symbol": "STE",
+    "name": "Steris plc",
+    "category": "equity",
+    "yahooSymbol": "STE"
+  },
+  {
+    "symbol": "STX",
+    "name": "Seagate Technology Holdings plc",
+    "category": "equity",
+    "yahooSymbol": "STX"
+  },
+  {
+    "symbol": "SWK",
+    "name": "Stanley Black & Decker Inc.",
+    "category": "equity",
+    "yahooSymbol": "SWK"
+  },
+  {
+    "symbol": "SWKS",
+    "name": "Skyworks Solutions Inc.",
+    "category": "equity",
+    "yahooSymbol": "SWKS"
+  },
+  {
+    "symbol": "SYF",
+    "name": "Synchrony Financial",
+    "category": "equity",
+    "yahooSymbol": "SYF"
+  },
+  {
+    "symbol": "T",
+    "name": "AT&T Inc.",
+    "category": "equity",
+    "yahooSymbol": "T"
+  },
+  {
+    "symbol": "TDY",
+    "name": "Teledyne Technologies Inc.",
+    "category": "equity",
+    "yahooSymbol": "TDY"
+  },
+  {
+    "symbol": "TECH",
+    "name": "Bio-Techne Corp.",
+    "category": "equity",
+    "yahooSymbol": "TECH"
+  },
+  {
+    "symbol": "TER",
+    "name": "Teradyne Inc.",
+    "category": "equity",
+    "yahooSymbol": "TER"
+  },
+  {
+    "symbol": "TFC",
+    "name": "Truist Financial Corp.",
+    "category": "equity",
+    "yahooSymbol": "TFC"
+  },
+  {
+    "symbol": "TFX",
+    "name": "Teleflex Inc.",
+    "category": "equity",
+    "yahooSymbol": "TFX"
+  },
+  {
+    "symbol": "TPR",
+    "name": "Tapestry Inc.",
+    "category": "equity",
+    "yahooSymbol": "TPR"
+  },
+  {
+    "symbol": "TRGP",
+    "name": "Targa Resources Corp.",
+    "category": "equity",
+    "yahooSymbol": "TRGP"
+  },
+  {
+    "symbol": "TRMB",
+    "name": "Trimble Inc.",
+    "category": "equity",
+    "yahooSymbol": "TRMB"
+  },
+  {
+    "symbol": "TROW",
+    "name": "T. Rowe Price Group Inc.",
+    "category": "equity",
+    "yahooSymbol": "TROW"
+  },
+  {
+    "symbol": "TRV",
+    "name": "Travelers Companies Inc.",
+    "category": "equity",
+    "yahooSymbol": "TRV"
+  },
+  {
+    "symbol": "TXT",
+    "name": "Textron Inc.",
+    "category": "equity",
+    "yahooSymbol": "TXT"
+  },
+  {
+    "symbol": "TYL",
+    "name": "Tyler Technologies Inc.",
+    "category": "equity",
+    "yahooSymbol": "TYL"
+  },
+  {
+    "symbol": "UDR",
+    "name": "UDR Inc.",
+    "category": "equity",
+    "yahooSymbol": "UDR"
+  },
+  {
+    "symbol": "UHS",
+    "name": "Universal Health Services Inc.",
+    "category": "equity",
+    "yahooSymbol": "UHS"
+  },
+  {
+    "symbol": "USB",
+    "name": "U.S. Bancorp",
+    "category": "equity",
+    "yahooSymbol": "USB"
+  },
+  {
+    "symbol": "VFC",
+    "name": "V.F. Corp.",
+    "category": "equity",
+    "yahooSymbol": "VFC"
+  },
+  {
+    "symbol": "VICI",
+    "name": "VICI Properties Inc.",
+    "category": "equity",
+    "yahooSymbol": "VICI"
+  },
+  {
+    "symbol": "VRSN",
+    "name": "VeriSign Inc.",
+    "category": "equity",
+    "yahooSymbol": "VRSN"
+  },
+  {
+    "symbol": "VTR",
+    "name": "Ventas Inc.",
+    "category": "equity",
+    "yahooSymbol": "VTR"
+  },
+  {
+    "symbol": "VTRS",
+    "name": "Viatris Inc.",
+    "category": "equity",
+    "yahooSymbol": "VTRS"
+  },
+  {
+    "symbol": "VZ",
+    "name": "Verizon Communications Inc.",
+    "category": "equity",
+    "yahooSymbol": "VZ"
+  },
+  {
+    "symbol": "WAB",
+    "name": "Wabtec Corp.",
+    "category": "equity",
+    "yahooSymbol": "WAB"
+  },
+  {
+    "symbol": "WAT",
+    "name": "Waters Corp.",
+    "category": "equity",
+    "yahooSymbol": "WAT"
+  },
+  {
+    "symbol": "WBA",
+    "name": "Walgreens Boots Alliance Inc.",
+    "category": "equity",
+    "yahooSymbol": "WBA"
+  },
+  {
+    "symbol": "WDC",
+    "name": "Western Digital Corp.",
+    "category": "equity",
+    "yahooSymbol": "WDC"
+  },
+  {
+    "symbol": "WEC",
+    "name": "WEC Energy Group Inc.",
+    "category": "equity",
+    "yahooSymbol": "WEC"
+  },
+  {
+    "symbol": "WHR",
+    "name": "Whirlpool Corp.",
+    "category": "equity",
+    "yahooSymbol": "WHR"
+  },
+  {
+    "symbol": "WRB",
+    "name": "W.R. Berkley Corp.",
+    "category": "equity",
+    "yahooSymbol": "WRB"
+  },
+  {
+    "symbol": "WST",
+    "name": "West Pharmaceutical Services Inc.",
+    "category": "equity",
+    "yahooSymbol": "WST"
+  },
+  {
+    "symbol": "WTW",
+    "name": "Willis Towers Watson plc",
+    "category": "equity",
+    "yahooSymbol": "WTW"
+  },
+  {
+    "symbol": "WY",
+    "name": "Weyerhaeuser Co.",
+    "category": "equity",
+    "yahooSymbol": "WY"
+  },
+  {
+    "symbol": "WYNN",
+    "name": "Wynn Resorts Ltd.",
+    "category": "equity",
+    "yahooSymbol": "WYNN"
+  },
+  {
+    "symbol": "XYL",
+    "name": "Xylem Inc.",
+    "category": "equity",
+    "yahooSymbol": "XYL"
+  },
+  {
+    "symbol": "ZBRA",
+    "name": "Zebra Technologies Corp.",
+    "category": "equity",
+    "yahooSymbol": "ZBRA"
+  },
+  {
+    "symbol": "ZION",
+    "name": "Zions Bancorporation",
+    "category": "equity",
+    "yahooSymbol": "ZION"
+  }
+]

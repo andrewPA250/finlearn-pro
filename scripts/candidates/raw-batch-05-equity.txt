@@ -1,0 +1,74 @@
+DXC DXC Technology Co.
+JNPR Juniper Networks Inc.
+WDAY Workday Inc.
+VEEV Veeva Systems Inc.
+ZS Zscaler Inc.
+PATH UiPath Inc.
+DOCN DigitalOcean Holdings Inc.
+PCTY Paylocity Holding Corp.
+BILL Bill.com Holdings Inc.
+APPF AppFolio Inc.
+PEGA Pegasystems Inc.
+MANH Manhattan Associates Inc.
+ALRM Alarm.com Holdings Inc.
+SPSC SPS Commerce Inc.
+SSNC SS&C Technologies Holdings Inc.
+BLKB Blackbaud Inc.
+QLYS Qualys Inc.
+RPD Rapid7 Inc.
+TENB Tenable Holdings Inc.
+VRNS Varonis Systems Inc.
+CYBR CyberArk Software Ltd.
+CFLT Confluent Inc.
+FROG JFrog Ltd.
+PD PagerDuty Inc.
+SMAR Smartsheet Inc.
+ASAN Asana Inc.
+BOX Box Inc.
+DBX Dropbox Inc.
+DOMO Domo Inc.
+YEXT Yext Inc.
+BIGC BigCommerce Holdings Inc.
+WIX Wix.com Ltd.
+SQSP Squarespace Inc.
+APPN Appian Corp.
+NCNO nCino Inc.
+EVBG Everbridge Inc.
+FSLY Fastly Inc.
+GTLS Chart Industries Inc.
+FIX Comfort Systems USA Inc.
+ACM AECOM
+MTZ MasTec Inc.
+EME EMCOR Group Inc.
+DY Dycom Industries Inc.
+PRIM Primoris Services Corp.
+AOS A. O. Smith Corp.
+LII Lennox International Inc.
+ALLE Allegion plc
+CSL Carlisle Companies Inc.
+IEX IDEX Corp.
+FAST Fastenal Co.
+WTS Watts Water Technologies Inc.
+ITT ITT Inc.
+XPEL XPEL Inc.
+THO Thor Industries Inc.
+WGO Winnebago Industries Inc.
+PII Polaris Inc.
+HOG Harley-Davidson Inc.
+BC Brunswick Corp.
+SNBR Sleep Number Corp.
+TPX Tempur Sealy International Inc.
+LEG Leggett & Platt Inc.
+PLAY Dave & Buster's Entertainment Inc.
+SIX Six Flags Entertainment Corp.
+SEAS United Parks & Resorts Inc.
+BYD Boyd Gaming Corp.
+CHDN Churchill Downs Inc.
+RSI Rush Street Interactive Inc.
+GENI Genius Sports Ltd.
+IGT International Game Technology PLC
+EVRI Everi Holdings Inc.
+CZR Caesars Entertainment Inc.
+RRR Red Rock Resorts Inc.
+GDEN Golden Entertainment Inc.
+MCRI Monarch Casino & Resort Inc.
