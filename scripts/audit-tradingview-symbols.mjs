@@ -51,16 +51,19 @@ const VERIFIED_EQUITY_ETF_SYMBOLS = new Set(
   [...whitelistBlockMatch[1].matchAll(/"([^"]+)"/g)].map((m) => m[1])
 );
 
+// Continuous-futures detector — still used to label commodity rows in the
+// report, even though all of index/bond/commodity is now disabled wholesale.
 const FUTURES_CONTINUOUS = /\d!$/;
 
 function validateTradingViewSymbol(symbol, category) {
   if (!symbol) return false;
-  if (FUTURES_CONTINUOUS.test(symbol)) return false;
   switch (category) {
     case "index":
     case "bond":
     case "commodity":
-      return true;
+      // TVC:* / continuous-futures feeds are not embeddable in the anonymous
+      // widget (confirmed against the live SPX chart) — Advanced Chart off.
+      return false;
     case "forex":
       return symbol.startsWith("FX:");
     case "crypto":

@@ -18,25 +18,27 @@ declare global {
 //
 // Trust model, by category:
 //
-// - index / bond / commodity: every catalog entry in these categories sets
-//   tradingViewSymbol explicitly (no auto-derivation in catalog.ts), so the
-//   value reflects deliberate research. These are trusted directly, with
-//   one exception: continuous futures contracts ("...1!" notation, e.g.
-//   COMEX:HG1!, CBOT:ZC1!) commonly require a TradingView real-time/Pro
-//   data subscription and are the most common real-world cause of the
-//   "this symbol is only available on TradingView" popup + silent fallback.
-//   Those are excluded until manually confirmed embeddable.
+// - index / bond / commodity: DISABLED. Every catalog entry in these
+//   categories uses TradingView's own calculated feeds — TVC:* for indices
+//   (TVC:SPX, TVC:NDX), treasury yields (TVC:US10Y) and spot commodities
+//   (TVC:GOLD, TVC:USOIL), plus continuous futures ("...1!", e.g. COMEX:HG1!)
+//   for the rest. In the *anonymous* embed widget these all require a
+//   logged-in TradingView session / carry data-licensing restrictions, which
+//   produces the "This symbol is only available on TradingView" popup and a
+//   silent fallback to the widget's default symbol (AAPL). This was confirmed
+//   visually against the live widget (TVC:SPX), so the Advanced toggle is not
+//   offered for these categories at all — the clean internal Recharts chart is
+//   the only chart shown.
 // - forex (FX:XXXXXX) / crypto (BINANCE:XXXUSDT): deterministic, standard
 //   TradingView data feeds, always public in the free widget. Trusted by
 //   prefix.
-// - equity / etf: exchange prefix correctness varies per ticker (e.g. a
-//   stock can be NASDAQ- or NYSE-listed) and cannot be inferred from the
-//   symbol string alone, so these are validated against an explicit,
-//   manually-verified list. Anything not listed here shows the clean
-//   "chart unavailable" fallback rather than risking an unverified guess.
+// - equity / etf: real exchange-listed tickers (NASDAQ:/NYSE:/AMEX:) are the
+//   embed widget's primary use case and render publicly. Exchange-prefix
+//   correctness varies per ticker and cannot be inferred from the symbol
+//   string alone, so these are validated against an explicit, manually-curated
+//   list. Anything not listed shows the clean "chart unavailable" fallback
+//   rather than risking an unverified guess.
 // ---------------------------------------------------------------------------
-
-const FUTURES_CONTINUOUS = /\d!$/;
 
 /** Manually verified NASDAQ/NYSE/AMEX equity + ETF symbols — exchange-correct and confirmed embeddable. */
 const VERIFIED_EQUITY_ETF_SYMBOLS = new Set([
@@ -66,13 +68,15 @@ export function validateTradingViewSymbol(
   category?: MarketCategoryId
 ): boolean {
   if (!symbol) return false;
-  if (FUTURES_CONTINUOUS.test(symbol)) return false;
 
   switch (category) {
     case "index":
     case "bond":
     case "commodity":
-      return true;
+      // TradingView's TVC:* / continuous-futures feeds are not embeddable in
+      // the anonymous widget (confirmed against the live SPX chart). No
+      // Advanced toggle for these — the internal Recharts chart is shown.
+      return false;
     case "forex":
       return symbol.startsWith("FX:");
     case "crypto":
