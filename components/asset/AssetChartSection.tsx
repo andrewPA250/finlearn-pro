@@ -14,6 +14,7 @@ import type { MarketDataPoint } from "@/types/market";
 import type { AssetUnit } from "@/lib/market";
 import type { ProviderSource } from "@/lib/providers/types";
 import type { TickerQuote } from "@/lib/market/ticker";
+import type { MarketCategoryId } from "@/types/markets";
 import { synchronizeCandles } from "@/lib/market/synchronizeCandles";
 import { TradingViewChart, validateTradingViewSymbol } from "@/components/asset/TradingViewChart";
 
@@ -30,8 +31,10 @@ interface AssetChartSectionProps {
   quote: TickerQuote | null;
   unit: AssetUnit;
   source: ProviderSource;
-  /** TradingView symbol — when present the Advanced mode toggle becomes available. */
+  /** TradingView symbol — when present and embeddable, the Advanced mode toggle becomes available. */
   tvSymbol?: string;
+  /** Catalog category — required to decide whether tvSymbol is a trusted, embeddable TradingView symbol. */
+  category?: MarketCategoryId;
 }
 
 // ---------------------------------------------------------------------------
@@ -129,12 +132,24 @@ function makeTooltip(unit: AssetUnit) {
 // Component
 // ---------------------------------------------------------------------------
 
-export function AssetChartSection({ symbol, candles, quote, unit, source, tvSymbol }: AssetChartSectionProps) {
+export function AssetChartSection({ symbol, candles, quote, unit, source, tvSymbol, category }: AssetChartSectionProps) {
   const [timeframe, setTimeframe] = useState<ChartTimeframe>("1Y");
   const [mode, setMode]           = useState<ChartMode>("sync");
   const [hydrated, setHydrated]   = useState(false);
 
-  const tvAvailable = !!tvSymbol && validateTradingViewSymbol(tvSymbol);
+  // tvSymbol is read verbatim from instrument.tradingViewSymbol — never derived
+  // from yahooSymbol, the app symbol, or any other fallback.
+  const tvAvailable = validateTradingViewSymbol(tvSymbol, category);
+
+  if (process.env.NODE_ENV === "development") {
+    // eslint-disable-next-line no-console
+    console.log("[TV DEBUG]", {
+      asset: symbol,
+      tradingViewSymbol: tvSymbol,
+      category,
+      tvAvailable,
+    });
+  }
 
   // Hydration-safe localStorage read — avoids SSR/client mismatch.
   useEffect(() => {
@@ -270,7 +285,7 @@ export function AssetChartSection({ symbol, candles, quote, unit, source, tvSymb
       {/* ── Chart area ─────────────────────────────────────────────────────── */}
       {showTV ? (
         <div className="mt-3 h-[420px] sm:h-[500px]">
-          <TradingViewChart key={tvSymbol} tvSymbol={tvSymbol!} />
+          <TradingViewChart key={tvSymbol} tvSymbol={tvSymbol!} category={category} />
         </div>
       ) : hasData ? (
         <div className="mt-3 h-[240px] sm:h-[280px]">

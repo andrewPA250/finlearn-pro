@@ -75,6 +75,7 @@ export function AssetView({ instrument, categoryLabel, quote, candles, newsResul
           unit={quote?.unit ?? "index"}
           source={quote?.source ?? "local-static"}
           tvSymbol={instrument.tradingViewSymbol}
+          category={instrument.category}
         />
 
         {/* Statistics grid + 52W range bar */}
